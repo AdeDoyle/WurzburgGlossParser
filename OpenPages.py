@@ -1,3 +1,5 @@
+"""Level 2."""
+
 from OpenDocx import get_text
 
 

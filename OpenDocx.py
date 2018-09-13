@@ -1,3 +1,5 @@
+"""Level 1."""
+
 import docx
 
 
