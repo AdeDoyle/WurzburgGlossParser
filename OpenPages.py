@@ -1,6 +1,7 @@
 """Level 2."""
 
 from OpenDocx import get_text
+from IteratePages import find_page
 
 
 def get_pages(filename, startpage=499, endpage=712):
@@ -21,15 +22,7 @@ def get_pages(filename, startpage=499, endpage=712):
     if startpage == 499 and endpage == 712:
         return alltext
     elif startpage > 499:
-        curpage = 499
-        for i in range(499, startpage):
-            alltext = alltext[alltext.find(str(curpage)):]
-            alltext = alltext[alltext.find("\n"):]
-            curpage += 1
-        targetpagenoplace = alltext.find(str(curpage))
-        disgardtext = alltext[:targetpagenoplace]
-        disgardtext = disgardtext[:disgardtext.rfind("\n")]
-        alltext = alltext[len(disgardtext) + 1:]
+        alltext = alltext[find_page(alltext, startpage):]
     for page in range(startpage, endpage + 1):
         if lastpage == 0:
             pageno = startpage
