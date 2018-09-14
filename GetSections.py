@@ -1,11 +1,12 @@
-"""Level 3."""
+"""Level 1."""
 
 from OpenPages import get_pages
 
 
-def get_section(filename, startpage=499, endpage=712):
-    fulltext = get_pages(filename, startpage, endpage)
-    print(fulltext)
+def get_section(fulltext, section="No Section"):
+    """Gets and returns just the text between a particular set of section tags"""
+    return fulltext
 
 
-get_section("Wurzburg Glosses")
+glosses = get_pages("Wurzburg Glosses", 499, 499)
+print(get_section(glosses))
