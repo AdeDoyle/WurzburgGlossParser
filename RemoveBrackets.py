@@ -1,0 +1,33 @@
+"""Level 1"""
+
+from OpenPages import get_pages
+from ClearTags import clear_tags
+from GetSections import get_section
+
+
+def remove_brackets(file):
+    """Removes all square and round brackets in the text. If square brackets enclose marginal information the contents
+       of the brackets are removed also"""
+    filetext = file
+    if "(" in filetext:
+        filetextlist = filetext.split("(")
+        filetext = "".join(filetextlist)
+    if ")" in filetext:
+        filetextlist = filetext.split(")")
+        filetext = "".join(filetextlist)
+    if "[" in filetext:
+        sbcount = filetext.count("[")
+        for i in range(sbcount):
+            sbopos = filetext.find("[")
+            sbcpos = filetext.find("]")
+            sbtext = filetext[sbopos + 1: sbcpos]
+            if "marg." in sbtext:
+                filetext = filetext[:sbopos] + filetext[sbcpos + 1:]
+            else:
+                filetext = filetext[:sbcpos] + filetext[sbcpos + 1:]
+                filetext = filetext[:sbopos] + filetext[sbopos + 1:]
+    return filetext
+
+
+# glosses = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))
+# print(remove_brackets(glosses))
