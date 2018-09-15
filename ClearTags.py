@@ -4,8 +4,8 @@ from OpenPages import get_pages
 
 
 def clear_tags(file, exceptions=[]):
-    """Clears all tags from the tagset out of the text, replacing them with original TPH markers where they were
-       originally identified by use of various bracket types"""
+    """Clears all tags out of the text except those listed as exceptions, replacing them with original TPH markers where
+       they were originally identified by use of various bracket types"""
     filetext = file
     taglist = ["H1", "H2", "Lat", "SG", "Eng", "FN", "GLat", "fol", "num", "let", "Rep", "ie", "vel", "Com",
                "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep"]
@@ -82,6 +82,22 @@ def clear_tags(file, exceptions=[]):
     return filetext
 
 
+def clear_spectags(file, taglist=[]):
+    """Clears only the specified tag or tags from the text using the clear_tags function"""
+    alltags = ["H1", "H2", "Lat", "SG", "Eng", "FN", "GLat", "fol", "num", "let", "Rep", "ie", "vel", "Com", "Con",
+               "Sup", "Res", "STOP", "Nam", "MRep", "LRep"]
+    excepted = []
+    for exception in alltags:
+        if exception not in taglist:
+            excepted.append(exception)
+    untaggedtext = clear_tags(file, excepted)
+    return untaggedtext
+
+
 # glosses = get_pages("Wurzburg Glosses", 499, 509)
+
 # print(clear_tags(glosses, ["Lat", "SG", "Eng", "FN"]))
 # print(clear_tags(glosses))
+
+# print(clear_spectags(glosses, ["Lat", "SG", "Eng", "FN"]))
+# print(clear_spectags(glosses))
