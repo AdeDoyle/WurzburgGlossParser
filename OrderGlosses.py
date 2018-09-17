@@ -11,31 +11,44 @@ def order_glosses(file):
        and returns a string with each gloss on a new line"""
     glosstext = file
     theseglosses = []
+
+    glossitirs = []
+
     folglosspat = re.compile(r'(\[/?f\. \d[a-d]\])?(\d{1,2}, )?\d{1,2}\. ')
-    for i in folglosspat.finditer(glosstext):
-        patfound = i[0]
-        glosstext = glosstext[glosstext.find(patfound):]
-        patlen = len(patfound)
-        disctext = glosstext[patlen:]
-        nextpat = folglosspat.search(disctext)
-        if nextpat is None:
-            thisgloss = glosstext
+    glossitir = folglosspat.finditer(glosstext)
+    for i in glossitir:
+        glossitirs.append(i.start())
+    for i in glossitirs:
+        if i == glossitirs[0]:
+            startpoint = i
+        elif i == glossitirs[-1]:
+            endpoint = i
+            thisgloss = glosstext[startpoint:endpoint]
+            thisgloss = thisgloss.strip()
+            if "\n" in thisgloss:
+                thisglosslist = thisgloss.split("\n")
+                thisgloss = " ".join(thisglosslist)
+            theseglosses.append(thisgloss)
+            startpoint = endpoint
+            lastgloss = glosstext[startpoint:]
+            lastgloss = lastgloss.strip()
+            if "\n" in lastgloss:
+                lastglosslist = lastgloss.split("\n")
+                lastgloss = " ".join(lastglosslist)
+            theseglosses.append(lastgloss)
         else:
-            nextpat = nextpat[0]
-            thisgloss = glosstext[:glosstext.find(nextpat)]
-        if "\n" in thisgloss:
-            thisglosslist = thisgloss.split("\n")
-            thisgloss = "".join(thisglosslist)
-        thisgloss = thisgloss.strip()
-        theseglosses.append(thisgloss)
+            endpoint = i
+            thisgloss = glosstext[startpoint:endpoint]
+            thisgloss = thisgloss.strip()
+            if "\n" in thisgloss:
+                thisglosslist = thisgloss.split("\n")
+                thisgloss = " ".join(thisglosslist)
+            theseglosses.append(thisgloss)
+            startpoint = endpoint
     glossesstring = "\n".join(theseglosses)
     return glossesstring
 
 
 # glosses = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))
-# # Using the above variable for glosses with order_glosses instead of clearing the tags afterwards as below
-# # deletes two glosses at the end of f. 1d and beginning of f. 2a.
-
-# glosses = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG"))
+# glosses = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 712), "SG"))
 # print(order_glosses(glosses))
-# print(clear_tags(order_glosses(glosses)))
