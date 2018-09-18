@@ -44,6 +44,11 @@ def order_glosses(file):
             theseglosses.append(thisgloss)
             startpoint = endpoint
     glossesstring = "\n".join(theseglosses)
+    # """This code counts the total number of glosses, then prints them by number"""
+    # glosscount = 0
+    # for i in theseglosses:
+    #     glosscount += 1
+    #     print(str(glosscount) + ": " + i)
     return glossesstring
 
 
