@@ -12,7 +12,7 @@ def order_glosses(file):
     glosstext = file
     theseglosses = []
     glossitirs = []
-    folglosspat = re.compile(r'(\[/?f\. \d[a-d]\])?(\d{1,2}, )?\d{1,2}\. ')
+    folglosspat = re.compile(r'(\[/?f\. \d[a-d]\])?(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
     glossitir = folglosspat.finditer(glosstext)
     for i in glossitir:
         glossitirs.append(i.start())
