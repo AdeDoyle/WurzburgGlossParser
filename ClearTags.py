@@ -32,6 +32,15 @@ def clear_tags(file, exceptions=[]):
                     if closetag in filetext:
                         filetextlist = filetext.split(closetag)
                         filetext = "".join(filetextlist)
+                    for j in range(99):
+                        opentag = "[" + str(i) + "–" + str(j) + "]"
+                        closetag = "[/" + str(i) + "–" + str(j) + "]"
+                        if opentag in filetext:
+                            filetextlist = filetext.split(opentag)
+                            filetext = "".join(filetextlist)
+                        if closetag in filetext:
+                            filetextlist = filetext.split(closetag)
+                            filetext = "".join(filetextlist)
             elif tag == "let":
                 for l in ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
                           "t", "u", "v", "w", "x", "y", "z"]:
