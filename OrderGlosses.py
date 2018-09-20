@@ -6,7 +6,7 @@ from OpenPages import get_pages
 import re
 
 
-def order_glosses(file):
+def order_glosslist(file):
     """Finds each gloss by its number (and folio info where applicable)
        and returns a string with each gloss on a new line"""
     glosstext = file
@@ -43,12 +43,17 @@ def order_glosses(file):
                 thisgloss = " ".join(thisglosslist)
             theseglosses.append(thisgloss)
             startpoint = endpoint
-    glossesstring = "\n".join(theseglosses)
     # """This code counts the total number of glosses, then prints them by number"""
     # glosscount = 0
     # for i in theseglosses:
     #     glosscount += 1
     #     print(str(glosscount) + ": " + i)
+    return theseglosses
+
+
+def order_glosses(file):
+    glosslist = order_glosslist(file)
+    glossesstring = "\n".join(glosslist)
     return glossesstring
 
 

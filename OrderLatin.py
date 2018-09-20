@@ -6,7 +6,7 @@ from OpenPages import get_pages
 import re
 
 
-def order_latin(file):
+def order_latlist(file):
     latext = file
     latitirs = []
     theselines = []
@@ -42,10 +42,16 @@ def order_latin(file):
                 thisline = " ".join(thislinelist)
             theselines.append(thisline)
             startpoint = endpoint
-    linesstring = "\n".join(theselines)
+    return theselines
+
+
+def order_latin(file):
+    latlist = order_latlist(file)
+    linesstring = "\n".join(latlist)
     return linesstring
 
 
-# glosses = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "Lat")))
-# glosses = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "Lat"))
-# print(order_latin(glosses))
+# latin = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "Lat")))
+# latin = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "Lat"))
+# print(order_latlist(latin))
+# print(order_latin(latin))
