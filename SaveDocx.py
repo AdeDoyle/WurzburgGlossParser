@@ -1,11 +1,23 @@
 """Level 1"""
 
 from docx import Document
+import os
 
 
 def save_docx(content, docname="New Doc"):
+    newdocname = docname
+    docnamelen = len(docname)
     doc = Document()
+    curdir = os.getcwd()
+    exists = os.path.isfile(curdir + "/" + docname + ".docx")
     doc.add_paragraph(content)
+    if exists:
+        doccount = 0
+        while exists:
+            newdocname = docname[:docnamelen] + str(doccount)
+            exists = os.path.isfile(curdir + "/" + newdocname + ".docx")
+            doccount += 1
+    docname = newdocname
     doc.save(docname + ".docx")
 
 
