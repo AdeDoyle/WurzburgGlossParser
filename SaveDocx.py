@@ -5,6 +5,9 @@ import os
 
 
 def save_docx(content, docname="New Doc"):
+    """Saves content as text in a .docx document file. If a file already exists in the directory with the selected
+       filename, the name is edited by adding a number to the end of it before saving. This prevents files with the same
+       name from being overwritten"""
     newdocname = docname
     docnamelen = len(docname)
     doc = Document()
