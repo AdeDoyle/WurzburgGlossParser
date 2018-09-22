@@ -5,11 +5,13 @@ from OpenPages import get_pages
 
 
 def order_footnotes(file, page):
+    """Prints footnotes for a selected page as a single string"""
     footnotes = "\n\n".join(get_section(get_pages(file, page, page), "FN"))
     return footnotes
 
 
 def order_footlist(file, page):
+    """Returns footnotes for a selected page as a list"""
     footnotes = order_footnotes(file, page)
     footlist = footnotes.split("\n")
     return footlist
