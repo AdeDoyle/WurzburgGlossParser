@@ -53,8 +53,8 @@ def get_latinfo(file, startpage, stoppage):
     return infolist
 
 
-# for informationlist in (get_latpageinfo("Wurzburg Glosses", 503)):
+# for informationlist in (get_latpageinfo("Wurzburg Glosses", 499)):
 #     print(informationlist)
 
-# for informationlist in (get_latinfo("Wurzburg Glosses", 499, 503)):
+# for informationlist in (get_latinfo("Wurzburg Glosses", 499, 509)):
 #     print(informationlist)

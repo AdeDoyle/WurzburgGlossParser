@@ -10,6 +10,14 @@ def order_latlist(file):
     latext = file
     latitirs = []
     theselines = []
+    brokenlinepat = re.compile(r'(\[/?f\. \d[a-d]\])?\D.+(\n)?(.*\n)?(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
+    brokenlineitir = brokenlinepat.finditer(latext)
+    for i in brokenlineitir:
+        brokelattext = i.group()
+        if latext.find(brokelattext) == 0:
+            brokelattext = brokelattext[:brokelattext.rfind("\n")]
+            brokelattext = " ".join(brokelattext.split("\n"))
+            theselines.append(brokelattext)
     linepat = re.compile(r'(\[/?f\. \d[a-d]\])?(Rom\. )?(Corintii .*)?(Scribens .*)?(Explicit .*)?(Incipit .*)?'
                          r'([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
     lineitir = linepat.finditer(latext)
@@ -51,7 +59,7 @@ def order_latin(file):
     return linesstring
 
 
-# latin = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "Lat")))
-# latin = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "Lat"))
+# latin = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "Lat")))
+# latin = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "Lat"))
 # print(order_latlist(latin))
 # print(order_latin(latin))

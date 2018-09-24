@@ -30,8 +30,8 @@ def get_fol(text):
     return follist
 
 
-# glosses = get_pages("Wurzburg Glosses", 499, 503)
-# glosses = order_glosses("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "SG")))
-# glosses = order_glosses(clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 503), "SG")), "fol"))
+# glosses = get_pages("Wurzburg Glosses", 499, 509)
+# glosses = order_glosses("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))
+# glosses = order_glosses(clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")), "fol"))
 # for i in get_fol(glosses):
 #     print(i[1] + ":\n" + i[0] + "\n")
