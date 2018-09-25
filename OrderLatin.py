@@ -6,7 +6,9 @@ from OpenPages import get_pages
 import re
 
 
-def order_latlist(file):
+def order_latlist_page(file):
+    """Takes a single page of Latin text. Orders the text by removing any new lines where no new numbers are marked.
+    Returns a list of ordered lines for the page."""
     latext = file
     latitirs = []
     theselines = []
@@ -50,10 +52,31 @@ def order_latlist(file):
                 thisline = " ".join(thislinelist)
             theselines.append(thisline)
             startpoint = endpoint
+    if theselines[1] in theselines[0]:
+        del theselines[0]
+    elif theselines[0] in theselines[1]:
+        del theselines[0]
     return theselines
 
 
+def order_latlist(file):
+    """Takes multiple pages of latin text where pages are separated by a doule space ("\n\n"). Returns a list of ordered
+       lines for the entire file."""
+    pages = file.split("\n\n")
+    orderedpageslist = []
+    for page in pages:
+        orderedglosses = order_latlist_page(page)
+        orderedpageslist.append(orderedglosses)
+    orderedpages = []
+    for orderedpage in orderedpageslist:
+        for orderedgloss in orderedpage:
+            orderedpages.append(orderedgloss)
+    return orderedpages
+
+
 def order_latin(file):
+    """Takes multiple pages of latin text where pages are separated by a doule space ("\n\n"). Returns a single string
+     of ordered lines for the entire file."""
     latlist = order_latlist(file)
     linesstring = "\n".join(latlist)
     return linesstring
