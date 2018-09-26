@@ -7,8 +7,7 @@ import re
 
 
 def order_glosslist(file):
-    """Finds each gloss by its number (and folio info where applicable)
-       and returns a string with each gloss on a new line"""
+    """Finds each gloss by its number and returns a list of glosses"""
     glosstext = file
     theseglosses = []
     glossitirs = []
@@ -52,6 +51,7 @@ def order_glosslist(file):
 
 
 def order_glosses(file):
+    """Finds each gloss by its number and returns a string with each gloss on a new line"""
     glosslist = order_glosslist(file)
     glossesstring = "\n".join(glosslist)
     return glossesstring

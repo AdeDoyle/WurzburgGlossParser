@@ -10,9 +10,9 @@ import re
 
 
 def get_allinfo(file, startpage, stoppage=None):
-    """Returns an infolist containing multiple sub-lists. The first sublist contains the headers for a info-table.
-       Subsequent lists contain, respectively, for a set page range page no., folio, gloss no., gloss text, Latin lemma,
-       Latin line no., and Latin text."""
+    """Returns an infolist containing multiple sub-lists. The first sublist contains the headers for an info-table.
+       Subsequent lists contain, respectively, for a set page range: page no., folio, gloss no., gloss text, Latin
+       lemma, Latin line no., and Latin text."""
     if stoppage is None:
         stoppage = startpage
     infolist = [["Page", "Folio", "Gloss No.", "Gloss Text", "Lemma", "Line No.", "Glossed Latin"]]
