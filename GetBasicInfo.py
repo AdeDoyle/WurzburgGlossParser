@@ -42,6 +42,9 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     if glossstub in foltextlist[1]:
                         thisfolio = foltextlist[0]
                         thisglosslist.append(thisfolio)
+                        glossfound = True
+            if not glossfound:
+                thisglosslist.append("No Folio Information Found")
             glossnopat = re.compile(r'(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
             glosspatitir = glossnopat.finditer(gloss)
             for i in glosspatitir:
