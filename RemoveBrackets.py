@@ -3,6 +3,7 @@
 from OpenPages import get_pages
 from ClearTags import clear_tags
 from GetSections import get_section
+from OrderGlosses import order_glosses
 
 
 def remove_brackets(file):
@@ -26,8 +27,14 @@ def remove_brackets(file):
             else:
                 filetext = filetext[:sbcpos] + filetext[sbcpos + 1:]
                 filetext = filetext[:sbopos] + filetext[sbopos + 1:]
+    if "  " in filetext:
+        spacecount = filetext.count("  ")
+        for space in range(spacecount):
+            spaceplace = filetext.find("  ")
+            filetext = filetext[:spaceplace] + filetext[spaceplace + 1:]
     return filetext
 
 
 # glosses = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))
+# glosses = order_glosses(clear_tags("\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG"))))
 # print(remove_brackets(glosses))
