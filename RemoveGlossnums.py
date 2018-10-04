@@ -4,6 +4,7 @@ from OpenPages import get_pages
 from GetSections import get_section
 from ClearTags import clear_tags
 from OrderGlosses import order_glosses
+from RemoveBrackets import remove_brackets
 import re
 
 
@@ -19,6 +20,7 @@ def remove_glossnums(file):
     return filetext
 
 
-# glosses = order_glosses(clear_tags("\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG"))))
-# glosses = "\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG"))
+# glosses = remove_brackets(
+#     order_glosses(clear_tags("\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))))
+# glosses = order_glosses("\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))
 # print(remove_glossnums(glosses))
