@@ -11,7 +11,7 @@ def order_glosslist(file):
     glosstext = file
     theseglosses = []
     glossitirs = []
-    folglosspat = re.compile(r'(\[/?f\. \d[a-d]\])?(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
+    folglosspat = re.compile(r'(\[/?f\. \d{1,2}[a-d]\])?(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
     glossitir = folglosspat.finditer(glosstext)
     for i in glossitir:
         glossitirs.append(i.start())
@@ -57,6 +57,8 @@ def order_glosses(file):
     return glossesstring
 
 
-# glosses = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG")))
-# glosses = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 509), "SG"))
+# glosses = clear_tags("\n\n".join(get_section(get_pages("Wurzburg Glosses", 558, 558), "SG")))
+# glosses = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 558), "SG"))
 # print(order_glosses(glosses))
+# for test in order_glosslist(glosses):
+#     print(test)
