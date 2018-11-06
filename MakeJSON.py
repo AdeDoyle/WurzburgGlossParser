@@ -6,21 +6,20 @@ from GetBasicInfo import get_glinfo
 def make_json(glosslist, headers=False):
     """Takes a list of sublists, each sublist containing a gloss and related information, returns a json package for
        each gloss"""
-    jsonformat0 = """{"epistles": [x]
-}"""
+    jsonformat0 = """[x]"""
     jsonformat1 = """{
     "epistle": "[x]",
     "folios": [y]
-    }"""
+}"""
     jsonformat2 = """{
         "folio": "[x]",
         "glosses": [y]
-        }"""
+    }"""
     jsonformat3 = """{
             "glossNo": "[x]",
             "glossText": "[y]",
             "tphPage": "[z]"
-            }"""
+        }"""
     if headers:
         glosslist = glosslist[1:]
     #  This gets level 3
@@ -52,16 +51,16 @@ def make_json(glosslist, headers=False):
             elif curep == lastep and curfol == lastfol:
                 epfollist.append(curgloss)
             else:
-                epfolstr = ",\n            ".join(epfollist)
+                epfolstr = ",\n        ".join(epfollist)
                 jsonglosslist2.append([lastep, lastfol, epfolstr])
                 epfollist = [curgloss]
         else:
             if curep == lastep and curfol == lastfol:
                 epfollist.append(curgloss)
-                epfolstr = ",\n            ".join(epfollist)
+                epfolstr = ",\n        ".join(epfollist)
                 jsonglosslist2.append([lastep, lastfol, epfolstr])
             else:
-                epfolstr = ",\n            ".join(epfollist)
+                epfolstr = ",\n        ".join(epfollist)
                 jsonglosslist2.append([lastep, lastfol, epfolstr])
                 jsonglosslist2.append([curep, curfol, curgloss])
     #  This gets level 2
@@ -87,16 +86,16 @@ def make_json(glosslist, headers=False):
             elif curep == lastep:
                 eplist.append(curfol)
             else:
-                epstr = ",\n        ".join(eplist)
+                epstr = ",\n    ".join(eplist)
                 jsonfollist2.append([lastep, epstr])
                 eplist = [curfol]
         else:
             if curep == lastep:
                 eplist.append(curfol)
-                epstr = ",\n        ".join(eplist)
+                epstr = ",\n    ".join(eplist)
                 jsonfollist2.append([lastep, epstr])
             else:
-                epstr = ",\n        ".join(eplist)
+                epstr = ",\n    ".join(eplist)
                 jsonfollist2.append([lastep, epstr])
                 jsonfollist2.append([curep, curfol])
     #  This gets level 1
@@ -109,7 +108,7 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("y]")] + jsonfol + jsonblank[jsonblank.find("y]") + 1:]
         jsoneplist.append(jsonblank)
     #  This gets level 0
-    jsonepstr = ",\n    ".join(jsoneplist)
+    jsonepstr = ",\n".join(jsoneplist)
     jsonoutput = jsonformat0[:jsonformat0.find("x]")] + jsonepstr + jsonformat0[jsonformat0.find("x]") + 1:]
     return jsonoutput
 
@@ -124,5 +123,5 @@ def make_json(glosslist, headers=False):
 #                  ["Cor II", "506", "f. 2a", "1", "puu"], ["Cor II", "506", "f. 2a", "2", "fum"]]
 # print(make_json(testglosslist))
 
-# wbglosslist = get_glinfo("Wurzburg Glosses", 499, 509)
+# wbglosslist = get_glinfo("Wurzburg Glosses", 499, 619)
 # print(make_json(wbglosslist, True))
