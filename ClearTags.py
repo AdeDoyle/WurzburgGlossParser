@@ -12,7 +12,7 @@ def clear_tags(file, exceptions=[]):
     for tag in taglist:
         if tag not in exceptions:
             if tag == "fol":
-                for i in range(1, 34):
+                for i in range(1, 34 + 1):
                     for l in ["a", "b", "c", "d"]:
                         opentag = "[f. " + str(i) + l + "]"
                         closetag = "[/f. " + str(i) + l + "]"

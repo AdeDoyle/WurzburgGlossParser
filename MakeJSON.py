@@ -123,5 +123,5 @@ def make_json(glosslist, headers=False):
 #                  ["Cor II", "506", "f. 2a", "1", "puu"], ["Cor II", "506", "f. 2a", "2", "fum"]]
 # print(make_json(testglosslist))
 
-# wbglosslist = get_glinfo("Wurzburg Glosses", 499, 619)
+# wbglosslist = get_glinfo("Wurzburg Glosses", 499, 712)
 # print(make_json(wbglosslist, True))
