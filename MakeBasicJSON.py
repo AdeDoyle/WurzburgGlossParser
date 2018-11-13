@@ -1,9 +1,9 @@
 """Level 1"""
 
-from GetFullInfo import get_glinfo
+from GetBasicInfo import get_glinfobasic
 
 
-def make_json(glosslist, headers=False):
+def make_jsonbasic(glosslist, headers=False):
     """Takes a list of sublists, each sublist containing a gloss and related information, returns a json package for
        each gloss"""
     jsonformat0 = """[x]"""
@@ -121,7 +121,7 @@ def make_json(glosslist, headers=False):
 #                  ["Rom", "504", "f. 1c", "4", "poo"], ["Cor I", "504", "f. 1c", "5", "pee"],
 #                  ["Cor I", "505", "f. 1d", "1", "paa"], ["Cor I", "505", "f. 1d", "2", "pii"],
 #                  ["Cor II", "506", "f. 2a", "1", "puu"], ["Cor II", "506", "f. 2a", "2", "fum"]]
-# print(make_json(testglosslist))
+# print(make_jsonbasic(testglosslist))
 
-# wbglosslist = get_glinfo("Wurzburg Glosses", 499, 523)
-# print(make_json(wbglosslist, True))
+# wbglosslist = get_glinfobasic("Wurzburg Glosses", 499, 712)
+# print(make_jsonbasic(wbglosslist, True))
