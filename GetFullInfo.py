@@ -4,7 +4,7 @@ from GetTagText import get_tagtext
 from OpenPages import get_pages
 from GetSections import get_section
 from OrderGlosses import order_glosses, order_glosslist
-from ClearTags import clear_tags
+from ClearTags import clear_tags, clear_spectags
 from GetFolio import get_fol
 import re
 
@@ -14,7 +14,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
        Subsequent lists contain, respectively, for a set page range: Epistle, Page No., Folio, Gloss no. and Gloss Text
        (with [GLat][/GLat] tags converted to html italics tags) for every gloss in Wb."""
     curepist = "Unknown"
-    infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Text"]]
+    infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Text", "Gloss Footnotes"]]
     for page in range(startpage, stoppage + 1):
         thispage = page
         pagetext = get_pages(file, thispage, thispage)
@@ -23,11 +23,11 @@ def get_glinfo(file, startpage=499, stoppage=712):
         if epfunc:
             curepist = epfunc[0]
         # Identifies individual glosses on the current page, and adds them to a gloss-list.
-        glosslist = order_glosslist(clear_tags("\n\n".join(get_section(pagetext, "SG")), "GLat"))
+        glosslist = order_glosslist(clear_tags("\n\n".join(get_section(pagetext, "SG")), ["GLat", "let"]))
         foliolist = []
         # Creates a list of folios and related gloss text for the current page.
         for folinfo in get_fol(order_glosses(clear_tags("\n\n".join(get_section(get_pages(
-                file, thispage, thispage), "SG")), ["GLat", "fol"]))):
+                file, thispage, thispage), "SG")), ["GLat", "fol", "let"]))):
             folio = folinfo[1]
             foliotext = folinfo[0]
             foliolist.append([folio, foliotext])
@@ -54,7 +54,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
             # Identifies gloss numbers and removes them from the gloss text.
             glossnopat = re.compile(r'(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
             glosspatitir = glossnopat.finditer(gloss)
-            # Adds gloss number and gloss text to list.
+            # Adds gloss number and gloss texts to list.
             for i in glosspatitir:
                 glosstext = gloss[gloss.find(i.group()) + len(i.group()):]
                 # Replaces Latin tags with html emphasis tags.
@@ -64,7 +64,30 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 if "[/GLat]" in glosstext:
                     glosstextlist = glosstext.split("[/GLat]")
                     glosstext = "</em>".join(glosstextlist)
-                thisglosslist.extend([(i.group())[:-2], glosstext])
+                basegloss = clear_spectags(glosstext, "let")
+                footnotesgloss = clear_tags(glosstext, "let")
+                footnotepat = re.compile(r'\[/?[a-z]\]')
+                fnpatitir = footnotepat.finditer(footnotesgloss)
+                fnlist = []
+                for i in fnpatitir:
+                    fnlist.append(i.group())
+                if fnlist:
+                    for fntag in fnlist:
+                        if "[/" in fntag:
+                            endtag = fntag
+                            begintag = "".join(endtag.split("/"))
+                            footnotesgloss = "".join(footnotesgloss.split(begintag))
+                            tagplace = footnotesgloss.find(endtag)
+                            footnotesgloss = footnotesgloss[:tagplace] + "<sup>" +\
+                                             footnotesgloss[tagplace + 2: tagplace + 3] + "</sup>" +\
+                                             footnotesgloss[tagplace + 4:]
+                            if begintag in fnlist:
+                                del fnlist[fnlist.index(begintag)]
+                    for footnote in fnlist:
+                        fnletter = footnote[-2]
+                        fnsuperscript = "<sup>" + fnletter + "</sup>"
+                        footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
+                thisglosslist.extend([(i.group())[:-2], basegloss, footnotesgloss])
             infolist.append(thisglosslist)
     return infolist
 

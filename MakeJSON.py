@@ -16,8 +16,9 @@ def make_json(glosslist, headers=False):
         "glosses": [y]
     }"""
     jsonformat3 = """{
-            "glossNo": "[x]",
-            "glossText": "[y]",
+            "glossNo": "[w]",
+            "glossText": "[x]",
+            "glossFNs": "[y]",
             "tphPage": "[z]"
         }"""
     if headers:
@@ -31,8 +32,10 @@ def make_json(glosslist, headers=False):
         f = gloss[2]
         gn = gloss[3]
         gt = gloss[4]
-        jsonblank = jsonblank[:jsonblank.find("[x]")] + gn + jsonblank[jsonblank.find("[x]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[y]")] + gt + jsonblank[jsonblank.find("[y]") + 3:]
+        gfn = gloss[5]
+        jsonblank = jsonblank[:jsonblank.find("[w]")] + gn + jsonblank[jsonblank.find("[w]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[x]")] + gt + jsonblank[jsonblank.find("[x]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[y]")] + gfn + jsonblank[jsonblank.find("[y]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[z]")] + str(p) + jsonblank[jsonblank.find("[z]") + 3:]
         jsonblanklist = [e, f, jsonblank]
         jsonglosslist1.append(jsonblanklist)
