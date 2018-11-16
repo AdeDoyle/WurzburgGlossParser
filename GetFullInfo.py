@@ -54,8 +54,9 @@ def get_glinfo(file, startpage=499, stoppage=712):
             # Identifies gloss numbers and removes them from the gloss text.
             glossnopat = re.compile(r'(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
             glosspatitir = glossnopat.finditer(gloss)
-            # Adds gloss number and gloss texts to list.
+            # Adds, first, gloss number(s), and then gloss text(s) to list.
             for i in glosspatitir:
+                thisglosslist.append(i.group()[:-2])
                 glosstext = gloss[gloss.find(i.group()) + len(i.group()):]
                 # Replaces Latin tags with html emphasis tags.
                 if "[GLat]" in glosstext:
@@ -69,8 +70,8 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 footnotepat = re.compile(r'\[/?[a-z]\]')
                 fnpatitir = footnotepat.finditer(footnotesgloss)
                 fnlist = []
-                for i in fnpatitir:
-                    fnlist.append(i.group())
+                for j in fnpatitir:
+                    fnlist.append(j.group())
                 if fnlist:
                     for fntag in fnlist:
                         if "[/" in fntag:
@@ -87,7 +88,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         fnletter = footnote[-2]
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
-                thisglosslist.extend([(i.group())[:-2], basegloss, footnotesgloss])
+                thisglosslist.extend([basegloss, footnotesgloss])
             infolist.append(thisglosslist)
     return infolist
 
