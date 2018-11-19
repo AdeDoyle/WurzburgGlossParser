@@ -3,7 +3,7 @@
 import xlsxwriter
 import os
 from GetAllInfo import get_allinfo
-from GetBasicInfo import get_glinfo
+from GetBasicInfo import get_glinfobasic
 
 
 def save_xlsx(filename, datalists, headers=False):
@@ -47,4 +47,4 @@ def save_xlsx(filename, datalists, headers=False):
 # save_xlsx("test workbook", [["FirstNo", "SecondNo", "ThirdNo"], [9, 8, 7], [6, 5, 4], [3, 2, 1]])
 
 # save_xlsx("All Info Table Test p.499-509", get_allinfo("Wurzburg Glosses", 499, 509), True)
-# save_xlsx("All Gloss Info Basic", get_glinfo("Wurzburg Glosses", 499, 712), True)
+# save_xlsx("All Gloss Info Basic", get_glinfobasic("Wurzburg Glosses", 499, 712), True)
