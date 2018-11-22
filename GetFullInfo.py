@@ -14,7 +14,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
        Subsequent lists contain, respectively, for a set page range: Epistle, Page No., Folio, Gloss no. and Gloss Text
        (with [GLat][/GLat] tags converted to html italics tags) for every gloss in Wb."""
     curepist = "Unknown"
-    infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Text", "Gloss Footnotes"]]
+    infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes"]]
     for page in range(startpage, stoppage + 1):
         thispage = page
         pagetext = get_pages(file, thispage, thispage)
@@ -23,11 +23,11 @@ def get_glinfo(file, startpage=499, stoppage=712):
         if epfunc:
             curepist = epfunc[0]
         # Identifies individual glosses on the current page, and adds them to a gloss-list.
-        glosslist = order_glosslist(clear_tags("\n\n".join(get_section(pagetext, "SG")), ["GLat", "let"]))
+        glosslist = order_glosslist(clear_spectags("\n\n".join(get_section(pagetext, "SG")), "fol"))
         foliolist = []
         # Creates a list of folios and related gloss text for the current page.
-        for folinfo in get_fol(order_glosses(clear_tags("\n\n".join(get_section(get_pages(
-                file, thispage, thispage), "SG")), ["GLat", "fol", "let"]))):
+        for folinfo in get_fol(order_glosses("\n\n".join(get_section(get_pages(
+                file, thispage, thispage), "SG")))):
             folio = folinfo[1]
             foliotext = folinfo[0]
             foliolist.append([folio, foliotext])
@@ -54,18 +54,21 @@ def get_glinfo(file, startpage=499, stoppage=712):
             # Identifies gloss numbers and removes them from the gloss text.
             glossnopat = re.compile(r'(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
             glosspatitir = glossnopat.finditer(gloss)
-            # Adds, first, gloss number(s), and then gloss text(s) to list.
             for i in glosspatitir:
+                # Adds gloss number to list.
                 thisglosslist.append(i.group()[:-2])
-                glosstext = gloss[gloss.find(i.group()) + len(i.group()):]
-                # Replaces Latin tags with html emphasis tags.
+                # Identifies foundational gloss including all markup tags.
+                glossfulltags = gloss[gloss.find(i.group()) + len(i.group()):]
+                # Creates a display copy of the gloss text, replacing Latin tags with html emphasis tags.
+                glosstext = glossfulltags
                 if "[GLat]" in glosstext:
                     glosstextlist = glosstext.split("[GLat]")
                     glosstext = "<em>".join(glosstextlist)
                 if "[/GLat]" in glosstext:
                     glosstextlist = glosstext.split("[/GLat]")
                     glosstext = "</em>".join(glosstextlist)
-                basegloss = clear_spectags(glosstext, "let")
+                # Creates 2 copies of display gloss text, one primary, one retaining footnotes in superscript tags.
+                basegloss = clear_tags(glosstext)
                 footnotesgloss = clear_tags(glosstext, "let")
                 footnotepat = re.compile(r'\[/?[a-z]\]')
                 fnpatitir = footnotepat.finditer(footnotesgloss)
@@ -88,7 +91,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         fnletter = footnote[-2]
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
-                thisglosslist.extend([basegloss, footnotesgloss])
+                thisglosslist.extend([glossfulltags, basegloss, footnotesgloss])
             infolist.append(thisglosslist)
     return infolist
 
