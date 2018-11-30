@@ -119,14 +119,14 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-# testglosslist = [["Rom", "499", "f. 1a", "1", "foo"], ["Rom", "499", "f. 1a", "2", "fee"],
-#                  ["Rom", "500", "f. 1a", "3", "faa"], ["Rom", "500", "f. 1b", "4", "fii"],
-#                  ["Rom", "501", "f. 1b", "5", "fuu"], ["Rom", "502", "f. 1b", "6", "roo"],
-#                  ["Rom", "502", "f. 1b", "7", "ree"], ["Rom", "502", "f. 1b", "1", "raa"],
-#                  ["Rom", "503", "f. 1c", "2", "rii"], ["Rom", "503", "f. 1c", "3", "ruu"],
-#                  ["Rom", "504", "f. 1c", "4", "poo"], ["Cor I", "504", "f. 1c", "5", "pee"],
-#                  ["Cor I", "505", "f. 1d", "1", "paa"], ["Cor I", "505", "f. 1d", "2", "pii"],
-#                  ["Cor II", "506", "f. 2a", "1", "puu"], ["Cor II", "506", "f. 2a", "2", "fum"]]
+# testglosslist = [["Rom", "499", "f. 1a", "1", "foo", "foo", "foo"], ["Rom", "499", "f. 1a", "2", "fee", "fee", "fee"],
+#                  ["Rom", "500", "f. 1a", "3", "faa", "faa", "faa"], ["Rom", "500", "f. 1b", "4", "fii", "fii", "fii"],
+#                  ["Rom", "501", "f. 1b", "5", "fuu", "fuu", "fuu"], ["Rom", "502", "f. 1b", "6", "roo", "roo", "roo"],
+#                  ["Rom", "502", "f. 1b", "7", "ree", "ree", "ree"], ["Rom", "502", "f. 1b", "1", "raa", "raa", "raa"],
+#                  ["Rom", "503", "f. 1c", "2", "rii", "rii", "rii"], ["Rom", "503", "f. 1c", "3", "ruu", "ruu", "ruu"],
+#                  ["Rom", "504", "f. 1c", "4", "poo", "poo", "poo"], ["Cor", "504", "f. 1c", "5", "pee", "pee", "pee"],
+#                  ["Cor", "505", "f. 1d", "1", "paa", "paa", "paa"], ["Cor", "505", "f. 1d", "2", "pii", "pii", "pii"],
+#                  ["Phl", "506", "f. 2a", "1", "puu", "puu", "puu"], ["Phl", "506", "f. 2a", "2", "fum", "fum", "fum"]]
 # print(make_json(testglosslist))
 
 # wbglosslist = get_glinfo("Wurzburg Glosses", 499, 712)
