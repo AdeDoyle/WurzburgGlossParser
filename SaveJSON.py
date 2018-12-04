@@ -20,7 +20,7 @@ def save_json(content, docname="glosses"):
             exists = os.path.isfile(curdir + "/" + newdocname + ".json")
             doccount += 1
     docname = newdocname
-    with open(docname + '.json', 'w') as doc:
+    with open(docname + '.json', 'w', encoding='utf-8') as doc:
         doc.write(content)
 
 
@@ -32,7 +32,7 @@ def save_json(content, docname="glosses"):
 #                  ["Rom", "504", "f. 1c", "4", "poo", "poo", "poo"], ["Cor", "504", "f. 1c", "5", "pee", "pee", "pee"],
 #                  ["Cor", "505", "f. 1d", "1", "paa", "paa", "paa"], ["Cor", "505", "f. 1d", "2", "pii", "pii", "pii"],
 #                  ["Phl", "506", "f. 2a", "1", "puu", "puu", "puu"], ["Phl", "506", "f. 2a", "2", "fum", "fum", "fum"]]
-# save_docx(make_json(testglosslist))
+# save_json(make_json(testglosslist))
 
 # wbglosslist = get_glinfo("Wurzburg Glosses", 499, 712)
 # save_json(make_json(wbglosslist, True))
