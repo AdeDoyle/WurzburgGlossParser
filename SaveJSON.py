@@ -5,7 +5,7 @@ from MakeJSON import make_json
 import os
 
 
-def save_docx(content, docname="glosses"):
+def save_json(content, docname="glosses"):
     """Saves content as text in a .json document file. If a file already exists in the directory with the selected
        filename, the name is edited by adding a number to the end of it before saving. This prevents files with the same
        name from being overwritten"""
@@ -35,4 +35,4 @@ def save_docx(content, docname="glosses"):
 # save_docx(make_json(testglosslist))
 
 # wbglosslist = get_glinfo("Wurzburg Glosses", 499, 712)
-# save_docx(make_json(wbglosslist, True))
+# save_json(make_json(wbglosslist, True))
