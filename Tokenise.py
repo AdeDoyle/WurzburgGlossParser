@@ -2,6 +2,7 @@
 
 from RemoveNewlines import remove_newlines, get_pages, get_section, clear_tags, order_glosses, remove_brackets,\
     remove_glossnums
+from RemoveLatin import rem_lat
 from SaveXlsx import save_xlsx
 
 
@@ -52,8 +53,10 @@ def top_toks(string, occurrences=0):
 
 # glosses = remove_glossnums(remove_brackets(
 #     order_glosses(clear_tags("\n".join(get_section(get_pages("Wurzburg Glosses", 499, 712), "SG"))))))
-# for token in top_toks(glosses, 69):
+# glosses = remove_glossnums(remove_brackets(rem_lat(order_glosses(clear_tags(
+#     "\n".join(get_section(get_pages("Wurzburg Glosses", 499, 712), "SG")), ["GLat", "ie", "vel"])), True)))
+# for token in top_toks(glosses, 53):
 #     print(str(token[0]) + ". " + token[2] + " - Count: " + str(token[1]))
 
 # # Saves an excel document of the most common tokens.
-# save_xlsx("Wb. Common Tokens", top_toks(glosses, 69))
+# save_xlsx("Wb. Common Tokens", top_toks(glosses, 53))

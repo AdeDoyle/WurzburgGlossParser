@@ -60,8 +60,8 @@ def order_latlist_page(file):
 
 
 def order_latlist(file):
-    """Takes multiple pages of latin text where pages are separated by a doule space ("\n\n"). Returns a list of ordered
-       lines for the entire file."""
+    """Takes multiple pages of latin text where pages are separated by a double space ("\n\n").
+       Returns a list of ordered lines for the entire file."""
     pages = file.split("\n\n")
     orderedpageslist = []
     for page in pages:
@@ -75,8 +75,8 @@ def order_latlist(file):
 
 
 def order_latin(file):
-    """Takes multiple pages of latin text where pages are separated by a doule space ("\n\n"). Returns a single string
-     of ordered lines for the entire file."""
+    """Takes multiple pages of latin text where pages are separated by a double space ("\n\n").
+       Returns a single string of ordered lines for the entire file."""
     latlist = order_latlist(file)
     linesstring = "\n".join(latlist)
     return linesstring

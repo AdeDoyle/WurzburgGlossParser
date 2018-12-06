@@ -4,6 +4,8 @@ from GetSections import get_section, get_pages
 
 
 def testsectext(sec, startpage, stoppage):
+    """Takes a desired section and page range as input.
+       Outputs a list of lists of page no. and page content."""
     pagesinfolist = []
     for page in range(startpage, stoppage + 1):
         pageinfolist = [str(page), "\n\n".join(get_section(get_pages("Wurzburg Glosses", page, page), sec))]
