@@ -1,7 +1,8 @@
 """Lervel 1, 1, 1, 2"""
 
-from Tokenise import space_tokenise, remove_glossnums, remove_brackets, rem_lat, order_glosses, clear_tags,get_section,\
-    get_pages
+from Tokenise import space_tokenise, remove_glossnums, remove_brackets, rem_lat, order_glosses, clear_tags,\
+    get_section, get_pages
+from OpenDocx import get_text
 from matplotlib import pyplot as plt
 
 
@@ -61,8 +62,8 @@ def multiplot_occur(occurrenceslist):
         tokslist.append(tok)
         y = occurrences[1:]
         plt.plot(x, y)
-    plt.title("Occurrences of tokens in Glosses")
-    plt.xlabel("Glosses")
+    plt.title("Occurrences of Tokens in Wb. Glosses")
+    plt.xlabel("Glosses (Beginning to End)")
     plt.ylabel("Token Occurrences")
     plt.legend(tokslist)
     plt.show()
@@ -71,8 +72,16 @@ def multiplot_occur(occurrenceslist):
 
 # glosses = remove_glossnums(remove_brackets(rem_lat(order_glosses(clear_tags(
 #     "\n".join(get_section(get_pages("Wurzburg Glosses", 499, 712), "SG")), ["GLat", "ie", "vel"])), True)))
+# glosses = remove_glossnums(remove_brackets(rem_lat(clear_tags(
+#     get_text("Wb. Prima Manus"), ["GLat", "ie", "vel"]), True)))
+# glosses = remove_glossnums(remove_brackets(rem_lat(clear_tags(
+#     get_text("Wb. Hand Two"), ["GLat", "ie", "vel"]), True)))
+# glosses = remove_glossnums(remove_brackets(rem_lat(clear_tags(
+#     get_text("Wb. Hand Three"), ["GLat", "ie", "vel"]), True)))
+
 # glosstoks = space_tokenise(glosses.strip())
 
+# # input the desired tokens to be plotted and size of each division
 # t1 = occur_count(glosstoks, "ni", 1633)
 # t2 = occur_count(glosstoks, "ní", 1633)
 # t3 = occur_count(glosstoks, "dano", 1633)
