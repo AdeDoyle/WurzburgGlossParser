@@ -24,6 +24,8 @@ def remove_brackets(file):
             sbtext = filetext[sbopos + 1: sbcpos]
             if "marg." in sbtext:
                 filetext = filetext[:sbopos] + filetext[sbcpos + 1:]
+            elif "between ff." in sbtext:
+                filetext = filetext[:sbopos] + filetext[sbcpos + 1:]
             else:
                 filetext = filetext[:sbcpos] + filetext[sbcpos + 1:]
                 filetext = filetext[:sbopos] + filetext[sbopos + 1:]
