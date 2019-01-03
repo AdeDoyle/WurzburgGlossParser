@@ -1,6 +1,7 @@
-"""Level 3"""
+"""Level 3, 1"""
 
 from GetSections import get_section, get_pages
+import re
 
 
 def testsectext(sec, startpage, stoppage):
@@ -13,6 +14,30 @@ def testsectext(sec, startpage, stoppage):
     return pagesinfolist
 
 
+def testlatnums(text):
+    """Searches for number patterns within a text which do not match expected numbering or superscript patterns"""
+    numlist = []
+    numpat = re.compile(r'\d[^.\]\da-z]')
+    numpatitir = numpat.finditer(text)
+    for i in numpatitir:
+        find = i.group()
+        if find not in numlist:
+            numlist.append(find)
+    numpat = re.compile(r'[^\[\]\d\s]\d\. ')
+    numpatitir = numpat.finditer(text)
+    for i in numpatitir:
+        find = i.group()
+        if find not in numlist:
+            numlist.append(find)
+    numpat = re.compile(r'\d\.[^\s]')
+    numpatitir = numpat.finditer(text)
+    for i in numpatitir:
+        find = i.group()
+        if find not in numlist:
+            numlist.append(find)
+    return numlist
+
+
 # sections = testsectext("Lat", 499, 712)
 # sections = testsectext("SG", 499, 712)
 # sections = testsectext("Eng", 499, 712)
@@ -21,3 +46,7 @@ def testsectext(sec, startpage, stoppage):
 #     print(pagelist[0])
 #     print(pagelist[1])
 #     print("")
+
+# lattext = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 712), "Lat"))
+# for fail in testlatnums(lattext):
+#     print(fail)
