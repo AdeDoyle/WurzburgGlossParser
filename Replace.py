@@ -6,7 +6,7 @@ import re
 
 def rep_mstags(text, footnotes):
     """Finds all open/close footnotes in a gloss or line of Latin, checks if there is a footnote with an associated
-    manuscript replacement tagged and, if so, replaces it returning the gloss/Latin with all replacements made."""
+       manuscript replacement tagged and, if so, replaces it returning the gloss/Latin with all replacements made."""
     textstring = text
     tagsintext = []
     taggedtextlist = []
@@ -36,7 +36,7 @@ def rep_mstags(text, footnotes):
 
 def rep_legtags(text, footnotes):
     """Finds all open/close footnotes in a gloss or line of Latin, checks if there is a footnote with an associated
-    suggested reading tagged and, if so, replaces it returning the gloss/Latin with all replacements made."""
+       suggested reading tagged and, if so, replaces it returning the gloss/Latin with all replacements made."""
     textstring = text
     tagsintext = []
     taggedtextlist = []

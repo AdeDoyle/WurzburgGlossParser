@@ -46,5 +46,5 @@ def save_xlsx(filename, datalists, headers=False):
 # save_xlsx("test workbook", [["FirstNo", "SecondNo", "ThirdNo"], [1, 2, 3], [4, 5, 6], [7, 8, 9]], True)
 # save_xlsx("test workbook", [["FirstNo", "SecondNo", "ThirdNo"], [9, 8, 7], [6, 5, 4], [3, 2, 1]])
 
-# save_xlsx("All Info Table Test p.499-509", get_allinfo("Wurzburg Glosses", 499, 509), True)
+# save_xlsx("All Gloss Info", get_allinfo("Wurzburg Glosses", 499, 712), True)
 # save_xlsx("All Gloss Info Basic", get_glinfobasic("Wurzburg Glosses", 499, 712), True)

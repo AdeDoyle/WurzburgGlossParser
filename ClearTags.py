@@ -26,7 +26,7 @@ def clear_tags(file, exceptions=[]):
                             filetextlist = filetext.split(closetag)
                             filetext = "".join(filetextlist)
             elif tag == "num":
-                numtagpat = re.compile(r'\[/?\d\w?(–\d\w?)?\]')
+                numtagpat = re.compile(r'\[/?\d{1,2}\w?(–\d{1,2}\w?)?\]')
                 numtagpatitir = numtagpat.finditer(filetext)
                 numtaglist = []
                 for i in numtagpatitir:
