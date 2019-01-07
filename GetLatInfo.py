@@ -20,6 +20,7 @@ def get_latpageinfo(file, page):
     glossitir = numpat.finditer(glosses)
     glossnums = []
     for i in glossitir:
+        # gets gloss numbers from the Irish text, converts them to match tags in the Latin text, adds them to a list.
         glossnum = i.group()
         glossnum = glossnum[:-2]
         if ", " in glossnum:
@@ -28,6 +29,7 @@ def get_latpageinfo(file, page):
     latpergloss = []
     lemmas = []
     for num in glossnums:
+        # checks for expected gloss numbers in the latin text and, if found, adds the latin line and lemma to lists.
         for line in latlines:
             if num in line:
                 latpergloss.append(line)
@@ -37,6 +39,7 @@ def get_latpageinfo(file, page):
                 lemma = linetext[linetext.rfind(" ") + 1:]
                 lemmas.append(lemma)
     for i in range(len(glossnums)):
+        # compiles a list of the gloss, the Latin line, and the lemma for the gloss within the Latin line.
         latininfolist.append([eachgloss[i], clear_tags(latpergloss[i]), clear_tags(lemmas[i])])
     return latininfolist
 
@@ -56,5 +59,5 @@ def get_latinfo(file, startpage, stoppage):
 # for informationlist in (get_latpageinfo("Wurzburg Glosses", 499)):
 #     print(informationlist)
 
-# for informationlist in (get_latinfo("Wurzburg Glosses", 499, 509)):
+# for informationlist in (get_latinfo("Wurzburg Glosses", 499, 712)):
 #     print(informationlist)
