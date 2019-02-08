@@ -1,6 +1,6 @@
 """Level 1"""
 
-from GetFullInfo import get_glinfo
+from CombineInfoLists import combine_infolists
 
 
 def make_json(glosslist, headers=False):
@@ -18,6 +18,9 @@ def make_json(glosslist, headers=False):
     jsonformat3 = """{
             "tphPage": "[a]",
             "glossNo": "[b]",
+            "latLine": "[c]",
+            "latin": "[d]",
+            "lemma": "[e]",
             "glossFullTags": "[g]",
             "glossText": "[x]",
             "glossFNs": "[y]"
@@ -31,12 +34,18 @@ def make_json(glosslist, headers=False):
         e = gloss[0]
         p = gloss[1]
         f = gloss[2]
-        gn = gloss[3]
-        g = gloss[4]
-        gt = gloss[5]
-        gfn = gloss[6]
+        ll = gloss[3]
+        la = gloss[4]
+        le = gloss[5]
+        gn = gloss[6]
+        g = gloss[7]
+        gt = gloss[8]
+        gfn = gloss[9]
         jsonblank = jsonblank[:jsonblank.find("[a]")] + str(p) + jsonblank[jsonblank.find("[a]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[b]")] + gn + jsonblank[jsonblank.find("[b]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[c]")] + ll + jsonblank[jsonblank.find("[c]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[d]")] + la + jsonblank[jsonblank.find("[d]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[e]")] + le + jsonblank[jsonblank.find("[e]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[x]")] + gt + jsonblank[jsonblank.find("[x]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[y]")] + gfn + jsonblank[jsonblank.find("[y]") + 3:]
@@ -119,15 +128,5 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-# testglosslist = [["Rom", "499", "f. 1a", "1", "foo", "foo", "foo"], ["Rom", "499", "f. 1a", "2", "fee", "fee", "fee"],
-#                  ["Rom", "500", "f. 1a", "3", "faa", "faa", "faa"], ["Rom", "500", "f. 1b", "4", "fii", "fii", "fii"],
-#                  ["Rom", "501", "f. 1b", "5", "fuu", "fuu", "fuu"], ["Rom", "502", "f. 1b", "6", "roo", "roo", "roo"],
-#                  ["Rom", "502", "f. 1b", "7", "ree", "ree", "ree"], ["Rom", "502", "f. 1b", "1", "raa", "raa", "raa"],
-#                  ["Rom", "503", "f. 1c", "2", "rii", "rii", "rii"], ["Rom", "503", "f. 1c", "3", "ruu", "ruu", "ruu"],
-#                  ["Rom", "504", "f. 1c", "4", "poo", "poo", "poo"], ["Cor", "504", "f. 1c", "5", "pee", "pee", "pee"],
-#                  ["Cor", "505", "f. 1d", "1", "paa", "paa", "paa"], ["Cor", "505", "f. 1d", "2", "pii", "pii", "pii"],
-#                  ["Phl", "506", "f. 2a", "1", "puu", "puu", "puu"], ["Phl", "506", "f. 2a", "2", "fum", "fum", "fum"]]
-# print(make_json(testglosslist))
-
-# wbglosslist = get_glinfo("Wurzburg Glosses", 499, 712)
+# wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
 # print(make_json(wbglosslist, True))

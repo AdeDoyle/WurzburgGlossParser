@@ -55,7 +55,7 @@ def get_allinfo(file, startpage, stoppage=None):
                     latno = "0"
                 else:
                     latno = (i.group())[4:-2]
-                    latin = latin[len(latno) + 1:]
+                    latin = latin[len(latno) + 2:]
             glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, latno, latin])
             infolist.append(glosslistplus)
     latnofixlist = []

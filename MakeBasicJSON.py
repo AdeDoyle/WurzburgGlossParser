@@ -1,4 +1,5 @@
 """Level 1"""
+"""DISUSED!"""
 
 from GetBasicInfo import get_glinfobasic
 
