@@ -60,12 +60,14 @@ def get_allinfo(file, startpage, stoppage=None):
             latin = sublist[1]
             # Identifies Latin Verse Numbers and Latin text for that verse
             # Adds '00. ' to the start of every latin line in the page's Latin list (for folios that start with no no.)
-            # 'Rom. ' is removed later (Why include 'Rom. '?)
-            versenopat = re.compile(r'00\. (Rom\. )?([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?(\d{1,2}[a-z]?\. )?')
+            # 'Rom. ' is removed later, but must be included here for regex to work
+            versenopat = re.compile(r'00\. (\[NV\]|((Rom\. )?([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?(\d{1,2}[a-z]?\. )?))')
             latpatitir = versenopat.finditer("00. " + latin)
             for i in latpatitir:
                 if i.group() == "00. ":
                     verseno = "0"
+                elif i.group() == "00. [NV]":
+                    verseno = "[NV]"
                 else:
                     verseno = (i.group())[4:-2]
                     latin = latin[len(verseno) + 2:]
@@ -83,9 +85,11 @@ def get_allinfo(file, startpage, stoppage=None):
     numsearch = "".join(versenofixlist)
     romnumlist = []
     # Finds all chapter numerals throughout all the verse info, adds these to romnumlist
-    numeralpat = re.compile(r'[IVX]{1,4}\. ')
+    # numeralpat = re.compile(r'[IVX]{1,4}\. ')
+    numeralpat = re.compile(r'(\[NV\]|[IVX]{1,4}\. )')
     numpatitir = numeralpat.finditer(numsearch)
     for numfind in numpatitir:
+        # print(numfind.group())
         if numfind.group() not in romnumlist:
             romnumlist.append(numfind.group())
     # Goes through every verseno in the versenofixlist
@@ -99,9 +103,13 @@ def get_allinfo(file, startpage, stoppage=None):
             item = versenofixlist[poscount]
         if item != "0":
             curverse = item
-        # Replaces no-number verses with the number of the previous verse
+        # Replaces no-number verses not at epistle boundaries with the number of the previous verse
         elif item == "0":
             versenofixlist[poscount] = curverse
+            item = versenofixlist[poscount]
+        # Replaces no-number verses at epistle boundaries with a comment that no information is available about verse.
+        if item == "[NV]":
+            versenofixlist[poscount] = "- No Chapter or Verse Information Available"
             item = versenofixlist[poscount]
         # Updates the current (previous) verse to the roman numeral of the current verse
         for romnum in romnumlist:
@@ -110,13 +118,25 @@ def get_allinfo(file, startpage, stoppage=None):
                     curnum = romnum
         # Combines chapter numerals to verse numbers that don't have them already
         if curnum not in item:
-            versenofixlist[poscount] = curnum + item
+            if item != "- No Chapter or Verse Information Available":
+                versenofixlist[poscount] = curnum + item
         poscount += 1
     fixcount = 0
     # The versenos in infolist are updated with the corrected forms from versenofixlist
     for wronglist in infolist:
         wronglist[5] = versenofixlist[fixcount]
         fixcount += 1
+    # Adds Epistle Name to chapter and verse
+    epnames = ["Rom.", "1 Cor.", "2 Cor.", "Gal.", "Eph.", "Phil.", "1 Thes.", "2 Thes.", "Col.", "1 Tim.", "2 Tim.",
+               "Tit.", "Philem.", "Heb."]
+    eppages = [543, 591, 619, 631, 643, 654, 663, 669, 679, 690, 698, 703, 705, 713]
+    spot = 0
+    for item in infolist[1:]:
+        if int(item[0]) < eppages[spot]:
+            item[5] = epnames[spot] + " " + item[5]
+        elif int(item[0]) == eppages[spot]:
+            spot += 1
+            item[5] = epnames[spot] + " " + item[5]
     return infolist
 
 

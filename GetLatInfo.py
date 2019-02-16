@@ -28,16 +28,44 @@ def get_latpageinfo(file, page):
         glossnums.append("[" + glossnum + "]")
     latpergloss = []
     lemmas = []
+    usednums = []
+    backlist = []
+    # Creates a reversed version of latlines to be searched instead on pages where there are duplicate glossnos
+    # This prevents two glosses with the same number interacting with each other's Latin lines.
+    for line in latlines:
+        backlist.append(line)
+    backlist.reverse()
+    # checks for expected gloss numbers in the latin text and, if found, adds the latin line and lemma to lists.
     for num in glossnums:
-        # checks for expected gloss numbers in the latin text and, if found, adds the latin line and lemma to lists.
-        for line in latlines:
-            if num in line:
-                latpergloss.append(line)
-                linetext = line
-                numpos = line.find(num)
-                linetext = linetext[:numpos]
-                lemma = linetext[linetext.rfind(" ") + 1:]
-                lemmas.append(lemma)
+        if num not in usednums:
+            # If this is the first instance of this glossno on this page
+            usednums.append(num)
+            found = False
+            while not found:
+                for line in latlines:
+                    if num in line:
+                        latpergloss.append(line)
+                        linetext = line
+                        numpos = line.find(num)
+                        linetext = linetext[:numpos]
+                        lemma = linetext[linetext.rfind(" ") + 1:]
+                        lemmas.append(lemma)
+                        found = True
+                        break
+        elif num in usednums:
+            # If this is not the first instance of this glossno on this page
+            found = False
+            while not found:
+                for line in backlist:
+                    if num in line:
+                        latpergloss.append(line)
+                        linetext = line
+                        numpos = line.find(num)
+                        linetext = linetext[:numpos]
+                        lemma = linetext[linetext.rfind(" ") + 1:]
+                        lemmas.append(lemma)
+                        found = True
+                        break
     for i in range(len(glossnums)):
         # compiles a list of the gloss, the Latin line, and the lemma for the gloss within the Latin line.
         latininfolist.append([eachgloss[i], clear_tags(latpergloss[i]), clear_tags(lemmas[i])])
