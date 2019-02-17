@@ -20,7 +20,7 @@ def get_latpageinfo(file, page):
     glossitir = numpat.finditer(glosses)
     glossnums = []
     for i in glossitir:
-        # gets gloss numbers from the Irish text, converts them to match tags in the Latin text, adds them to a list.
+        # Gets gloss numbers from the Irish text, converts them to match tags in the Latin text, adds them to a list.
         glossnum = i.group()
         glossnum = glossnum[:-2]
         if ", " in glossnum:
@@ -30,15 +30,15 @@ def get_latpageinfo(file, page):
     lemmas = []
     usednums = []
     backlist = []
-    # Creates a reversed version of latlines to be searched instead on pages where there are duplicate glossnos
+    # Creates a reversed version of latlines to be searched instead on pages where there are duplicate glossnos.
     # This prevents two glosses with the same number interacting with each other's Latin lines.
     for line in latlines:
         backlist.append(line)
     backlist.reverse()
-    # checks for expected gloss numbers in the latin text and, if found, adds the latin line and lemma to lists.
+    # Checks for expected gloss numbers in the latin text and, if found, adds the latin line and lemma to lists.
     for num in glossnums:
         if num not in usednums:
-            # If this is the first instance of this glossno on this page
+            # If this is the first instance of this glossno on this page.
             usednums.append(num)
             found = False
             while not found:
@@ -53,7 +53,7 @@ def get_latpageinfo(file, page):
                         found = True
                         break
         elif num in usednums:
-            # If this is not the first instance of this glossno on this page
+            # If this is not the first instance of this glossno on this page.
             found = False
             while not found:
                 for line in backlist:
@@ -67,8 +67,8 @@ def get_latpageinfo(file, page):
                         found = True
                         break
     for i in range(len(glossnums)):
-        # compiles a list of the gloss, the Latin line, and the lemma for the gloss within the Latin line.
-        latininfolist.append([eachgloss[i], clear_tags(latpergloss[i]), clear_tags(lemmas[i])])
+        # Compiles a list of the gloss, the Latin line, and the lemma for the gloss within the Latin line.
+        latininfolist.append([eachgloss[i], clear_tags(latpergloss[i], "NV"), clear_tags(lemmas[i])])
     return latininfolist
 
 

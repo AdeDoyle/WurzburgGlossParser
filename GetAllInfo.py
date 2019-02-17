@@ -74,7 +74,7 @@ def get_allinfo(file, startpage, stoppage=None):
             # Adds glossno, glosstext, lemma, verseno, and Latin text to glosslistplus
             # Now glosslistplus is: pageno, folio, glossno, glosstext, lemma, verseno, and Latin text
             # Adds glosslistplus to infolist (which is returned once fixed)
-            glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, verseno, latin])
+            glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, verseno, clear_tags(latin)])
             infolist.append(glosslistplus)
     # Fixes versenos in infolist (combines numberless verses, adds chapter to verses with verseno only)
     # Adds all versenos from infolist to versenofixlist
