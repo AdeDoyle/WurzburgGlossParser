@@ -12,8 +12,8 @@ def combine_infolists(file, startpage=499, stoppage=712):
     del glossinfo[0]
     latinfo = get_allinfo(file, startpage, stoppage)
     del latinfo[0]
-    combolist = [["Epistle", "Page", "Folio", "Latin Line No.", "Latin", "Lemma", "Gloss No.", "Gloss Full-Tags",
-                  "Gloss Text", "Gloss Footnotes"]]
+    combolist = [["Epistle", "Page", "Folio", "Verse", "Latin", "Lemma", "Lemma Position", "Gloss No.",
+                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes"]]
     if len(glossinfo) == len(latinfo):
         for i in range(len(glossinfo)):
             gloss = glossinfo[i]
@@ -21,8 +21,8 @@ def combine_infolists(file, startpage=499, stoppage=712):
             glist = gloss[:3]
             if clear_tags(gloss[4]) == lat[3]:
                 # Ensures the gloss from one list matches the same gloss in the other list before combining contents.
-                glist.extend(lat[5:])
-                glist.append(lat[4])
+                glist.extend(lat[6:])
+                glist.extend(lat[4:6])
                 glist.extend(gloss[3:])
                 combolist.append(glist)
             else:

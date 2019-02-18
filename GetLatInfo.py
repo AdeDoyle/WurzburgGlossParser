@@ -27,7 +27,8 @@ def get_latpageinfo(file, page):
             glossnum = "–".join(glossnum.split(", "))
         glossnums.append("[" + glossnum + "]")
     latpergloss = []
-    lemmas = []
+    lemmata = []
+    positions = []
     usednums = []
     backlist = []
     # Creates a reversed version of latlines to be searched instead on pages where there are duplicate glossnos.
@@ -49,7 +50,18 @@ def get_latpageinfo(file, page):
                         numpos = line.find(num)
                         linetext = linetext[:numpos]
                         lemma = linetext[linetext.rfind(" ") + 1:]
-                        lemmas.append(lemma)
+                        lemmata.append(lemma)
+                        notagtext = clear_tags(linetext)
+                        remnumpat = re.compile(
+                            r'(\[NV\]|((Rom\. )?([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?(\d{1,2}[a-z]?\. )?))')
+                        thisglossremnum = ""  # has to be put here for pages which begin mid-Latin-line
+                        for remnum in remnumpat.finditer(notagtext):
+                            if remnum.group() != "":
+                                thisglossremnum = remnum.group()
+                        remlen = len(thisglossremnum)
+                        notagtext = notagtext[remlen:]
+                        lempos = notagtext.rfind(lemma)
+                        positions.append(lempos)
                         found = True
                         break
         elif num in usednums:
@@ -63,12 +75,23 @@ def get_latpageinfo(file, page):
                         numpos = line.find(num)
                         linetext = linetext[:numpos]
                         lemma = linetext[linetext.rfind(" ") + 1:]
-                        lemmas.append(lemma)
+                        lemmata.append(lemma)
+                        notagtext = clear_tags(linetext)
+                        remnumpat = re.compile(
+                            r'(\[NV\]|((Rom\. )?([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?(\d{1,2}[a-z]?\. )?))')
+                        thisglossremnum = ""  # has to be put here for pages which begin mid-Latin-line
+                        for remnum in remnumpat.finditer(notagtext):
+                            if remnum.group() != "":
+                                thisglossremnum = remnum.group()
+                        remlen = len(thisglossremnum)
+                        notagtext = notagtext[remlen:]
+                        lempos = notagtext.rfind(lemma)
+                        positions.append(lempos)
                         found = True
                         break
     for i in range(len(glossnums)):
         # Compiles a list of the gloss, the Latin line, and the lemma for the gloss within the Latin line.
-        latininfolist.append([eachgloss[i], clear_tags(latpergloss[i], "NV"), clear_tags(lemmas[i])])
+        latininfolist.append([eachgloss[i], clear_tags(latpergloss[i], "NV"), clear_tags(lemmata[i]), positions[i]])
     return latininfolist
 
 
@@ -85,7 +108,7 @@ def get_latinfo(file, startpage, stoppage):
 
 
 # for informationlist in (get_latpageinfo("Wurzburg Glosses", 499)):
-#     print(informationlist)
+#     print(informationlist[3])
 
 # for informationlist in (get_latinfo("Wurzburg Glosses", 499, 712)):
 #     print(informationlist)

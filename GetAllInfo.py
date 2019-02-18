@@ -15,7 +15,7 @@ def get_allinfo(file, startpage, stoppage=None):
        lemma, verse, and Latin text."""
     if stoppage is None:
         stoppage = startpage
-    infolist = [["Page", "Folio", "Gloss No.", "Gloss Text", "Lemma", "Verse", "Glossed Latin"]]
+    infolist = [["Page", "Folio", "Gloss No.", "Gloss Text", "Lemma", "Lemma Position", "Verse", "Glossed Latin"]]
     for page in range(startpage, stoppage + 1):
         thispage = page
         # Collect folio information, one page at a time
@@ -25,7 +25,7 @@ def get_allinfo(file, startpage, stoppage=None):
             folio = folinfo[1]
             foliotext = folinfo[0]
             foliolist.append([folio, foliotext])
-        # Gets gloss, glossed latin, and lemma for all glosses, one page at a time
+        # Gets gloss, glossed latin, lemma and lemma position for all glosses, one page at a time
         for sublist in get_latpageinfo(file, page):
             glosslistplus = [thispage]
             thisgloss = sublist[0]
@@ -56,6 +56,7 @@ def get_allinfo(file, startpage, stoppage=None):
             # Identifies glossno, glosstext, latin text, and latin lemma from their lists (all already found)
             glossno = glosslist[0]
             glosstext = glosslist[1]
+            lempos = sublist[3]
             lemma = sublist[2]
             latin = sublist[1]
             # Identifies Latin Verse Numbers and Latin text for that verse
@@ -72,24 +73,22 @@ def get_allinfo(file, startpage, stoppage=None):
                     verseno = (i.group())[4:-2]
                     latin = latin[len(verseno) + 2:]
             # Adds glossno, glosstext, lemma, verseno, and Latin text to glosslistplus
-            # Now glosslistplus is: pageno, folio, glossno, glosstext, lemma, verseno, and Latin text
+            # Now glosslistplus is: pageno, folio, glossno, glosstext, lemma, lempos, verseno, and Latin text
             # Adds glosslistplus to infolist (which is returned once fixed)
-            glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, verseno, clear_tags(latin)])
+            glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, lempos, verseno, clear_tags(latin)])
             infolist.append(glosslistplus)
     # Fixes versenos in infolist (combines numberless verses, adds chapter to verses with verseno only)
     # Adds all versenos from infolist to versenofixlist
     versenofixlist = []
     for info in infolist:
-        versenofixlist.append(info[5])
+        versenofixlist.append(info[6])
     # Joins all versenos together
     numsearch = "".join(versenofixlist)
     romnumlist = []
     # Finds all chapter numerals throughout all the verse info, adds these to romnumlist
-    # numeralpat = re.compile(r'[IVX]{1,4}\. ')
     numeralpat = re.compile(r'(\[NV\]|[IVX]{1,4}\. )')
     numpatitir = numeralpat.finditer(numsearch)
     for numfind in numpatitir:
-        # print(numfind.group())
         if numfind.group() not in romnumlist:
             romnumlist.append(numfind.group())
     # Goes through every verseno in the versenofixlist
@@ -124,7 +123,7 @@ def get_allinfo(file, startpage, stoppage=None):
     fixcount = 0
     # The versenos in infolist are updated with the corrected forms from versenofixlist
     for wronglist in infolist:
-        wronglist[5] = versenofixlist[fixcount]
+        wronglist[6] = versenofixlist[fixcount]
         fixcount += 1
     # Adds Epistle Name to chapter and verse
     epnames = ["Rom.", "1 Cor.", "2 Cor.", "Gal.", "Eph.", "Phil.", "1 Thes.", "2 Thes.", "Col.", "1 Tim.", "2 Tim.",
@@ -133,13 +132,13 @@ def get_allinfo(file, startpage, stoppage=None):
     spot = 0
     for item in infolist[1:]:
         if int(item[0]) < eppages[spot]:
-            item[5] = epnames[spot] + " " + item[5]
+            item[6] = epnames[spot] + " " + item[6]
         elif int(item[0]) == eppages[spot]:
             spot += 1
-            item[5] = epnames[spot] + " " + item[5]
+            item[6] = epnames[spot] + " " + item[6]
     return infolist
 
 
-# for inf in get_allinfo("Wurzburg Glosses", 499, 509):
+# for inf in get_allinfo("Wurzburg Glosses", 499, 712):
 #     print(inf)
 # print(get_allinfo("Wurzburg Glosses", 499, 509))
