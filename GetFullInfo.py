@@ -6,7 +6,7 @@ from GetSections import get_section
 from OrderGlosses import order_glosses, order_glosslist
 from ClearTags import clear_tags, clear_spectags
 from GetFolio import get_fol
-from GetTrans import get_transpageinfo
+from GetTrans import get_transpagesinfo
 import re
 
 
@@ -17,12 +17,10 @@ def get_glinfo(file, startpage=499, stoppage=712):
     curepist = "Unknown"
     infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes",
                  "Gloss Translation"]]
+    pagestrans = get_transpagesinfo(file, startpage, stoppage)
     for page in range(startpage, stoppage + 1):
         thispage = page
         pagetext = get_pages(file, thispage, thispage)
-
-        pagetrans = get_transpageinfo(file, thispage)
-
         # Checks for a new epistle on the current page.
         epfunc = get_tagtext(pagetext, "H2")
         if epfunc:
@@ -98,42 +96,39 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
                 thisglosslist.extend([glossfulltags, basegloss, footnotesgloss])
             infolist.append(thisglosslist)
-        # add translations to the end of the infolists where they are available
-        for infoset in infolist:
-            # exclude the first infoset containing the titles
-            if infoset != infolist[0]:
-                glossid = infoset[3]
-                # print(glossid)
-                curpagetrans = pagetrans[0]
-                curtransid = curpagetrans[0]
-                # print(curtransid)
-                curtrans = curpagetrans[1]
-                # deal with the conjoined gloss on TPH p. 500 (1b10 + 1b11)
-                # split the gloss id into the two numbers, use these to identify the two translations
-                # conjoin the two translations and append them to the infoset for the conjoined gloss ids
-                if ", " in glossid:
-                    glossidlist = glossid.split(", ")
-                    splittranslations = []
-                    for newid in glossidlist:
-                        if newid == curtransid:
-                            splittranslations.append(curtrans)
-                            del pagetrans[0]
-                            curpagetrans = pagetrans[0]
-                            curtransid = curpagetrans[0]
-                            curtrans = curpagetrans[1]
-                    joinedtrans = " i.e. ".join(splittranslations)
-                    infoset.append(joinedtrans)
+    # add translations to the end of the infolists where they are available
+    for infoset in infolist:
+        # exclude the first infoset containing the titles
+        if infoset != infolist[0]:
+            glossid = infoset[3]
+            curpagetrans = pagestrans[0]
+            curtransid = curpagetrans[0]
+            curtrans = curpagetrans[1]
+            # deal with the conjoined gloss on TPH p. 500 (1b10 + 1b11)
+            # split the gloss id into the two numbers, use these to identify the two translations
+            # conjoin the two translations and append them to the infoset for the conjoined gloss ids
+            if ", " in glossid:
+                glossidlist = glossid.split(", ")
+                splittranslations = []
+                for newid in glossidlist:
+                    if newid == curtransid:
+                        splittranslations.append(curtrans)
+                        del pagestrans[0]
+                        curpagetrans = pagestrans[0]
+                        curtransid = curpagetrans[0]
+                        curtrans = curpagetrans[1]
+                joinedtrans = " i.e. ".join(splittranslations)
+                infoset.append(joinedtrans)
+            else:
+                if glossid == curtransid:
+                    infoset.append(curtrans)
+                    del pagestrans[0]
+                # if no translation is given in TPH
                 else:
-                    if glossid == curtransid:
-                        infoset.append(curtrans)
-                        del pagetrans[0]
-                    # if no translation is given in TPH
-                    else:
-                        infoset.append("No translation available.")
-                        # print(glossid + " " + curtransid)
+                    infoset.append("No translation available.")
     return infolist
 
 
-for glossinfolist in get_glinfo("Wurzburg Glosses", 499, 500):
-    print(glossinfolist[7])
+# for glossinfolist in get_glinfo("Wurzburg Glosses", 499, 509):
+#     print(glossinfolist)
 # print(get_glinfo("Wurzburg Glosses", 499, 499))

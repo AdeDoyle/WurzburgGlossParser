@@ -53,9 +53,21 @@ def get_transpageinfo(file, page):
     return translist
 
 
+def get_transpagesinfo(file, startpage, stoppage):
+    pagesinfolist = []
+    for page in range(startpage, stoppage + 1):
+        pagelist = get_transpageinfo(file, page)
+        for glosstrans in pagelist:
+            pagesinfolist.append(glosstrans)
+    return pagesinfolist
+
+
 # for informationlist in (get_transpageinfo("Wurzburg Glosses", 503)):
 #         print(informationlist)
 
 # for leath in range(499, 712):
 #     for informationlist in (get_transpageinfo("Wurzburg Glosses", leath)):
 #         print(str(leath) + " " + informationlist[0] + " " + informationlist[1])
+
+# for i in get_transpagesinfo("Wurzburg Glosses", 499, 509):
+#     print(i)
