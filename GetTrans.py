@@ -50,6 +50,23 @@ def get_transpageinfo(file, page):
     for i in range(len(englishnums)):
         thislist = [englishnums[i], englishlines[i]]
         translist.append(thislist)
+    # edit translations to include html superscript footnotes instead of footnote tags
+    for i in range(len(translist)):
+        translationpair = translist[i]
+        if "[" in translationpair[1]:
+            fixedtrans = translationpair[1]
+            newpair = [translationpair[0]]
+            fnpat = re.compile(r'\[\w\]')
+            fnpatitir = fnpat.finditer(translationpair[1])
+            for fn in fnpatitir:
+                fntags = fn.group()
+                fntagless = fntags[1:-1]
+                ss = "<sup>" + fntagless + "</sup>"
+                fixedlist = fixedtrans.split(fntags)
+                fixedtrans = ss.join(fixedlist)
+            if fixedtrans != translationpair[1]:
+                newpair.append(fixedtrans)
+                translist[i] = newpair
     return translist
 
 
