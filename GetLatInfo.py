@@ -10,8 +10,7 @@ import re
 
 def get_latpageinfo(file, page):
     """returns a list of gloss-lists for a specified page of TPH
-       each gloss-list contains a gloss, the Latin text the gloss is on, and the specific Latin "lemma" or word that
-       is marked in TPH to show the gloss as gloss-list[0], [1] and [2] respectively"""
+       each gloss-list contains a gloss[0], the Latin verse[1], the lemma[2], and the lemma position[3]"""
     latininfolist = []
     latlines = order_latlist("\n\n".join(get_section(get_pages(file, page, page), "Lat")))
     eachgloss = order_glosslist(clear_tags("\n\n".join(get_section(get_pages(file, page, page), "SG"))))
@@ -50,6 +49,9 @@ def get_latpageinfo(file, page):
                         numpos = line.find(num)
                         linetext = linetext[:numpos]
                         lemma = linetext[linetext.rfind(" ") + 1:]
+                        if "[" in lemma:
+                            tagpos = lemma.find("[")
+                            lemma = lemma[:tagpos]
                         lemmata.append(lemma)
                         notagtext = clear_tags(linetext)
                         remnumpat = re.compile(
@@ -97,8 +99,7 @@ def get_latpageinfo(file, page):
 
 def get_latinfo(file, startpage, stoppage):
     """returns a list of gloss-lists for a specified page range within TPH
-       each gloss-list contains a gloss, the Latin text the gloss is on, and the specific Latin "lemma" or word that
-       is marked in TPH to show the gloss as gloss-list[0], [1] and [2] respectively"""
+       each gloss-list contains a gloss[0], the Latin verse[1], the lemma[2], and the lemma position[3]"""
     infolist = []
     for page in range(startpage, stoppage + 1):
         curlist = get_latpageinfo(file, page)
