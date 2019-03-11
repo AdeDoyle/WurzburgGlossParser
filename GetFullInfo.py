@@ -123,6 +123,19 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 if glossid == curtransid:
                     infoset.append(curtrans)
                     del pagestrans[0]
+                # deal with page 587 where glosses 27, 28, and 29 share the one translation, numbered '27 – 29.'.
+                elif " – " in curtransid:
+                    curtransidlist = curtransid.split(" – ")
+                    curtransidrange = [int(curtransidlist[0]), int(curtransidlist[1])]
+                    idstart = curtransidrange[0]
+                    idstop = curtransidrange[1]
+                    curtransidlist = []
+                    for i in range(idstart, idstop + 1):
+                        curtransidlist.append(str(i))
+                    if glossid in curtransidlist:
+                        infoset.append(curtrans)
+                    if glossid == curtransidlist[-1]:
+                        del pagestrans[0]
                 # if no translation is given in TPH
                 else:
                     infoset.append("No translation available.")

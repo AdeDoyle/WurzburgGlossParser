@@ -12,7 +12,7 @@ def get_transpageinfo(file, page):
     english = clear_spectags("\n\n".join(get_section(get_pages(file, page, page), "Eng")), "fol")
     englishnums = []
     englishlines = []
-    engpat = re.compile(r'\d{1,2}[a-z]?\. ')
+    engpat = re.compile(r'(\d{1,2} – )?\d{1,2}[a-z]?\. ')
     engpatitir = engpat.finditer(english)
     # find the numbers in the english text, add them to a list
     for i in engpatitir:
