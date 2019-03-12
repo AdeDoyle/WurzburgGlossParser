@@ -23,8 +23,9 @@ def make_json(glosslist, headers=False):
             "lemma": "[e]",
             "lemPos": "[f]",
             "glossFullTags": "[g]",
-            "glossText": "[x]",
-            "glossFNs": "[y]",
+            "glossText": "[w]",
+            "glossFNs": "[x]",
+            "footnotes": "[y]",
             "glossTrans": "[z]"
         }"""
     if headers:
@@ -44,7 +45,8 @@ def make_json(glosslist, headers=False):
         g = gloss[8]
         gt = gloss[9]
         gfn = gloss[10]
-        gtr = gloss[11]
+        fn = gloss[11]
+        gtr = gloss[12]
         jsonblank = jsonblank[:jsonblank.find("[a]")] + str(p) + jsonblank[jsonblank.find("[a]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[b]")] + gn + jsonblank[jsonblank.find("[b]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[c]")] + v + jsonblank[jsonblank.find("[c]") + 3:]
@@ -52,8 +54,9 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[e]")] + le + jsonblank[jsonblank.find("[e]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[f]")] + str(lp) + jsonblank[jsonblank.find("[f]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[x]")] + gt + jsonblank[jsonblank.find("[x]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[y]")] + gfn + jsonblank[jsonblank.find("[y]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[w]")] + gt + jsonblank[jsonblank.find("[w]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[x]")] + gfn + jsonblank[jsonblank.find("[x]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[y]")] + fn + jsonblank[jsonblank.find("[y]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[z]")] + gtr + jsonblank[jsonblank.find("[z]") + 3:]
         jsonblanklist = [e, f, jsonblank]
         jsonglosslist1.append(jsonblanklist)

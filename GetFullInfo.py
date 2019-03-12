@@ -7,6 +7,7 @@ from OrderGlosses import order_glosses, order_glosslist
 from ClearTags import clear_tags, clear_spectags
 from GetFolio import get_fol
 from GetTrans import get_transpagesinfo
+from OrderFootnotes import order_footlist
 import re
 
 
@@ -16,11 +17,13 @@ def get_glinfo(file, startpage=499, stoppage=712):
        (with [GLat][/GLat] tags converted to html italics tags) for every gloss in Wb."""
     curepist = "Unknown"
     infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes",
-                 "Gloss Translation"]]
+                 "Relevant Footnotes", "Gloss Translation"]]
     pagestrans = get_transpagesinfo(file, startpage, stoppage)
     for page in range(startpage, stoppage + 1):
         thispage = page
         pagetext = get_pages(file, thispage, thispage)
+        # Gets all page Footnotes for the first time (for the gloss)
+        footnotelist = order_footlist(file, page)
         # Checks for a new epistle on the current page.
         epfunc = get_tagtext(pagetext, "H2")
         if epfunc:
@@ -78,6 +81,8 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 fnlist = []
                 for j in fnpatitir:
                     fnlist.append(j.group())
+                if not fnlist:
+                    fnstring = ""
                 if fnlist:
                     for fntag in fnlist:
                         if "[/" in fntag:
@@ -90,11 +95,18 @@ def get_glinfo(file, startpage=499, stoppage=712):
                                              footnotesgloss[tagplace + 4:]
                             if begintag in fnlist:
                                 del fnlist[fnlist.index(begintag)]
+                    glossfnlist = []
                     for footnote in fnlist:
                         fnletter = footnote[-2]
+                        # Collects footnotes relevant to this gloss and adds them to a list.
+                        for fnote in footnotelist:
+                            fnoteid = fnote[:1]
+                            if fnletter == fnoteid:
+                                glossfnlist.append(fnote[:1] + ":" + fnote[1:])
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
-                thisglosslist.extend([glossfulltags, basegloss, footnotesgloss])
+                    fnstring = clear_tags("\n".join(glossfnlist))
+                thisglosslist.extend([glossfulltags, basegloss, footnotesgloss, fnstring])
             infolist.append(thisglosslist)
     # add translations to the end of the infolists where they are available
     for infoset in infolist:
@@ -139,6 +151,42 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 # if no translation is given in TPH
                 else:
                     infoset.append("No translation available.")
+    # Gets all page Footnotes for the second time (for the translation)
+    curpage = None
+    for infoset in infolist:
+        # exclude the first infoset containing the titles
+        if infoset != infolist[0]:
+            thistransfns = []
+            # ensures page footnotes are only generated once per page, and not for every gloss
+            if curpage:
+                if curpage != infoset[1]:
+                    curpage = infoset[1]
+                    footnotelist = order_footlist(file, curpage)
+            elif not curpage:
+                curpage = infoset[1]
+                footnotelist = order_footlist(file, curpage)
+            trans = infoset[8]
+            # finds which translations have footnotes, looks for the associated footnote i the list generated above
+            if "<sup>" in trans:
+                superscriptpat = re.compile(r'<sup>\w</sup>')
+                superscriptpatitir = superscriptpat.finditer(trans)
+                for i in superscriptpatitir:
+                    fnid = i.group()[5]
+                    for footnote in footnotelist:
+                        if footnote[0] == fnid:
+                            # if the footnote is found and not already in the footnote list for the gloss it is added
+                            if infoset[7]:
+                                if footnote[:1] + ":" + footnote[1:] not in infoset[7]:
+                                    thistransfns.append(footnote[:1] + ":" + footnote[1:])
+                            else:
+                                thistransfns.append(footnote[:1] + ":" + footnote[1:])
+            # all footnotes found for the gloss are combined
+            if thistransfns:
+                if not infoset[7]:
+                    infoset[7] = "\n".join(thistransfns)
+                elif infoset[7]:
+                    combofns = infoset[7] + "\n" + "\n".join(thistransfns)
+                    infoset[7] = combofns
     return infolist
 
 

@@ -13,7 +13,7 @@ def combine_infolists(file, startpage=499, stoppage=712):
     latinfo = get_allinfo(file, startpage, stoppage)
     del latinfo[0]
     combolist = [["Epistle", "Page", "Folio", "Verse", "Latin", "Lemma", "Lemma Position", "Gloss No.",
-                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "Gloss Translation"]]
+                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "Relevant Footnotes", "Gloss Translation"]]
     if len(glossinfo) == len(latinfo):
         for i in range(len(glossinfo)):
             gloss = glossinfo[i]
