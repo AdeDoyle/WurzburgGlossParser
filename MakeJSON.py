@@ -57,7 +57,7 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[w]")] + gt + jsonblank[jsonblank.find("[w]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[x]")] + gfn + jsonblank[jsonblank.find("[x]") + 3:]
         if not fn:
-            jsonblank = jsonblank[:jsonblank.find("[y]")] + "null" + jsonblank[jsonblank.find("[y]") + 3:]
+            jsonblank = jsonblank[:jsonblank.find("[y]") - 1] + "null" + jsonblank[jsonblank.find("[y]") + 4:]
         elif fn:
             if isinstance(fn, list):
                 for fnt in range(len(fn)):
