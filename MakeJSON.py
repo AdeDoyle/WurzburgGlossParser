@@ -56,7 +56,13 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[w]")] + gt + jsonblank[jsonblank.find("[w]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[x]")] + gfn + jsonblank[jsonblank.find("[x]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[y]")] + fn + jsonblank[jsonblank.find("[y]") + 3:]
+        if not fn:
+            jsonblank = jsonblank[:jsonblank.find("[y]")] + "null" + jsonblank[jsonblank.find("[y]") + 3:]
+        elif fn:
+            if isinstance(fn, list):
+                fncombine = '",\n                "'.join(fn)
+                fn = '[{\n                "' + fncombine + '"\n            }]'
+                jsonblank = jsonblank[:jsonblank.find("[y]")] + fn + jsonblank[jsonblank.find("[y]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[z]")] + gtr + jsonblank[jsonblank.find("[z]") + 3:]
         jsonblanklist = [e, f, jsonblank]
         jsonglosslist1.append(jsonblanklist)
@@ -137,5 +143,5 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-# wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
-# print(make_json(wbglosslist, True))
+wbglosslist = combine_infolists("Wurzburg Glosses", 499, 500)
+print(make_json(wbglosslist, True))
