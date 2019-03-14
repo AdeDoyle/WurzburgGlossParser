@@ -60,11 +60,8 @@ def make_json(glosslist, headers=False):
             jsonblank = jsonblank[:jsonblank.find("[y]") - 1] + "null" + jsonblank[jsonblank.find("[y]") + 4:]
         elif fn:
             if isinstance(fn, list):
-                for fnt in range(len(fn)):
-                    thisfn = fn[fnt]
-                    fn[fnt] = thisfn[:1] + '": "' + thisfn[3:]
                 fncombine = '",\n                "'.join(fn)
-                fn = '[{\n                "' + fncombine + '"\n            }]'
+                fn = '[\n                "' + fncombine + '"\n            ]'
                 jsonblank = jsonblank[:jsonblank.find("[y]") - 1] + fn + jsonblank[jsonblank.find("[y]") + 4:]
         jsonblank = jsonblank[:jsonblank.find("[z]")] + gtr + jsonblank[jsonblank.find("[z]") + 3:]
         jsonblanklist = [e, f, jsonblank]
