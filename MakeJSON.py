@@ -23,6 +23,7 @@ def make_json(glosslist, headers=False):
             "lemma": "[e]",
             "lemPos": "[f]",
             "glossFullTags": "[g]",
+            "glossHand": "[h]",
             "glossText": "[w]",
             "glossFNs": "[x]",
             "footnotes": "[y]",
@@ -32,6 +33,7 @@ def make_json(glosslist, headers=False):
         glosslist = glosslist[1:]
     #  This gets level 3
     jsonglosslist1 = []
+    foliohandswap = False
     for gloss in glosslist:
         jsonblank = jsonformat3
         e = gloss[0]
@@ -47,6 +49,15 @@ def make_json(glosslist, headers=False):
         gfn = gloss[10]
         fn = gloss[11]
         gtr = gloss[12]
+        h = "Hand Two"
+        if f == "f. 33a":
+            foliohandswap = True
+        if foliohandswap:
+            h = "Hand Three"
+        if fn:
+            for i in fn:
+                if "prima" in i:
+                    h = "Hand One (Prima Manus)"
         jsonblank = jsonblank[:jsonblank.find("[a]")] + str(p) + jsonblank[jsonblank.find("[a]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[b]")] + gn + jsonblank[jsonblank.find("[b]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[c]")] + v + jsonblank[jsonblank.find("[c]") + 3:]
@@ -54,6 +65,7 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[e]")] + le + jsonblank[jsonblank.find("[e]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[f]")] + str(lp) + jsonblank[jsonblank.find("[f]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[h]")] + h + jsonblank[jsonblank.find("[h]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[w]")] + gt + jsonblank[jsonblank.find("[w]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[x]")] + gfn + jsonblank[jsonblank.find("[x]") + 3:]
         if not fn:
