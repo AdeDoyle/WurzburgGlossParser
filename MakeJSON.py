@@ -155,5 +155,5 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-wbglosslist = combine_infolists("Wurzburg Glosses", 499, 500)
-print(make_json(wbglosslist, True))
+# wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
+# print(make_json(wbglosslist, True))

@@ -34,5 +34,5 @@ def save_json(content, docname="glosses"):
 #                  ["Phl", "506", "f. 2a", "1", "puu", "puu", "puu"], ["Phl", "506", "f. 2a", "2", "fum", "fum", "fum"]]
 # save_json(make_json(testglosslist))
 
-# wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
-# save_json(make_json(wbglosslist, True))
+wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
+save_json(make_json(wbglosslist, True))
