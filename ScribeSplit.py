@@ -28,10 +28,10 @@ def scribe_split(glossfile, startpage=499, stoppage=712):
     primanlist = ['Prima Manus']
     handiilist = ['Hand Two']
     handiiilist = ['Hand Three']
-    glosscount = 0
-    pmcount = 0
-    htwocount = 0
-    hthreecount = 0
+    # glosscount = 0
+    # pmcount = 0
+    # htwocount = 0
+    # hthreecount = 0
     # adds all glosses to a single list
     for page in pagesdir:
         glosslist = order_glosslist(page[1])
