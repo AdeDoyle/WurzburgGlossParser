@@ -26,6 +26,8 @@ def remove_brackets(file):
                 filetext = filetext[:sbopos] + filetext[sbcpos + 1:]
             elif "between ff." in sbtext:
                 filetext = filetext[:sbopos] + filetext[sbcpos + 1:]
+            elif "over v." in sbtext:
+                filetext = filetext[:sbopos] + filetext[sbcpos + 1:]
             else:
                 filetext = filetext[:sbcpos] + filetext[sbcpos + 1:]
                 filetext = filetext[:sbopos] + filetext[sbopos + 1:]
