@@ -24,9 +24,21 @@ def scribe_split(glossfile, startpage=499, stoppage=712):
         pagedir = [pageno, irish]
         pagesdir.append(pagedir)
     # get the individual glosses per page, check if they have a 'prima manus' footnote, if so, put in PM list
+    allglosses = ['All Glosses']
     primanlist = ['Prima Manus']
     handiilist = ['Hand Two']
     handiiilist = ['Hand Three']
+    glosscount = 0
+    pmcount = 0
+    htwocount = 0
+    hthreecount = 0
+    # adds all glosses to a single list
+    for page in pagesdir:
+        glosslist = order_glosslist(page[1])
+        for curgloss in glosslist:
+            allglosses.append(curgloss)
+            # glosscount += 1
+    # adds prima manus glosses to a proma manus list
     for page in pagesdir:
         glosslist = order_glosslist(page[1])
         footnotes = order_footlist(glossfile, page[0])
@@ -43,6 +55,8 @@ def scribe_split(glossfile, startpage=499, stoppage=712):
                         if "prima" in fn:
                             if curgloss not in primanlist:
                                 primanlist.append(curgloss)
+                                # pmcount += 1
+    # adds remaining glosses to separate lists for hands 2 and 3
     handtwo = True
     for page in pagesdir:
         glosslist = order_glosslist(page[1])
@@ -53,10 +67,13 @@ def scribe_split(glossfile, startpage=499, stoppage=712):
             if handtwo:
                 if curgloss not in primanlist:
                     handiilist.append(curgloss)
+                    # htwocount += 1
             else:
                 if curgloss not in primanlist:
                     handiiilist.append(curgloss)
-    handlists = [primanlist, handiilist, handiiilist]
+                    # hthreecount += 1
+    handlists = [allglosses, primanlist, handiilist, handiiilist]
+    # print("Full Count: %d\nH1: %d\nH2: %d\nH3: %d" % (glosscount, pmcount, htwocount, hthreecount))
     return handlists
 
 
