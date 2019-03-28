@@ -33,7 +33,7 @@ def cleangloss(gloss):
             glosssplit = cleanedgloss.split(i.group())
             cleanedgloss = "".join(glosssplit)
     # Removes all known, undesired punctuation except full stops
-    for punct in [",", " . ", ":", ".........", ".......", "......", ".....", "....", "...", "  "]:
+    for punct in [",", " . ", ":", ";", ".........", ".......", "......", ".....", "....", "...", "  "]:
         if punct in cleanedgloss:
             while punct in cleanedgloss:
                 glosssplit = cleanedgloss.split(punct)
