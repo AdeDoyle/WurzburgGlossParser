@@ -6,6 +6,7 @@ from RemoveLatin import rep_lat
 from ClearTags import clear_tags
 from RemoveBrackets import remove_brackets
 import re
+from Tokenise import remove_duptoks
 
 
 def openhandlists(file):
@@ -42,9 +43,16 @@ def cleangloss(gloss):
     stoppat = re.compile(r'[^ilɫró]\.[^\w]')
     stoppatitir = stoppat.finditer(cleanedgloss)
     for i in stoppatitir:
+        # Remainder (below) necessary to ensure only full stop is removed, and not all of i.group()
+        isplit = (i.group().strip()).split(".")
+        # Ensure no space is removed after "*"
+        if "*" in isplit:
+            remainder = " ".join(isplit)
+        else:
+            remainder = ("".join(isplit))
         if i.group() in cleanedgloss:
             glosssplit = cleanedgloss.split(i.group())
-            cleanedgloss = "".join(glosssplit)
+            cleanedgloss = remainder.join(glosssplit)
     # Replaces doubled Latin markers with just one
     if "*Latin* *Latin*" in cleanedgloss:
         while "*Latin* *Latin*" in cleanedgloss:
@@ -61,6 +69,9 @@ def cleangloss(gloss):
                 patfound = True
         if not patfound:
             cleanedgloss = cleanedgloss[:-1]
+    if cleanedgloss[:3] != ".i.":
+        if cleanedgloss[0] == ".":
+            cleanedgloss = cleanedgloss[1:]
     cleanedgloss = cleanedgloss.strip()
     return cleanedgloss
 
@@ -95,16 +106,44 @@ def compile_tokenised_glosslist(file):
     return tokenised_handlist
 
 
+def combinelists(listlist):
+    """Combines lists of lists into a single list of the
+       contents of all the lists in the list-of-lists entered"""
+    outlist = []
+    for i in range(len(listlist)):
+        singlelist = listlist[i]
+        for j in range(len(singlelist)):
+            outlist.append(singlelist[j])
+    return outlist
+
+
+def get_unitoks(glosslist):
+    """Returns a list of unique tokens in a list of tokenised glosses"""
+    return remove_duptoks(combinelists(glosslist))
+
+
+def get_unitokscount(glosslist):
+    """Returns a count of all unique tokens in a list of tokenised glosses"""
+    unitoks = remove_duptoks(combinelists(glosslist))
+    tokcount = len(unitoks)
+    return tokcount
+
+
+def get_inditokcount(tok, glosslist):
+    """Returns a count of a single token's number of occurrences in a list of tokenised glosses"""
+    alltoks = combinelists(glosslist)
+    if tok in alltoks:
+        return alltoks.count(tok)
+    elif tok not in alltoks:
+        return 0
+
+
 # glosshands = ["Wb. All Glosses", "Wb. Prima Manus", "Wb. Hand Two", "Wb. Hand Three"]
 # allglosstoks = compile_tokenised_glosslist(glosshands[0])
 # pmtoks = compile_tokenised_glosslist(glosshands[1])
 # h2toks = compile_tokenised_glosslist(glosshands[2])
 # h3toks = compile_tokenised_glosslist(glosshands[3])
 
-# print(len(allglosstoks))
-# print(len(pmtoks))
-# print(len(h2toks))
-# print(len(h3toks))
 
 # print(openhandlists(glosshands[0]))
 
@@ -116,3 +155,29 @@ def compile_tokenised_glosslist(file):
 
 # for tok_gloss in compile_tokenised_glosslist(glosshands[0]):
 #     print(tok_gloss)
+
+# for unitok in get_unitoks(pmtoks):
+#     print(unitok)
+
+# print(get_unitokscount(pmtoks))
+
+# for tok in remove_duptoks(combinelists(pmtoks)):
+#     print(tok + ": " + str(get_inditokcount(tok, pmtoks)))
+
+# # Count how many glosses are in each gloss-list
+# print(len(allglosstoks))
+# print(len(pmtoks))
+# print(len(h2toks))
+# print(len(h3toks))
+
+# # Count how many unique tokens are in each gloss-list
+# print(len(remove_duptoks(combinelists(allglosstoks))))
+# print(len(remove_duptoks(combinelists(pmtoks))))
+# print(len(remove_duptoks(combinelists(h2toks))))
+# print(len(remove_duptoks(combinelists(h3toks))))
+
+# # Count how many tokens are in each gloss-list
+# print(len(combinelists(allglosstoks)))
+# print(len(combinelists(pmtoks)))
+# print(len(combinelists(h2toks)))
+# print(len(combinelists(h3toks)))
