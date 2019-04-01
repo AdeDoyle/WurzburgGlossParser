@@ -132,9 +132,21 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         curtransid = curpagetrans[0]
                         curtrans = curpagetrans[1]
                 joinedtrans = " i.e. ".join(splittranslations)
+                if "[GLat]" in joinedtrans:
+                    transtextlist = joinedtrans.split("[GLat]")
+                    joinedtrans = "<em>".join(transtextlist)
+                if "[/GLat]" in joinedtrans:
+                    transtextlist = joinedtrans.split("[/GLat]")
+                    joinedtrans = "</em>".join(transtextlist)
                 infoset.append(joinedtrans)
             else:
                 if glossid == curtransid:
+                    if "[GLat]" in curtrans:
+                        transtextlist = curtrans.split("[GLat]")
+                        curtrans = "<em>".join(transtextlist)
+                    if "[/GLat]" in curtrans:
+                        transtextlist = curtrans.split("[/GLat]")
+                        curtrans = "</em>".join(transtextlist)
                     infoset.append(curtrans)
                     del pagestrans[0]
                 # deal with page 587 where glosses 27, 28, and 29 share the one translation, numbered '27 – 29.'.
@@ -147,6 +159,12 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     for i in range(idstart, idstop + 1):
                         curtransidlist.append(str(i))
                     if glossid in curtransidlist:
+                        if "[GLat]" in curtrans:
+                            transtextlist = curtrans.split("[GLat]")
+                            curtrans = "<em>".join(transtextlist)
+                        if "[/GLat]" in curtrans:
+                            transtextlist = curtrans.split("[/GLat]")
+                            curtrans = "</em>".join(transtextlist)
                         infoset.append(curtrans)
                     if glossid == curtransidlist[-1]:
                         del pagestrans[0]
