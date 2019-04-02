@@ -8,50 +8,57 @@ def basic_bayes(p2g1, p1, p2):
     return topline / bottomline
 
 
-def bayes_tok(tok, allglosses, scribe_glosses):
-    """Takes a word, a list of texts and the number of a given text within that list.
-       Uses bayes theorum to estimate the probability of the of a given text given the word's occurrence."""
+def bayes_tok(tok, hand):
+    """Takes a token, and a hand number.
+       Uses Bayes theorem to calculate the probability of the given token being used by the given hand."""
+    glosshands = ["Wb. All Glosses", "Wb. Prima Manus", "Wb. Hand Two", "Wb. Hand Three"]
+    allglosstoks = compile_tokenised_glosslist(glosshands[0])
+    allcurhand = compile_tokenised_glosslist(glosshands[hand])
     # probability of a given token
     # (number of times token is used by all scribes / total number of tokens used by all scribes)
-    pw = get_inditokcount(tok, allglosses) / len(combinelists(allglosses))
+    pw = get_inditokcount(tok, allglosstoks) / len(combinelists(allglosstoks))
     # probability of a given scribe
-    # (1 / number of scribes)
-    ps = 1/3
+    # (total number of tokens used by a given scribe / total number of tokens used by all scribes)
+    ps = len(combinelists(allcurhand)) / len(combinelists(allglosstoks))
     # probability of a given token given a scribe
-    # (number of times token used by scribe / total number of tokens by scribe)
-    pwgs = get_inditokcount(tok, scribe_glosses) / len(combinelists(scribe_glosses))
+    # (number of times a given token is used by given scribe / total number of tokens used by a given scribe)
+    pwgs = get_inditokcount(tok, allcurhand) / len(combinelists(allcurhand))
     return basic_bayes(pwgs, ps, pw)
 
 
-glosshands = ["Wb. All Glosses", "Wb. Prima Manus", "Wb. Hand Two", "Wb. Hand Three"]
-
-# # Lists of tokenised glosses
-allglosstoks = compile_tokenised_glosslist(glosshands[0])
-pmtoks = compile_tokenised_glosslist(glosshands[1])
-h2toks = compile_tokenised_glosslist(glosshands[2])
-h3toks = compile_tokenised_glosslist(glosshands[3])
+# Defines a function which gets the first element in a list.
+def takefirst(elem):
+    return elem[0]
 
 
-# # Lists of unique tokens for each list of tokenised glosses
-# allglossunitoks = get_unitoks(allglosstoks)
-pmunitoks = get_unitoks(pmtoks)
-h2unitoks = get_unitoks(h2toks)
-h3unitoks = get_unitoks(h3toks)
-
-
-commontoks = []
-# # Lists all tokens common to the three scribe lists
+# commontoks = []
+# pmunitoks = get_unitoks(compile_tokenised_glosslist("Wb. Prima Manus"))
+# h2unitoks = get_unitoks(compile_tokenised_glosslist("Wb. Hand Two"))
+# h3unitoks = get_unitoks(compile_tokenised_glosslist("Wb. Hand Three"))
+# # # Lists all tokens common to the three scribe lists (too few, not useful)
+# # for token in pmunitoks:
+# #     if token in h3unitoks:
+# #         if token in h2unitoks:
+# #             commontoks.append(token)
+# # # Lists all tokens common to the three scribe lists
+# for token in h2unitoks:
+#     if token in pmunitoks or token in h3unitoks:
+#         if token not in commontoks:
+#             commontoks.append(token)
 # for token in pmunitoks:
 #     if token in h3unitoks:
-#         if token in h2unitoks:
+#         if token not in commontoks:
 #             commontoks.append(token)
-# # Lists all tokens common to the three scribe lists
-for token in h2unitoks:
-    if token in pmunitoks or token in h3unitoks:
-        commontoks.append(token)
-for token in pmunitoks:
-    if token in h3unitoks:
-        commontoks.append(token)
+# # Reverses the order of the tokens in the common tokens list
+# comtokscounted = []
+# allthetoks = combinelists(compile_tokenised_glosslist("Wb. All Glosses"))
+# for i in commontoks:
+#     tokcount = allthetoks.count(i)
+#     tokcountlist = [tokcount, i]
+#     comtokscounted.append(tokcountlist)
+# comtokscounted.sort(key=takefirst, reverse=True)
+# # for i in comtokscounted:
+# #     print(i[1] + ": " + str(i[0]))
 
 
 # # Test basic_bayes
@@ -62,6 +69,9 @@ for token in pmunitoks:
 # print(basic_bayes(plgw, pw, pl))
 
 
-# Test bayes_tok
-for token in commontoks:
-    print(token + ": " + str(bayes_tok(token, allglosstoks, h3toks)))
+# # Test bayes_setup
+# for token in comtokscounted:
+#     print(token[1] + ": " + str(token[0]))
+#     print("H1 – " + str(bayes_tok(token[1], 1)))
+#     print("H2 – " + str(bayes_tok(token[1], 2)))
+#     print("H3 – " + str(bayes_tok(token[1], 3)) + "\n")
