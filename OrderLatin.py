@@ -1,11 +1,13 @@
 """Level 1"""
 
+from functools import lru_cache
 from ClearTags import clear_tags
 from GetSections import get_section
 from OpenPages import get_pages
 import re
 
 
+@lru_cache(maxsize=250)
 def order_latlist_page(file):
     """Takes a single page of Latin text. Orders the text by removing any new lines where no new numbers are marked.
        Returns a list of ordered lines for the page."""
@@ -90,6 +92,7 @@ def order_latlist_page(file):
     return lineslist
 
 
+@lru_cache(maxsize=250)
 def order_latlist(file):
     """Takes multiple pages of latin text where pages are separated by a double space ("\n\n").
        Returns a list of ordered lines for the entire file."""
@@ -105,6 +108,7 @@ def order_latlist(file):
     return orderedpages
 
 
+@lru_cache(maxsize=250)
 def order_latin(file):
     """Takes multiple pages of latin text where pages are separated by a double space ("\n\n").
        Returns a single string of ordered lines for the entire file."""

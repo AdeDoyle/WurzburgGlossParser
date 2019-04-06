@@ -1,5 +1,6 @@
 """Level 1"""
 
+from functools import lru_cache
 from OpenPages import get_pages
 from GetSections import get_section
 from ClearTags import clear_tags
@@ -8,6 +9,7 @@ from RemoveBrackets import remove_brackets
 from RemoveGlossnums import remove_glossnums
 
 
+@lru_cache(maxsize=250)
 def remove_newlines(file):
     """Takes a string, replaces all newlines with spaces, removes all double spaces"""
     filetext = file

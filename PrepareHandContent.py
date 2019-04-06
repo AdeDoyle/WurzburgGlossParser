@@ -1,4 +1,4 @@
-"""Level 2"""
+"""Level 2, 2, 2, 1, 1, 1, 2, 2, 1"""
 
 from OpenDocx import get_text
 from OrderGlosses import order_glosslist

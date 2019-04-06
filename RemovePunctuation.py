@@ -1,6 +1,9 @@
 """Level 1"""
 
+from functools import lru_cache
 
+
+@lru_cache(maxsize=9000)
 def rempunc_tok(token, exceptions=[]):
     """takes a token and list of exceptions. If a punctuation type is not excepted, it is removed from the token if at
        the end and not preceded directly by another un-excepted punctuation type"""

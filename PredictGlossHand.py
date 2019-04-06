@@ -1,3 +1,5 @@
+"""Level 3, 2, 2, 3"""
+
 from PrepareHandContent import compile_tokenised_glosslist, get_unitoks
 from CalculateBayes import bayes_tok
 import time
@@ -123,7 +125,7 @@ def return_correction_list2():
     return str(percent_correct) + "% correct"
 
 
-allglosstoks = compile_tokenised_glosslist("Wb. All Glosses")
+# allglosstoks = compile_tokenised_glosslist("Wb. All Glosses")
 
 
 # print(auth_check_glosshand(['.i.', 'díith', '.i.', '*Latin*', 'dernum']))

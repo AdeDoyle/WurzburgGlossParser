@@ -1,5 +1,6 @@
 """Level 3"""
 
+from functools import lru_cache
 from GetTagText import get_tagtext
 from OpenPages import get_pages
 from GetSections import get_section
@@ -11,6 +12,7 @@ from OrderFootnotes import order_footlist
 import re
 
 
+@lru_cache(maxsize=1000)
 def get_glinfo(file, startpage=499, stoppage=712):
     """Returns an infolist containing multiple sublists. The first sublist contains the headers for an info-table.
        Subsequent lists contain, respectively, for a set page range: Epistle, Page No., Folio, Gloss no. and Gloss Text

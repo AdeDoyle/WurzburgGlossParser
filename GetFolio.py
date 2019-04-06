@@ -1,5 +1,6 @@
 """Level 1"""
 
+from functools import lru_cache
 from OpenPages import get_pages
 from GetSections import get_section
 from OrderGlosses import order_glosses
@@ -7,6 +8,7 @@ from ClearTags import clear_tags
 import re
 
 
+@lru_cache(maxsize=1000)
 def get_fol(text):
     """Takes a text returns a folio-list of tag-lists with text at tag-list[0] and folio info at tag-list[1]"""
     fulltext = text

@@ -1,11 +1,13 @@
 """Level 1"""
 
+from functools import lru_cache
 from ClearTags import clear_tags
 from GetSections import get_section
 from OpenPages import get_pages
 import re
 
 
+@lru_cache(maxsize=250)
 def order_glosslist(file):
     """Finds each gloss by its number and returns a list of glosses"""
     glosstext = file
@@ -50,6 +52,7 @@ def order_glosslist(file):
     return theseglosses
 
 
+@lru_cache(maxsize=250)
 def order_glosses(file):
     """Finds each gloss by its number and returns a string with each gloss on a new line"""
     glosslist = order_glosslist(file)

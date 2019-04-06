@@ -1,6 +1,10 @@
+"""Level 1, 2, 1"""
+
+from functools import lru_cache
 from PrepareHandContent import compile_tokenised_glosslist, combinelists, get_inditokcount, get_unitoks
 
 
+@lru_cache(maxsize=12000)
 def basic_bayes(p2g1, p1, p2):
     """Calculates the probability 1 (a scribe) given the probability of 2 (a word/bigram/contraction etc.)"""
     topline = p2g1 * p1
@@ -8,6 +12,7 @@ def basic_bayes(p2g1, p1, p2):
     return topline / bottomline
 
 
+@lru_cache(maxsize=12000)
 def bayes_tok(tok, hand):
     """Takes a token, and a hand number.
        Uses Bayes theorem to calculate the probability of the given token being used by the given hand."""

@@ -1,8 +1,10 @@
 """Level 1."""
 
+from functools import lru_cache
 from OpenDocx import get_text
 
 
+@lru_cache(maxsize=250)
 def find_page(file, findpage):
     """Iterates through document from page 499-712 and finds the beginning point of a desired page.
        Returns position."""

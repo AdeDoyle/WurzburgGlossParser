@@ -1,5 +1,6 @@
 """Level 1"""
 
+from functools import lru_cache
 from OpenPages import get_pages
 from GetSections import get_section
 from ClearTags import clear_tags
@@ -8,6 +9,7 @@ from RemoveBrackets import remove_brackets
 import re
 
 
+@lru_cache(maxsize=1000)
 def remove_glossnums(file):
     filetext = file
     """Removes gloss numbers from a string of glosses"""

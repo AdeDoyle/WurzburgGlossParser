@@ -1,5 +1,6 @@
 """Level 3"""
 
+from functools import lru_cache
 from GetSections import get_section
 from OpenPages import get_pages
 from OrderLatin import order_latlist
@@ -8,6 +9,7 @@ from ClearTags import clear_tags
 import re
 
 
+@lru_cache(maxsize=1000)
 def get_latpageinfo(file, page):
     """returns a list of gloss-lists for a specified page of TPH
        each gloss-list contains a gloss[0], the Latin verse[1], the lemma[2], and the lemma position[3]"""
@@ -97,6 +99,7 @@ def get_latpageinfo(file, page):
     return latininfolist
 
 
+@lru_cache(maxsize=1000)
 def get_latinfo(file, startpage, stoppage):
     """returns a list of gloss-lists for a specified page range within TPH
        each gloss-list contains a gloss[0], the Latin verse[1], the lemma[2], and the lemma position[3]"""

@@ -1,11 +1,13 @@
 """Level 1"""
 
+from functools import lru_cache
 from OpenPages import get_pages
 from ClearTags import clear_tags
 from GetSections import get_section
 from OrderGlosses import order_glosses
 
 
+@lru_cache(maxsize=250)
 def remove_brackets(file):
     """Removes all square and round brackets in the text. If square brackets enclose marginal information the contents
        of the brackets are removed also"""

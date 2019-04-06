@@ -1,8 +1,10 @@
 """Level 1."""
 
+from functools import lru_cache
 from OpenPages import get_pages
 
 
+@lru_cache(maxsize=1000)
 def get_tagtext(fulltext, tag):
     """Gets just the text between a particular set of tags from a string, returns a list of each instance"""
     taglist = []

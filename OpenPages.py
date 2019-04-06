@@ -1,9 +1,11 @@
 """Level 2."""
 
+from functools import lru_cache
 from OpenDocx import get_text
 from IteratePages import find_page
 
 
+@lru_cache(maxsize=250)
 def get_pages(filename, startpage=499, endpage=712):
     """Opens the text of the Glosses from the document and returns the text of the selected page range"""
     alltext = get_text(filename)

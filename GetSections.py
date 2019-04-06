@@ -1,9 +1,11 @@
 """Level 2."""
 
+from functools import lru_cache
 from GetTagText import get_tagtext
 from OpenPages import get_pages
 
 
+@lru_cache(maxsize=1000)
 def get_section(fulltext, section="No Section"):
     """Gets and returns list of instances of just the text between a particular set of section tags"""
     if section != "Lat":

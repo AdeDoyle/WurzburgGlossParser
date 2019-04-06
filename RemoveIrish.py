@@ -1,8 +1,10 @@
 """Level 1"""
 
+from functools import lru_cache
 from OrderGlosses import order_glosses, get_section, get_pages, clear_tags
 
 
+@lru_cache(maxsize=250)
 def rep_Ir(glosstext, repchar="…"):
     """Takes glosses as input. Replaces all Irish text text with ellipsis (or other selected replace-character."""
     oplat = "[GLat]"

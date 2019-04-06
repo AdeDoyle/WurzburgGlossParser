@@ -1,9 +1,11 @@
 """Level 2"""
 
+from functools import lru_cache
 from GetTagText import get_tagtext
 import re
 
 
+@lru_cache(maxsize=3000)
 def rep_mstags(text, footnotes):
     """Finds all open/close footnotes in a gloss or line of Latin, checks if there is a footnote with an associated
        manuscript replacement tagged and, if so, replaces it returning the gloss/Latin with all replacements made."""
@@ -34,6 +36,7 @@ def rep_mstags(text, footnotes):
     return textstring
 
 
+@lru_cache(maxsize=3000)
 def rep_legtags(text, footnotes):
     """Finds all open/close footnotes in a gloss or line of Latin, checks if there is a footnote with an associated
        suggested reading tagged and, if so, replaces it returning the gloss/Latin with all replacements made."""

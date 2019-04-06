@@ -1,9 +1,11 @@
 """Level 1"""
 
+from functools import lru_cache
 from RemoveNewlines import remove_newlines
 from OrderGlosses import order_glosses, get_section, get_pages, clear_tags
 
 
+@lru_cache(maxsize=250)
 def rep_lat(glosstext, repchar="…", strong=False):
     """Takes glosses as input. Replaces all Latin text with ellipsis (or other selected replace-character.
        A strong-replace will treat common abbreviations like Latin and remove them too."""
@@ -47,6 +49,7 @@ def rep_lat(glosstext, repchar="…", strong=False):
     return workingtext
 
 
+@lru_cache(maxsize=250)
 def rem_lat(glosstext, strong=False):
     """Takes glosses as input. Removes all Latin text and resultant double spacing."""
     workingtext = glosstext
