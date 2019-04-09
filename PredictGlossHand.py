@@ -3,6 +3,7 @@
 from PrepareHandContent import compile_tokenised_glosslist, get_unitoks
 from CalculateBayes import bayes_tok
 import time
+from SaveDocx import save_docx
 
 
 def auth_check_glosshand(gloss):
@@ -137,3 +138,5 @@ def return_correction_list2():
 # print(return_correction_list1())  # 1169.7852444648743 ticks on first ten glosses
 
 # print(return_correction_list2())  # 695.408495426178 ticks on first ten glosses
+
+# save_docx(return_correction_list2(), "Hands Predicted Correctly")
