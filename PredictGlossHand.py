@@ -3,6 +3,7 @@
 from PrepareHandContent import compile_tokenised_glosslist, get_unitoks
 from CalculateBayes import bayes_tok
 import time
+import pickle
 from SaveDocx import save_docx
 
 
@@ -84,8 +85,17 @@ def return_correction_list2():
             thistokfreqs = allunitoksdict[token]
             for hand in range(3):
                 thistokfreqs.append(bayes_tok(token, hand + 1))
+    # # OPTIONAL: Saves the dictionary of hand probabilities created above as an object
+    # # As the process takes a long time to run, it is advisable to do this once, and load from it in future (below)
+    # pickle_out = open("unitokprobs_pickle", "wb")
+    # pickle.dump(allunitoksdict, pickle_out)
+    # pickle_out.close()
+    # # OPTIONAL: Loads a pre-saved dictionary of hand probabilities if the file is available
+    # # Only possible if the file has been created using the step above
+    # pickle_in = open("unitokprobs_pickle", "rb")
+    # allunitoksdict = pickle.load(pickle_in)
+    # Creates three lists of hand probabilities for each token in the gloss
     all_corrections = []
-    # Creates three list of hand probabilities for each token in the gloss
     for gloss in allglosstoks:  # select how many glosses to use
         tok_problist = [[], [], []]
         for token in gloss:
