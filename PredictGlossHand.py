@@ -122,14 +122,15 @@ def return_correction_list2():
                 most_probable_hand = i + 1
         # Compiles a list of the tokenised gloss, the most probable hand, and the accuracy of the author guess.
         authguess = most_probable_hand
-        glosschecklist = [gloss, authguess, check_correct(gloss, authguess)]
+        glosschecklist = [" ".join(gloss), "Probable Hand: " + str(authguess), check_correct(gloss, authguess)]
         all_corrections.append(glosschecklist)
     correctcount = 0
     # Calculates the percentage of glosses correctly assigned to a scribal hand.
     for i in all_corrections:
-        print(i)
         if i[2] == "Correct":
             correctcount += 1
+        else:
+            print(i)
     percent_correct = (100 / len(all_corrections) * correctcount)
     end = time.time()
     print(end - start)
