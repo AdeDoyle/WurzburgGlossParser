@@ -76,24 +76,24 @@ def return_correction_list2():
        checks to see if the gloss is actually from that hand,
        calculates how many glosses were assigned to the correct hand as a percentage"""
     allglosstoks = compile_tokenised_glosslist("Wb. All Glosses")
-    allunitoks = get_unitoks(allglosstoks)  # select how many glosses to use
-    # Creates a dictionary, adds to it a list of hand probabilities (value) for every unique token (key)
-    allunitoksdict = {}
-    for token in allunitoks:
-        if token != "*Latin*":
-            allunitoksdict[token] = []
-            thistokfreqs = allunitoksdict[token]
-            for hand in range(3):
-                thistokfreqs.append(bayes_tok(token, hand + 1))
+    # allunitoks = get_unitoks(allglosstoks)  # select how many glosses to use
+    # # Creates a dictionary, adds to it a list of hand probabilities (value) for every unique token (key)
+    # allunitoksdict = {}
+    # for token in allunitoks:
+    #     if token != "*Latin*":
+    #         allunitoksdict[token] = []
+    #         thistokfreqs = allunitoksdict[token]
+    #         for hand in range(3):
+    #             thistokfreqs.append(bayes_tok(token, hand + 1))
     # # OPTIONAL: Saves the dictionary of hand probabilities created above as an object
     # # As the process takes a long time to run, it is advisable to do this once, and load from it in future (below)
     # pickle_out = open("unitokprobs_pickle", "wb")
     # pickle.dump(allunitoksdict, pickle_out)
     # pickle_out.close()
-    # # OPTIONAL: Loads a pre-saved dictionary of hand probabilities if the file is available
-    # # Only possible if the file has been created using the step above
-    # pickle_in = open("unitokprobs_pickle", "rb")
-    # allunitoksdict = pickle.load(pickle_in)
+    # OPTIONAL: Loads a pre-saved dictionary of hand probabilities if the file is available
+    # Only possible if the file has been created using the step above
+    pickle_in = open("unitokprobs_pickle", "rb")
+    allunitoksdict = pickle.load(pickle_in)
     # Creates three lists of hand probabilities for each token in the gloss
     all_corrections = []
     for gloss in allglosstoks:  # select how many glosses to use
