@@ -7,6 +7,7 @@ from ClearTags import clear_tags
 from RemoveBrackets import remove_brackets
 import re
 from Tokenise import remove_duptoks
+from SaveDocx import save_docx
 
 
 def openhandlists(file):
@@ -106,6 +107,36 @@ def compile_tokenised_glosslist(file):
     return tokenised_handlist
 
 
+def create_test_training(file):
+    """Takes a list of tokenised glosses for a given hand
+       Divides the glosses into two lists, test and training (10% and 90% of glosses respectively)"""
+    fileglosses = compile_tokenised_glosslist(file)
+    training = []  # 90% of glosses in input file
+    test = []  # 10% of glosses in input file
+    for i in range(len(fileglosses)):
+        if (i + 1) % 10 == 0:
+            test.append(" ".join(fileglosses[i]))
+        else:
+            training.append(" ".join(fileglosses[i]))
+    return "\n".join(test), "\n".join(training)
+
+
+def split_testtrain(file):
+    """Splits the glosses from a tes/train file into a gloss list"""
+    filetext = openhandlists(file)
+    glosslist = filetext.split("\n")
+    return glosslist
+
+
+def compile_tokenised_testtrain(file):
+    """Returns a tokenised list of lists (glosses and their tokens) for each test/training gloss"""
+    tok_list = []
+    for gloss in split_testtrain(file):
+        glosstoks = gloss.split(" ")
+        tok_list.append(glosstoks)
+    return tok_list
+
+
 def combinelists(listlist):
     """Combines lists of lists into a single list of the
        contents of all the lists in the list-of-lists entered"""
@@ -143,6 +174,12 @@ def get_inditokcount(tok, glosslist):
 # pmtoks = compile_tokenised_glosslist(glosshands[1])
 # h2toks = compile_tokenised_glosslist(glosshands[2])
 # h3toks = compile_tokenised_glosslist(glosshands[3])
+# pmtest = compile_tokenised_testtrain("Hand_1_hand_test")
+# h2test = compile_tokenised_testtrain("Hand_2_hand_test")
+# h3test = compile_tokenised_testtrain("Hand_3_hand_test")
+# pmtrain = compile_tokenised_testtrain("Hand_1_hand_training")
+# h2train = compile_tokenised_testtrain("Hand_2_hand_training")
+# h3train = compile_tokenised_testtrain("Hand_3_hand_training")
 
 
 # print(openhandlists(glosshands[0]))
@@ -155,6 +192,23 @@ def get_inditokcount(tok, glosslist):
 
 # for tok_gloss in compile_tokenised_glosslist(glosshands[0]):
 #     print(tok_gloss)
+
+
+# print(create_test_training(glosshands[2])[0])
+
+# for i in range(1, 4):
+#     infile = glosshands[i]
+#     test_training = create_test_training(infile)
+#     handname = "Hand_" + str(i)
+#     save_docx(test_training[0], handname + "_hand_test")
+#     save_docx(test_training[1], handname + "_hand_training")
+
+# print(split_testtrain("Hand_1_hand_test"))
+
+# print(compile_tokenised_testtrain("Hand_1_hand_test"))
+
+# for i in compile_tokenised_testtrain("Hand_1_hand_test"):
+#     print(i)
 
 # for unitok in get_unitoks(pmtoks):
 #     print(unitok)
