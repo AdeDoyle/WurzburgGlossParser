@@ -177,9 +177,11 @@ def get_inditokcount(tok, glosslist):
 # pmtest = compile_tokenised_testtrain("Hand_1_hand_test")
 # h2test = compile_tokenised_testtrain("Hand_2_hand_test")
 # h3test = compile_tokenised_testtrain("Hand_3_hand_test")
+# alltesttoks = combinelists([pmtest, h2test, h3test])
 # pmtrain = compile_tokenised_testtrain("Hand_1_hand_training")
 # h2train = compile_tokenised_testtrain("Hand_2_hand_training")
 # h3train = compile_tokenised_testtrain("Hand_3_hand_training")
+# alltraintoks = [combinelists([pmtrain, h2train, h3train])]
 
 
 # print(openhandlists(glosshands[0]))
