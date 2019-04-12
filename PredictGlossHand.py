@@ -159,7 +159,7 @@ def return_correction_list3():
     # h2train = compile_tokenised_testtrain("Hand_2_hand_training")
     # h3train = compile_tokenised_testtrain("Hand_3_hand_training")
     # alltraintoks = combinelists([pmtrain, h2train, h3train])
-    # allunitoks = get_unitoks(alltraintoks[:10])  # select how many glosses to use from the training set
+    # allunitoks = get_unitoks(alltraintoks)  # select how many glosses to use from the training set
     # # Creates a dictionary, adds to it a list of hand probabilities (value) for every unique token (key)
     # allunitoksdict = {}
     # for token in allunitoks:
@@ -179,7 +179,7 @@ def return_correction_list3():
     allunitoksdict = pickle.load(pickle_in)
     # Creates three lists of hand probabilities for each token in the gloss
     all_corrections = []
-    for gloss in alltesttoks[:10]:  # select how many glosses use from the test set
+    for gloss in alltesttoks:  # select how many glosses use from the test set
         tok_problist = [[], [], []]
         for token in gloss:
             if token != "*Latin*":
