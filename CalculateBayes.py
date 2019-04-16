@@ -13,7 +13,7 @@ def basic_bayes(p2g1, p1, p2):
 
 
 @lru_cache(maxsize=12000)
-def bayes_tok(tok, hand):
+def bayes_tok(tok, hand, add_one=False):
     """Takes a token, and a hand number.
        Uses Bayes theorem to calculate the probability of the given token being used by the given hand."""
     glosshands = ["Wb. All Glosses", "Wb. Prima Manus", "Wb. Hand Two", "Wb. Hand Three"]
@@ -28,6 +28,8 @@ def bayes_tok(tok, hand):
     # probability of a given token given a scribe
     # (number of times a given token is used by given scribe / total number of tokens used by a given scribe)
     pwgs = get_inditokcount(tok, allcurhand) / len(combinelists(allcurhand))
+    if add_one:
+        pwgs = (get_inditokcount(tok, allcurhand) + 1) / (len(combinelists(allcurhand)) + len(combinelists(allglosstoks)))
     return basic_bayes(pwgs, ps, pw)
 
 
@@ -74,9 +76,20 @@ def takefirst(elem):
 # print(basic_bayes(plgw, pw, pl))
 
 
-# # Test bayes_setup
+# # Test bayes_tok
 # for token in comtokscounted:
 #     print(token[1] + ": " + str(token[0]))
 #     print("H1 – " + str(bayes_tok(token[1], 1)))
 #     print("H2 – " + str(bayes_tok(token[1], 2)))
 #     print("H3 – " + str(bayes_tok(token[1], 3)) + "\n")
+
+
+# # Test bayes_tok with smoothing
+# for token in comtokscounted[1:2]:
+#     print(token[1] + ": " + str(token[0]))
+#     print("H1 or – " + str(bayes_tok(token[1], 1)))
+#     print("H1 sm – " + str(bayes_tok(token[1], 1, True)))
+#     print("H2 or – " + str(bayes_tok(token[1], 2)))
+#     print("H2 sm – " + str(bayes_tok(token[1], 2, True)))
+#     print("H3 or – " + str(bayes_tok(token[1], 3)))
+#     print("H3 sm – " + str(bayes_tok(token[1], 3, True)) + "\n")
