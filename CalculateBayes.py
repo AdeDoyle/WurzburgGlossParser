@@ -13,23 +13,26 @@ def basic_bayes(p2g1, p1, p2):
 
 
 @lru_cache(maxsize=12000)
-def bayes_tok(tok, hand, add_one=False):
+def bayes_tok(tok, hand, alpha=0.0):
     """Takes a token, and a hand number.
        Uses Bayes theorem to calculate the probability of the given token being used by the given hand."""
     glosshands = ["Wb. All Glosses", "Wb. Prima Manus", "Wb. Hand Two", "Wb. Hand Three"]
     allglosstoks = compile_tokenised_glosslist(glosshands[0])
     allcurhand = compile_tokenised_glosslist(glosshands[hand])
+    all_toks_total = len(combinelists(allglosstoks))
+    scribe_toks_total = len(combinelists(allcurhand))
     # probability of a given token
     # (number of times token is used by all scribes / total number of tokens used by all scribes)
-    pw = get_inditokcount(tok, allglosstoks) / len(combinelists(allglosstoks))
+    pw = get_inditokcount(tok, allglosstoks) / all_toks_total
     # probability of a given scribe
     # (total number of tokens used by a given scribe / total number of tokens used by all scribes)
-    ps = len(combinelists(allcurhand)) / len(combinelists(allglosstoks))
+    ps = scribe_toks_total / all_toks_total
     # probability of a given token given a scribe
     # (number of times a given token is used by given scribe / total number of tokens used by a given scribe)
-    pwgs = get_inditokcount(tok, allcurhand) / len(combinelists(allcurhand))
-    if add_one:
-        pwgs = (get_inditokcount(tok, allcurhand) + 1) / (len(combinelists(allcurhand)) + len(combinelists(allglosstoks)))
+    pwgs = get_inditokcount(tok, allcurhand) / scribe_toks_total
+    if alpha:
+        pwgs = (get_inditokcount(tok, allcurhand) + alpha) \
+               / (scribe_toks_total + (alpha + all_toks_total))
     return basic_bayes(pwgs, ps, pw)
 
 
@@ -85,11 +88,11 @@ def takefirst(elem):
 
 
 # # Test bayes_tok with smoothing
-# for token in comtokscounted[1:2]:
+# for token in comtokscounted[4:5]:
 #     print(token[1] + ": " + str(token[0]))
 #     print("H1 or – " + str(bayes_tok(token[1], 1)))
-#     print("H1 sm – " + str(bayes_tok(token[1], 1, True)))
+#     print("H1 sm – " + str(bayes_tok(token[1], 1, 1.0)))
 #     print("H2 or – " + str(bayes_tok(token[1], 2)))
-#     print("H2 sm – " + str(bayes_tok(token[1], 2, True)))
+#     print("H2 sm – " + str(bayes_tok(token[1], 2, 1.0)))
 #     print("H3 or – " + str(bayes_tok(token[1], 3)))
-#     print("H3 sm – " + str(bayes_tok(token[1], 3, True)) + "\n")
+#     print("H3 sm – " + str(bayes_tok(token[1], 3, 1.0)) + "\n")

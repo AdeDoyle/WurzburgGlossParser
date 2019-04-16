@@ -167,7 +167,7 @@ def return_correction_list3():
     #         allunitoksdict[token] = []
     #         thistokfreqs = allunitoksdict[token]
     #         for hand in range(3):
-    #             thistokfreqs.append(bayes_tok(token, hand + 1, True))
+    #             thistokfreqs.append(bayes_tok(token, hand + 1, 1.0))
     # # OPTIONAL: Saves the dictionary of hand probabilities created above as an object
     # # As the process takes a long time to run, it is advisable to do this once, and load from it in future (below)
     # pickle_out = open("unitokprobs_pickle3", "wb")
