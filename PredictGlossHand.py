@@ -167,7 +167,7 @@ def return_correction_list3():
     #         allunitoksdict[token] = []
     #         thistokfreqs = allunitoksdict[token]
     #         for hand in range(3):
-    #             thistokfreqs.append(bayes_tok(token, hand + 1))
+    #             thistokfreqs.append(bayes_tok(token, hand + 1, True))
     # # OPTIONAL: Saves the dictionary of hand probabilities created above as an object
     # # As the process takes a long time to run, it is advisable to do this once, and load from it in future (below)
     # pickle_out = open("unitokprobs_pickle3", "wb")
@@ -184,8 +184,8 @@ def return_correction_list3():
         for token in gloss:
             if token != "*Latin*":
                 threehandprobs = allunitoksdict.get(token)
-                if not threehandprobs:  # Implement VERY rudimentary smoothing
-                    threehandprobs = [1/3, 1/3, 1/3]
+                # if not threehandprobs:  # Implement VERY rudimentary smoothing (redundant: use add-one smoothing)
+                #     threehandprobs = [1/3, 1/3, 1/3]
                 for i in range(len(tok_problist)):
                     tok_problist[i].append(threehandprobs[i])
         # Replaces the list of token probabilities for each hand with an overall probability for each hand.
