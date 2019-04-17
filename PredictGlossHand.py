@@ -45,7 +45,7 @@ def check_correct(gloss, hand):
     if gloss in compile_tokenised_glosslist(glosshands[hand]):
         return "Correct: Hand = " + str(hand)
     else:
-        for i in range(1, 3):
+        for i in range(1, 4):
             if i != hand:
                 if gloss in compile_tokenised_glosslist(glosshands[i]):
                     return "Incorrect: Hand = " + str(i)
@@ -130,18 +130,40 @@ def return_correction_list2():
         authguess = most_probable_hand
         glosschecklist = [" ".join(gloss), "Probable Hand: " + str(authguess), check_correct(gloss, authguess)]
         all_corrections.append(glosschecklist)
-    correctcount = 0
     # Calculates the percentage of glosses correctly assigned to a scribal hand.
+    h1count = 0
+    h2count = 0
+    h3count = 0
+    correctcount = 0
+    h1correctcount = 0
+    h2correctcount = 0
+    h3correctcount = 0
     for i in all_corrections:
         correction = i[2]
+        correcthand = int(correction[-1])
+        if correcthand == 1:
+            h1count += 1
+        elif correcthand == 2:
+            h2count += 1
+        else:
+            h3count += 1
         if correction[:7] == "Correct":
             correctcount += 1
-        else:
-            print(i)
+            if correcthand == 1:
+                h1correctcount += 1
+            elif correcthand == 2:
+                h2correctcount += 1
+            else:
+                h3correctcount += 1
     percent_correct = (100 / len(all_corrections) * correctcount)
+    h1_correct = (100 / h1count * h1correctcount)
+    h2_correct = (100 / h2count * h2correctcount)
+    h3_correct = (100 / h3count * h3correctcount)
     end = time.time()
-    print(end - start)
-    return str(percent_correct) + "% correct"
+    time_taken = (str((end - start) / 60))
+    print(time_taken[:4] + " min")
+    return str(percent_correct) + "% correct total\n" + str(h1_correct) + "% correct for h1\n" + str(
+        h2_correct) + "% correct for h2\n" + str(h3_correct) + "% correct for h3"
 
 
 def return_correction_list3():
@@ -184,8 +206,8 @@ def return_correction_list3():
         for token in gloss:
             if token != "*Latin*":
                 threehandprobs = allunitoksdict.get(token)
-                # if not threehandprobs:  # Implement VERY rudimentary smoothing (redundant: use add-one smoothing)
-                #     threehandprobs = [1/3, 1/3, 1/3]
+                if not threehandprobs:
+                    threehandprobs = [0, 0, 0]
                 for i in range(len(tok_problist)):
                     tok_problist[i].append(threehandprobs[i])
         # Replaces the list of token probabilities for each hand with an overall probability for each hand.
@@ -209,24 +231,48 @@ def return_correction_list3():
         authguess = most_probable_hand
         glosschecklist = [" ".join(gloss), "Probable Hand: " + str(authguess), check_correct(gloss, authguess)]
         all_corrections.append(glosschecklist)
-    correctcount = 0
     # Calculates the percentage of glosses correctly assigned to a scribal hand.
+    h1count = 0
+    h2count = 0
+    h3count = 0
+    correctcount = 0
+    h1correctcount = 0
+    h2correctcount = 0
+    h3correctcount = 0
     for i in all_corrections:
         correction = i[2]
+        correcthand = int(correction[-1])
+        if correcthand == 1:
+            h1count += 1
+        elif correcthand == 2:
+            h2count += 1
+        else:
+            h3count += 1
         if correction[:7] == "Correct":
             correctcount += 1
-        else:
-            print(i)
+            if correcthand == 1:
+                h1correctcount += 1
+            elif correcthand == 2:
+                h2correctcount += 1
+            else:
+                h3correctcount += 1
     percent_correct = (100 / len(all_corrections) * correctcount)
+    h1_correct = (100 / h1count * h1correctcount)
+    h2_correct = (100 / h2count * h2correctcount)
+    h3_correct = (100 / h3count * h3correctcount)
     end = time.time()
-    print(end - start)
-    return str(percent_correct) + "% correct"
+    time_taken = (str((end - start) / 60))
+    print(time_taken[:4] + " min")
+    return str(percent_correct) + "% correct total\n" + str(h1_correct) + "% correct for h1\n" + str(
+        h2_correct) + "% correct for h2\n" + str(h3_correct) + "% correct for h3"
 
 
 # allglosstoks = compile_tokenised_glosslist("Wb. All Glosses")
 
 
 # print(auth_check_glosshand(['.i.', 'díith', '.i.', '*Latin*', 'dernum']))
+
+# print(check_correct(["tacráth"], 1))
 
 # for gloss in allglosstoks[:10]:
 #     authguess = auth_check_glosshand(gloss)
