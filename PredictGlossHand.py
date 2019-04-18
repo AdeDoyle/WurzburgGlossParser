@@ -267,6 +267,120 @@ def return_correction_list3():
         h2_correct) + "% correct for h2\n" + str(h3_correct) + "% correct for h3"
 
 
+def return_correction_list4():
+    start = time.time()
+    """Saame as function 3, but with more calculations and used for testing."""
+    pmtest = compile_tokenised_testtrain("Hand_1_hand_test")
+    h2test = compile_tokenised_testtrain("Hand_2_hand_test")
+    h3test = compile_tokenised_testtrain("Hand_3_hand_test")
+    alltesttoks = combinelists([pmtest, h2test, h3test])
+    # This file is a direct copy of unitokprobs_pickle3
+    pickle_in = open("unitokprobs_pickle4", "rb")
+    allunitoksdict = pickle.load(pickle_in)
+    # Creates three lists of hand probabilities for each token in the gloss
+    all_corrections = []
+    for gloss in alltesttoks:  # select how many glosses use from the test set
+        tok_problist = [[], [], []]
+        for token in gloss:
+            if token != "*Latin*":
+                threehandprobs = allunitoksdict.get(token)
+                if not threehandprobs:
+                    threehandprobs = [0, 0, 0]
+                for i in range(len(tok_problist)):
+                    tok_problist[i].append(threehandprobs[i])
+        # Replaces the list of token probabilities for each hand with an overall probability for each hand.
+        for i in range(len(tok_problist)):
+            hand_problist = tok_problist[i]
+            multiplier = 1
+            for prob in hand_problist:
+                multiplier = multiplier * prob
+            tok_problist[i] = multiplier
+        most_probable_hand = 0
+        highest_prob = 0
+        # Looks at the three hands, finds the one with the highest probability for writing the gloss.
+        for i in range(len(tok_problist)):
+            if i == 0:
+                highest_prob = tok_problist[i]
+                most_probable_hand = i + 1
+            elif tok_problist[i] > highest_prob:
+                highest_prob = tok_problist[i]
+                most_probable_hand = i + 1
+        # Compiles a list of the tokenised gloss, the most probable hand, and the accuracy of the author guess.
+        authguess = most_probable_hand
+        glosschecklist = [" ".join(gloss), "Probable Hand: " + str(authguess), check_correct(gloss, authguess)]
+        all_corrections.append(glosschecklist)
+    # Calculates the percentage of glosses correctly assigned to a scribal hand.
+    h1count = 0
+    h2count = 0
+    h3count = 0
+    correctcount = 0
+    h1correctcount = 0
+    h2correctcount = 0
+    h3correctcount = 0
+    h1g2 = 0
+    h1g3 = 0
+    h2g1 = 0
+    h2g3 = 0
+    h3g1 = 0
+    h3g2 = 0
+    for i in all_corrections:
+        correction = i[2]
+        guess = i[1]
+        correcthand = int(correction[-1])
+        guesshand = int(guess[-1])
+        if correcthand == 1:
+            h1count += 1
+        elif correcthand == 2:
+            h2count += 1
+        else:
+            h3count += 1
+        if correction[:7] == "Correct":
+            correctcount += 1
+            if correcthand == 1:
+                h1correctcount += 1
+            elif correcthand == 2:
+                h2correctcount += 1
+            else:
+                h3correctcount += 1
+        # If guess is wrong, compile counts for incorrectly assigned hands
+        else:
+            if correcthand == 1:
+                if guesshand == 2:
+                    h1g2 += 1
+                elif guesshand == 3:
+                    h1g3 += 1
+            elif correcthand == 2:
+                if guesshand == 1:
+                    h2g1 += 1
+                elif guesshand == 3:
+                    h2g3 += 1
+            else:
+                if guesshand == 1:
+                    h3g1 += 1
+                elif guesshand == 2:
+                    h3g2 += 1
+    # Calculates percentage correctly assigned
+    percent_correct = (100 / len(all_corrections) * correctcount)
+    h1_correct = (100 / h1count * h1correctcount)
+    h2_correct = (100 / h2count * h2correctcount)
+    h3_correct = (100 / h3count * h3correctcount)
+    # Calculates percentage incorrectly assigned for each hand/guess pair
+    h1g2_incorrect = (100 / h1count * h1g2)
+    h1g3_incorrect = (100 / h1count * h1g3)
+    h2g1_incorrect = (100 / h2count * h2g1)
+    h2g3_incorrect = (100 / h2count * h2g3)
+    h3g1_incorrect = (100 / h3count * h3g1)
+    h3g2_incorrect = (100 / h3count * h3g2)
+    end = time.time()
+    time_taken = (str((end - start) / 60))
+    print(time_taken[:4] + " min")
+    return str(percent_correct) + "% correct total\n" + str(h1_correct) + "% correct for h1\n" + str(
+        h1g2_incorrect) + "% assigned 2\n" + str(h1g3_incorrect) + "% assigned 3\n" + str(
+        h2_correct) + "% correct for h2\n" + str(h2g1_incorrect) + "% assigned 1\n" + str(
+        h2g3_incorrect) + "% assigned 3\n" + str(h3_correct) + "% correct for h3\n" + str(
+        h3g1_incorrect) + "% assigned 1\n" + str(h3g2_incorrect) + "% assigned 2"
+
+
 # allglosstoks = compile_tokenised_glosslist("Wb. All Glosses")
 
 
@@ -283,5 +397,7 @@ def return_correction_list3():
 # print(return_correction_list2())  # 695.408495426178 ticks on first ten glosses (26.315075874328613 ticks with pickle)
 
 # print(return_correction_list3())  # 205.365735054016 ticks on first ten glosses (12.431609392166138 ticks with pickle)
+
+# print(return_correction_list4())
 
 # save_docx(return_correction_list2(), "Hands Predicted Correctly")
