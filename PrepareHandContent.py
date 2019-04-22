@@ -1,13 +1,17 @@
 """Level 2, 2, 2, 1, 1, 1, 2, 2, 1"""
 
 from OpenDocx import get_text
-from OrderGlosses import order_glosslist
+from OpenPages import get_pages
+from GetSections import get_section
+from OrderGlosses import order_glosses, order_glosslist
+from GetFolio import get_fol
 from RemoveLatin import rep_lat
 from ClearTags import clear_tags
 from RemoveBrackets import remove_brackets
 import re
 from Tokenise import remove_duptoks
 from SaveDocx import save_docx
+import pickle
 
 
 def openhandlists(file):
@@ -169,6 +173,48 @@ def get_inditokcount(tok, glosslist):
         return 0
 
 
+def list_numbered_glosses(file, startpage, stoppage):
+
+    glist = []
+    for p in range(startpage, stoppage + 1):
+        fcont = get_fol(order_glosses(clear_tags("\n\n".join(get_section(get_pages(file, p, p), "SG")), "fol")))
+        for g in order_glosslist("\n\n".join(get_section(get_pages(file, p, p), "SG"))):
+            for fol in fcont:
+                raw_gloss = clear_tags(g)
+                if clear_tags(g) in fol[0]:
+                    numpat = re.compile(r'(\d{1,2}[a-z]?, )?\d{1,2}[a-z]?\. ')
+                    numpatitir = numpat.finditer(raw_gloss)
+                    for i in numpatitir:
+                        if i.group() in raw_gloss:
+                            glist.append([fol[1][3:] + i.group()[:-1], cleangloss(g)])
+    return glist
+
+
+def create_tokeniser_test_training():
+    """Splits the glosses into two lists, one for training a character-level LSTM based tokeniser, and another
+       containing 41 pre-selected glosses as a test set.
+       Saves each list as a pickle file."""
+    glist = list_numbered_glosses("Wurzburg Glosses", 499, 712)
+    testglossids = ["2c4.", "5b11.", "5b28.", "6c7.", "6c9.", "9a14.", "9b4.", "9c20.", "10b27.", "10c21.", "10d23.",
+                    "10d36.", "11a24.", "12a22.", "12c9.", "12c29.", "12c32.", "12c36.", "14a8.", "14c2a.", "14c18.",
+                    "14c23.", "14d17.", "14d26.", "15a18.", "16d8.", "17d27.", "18a14.", "18c6.", "19b6.", "21a8.",
+                    "21c19.", "23b7.", "23d10.", "26b6.", "27a24.", "28c2.", "28d16.", "29d19.", "30b4.", "31c7."]
+    testglosses = []
+    trainglosses = []
+    for g in glist:
+        if g[0] in testglossids:
+            testglosses.append(g[1])
+        else:
+            trainglosses.append(g[1])
+    pickletest_out = open("toktest_pickle", "wb")
+    pickle.dump(testglosses, pickletest_out)
+    pickletest_out.close()
+    pickletrain_out = open("toktrain_pickle", "wb")
+    pickle.dump(trainglosses, pickletrain_out)
+    pickletrain_out.close()
+    return "\nTest and Training Sets Compiled for Gloss Tokenisation.\n"
+
+
 # glosshands = ["Wb. All Glosses", "Wb. Prima Manus", "Wb. Hand Two", "Wb. Hand Three"]
 # allglosstoks = compile_tokenised_glosslist(glosshands[0])
 # pmtoks = compile_tokenised_glosslist(glosshands[1])
@@ -237,3 +283,16 @@ def get_inditokcount(tok, glosslist):
 # print(len(combinelists(pmtoks)))
 # print(len(combinelists(h2toks)))
 # print(len(combinelists(h3toks)))
+
+# for g in list_numbered_glosses("Wurzburg Glosses", 499, 712):
+#     print(g)
+
+# print(create_tokeniser_test_training())
+
+# pickletest_in = open("toktest_pickle", "rb")
+# testglosses_tokeniser = pickle.load(pickletest_in)
+# pickletrain_in = open("toktrain_pickle", "rb")
+# trainglosses_tokeniser = pickle.load(pickletrain_in)
+# print(testglosses_tokeniser)
+# print(trainglosses_tokeniser)
+
