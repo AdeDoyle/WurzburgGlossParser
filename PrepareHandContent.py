@@ -193,23 +193,46 @@ def list_numbered_glosses(file, startpage, stoppage):
 def create_tokeniser_test_training():
     """Splits the glosses into two lists, one for training a character-level LSTM based tokeniser, and another
        containing 41 pre-selected glosses as a test set.
+       The test set is split into two further lists, the first list is the untokenised glosses of the test set, the
+       second is the same glosses, manually tokenised.
        Saves each list as a pickle file."""
     glist = list_numbered_glosses("Wurzburg Glosses", 499, 712)
+    # List numbers of all chosen test-set glosses in order
     testglossids = ["2c4.", "5b11.", "5b28.", "6c7.", "6c9.", "9a14.", "9b4.", "9c20.", "10b27.", "10c21.", "10d23.",
                     "10d36.", "11a24.", "12a22.", "12c9.", "12c29.", "12c32.", "12c36.", "14a8.", "14c2a.", "14c18.",
                     "14c23.", "14d17.", "14d26.", "15a18.", "16d8.", "17d27.", "18a14.", "18c6.", "19b6.", "21a8.",
                     "21c19.", "23b7.", "23d10.", "26b6.", "27a24.", "28c2.", "28d16.", "29d19.", "30b4.", "31c7."]
+    # Takes Manually Tokenised test-set glosses from file and adds them to a dictionary so they can be found using the
+    # list above as keys
+    man_tok_glosslist = get_text("Manually Tokenised Glosses").split("\n")
+    mtgidpat = re.compile(r'\(\d{1,2}\w \d{1,2}\w?\) ')
+    mtgs_with_ids = {}
+    for mtg in man_tok_glosslist:
+        mtgpatitir = mtgidpat.finditer(mtg)
+        for mtgiditir in mtgpatitir:
+            mtgloss = "".join(mtg.split(mtgiditir.group()))
+            mtgid = "".join(mtg.split(mtgloss))
+            mtgid_fix = "".join(mtgid.split(" ")) + "."
+            mtgid_fix = "".join(mtgid_fix.split("("))
+            mtgid_fix = "".join(mtgid_fix.split(")"))
+            mtgs_with_ids[mtgid_fix] = mtgloss
+    # Creates the test and training lists
     testglosses = []
+    testglosses_tokenised = []
     trainglosses = []
     for g in glist:
         if g[0] in testglossids:
             testglosses.append(g[1])
+            testglosses_tokenised.append(mtgs_with_ids.get(g[0]))
         else:
             trainglosses.append(g[1])
-    pickletest_out = open("toktest_pickle", "wb")
-    pickle.dump(testglosses, pickletest_out)
+    # Combines the untokenised and tokenised test-set
+    testglosses_set = [testglosses, testglosses_tokenised]
+    # Saves the test and train sets to pickle files
+    pickletest_out = open("toktest.pkl", "wb")
+    pickle.dump(testglosses_set, pickletest_out)
     pickletest_out.close()
-    pickletrain_out = open("toktrain_pickle", "wb")
+    pickletrain_out = open("toktrain.pkl", "wb")
     pickle.dump(trainglosses, pickletrain_out)
     pickletrain_out.close()
     return "\nTest and Training Sets Compiled for Gloss Tokenisation.\n"
@@ -289,10 +312,11 @@ def create_tokeniser_test_training():
 
 # print(create_tokeniser_test_training())
 
-# pickletest_in = open("toktest_pickle", "rb")
+# pickletest_in = open("toktest.pkl", "rb")
 # testglosses_tokeniser = pickle.load(pickletest_in)
-# pickletrain_in = open("toktrain_pickle", "rb")
+# pickletrain_in = open("toktrain.pkl", "rb")
 # trainglosses_tokeniser = pickle.load(pickletrain_in)
-# print(testglosses_tokeniser)
+# for testglosses_set in testglosses_tokeniser:
+#     print(testglosses_set)
 # print(trainglosses_tokeniser)
 
