@@ -214,17 +214,12 @@ model.fit(x_train, y_train, epochs=1000, verbose=2)
 print("Created Model...")
 
 
-def save_model():
-    """Saves the model"""
-    model.save('n3_Tokeniser.h5')  # 1 Hidden Layer
-    # model.save('n3_2HLTokeniser.h5')  # 2 Hidden Layers
-    # Save the mapping
-    pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
-    return "Saved Model..."
-
-
 # Save the model
-print(save_model())
+model.save('n3_Tokeniser.h5')  # 1 Hidden Layer
+# model.save('n3_2HLTokeniser.h5')  # 2 Hidden Layers
+# Save the mapping
+pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
+print("Saved Model...")
 
 
 # # Load the model
