@@ -1,4 +1,4 @@
-"""Level 2, 2, 2, 1, 1, 1, 2, 2, 1"""
+"""Level 2, 2, 2, 1, 1, 1, 1, 2, 2, 1"""
 
 from OpenDocx import get_text
 from OpenPages import get_pages
@@ -86,6 +86,28 @@ def tokenisegloss(gloss):
     return glosstoks
 
 
+def remove_non_glosses(gloss_list):
+    """Removes glosses from a list of pre-cleaned if they are comprised only of non-Old-Irish tokens"""
+    new_glosslist = []
+    faultlist = [".i.", "rl.", "ɫ.", "*Latin*", ""]
+    faultcount = 0
+    for gloss in gloss_list:
+        if gloss not in faultlist:
+            glossfault = True
+            for glosstok in tokenisegloss(gloss):
+                if glosstok not in faultlist:
+                    glossfault = False
+                    break
+            if glossfault:
+                faultcount += 1
+            else:
+                new_glosslist.append(gloss)
+        else:
+            faultcount += 1
+    # print(faultcount)
+    return new_glosslist
+
+
 def compile_tokenised_glosslist(file):
     """Takes a file, removes glosses which contain no Irish tokens,
        counts faults experienced along the way,
@@ -126,7 +148,7 @@ def create_test_training(file):
 
 
 def split_testtrain(file):
-    """Splits the glosses from a tes/train file into a gloss list"""
+    """Splits the glosses from a test/train file into a gloss list"""
     filetext = openhandlists(file)
     glosslist = filetext.split("\n")
     return glosslist
@@ -174,7 +196,7 @@ def get_inditokcount(tok, glosslist):
 
 
 def list_numbered_glosses(file, startpage, stoppage):
-
+    """Lists glosses by their folio ID and gloss number"""
     glist = []
     for p in range(startpage, stoppage + 1):
         fcont = get_fol(order_glosses(clear_tags("\n\n".join(get_section(get_pages(file, p, p), "SG")), "fol")))
@@ -250,7 +272,7 @@ def create_tokeniser_test_training():
 # pmtrain = compile_tokenised_testtrain("Hand_1_hand_training")
 # h2train = compile_tokenised_testtrain("Hand_2_hand_training")
 # h3train = compile_tokenised_testtrain("Hand_3_hand_training")
-# alltraintoks = [combinelists([pmtrain, h2train, h3train])]
+# alltraintoks = combinelists([pmtrain, h2train, h3train])
 
 
 # print(openhandlists(glosshands[0]))
@@ -261,9 +283,14 @@ def create_tokeniser_test_training():
 # for gloss in splitglosses(glosshands[0]):
 #     print(cleangloss(gloss))
 
+# cleaned_list = []
+# for OIgloss in splitglosses("Wb. All Glosses"):
+#     cleaned_list.append(cleangloss(OIgloss))
+# for OIgloss in remove_non_glosses(cleaned_list):
+#     print(OIgloss)
+
 # for tok_gloss in compile_tokenised_glosslist(glosshands[0]):
 #     print(tok_gloss)
-
 
 # print(create_test_training(glosshands[2])[0])
 
