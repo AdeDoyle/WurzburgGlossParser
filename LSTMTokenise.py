@@ -210,8 +210,16 @@ model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+
+def fit_model():
+    """Fits the model"""
+    model.fit(x_train, y_train, epochs=1000, verbose=2)
+    return "Created Model..."
+
+
 # Fit model
-model.fit(x_train, y_train, epochs=1000, verbose=2)
+print(fit_model())
 
 
 # Save the model
@@ -219,6 +227,7 @@ model.save('n3_Tokeniser.h5')  # 1 Hidden Layer
 # model.save('n3_2HLTokeniser.h5')  # 2 Hidden Layers
 # Save the mapping
 pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
+print("Saved Model...")
 
 
 # # Load the model
