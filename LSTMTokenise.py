@@ -24,7 +24,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 3
+pre_characters = 10
 print("Set training parameters...")
 
 
@@ -215,10 +215,10 @@ print("Created Model...")
 
 
 # Save the model
-# model.save('n3_Tokeniser.h5')  # 1 Hidden Layer
-model.save('n3_2HLTokeniser.h5')  # 2 Hidden Layers
-# Save the mapping
-pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
+# model.save('n3_Tokeniser.h5')  # 1 Hidden Layer / Name model
+model.save('n10_2HLTokeniser.h5')  # 2 Hidden Layers / Name model
+# # Save the mapping
+# pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
 print("Saved Model...")
 
 
@@ -260,11 +260,11 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 
 
 # test 1
-print(generate_seq(model, chardict, pre_characters, '$$$', 20))
+print(generate_seq(model, chardict, pre_characters, '$$$$$$$$$$', 20))
 # test 2
-print(generate_seq(model, chardict, pre_characters, '.i.', 20))
+print(generate_seq(model, chardict, pre_characters, '$$$$$$$.i.', 20))
 # test 3
-print(generate_seq(model, chardict, pre_characters, 'ari', 20))
+print(generate_seq(model, chardict, pre_characters, '$$$$$$aris', 20))
 
 
 """
@@ -278,11 +278,36 @@ Buffer: 3 pre-characters
     - 17s - loss: 2.1135 - acc: 0.3869
    Epoch 1000/1000
     - 16s - loss: 1.4568 - acc: 0.5443.
-    
+
    Time elapsed: 4.603508884045813 hr
-   
+
    $$$.i. ished and $$$.i.
    .i. ished and $$$.i. is
    arist $$$.i. ished and 
+
+
+Model 2: n3_2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Buffer: 3 pre-characters
+
+   Epoch 1/1000
+    - 39s - loss: 2.1743 - acc: 0.3687
+   Epoch 1000/1000
+    - 25s - loss: 1.3907 - acc: 0.5510
+
+   Time elapsed: 6.968101385368241 hr
+
+   $$$.i. ished and indind
+   .i. ished and indindind
+   arist $$$.i. ished and 
+
+
+Model 2: n10_2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Buffer: 10 pre-characters
 """
 
