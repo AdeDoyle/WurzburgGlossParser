@@ -309,5 +309,7 @@ Model 2: n10_2HLTokeniser.h5
 Two Hidden Layers
 LSTM cells: 40 x 40
 Buffer: 10 pre-characters
+
+   
 """
 
