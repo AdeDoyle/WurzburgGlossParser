@@ -24,7 +24,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 10
+pre_characters = 3
 print("Set training parameters...")
 
 
@@ -62,11 +62,11 @@ def encode(string_list):
     return num_list
 
 
-# # Encode all glosses using mapping (for use with full-padding)
-# x_train = encode(x_train)
-# x_test = encode(x_test)
-# y_test = encode(y_test)
-# print("Encoded training and test data for padding...")
+# Encode all glosses using mapping (for use with full-padding)
+x_train = encode(x_train)
+x_test = encode(x_test)
+y_test = encode(y_test)
+print("Encoded training and test data for padding...")
 
 
 def decode(numstring_list):
@@ -98,25 +98,25 @@ def min_pad(string_list):
     return prechar_list
 
 
-# # Pad all glosses to same length (for use with full-padding)
-# x_train = pad(x_train)
-# x_test = pad(x_test)
-# y_test = pad(y_test)
-# print("Padded training and test data...")
-
-
-# # Decode all padded glosses to be sequenced (for use with full-padding)
-# x_train = decode(x_train)
-# x_test = decode(x_test)
-# y_test = decode(y_test)
-# print("Decoded padded training and test data...")
-
-
-# Pad all glosses only with set number of pre-characters (for use with minimal-padding)
-x_train = min_pad(x_train)
-x_test = min_pad(x_test)
-y_test = min_pad(y_test)
+# Pad all glosses to same length (for use with full-padding)
+x_train = pad(x_train)
+x_test = pad(x_test)
+y_test = pad(y_test)
 print("Padded training and test data...")
+
+
+# Decode all padded glosses to be sequenced (for use with full-padding)
+x_train = decode(x_train)
+x_test = decode(x_test)
+y_test = decode(y_test)
+print("Decoded padded training and test data...")
+
+
+# # Pad all glosses only with set number of pre-characters (for use with minimal-padding)
+# x_train = min_pad(x_train)
+# x_test = min_pad(x_test)
+# y_test = min_pad(y_test)
+# print("Padded training and test data...")
 
 
 def sequence(string_list):
@@ -273,6 +273,7 @@ Model 1: n3_Tokeniser.h5
 One Hidden Layer
 LSTM cells: 40
 Buffer: 3 pre-characters
+Padding: Min
 
    Epoch 1/1000
     - 17s - loss: 2.1135 - acc: 0.3869
@@ -291,6 +292,7 @@ Model 2: n3_2HLTokeniser.h5
 Two Hidden Layers
 LSTM cells: 40 x 40
 Buffer: 3 pre-characters
+Padding: Min
 
    Epoch 1/1000
     - 39s - loss: 2.1743 - acc: 0.3687
@@ -304,12 +306,30 @@ Buffer: 3 pre-characters
    arist $$$.i. ished and 
 
 
-Model 2: n10_2HLTokeniser.h5
+Model 3: n10_2HLTokeniser.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
 Buffer: 10 pre-characters
+Padding: Min
 
-   
+   Epoch 1/1000
+    - 72s - loss: 1.9124 - acc: 0.4491
+   Epoch 1000/1000
+    - 63s - loss: 1.0683 - acc: 0.6743
+
+   Time elapsed: 18.134599746068318 hr
+
+   $$$$$$$$$$.i. isairi nepenni $
+   $$$$$$$.i. isairi nepenni $$$$
+   $$$$$$aris de indathar do dial
+
+
+Model 3: n3pad_2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Buffer: 3 pre-characters
+Padding: Full
 """
 
