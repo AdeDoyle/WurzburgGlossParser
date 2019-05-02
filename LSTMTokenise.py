@@ -210,7 +210,7 @@ model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=200, verbose=2)
+model.fit(x_train, y_train, epochs=1000, verbose=2)
 print("Created Model...")
 
 
@@ -351,6 +351,6 @@ Buffer: 5 pre-characters
 Padding: Min
 
    Epoch 1/1000
-   
+   - 23s - loss: 2.0469 - acc: 0.4085
 """
 
