@@ -24,7 +24,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 3
+pre_characters = 5
 print("Set training parameters...")
 
 
@@ -62,11 +62,11 @@ def encode(string_list):
     return num_list
 
 
-# Encode all glosses using mapping (for use with full-padding)
-x_train = encode(x_train)
-x_test = encode(x_test)
-y_test = encode(y_test)
-print("Encoded training and test data for padding...")
+# # Encode all glosses using mapping (for use with full-padding)
+# x_train = encode(x_train)
+# x_test = encode(x_test)
+# y_test = encode(y_test)
+# print("Encoded training and test data for padding...")
 
 
 def decode(numstring_list):
@@ -98,25 +98,25 @@ def min_pad(string_list):
     return prechar_list
 
 
-# Pad all glosses to same length (for use with full-padding)
-x_train = pad(x_train)
-x_test = pad(x_test)
-y_test = pad(y_test)
-print("Padded training and test data...")
-
-
-# Decode all padded glosses to be sequenced (for use with full-padding)
-x_train = decode(x_train)
-x_test = decode(x_test)
-y_test = decode(y_test)
-print("Decoded padded training and test data...")
-
-
-# # Pad all glosses only with set number of pre-characters (for use with minimal-padding)
-# x_train = min_pad(x_train)
-# x_test = min_pad(x_test)
-# y_test = min_pad(y_test)
+# # Pad all glosses to same length (for use with full-padding)
+# x_train = pad(x_train)
+# x_test = pad(x_test)
+# y_test = pad(y_test)
 # print("Padded training and test data...")
+
+
+# # Decode all padded glosses to be sequenced (for use with full-padding)
+# x_train = decode(x_train)
+# x_test = decode(x_test)
+# y_test = decode(y_test)
+# print("Decoded padded training and test data...")
+
+
+# Pad all glosses only with set number of pre-characters (for use with minimal-padding)
+x_train = min_pad(x_train)
+x_test = min_pad(x_test)
+y_test = min_pad(y_test)
+print("Padded training and test data...")
 
 
 def sequence(string_list):
@@ -204,19 +204,18 @@ def vec_decode(string_list):
 
 # Define model
 model = Sequential()
-model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+# model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
 model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=1000, verbose=2)
+model.fit(x_train, y_train, epochs=200, verbose=2)
 print("Created Model...")
 
 
 # Save the model
-# model.save('n3_Tokeniser.h5')  # 1 Hidden Layer / Name model
-model.save('n10_2HLTokeniser.h5')  # 2 Hidden Layers / Name model
+model.save('n5_Tokeniser.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
 print("Saved Model...")
@@ -224,7 +223,6 @@ print("Saved Model...")
 
 # # Load the model
 # model = load_model('n3_Tokeniser.h5')  # 1 Hidden Layer
-# # model = load_model('n3_2HLTokeniser.h5')  # 2 Hidden Layers
 # # Load the mapping
 # chardict = pickle.load(open('char_mapping.pkl', 'rb'))
 
@@ -260,11 +258,11 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 
 
 # test 1
-print(generate_seq(model, chardict, pre_characters, '$$$$$$$$$$', 20))
+print(generate_seq(model, chardict, pre_characters, '$$$$$', 20))
 # test 2
-print(generate_seq(model, chardict, pre_characters, '$$$$$$$.i.', 20))
+print(generate_seq(model, chardict, pre_characters, '$$.i.', 20))
 # test 3
-print(generate_seq(model, chardict, pre_characters, '$$$$$$aris', 20))
+print(generate_seq(model, chardict, pre_characters, '$aris', 20))
 
 
 """
@@ -325,11 +323,34 @@ Padding: Min
    $$$$$$aris de indathar do dial
 
 
-Model 3: n3pad_2HLTokeniser.h5
+Model 4: n3pad_2HLTokeniser.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
 Buffer: 3 pre-characters
 Padding: Full
+
+   Epoch 1/200
+    - 229s - loss: 0.2300 - acc: 0.9354
+   Epoch 200/200
+    Epoch 200/200
+    - 221s - loss: 0.1727 - acc: 0.9488
+
+   Time elapsed: 12.41259190135532 hr
+
+   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+   $$$$$$$.i. is $$$$$$$$$$$$$$$$
+   $$$$$$arist $$$$$$$$$$$$$$$$$$
+
+
+Model 5: n5_Tokeniser.h5
+
+One Hidden Layer
+LSTM cells: 40
+Buffer: 5 pre-characters
+Padding: Min
+
+   Epoch 1/1000
+   
 """
 
