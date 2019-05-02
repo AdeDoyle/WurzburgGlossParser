@@ -223,8 +223,8 @@ print("Saved Model...")
 
 
 # # Load the model
-# model = load_model('Tokeniser.h')  # 1 Hidden Layer
-# # model = load_model('2HLTokeniser.h')  # 2 Hidden Layers
+# model = load_model('n3_Tokeniser.h5')  # 1 Hidden Layer
+# # model = load_model('n3_2HLTokeniser.h5')  # 2 Hidden Layers
 # # Load the mapping
 # chardict = pickle.load(open('char_mapping.pkl', 'rb'))
 
