@@ -1,4 +1,4 @@
-"""Level 2, 2, 1, 2"""
+"""Level 1, 2, 2, 1, 2"""
 
 from RemoveNewlines import remove_newlines, get_pages, get_section, clear_tags, order_glosses, remove_brackets,\
     remove_glossnums
@@ -6,6 +6,67 @@ from RemoveLatin import rem_lat
 from RemovePunctuation import rempunc_tok
 from OpenDocx import get_text
 from SaveXlsx import save_xlsx
+from keras.models import load_model
+import pickle
+import re
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
+
+
+mod1 = "n3_Tokeniser.h5"
+mod2 = "n3_2HLTokeniser.h5"
+mod3 = "n10_2HLTokeniser.h5"
+
+
+def tokenise(model, intext):
+    """Takes a trained language model and a text, returns the text tokenised as per the language model"""
+    mod = load_model(model)
+    buffer = 0
+    buffpat = re.compile(r'n\d{1,2}_')
+    buffpatitir = buffpat.finditer(model)
+    for buff in buffpatitir:
+        buffer = int(buff.group()[1:-1])
+    buffer_text = buffer * "$"
+    text = buffer_text + intext
+    mapping = pickle.load(open('char_mapping.pkl', 'rb'))
+    reverse = {i: c for c, i in mapping.items()}
+    letters = [i for i in intext]
+    outlist = []
+    for i in range(len(text) - buffer):
+        let = text[buffer]
+        text_chunk = text[:buffer]
+        outlist_text = "".join(outlist)
+        # if there are enough letters in the outlist to make predictions from
+        # take the chunk of letters to predict from from the outlist
+        if buffer <= len(outlist):
+            text_chunk = outlist_text[-buffer:]
+        # if there aren't enough letters in the outlist to make predictions from yet
+        # combine what's in the outlist with what's in the text
+        else:
+            text_chunk = text_chunk[:buffer - (len(outlist))] + outlist_text
+        # if the letter were trying to predict isn't a space in the text
+        # predict a character
+        if let != " ":
+            encoded = [mapping[char] for char in text_chunk]
+            encoded = pad_sequences([encoded], maxlen=buffer, truncating='pre')
+            encoded = to_categorical(encoded, num_classes=len(mapping))
+            pred = mod.predict_classes(encoded, verbose=0)[0]
+            # if the prediction is not a space
+            # just add the letter we were trying to predict to the outlist
+            if pred != 1:
+                outlist.append(let)
+            # if the prediction is a space
+            # add a space to the outlist followed by the letter that was in the text
+            else:
+                outlist.append(" " + let)
+        # if the letter we're trying to predict is a space in the text
+        # just append a space to the outlist
+        else:
+            outlist.append(" ")
+        text = text[1:]
+    outtext = "".join(outlist)
+    # outtext = " ".join(outtext.split("  "))
+    return outtext
 
 
 def space_tokenise(string, puncfilter=False, puncexcept=[]):
@@ -61,6 +122,21 @@ def top_toks(string, occurrences=0):
             toknum += 1
             orderedtoklist.append([toknum, i[0], i[1]])
     return orderedtoklist
+
+
+# print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print()
+
+
+# testlists = pickle.load(open('toktest.pkl', 'rb'))
+# x_test = testlists[0]
+# y_test = testlists[1]
+# for text_no in range(len(x_test)):
+#     print(x_test[text_no])
+#     print(tokenise(mod1, x_test[text_no]))
+#     print(y_test[text_no] + "\n")
 
 
 # glosses = remove_glossnums(remove_brackets(
