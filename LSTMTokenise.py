@@ -204,7 +204,7 @@ def vec_decode(string_list):
 
 # Define model
 model = Sequential()
-# model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
 model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
@@ -215,7 +215,7 @@ print("Created Model...")
 
 
 # Save the model
-model.save('n5_Tokeniser.h5')  # Name model
+model.save('n5_2HLTokeniser.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
 print("Saved Model...")
@@ -270,6 +270,7 @@ Model 1: n3_Tokeniser.h5
 
 One Hidden Layer
 LSTM cells: 40
+Epochs: 1000
 Buffer: 3 pre-characters
 Padding: Min
 
@@ -289,6 +290,7 @@ Model 2: n3_2HLTokeniser.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
+Epochs: 1000
 Buffer: 3 pre-characters
 Padding: Min
 
@@ -308,6 +310,7 @@ Model 3: n10_2HLTokeniser.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
+Epochs: 1000
 Buffer: 10 pre-characters
 Padding: Min
 
@@ -327,6 +330,7 @@ Model 4: n3pad_2HLTokeniser.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
+Epochs: 200
 Buffer: 3 pre-characters
 Padding: Full
 
@@ -343,14 +347,44 @@ Padding: Full
    $$$$$$arist $$$$$$$$$$$$$$$$$$
 
 
+Model 4.1: n3pad_2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Epochs: 1000
+Buffer: 3 pre-characters
+Padding: Full
+
+
 Model 5: n5_Tokeniser.h5
 
 One Hidden Layer
 LSTM cells: 40
+Epochs: 1000
 Buffer: 5 pre-characters
 Padding: Min
 
    Epoch 1/1000
    - 23s - loss: 2.0469 - acc: 0.4085
+   Epoch 1000/1000
+    - 21s - loss: 1.3184 - acc: 0.6026
+
+   Time elapsed: 6.014215100871192 hr
+
+   $$$$$.i. ished and $$$$$.
+   $$.i. ished and $$$$$.i.
+   $arisaib $$$$$.i. ished a
+
+
+Model 6: n5_2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Epochs: 1000
+Buffer: 5 pre-characters
+Padding: Min
+
+   Epoch 1/1000
+    - 39s - loss: 2.1102 - acc: 0.3938
 """
 
