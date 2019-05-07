@@ -1,0 +1,164 @@
+import time
+from OpenDocx import get_text
+import pickle
+from PrepareHandContent import remove_non_glosses
+import numpy as np
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
+from keras.models import Sequential
+from keras.layers import LSTM
+from keras.layers import Dense
+from keras.models import load_model
+
+
+start_time = time.time()
+
+
+def time_elapsed(sec):
+    """Calculates time to train model"""
+    if sec < 60:
+        return str(sec) + " sec"
+    elif sec < (60 * 60):
+        return str(sec / 60) + " min"
+    else:
+        return str(sec / (60 * 60)) + " hr"
+
+
+# Set how many characters the model should look at before predicting an upcoming character
+pre_characters = 5
+print("Set training parameters...")
+
+
+# Import and clean Táin Bó Fraích
+tbf = " ".join((get_text("TBF_cleaned")).split("\n"))
+while "  " in tbf:
+    tbf = " ".join(tbf.split("  "))
+# Import test and train sets for character mapping
+train_in = open("toktrain.pkl", "rb")
+train_set = pickle.load(train_in)
+test_in = open("toktest.pkl", "rb")
+test_set = pickle.load(test_in)
+x_train = remove_non_glosses(train_set)
+x_test, y_test = test_set[0], test_set[1]
+print("Loaded Táin Bó Fraích, training, and test data...")
+
+
+# Combine all test and train sets into one list for later operations
+all_testtrain = [tbf] + x_train + x_test + y_test
+
+
+# Maps all characters in both sets
+chars = sorted(list(set("".join(all_testtrain))))
+chardict = dict((c, i + 1) for i, c in enumerate(chars))
+chardict["$"] = 0
+vocab_size = len(chardict)
+print('    No. of characters: %d' % vocab_size)
+rchardict = dict((i + 1, c) for i, c in enumerate(chars))
+rchardict[0] = "$"
+print("Mapped Characters...")
+
+
+def encode(string_list):
+    """Encodes a list of glosses using mapping"""
+    num_list = list()
+    for plain_string in string_list:
+        encoded_string = [chardict[char] for char in plain_string]
+        num_list.append(encoded_string)
+    return num_list
+
+
+def sequence(string_list):
+    """Organises gloss content into sequences"""
+    one_liner = " ".join(string_list)
+    sequences = list()
+    for i in range(pre_characters, len(one_liner)):
+        # select sequence of tokens
+        seq = one_liner[i - pre_characters: i + 1]
+        # store this seq
+        sequences.append(seq)
+    print('    Total Sequences for {0}: {1}'.format(seq_name, len(sequences)))
+    return sequences
+
+
+# Organize into sequences
+seq_name = "training"
+x_train = sequence([tbf])
+print("Organised Táin Bó Fraích into sequences...")
+
+
+# Encode all glosses using mapping (for use with padding)
+x_train = encode(x_train)
+print("Encoded Táin Bó Fraích...")
+
+
+# Separate training into input and output, and one hot encode all training sequences
+sequences = np.array(x_train)
+x_train, y_train = sequences[:, : - 1], sequences[:, - 1]
+sequences = [to_categorical(x, num_classes=vocab_size) for x in x_train]
+x_train = np.array(sequences)
+y_train = to_categorical(y_train, num_classes=vocab_size)
+print("One Hot encoded Táin Bó Fraích...")
+
+
+# Define model
+model = Sequential()
+model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
+model.add(Dense(vocab_size, activation='softmax'))
+print(model.summary())
+# Compile model
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(x_train, y_train, epochs=1000, verbose=2)
+print("Created Model...")
+
+
+# Save the model
+model.save('TBFn5_2HLTokeniser.h5')  # Name model
+# # Save the mapping
+pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
+print("Saved Model...")
+
+
+# # Load the model
+# model = load_model('n3_Tokeniser.h5')  # 1 Hidden Layer
+# # Load the mapping
+# chardict = pickle.load(open('char_mapping.pkl', 'rb'))
+
+
+end_time = time.time()
+seconds_elapsed = end_time - start_time
+print("Time elapsed: " + time_elapsed(seconds_elapsed))
+
+
+# Generate a sequence of characters with a language model
+def generate_seq(model, mapping, seq_length, seed_text, n_chars):
+    in_text = seed_text
+    # Generate a fixed number of characters
+    for _ in range(n_chars):
+        # Encode the characters as integers
+        encoded = [mapping[char] for char in in_text]
+        # Truncate sequences to a fixed length
+        encoded = pad_sequences([encoded], maxlen=seq_length, truncating='pre')
+        # One hot encode
+        encoded = to_categorical(encoded, num_classes=len(mapping))
+        # encoded = encoded.reshape(1, encoded.shape[0], encoded.shape[1])  # Causes shaping error, comment out
+        # Predict character
+        yhat = model.predict_classes(encoded, verbose=0)
+        # Reverse map integer to character
+        out_char = ''
+        for char, index in mapping.items():
+            if index == yhat:
+                out_char = char
+                break
+        # Append to input
+        in_text += char
+    return in_text
+
+
+# test 1
+print(generate_seq(model, chardict, pre_characters, '$$$$$', 20))
+# test 2
+print(generate_seq(model, chardict, pre_characters, '$$.i.', 20))
+# test 3
+print(generate_seq(model, chardict, pre_characters, '$aris', 20))
+
