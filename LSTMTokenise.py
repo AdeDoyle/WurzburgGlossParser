@@ -7,6 +7,7 @@ from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import LSTM
 from keras.layers import Dense
+from tensorflow.python.keras.callbacks import TensorBoard
 from keras.models import load_model
 
 
@@ -208,9 +209,11 @@ model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train
 model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
+# Log the model
+tb = TensorBoard(log_dir="logs/{}".format(time.time()))
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=1000, verbose=2)
+model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 

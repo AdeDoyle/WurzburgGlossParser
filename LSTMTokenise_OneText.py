@@ -109,9 +109,9 @@ print("One Hot encoded {}...".format(text_name))
 # Define model
 model = Sequential()
 model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
-# model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-# model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))
+model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
+model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
@@ -123,7 +123,7 @@ print("Created Model...")
 
 
 # Save the model
-model.save('n3_TBFTokeniser.h5')  # Name model
+model.save('n3_TBF4HLTokeniser.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
 print("Saved Model...")
@@ -250,10 +250,29 @@ Buffer: 3 pre-characters
    $ariss and a mbrat in tai
 
 
-Model 2: n3_TBF2HLTokeniser.h5
+Model 5: n3_TBF2HLTokeniser.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
+Epochs: 1000
+Buffer: 3 pre-characters
+
+   Epoch 1/1000
+    - 4s - loss: 2.9466 - acc: 0.1849
+   Epoch 1000/1000
+    - 3s - loss: 1.3057 - acc: 0.5030
+
+   Time elapsed: 52.01483686765035 min
+
+   $$$$$acht na mbréi do chu
+   $$.i. mór ⁊ arggaib argga
+   $arissin tair arggaib arg
+
+
+Model 6: n3_TBF4HLTokeniser.h5
+
+Five Hidden Layers
+LSTM cells: 40 x 40 x 27 x 27
 Epochs: 1000
 Buffer: 3 pre-characters
 
@@ -263,5 +282,7 @@ Buffer: 3 pre-characters
     
 
    Time elapsed: 
+
+
 """
 
