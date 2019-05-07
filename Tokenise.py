@@ -124,13 +124,20 @@ def top_toks(string, occurrences=0):
     return orderedtoklist
 
 
-mod1 = "n3_Tokeniser.h5"
+mod1 = "n3_1HLTokeniser.h5"
 mod2 = "n3_2HLTokeniser.h5"
 mod3 = "n10_2HLTokeniser.h5"
-mod4_200 = "n3pad_2HLTokeniser.h5"
-mod4 = "n3pad_2HLTokeniserV2.h5"
-mod5 = "n5_Tokeniser.h5"
+mod4 = "n3pad_2HLTokeniser.h5"
+mod4_200 = "n3pad_2HLTokeniserV2.h5"
+mod5 = "n5_1HLTokeniser.h5"
 mod6 = "n5_2HLTokeniser.h5"
+
+TBFmod1 = "n3_TBF1HLTokeniser.h5"
+TBFmod2 = "n3_TBF2HLTokeniser.h5"
+TBFmod3 = "n3_TBF4HLTokeniser.h5"
+TBFmod4 = "n5_TBF1HLTokeniser.h5"
+TBFmod5 = "n5_TBF2HLTokeniser.h5"
+TBFmod6 = "n5_TBF4HLTokeniser.h5"
 
 
 # print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
@@ -139,6 +146,14 @@ mod6 = "n5_2HLTokeniser.h5"
 # print(tokenise(mod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod4_200, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod6, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print()
+# print(tokenise(TBFmod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod6, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
 
 
