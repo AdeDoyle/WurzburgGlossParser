@@ -1,31 +1,31 @@
 """Level 1, 2, 2, 1, 2"""
 
+from keras.models import load_model
+import pickle
+import re
+from keras.preprocessing.sequence import pad_sequences
+from keras.utils import to_categorical
 from RemoveNewlines import remove_newlines, get_pages, get_section, clear_tags, order_glosses, remove_brackets,\
     remove_glossnums
 from RemoveLatin import rem_lat
 from RemovePunctuation import rempunc_tok
 from OpenDocx import get_text
 from SaveXlsx import save_xlsx
-from keras.models import load_model
-import pickle
-import re
-from keras.preprocessing.sequence import pad_sequences
-from keras.utils import to_categorical
-
-
-mod1 = "n3_Tokeniser.h5"
-mod2 = "n3_2HLTokeniser.h5"
-mod3 = "n10_2HLTokeniser.h5"
 
 
 def tokenise(model, intext):
     """Takes a trained language model and a text, returns the text tokenised as per the language model"""
     mod = load_model(model)
     buffer = 0
-    buffpat = re.compile(r'n\d{1,2}_')
+    buffpat = re.compile(r'n\d{1,2}(pad)?_')
     buffpatitir = buffpat.finditer(model)
     for buff in buffpatitir:
-        buffer = int(buff.group()[1:-1])
+        if "pad" in buff.group():
+            padbuff = buff.group()
+            buff = "".join(padbuff.split("pad"))
+            buffer = int(buff[1:-1])
+        else:
+            buffer = int(buff.group()[1:-1])
     buffer_text = buffer * "$"
     text = buffer_text + intext
     mapping = pickle.load(open('char_mapping.pkl', 'rb'))
@@ -124,9 +124,21 @@ def top_toks(string, occurrences=0):
     return orderedtoklist
 
 
+mod1 = "n3_Tokeniser.h5"
+mod2 = "n3_2HLTokeniser.h5"
+mod3 = "n10_2HLTokeniser.h5"
+mod4_200 = "n3pad_2HLTokeniser.h5"
+mod4 = "n3pad_2HLTokeniserV2.h5"
+mod5 = "n5_Tokeniser.h5"
+mod6 = "n5_2HLTokeniser.h5"
+
+
 # print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod4_200, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
 
 
