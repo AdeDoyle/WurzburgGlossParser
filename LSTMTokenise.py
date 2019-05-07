@@ -365,7 +365,7 @@ Buffer: 5 pre-characters
 Padding: Min
 
    Epoch 1/1000
-   - 23s - loss: 2.0469 - acc: 0.4085
+    - 23s - loss: 2.0469 - acc: 0.4085
    Epoch 1000/1000
     - 21s - loss: 1.3184 - acc: 0.6026
 

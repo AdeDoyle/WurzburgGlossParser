@@ -107,7 +107,7 @@ print("One Hot encoded {}...".format(text_name))
 
 # Define model
 model = Sequential()
-model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+# model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
 model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
@@ -118,9 +118,9 @@ print("Created Model...")
 
 
 # Save the model
-model.save('TBFn5_2HLTokeniser.h5')  # Name model
+model.save('n5_TBFTokeniser.h5')  # Name model
 # # Save the mapping
-pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
+# pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
 print("Saved Model...")
 
 
@@ -166,4 +166,40 @@ print(generate_seq(model, chardict, pre_characters, '$$$$$', 20))
 print(generate_seq(model, chardict, pre_characters, '$$.i.', 20))
 # test 3
 print(generate_seq(model, chardict, pre_characters, '$aris', 20))
+
+
+"""
+Model 1: n5_TBFTokeniser.h5
+
+One Hidden Layer
+LSTM cells: 40
+Epochs: 1000
+Buffer: 5 pre-characters
+
+   Epoch 1/1000
+    
+   Epoch 1000/1000
+    
+
+   Time elapsed:
+
+
+Model 2: n5_TBF2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Epochs: 1000
+Buffer: 5 pre-characters
+
+   Epoch 1/1000
+    - 5s - loss: 2.9282 - acc: 0.1839
+   Epoch 1000/1000
+    - 4s - loss: 0.5109 - acc: 0.7786
+
+   Time elapsed: 1.2472326714462705 hr
+
+   $$$$$.i. ished and $$$$$.
+   $$.i. ished and $$$$$.i.
+   $arisaib $$$$$.i. ished a
+"""
 
