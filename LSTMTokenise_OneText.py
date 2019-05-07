@@ -8,6 +8,7 @@ from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import LSTM
 from keras.layers import Dense
+from tensorflow.python.keras.callbacks import TensorBoard
 from keras.models import load_model
 
 
@@ -25,7 +26,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 5
+pre_characters = 3
 print("Set training parameters...")
 
 
@@ -108,24 +109,21 @@ print("One Hot encoded {}...".format(text_name))
 # Define model
 model = Sequential()
 model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))
-model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
-model.add(LSTM(18, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 5 Hidden Layers
-model.add(LSTM(12, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 6 Hidden Layers
-model.add(LSTM(8, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 7 Hidden Layers
-model.add(LSTM(6, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 8 Hidden Layers
-model.add(LSTM(4, input_shape=(x_train.shape[1], x_train.shape[2])))  # 9 Hidden Layers
+model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
+# model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
+# model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
+# Log the model
+tb = TensorBoard(log_dir="logs/{}".format(time.time()))
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=1000, verbose=2)
+model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 
 # Save the model
-model.save('n5_TBF9HLTokeniser.h5')  # Name model
+model.save('n3_TBFTokeniser.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
 print("Saved Model...")
@@ -233,12 +231,31 @@ Buffer: 5 pre-characters
    $ariscet nechach issa tec
 
 
-Model 4: n5_TBF9HLTokeniser.h5
+Model 4: n3_TBFTokeniser.h5
 
-Five Hidden Layers
-LSTM cells: 40 x 40 x 27 x 27 x 18 x 12 x 8 x 6 x 4
+One Hidden Layer
+LSTM cells: 40
 Epochs: 1000
-Buffer: 5 pre-characters
+Buffer: 3 pre-characters
+
+   Epoch 1/1000
+    - 2s - loss: 2.9394 - acc: 0.1838
+   Epoch 1000/1000
+    - 2s - loss: 1.3565 - acc: 0.5013
+
+   Time elapsed: 30.69184961716334 min
+
+   $$$$$aith co na mbrat in 
+   $$.i.ile thar sa in tair 
+   $ariss and a mbrat in tai
+
+
+Model 2: n3_TBF2HLTokeniser.h5
+
+Two Hidden Layers
+LSTM cells: 40 x 40
+Epochs: 1000
+Buffer: 3 pre-characters
 
    Epoch 1/1000
     
@@ -246,9 +263,5 @@ Buffer: 5 pre-characters
     
 
    Time elapsed: 
-
-
-
-
 """
 
