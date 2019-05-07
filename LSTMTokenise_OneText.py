@@ -110,7 +110,12 @@ model = Sequential()
 model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
 model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+model.add(LSTM(18, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 5 Hidden Layers
+model.add(LSTM(12, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 6 Hidden Layers
+model.add(LSTM(8, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 7 Hidden Layers
+model.add(LSTM(6, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 8 Hidden Layers
+model.add(LSTM(4, input_shape=(x_train.shape[1], x_train.shape[2])))  # 9 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Compile model
@@ -120,7 +125,7 @@ print("Created Model...")
 
 
 # Save the model
-model.save('n5_TBF4HLTokeniser.h5')  # Name model
+model.save('n5_TBF9HLTokeniser.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
 print("Saved Model...")
@@ -209,22 +214,41 @@ Buffer: 5 pre-characters
    $arisaib $$$$$.i. ished a
 
 
-Model 3: n5_TBF2HLTokeniser.h5
+Model 3: n5_TBF4HLTokeniser.h5
 
 Five Hidden Layers
-LSTM cells: 40 x 40 x 27 x27
+LSTM cells: 40 x 40 x 27 x 27
 Epochs: 1000
 Buffer: 5 pre-characters
 
    Epoch 1/1000
-    - 
+    - 10s - loss: 2.9596 - acc: 0.1832
    Epoch 1000/1000
-    - 
+    - 8s - loss: 0.5349 - acc: 0.7785
+
+   Time elapsed: 2.259919977254338 hr
+
+   $$$$$ is é dírimm athesc 
+   $$.i. conall cernach ara 
+   $ariscet nechach issa tec
+
+
+Model 4: n5_TBF9HLTokeniser.h5
+
+Five Hidden Layers
+LSTM cells: 40 x 40 x 27 x 27 x 18 x 12 x 8 x 6 x 4
+Epochs: 1000
+Buffer: 5 pre-characters
+
+   Epoch 1/1000
+    
+   Epoch 1000/1000
+    
 
    Time elapsed: 
 
-   
-   
-   
+
+
+
 """
 
