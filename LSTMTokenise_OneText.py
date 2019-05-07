@@ -108,10 +108,10 @@ print("One Hot encoded {}...".format(text_name))
 
 # Define model
 model = Sequential()
-model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))
-model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+# model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
+# model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
+# model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
@@ -122,17 +122,17 @@ model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 
-# Save the model
-model.save('n3_TBF4HLTokeniser.h5')  # Name model
+# # Save the model
+# model.save('n3_TBF4HLTokeniser.h5')  # Name model
 # # Save the mapping
-# pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))
-print("Saved Model...")
+# pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))  # Name mapping
+# print("Saved Model...")
 
 
 # # Load the model
-# model = load_model('n3_Tokeniser.h5')  # 1 Hidden Layer
+# model = load_model('n3_Tokeniser.h5')  # Model name
 # # Load the mapping
-# chardict = pickle.load(open('char_mapping.pkl', 'rb'))
+# chardict = pickle.load(open('char_mappingTBF.pkl', 'rb'))  # Mapping Name
 
 
 end_time = time.time()
@@ -277,12 +277,14 @@ Epochs: 1000
 Buffer: 3 pre-characters
 
    Epoch 1/1000
-    
+    - 7s - loss: 2.9666 - acc: 0.1829
    Epoch 1000/1000
-    
+    - 5s - loss: 1.3500 - acc: 0.5023
 
-   Time elapsed: 
+   Time elapsed: 1.520814772248268 hr
 
-
+   $$$$$ ⁊ a mbréib ar sin t
+   $$.i.eird a mbréib ar sin
+   $arisi in tair i mbréib a
 """
 
