@@ -220,12 +220,12 @@ print("Created Model...")
 # Save the model
 model.save('n5_2HLTokeniser.h5')  # Name model
 # # Save the mapping
-# pickle.dump(chardict, open('char_mapping.pkl', 'wb'))
+# pickle.dump(chardict, open('char_mapping.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
 
 
 # # Load the model
-# model = load_model('n3_Tokeniser.h5')  # 1 Hidden Layer
+# model = load_model('n3_Tokeniser.h5')
 # # Load the mapping
 # chardict = pickle.load(open('char_mapping.pkl', 'rb'))
 
@@ -269,7 +269,7 @@ print(generate_seq(model, chardict, pre_characters, '$aris', 20))
 
 
 """
-Model 1: n3_Tokeniser.h5
+Model 1: n3_1HLTokeniser.h5
 
 One Hidden Layer
 LSTM cells: 40
@@ -329,7 +329,7 @@ Padding: Min
    $$$$$$aris de indathar do dial
 
 
-Model 4: n3pad_2HLTokeniser.h5
+Model 4: n3pad_2HLTokeniserV2.h5
 
 Two Hidden Layers
 LSTM cells: 40 x 40
@@ -359,7 +359,7 @@ Buffer: 3 pre-characters
 Padding: Full
 
 
-Model 5: n5_Tokeniser.h5
+Model 5: n5_1HLTokeniser.h5
 
 One Hidden Layer
 LSTM cells: 40
@@ -389,5 +389,13 @@ Padding: Min
 
    Epoch 1/1000
     - 39s - loss: 2.1102 - acc: 0.3938
+       Epoch 1000/1000
+    - 35s - loss: 1.1575 - acc: 0.6449
+
+   Time elapsed: 9.68981124791834 hr
+
+   $$$$$.i. ished asrubart $
+   $$.i. ished asrubart $$$$
+   $aris*Latin* $$$$$.i. ish
 """
 
