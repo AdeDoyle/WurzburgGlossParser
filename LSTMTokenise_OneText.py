@@ -29,10 +29,15 @@ pre_characters = 5
 print("Set training parameters...")
 
 
-# Import and clean Táin Bó Fraích
-tbf = " ".join((get_text("TBF_cleaned")).split("\n"))
-while "  " in tbf:
-    tbf = " ".join(tbf.split("  "))
+# # Import the training set of glosses for use as the single training text
+# one_text_in = open("toktrain.pkl", "rb")
+# one_text = " ".join(pickle.load(one_text_in))
+# text_name = "Wb. Training Glosses"
+# Import and clean Táin Bó Fraích for use as the single training text
+one_text = " ".join((get_text("TBF_cleaned")).split("\n"))
+while "  " in one_text:
+    one_text = " ".join(one_text.split("  "))
+text_name = "Táin Bó Fraích"
 # Import test and train sets for character mapping
 train_in = open("toktrain.pkl", "rb")
 train_set = pickle.load(train_in)
@@ -40,11 +45,11 @@ test_in = open("toktest.pkl", "rb")
 test_set = pickle.load(test_in)
 x_train = remove_non_glosses(train_set)
 x_test, y_test = test_set[0], test_set[1]
-print("Loaded Táin Bó Fraích, training, and test data...")
+print("Loaded {}, training, and test data...".format(text_name))
 
 
 # Combine all test and train sets into one list for later operations
-all_testtrain = [tbf] + x_train + x_test + y_test
+all_testtrain = [one_text] + x_train + x_test + y_test
 
 
 # Maps all characters in both sets
@@ -82,13 +87,13 @@ def sequence(string_list):
 
 # Organize into sequences
 seq_name = "training"
-x_train = sequence([tbf])
-print("Organised Táin Bó Fraích into sequences...")
+x_train = sequence([one_text])
+print("Organised {} into sequences...".format(text_name))
 
 
 # Encode all glosses using mapping (for use with padding)
 x_train = encode(x_train)
-print("Encoded Táin Bó Fraích...")
+print("Encoded {}...".format(text_name))
 
 
 # Separate training into input and output, and one hot encode all training sequences
@@ -97,7 +102,7 @@ x_train, y_train = sequences[:, : - 1], sequences[:, - 1]
 sequences = [to_categorical(x, num_classes=vocab_size) for x in x_train]
 x_train = np.array(sequences)
 y_train = to_categorical(y_train, num_classes=vocab_size)
-print("One Hot encoded Táin Bó Fraích...")
+print("One Hot encoded {}...".format(text_name))
 
 
 # Define model
