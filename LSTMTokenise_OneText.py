@@ -26,7 +26,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 3
+pre_characters = 5
 print("Set training parameters...")
 
 
@@ -108,9 +108,9 @@ print("One Hot encoded {}...".format(text_name))
 
 # Define model
 model = Sequential()
-# model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
-# model.add(LSTM(27, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
+model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
+model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
 # model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
@@ -122,11 +122,11 @@ model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 
-# # Save the model
-# model.save('n3_TBF4HLTokeniser.h5')  # Name model
+# Save the model
+model.save('n5_TBF2HLTokeniserV2.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))  # Name mapping
-# print("Saved Model...")
+print("Saved Model...")
 
 
 # # Load the model
@@ -166,11 +166,11 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 
 
 # test 1
-print(generate_seq(model, chardict, pre_characters, '$$$$$', 20))
+print(generate_seq(model, chardict, pre_characters, 'biuus', 20))
 # test 2
-print(generate_seq(model, chardict, pre_characters, '$$.i.', 20))
+print(generate_seq(model, chardict, pre_characters, '.i. a', 20))
 # test 3
-print(generate_seq(model, chardict, pre_characters, '$aris', 20))
+print(generate_seq(model, chardict, pre_characters, 'arisd', 20))
 
 
 """
@@ -214,7 +214,7 @@ Buffer: 5 pre-characters
 
 Model 3: n5_TBF4HLTokeniser.h5
 
-Five Hidden Layers
+Four Hidden Layers
 LSTM cells: 40 x 40 x 27 x 27
 Epochs: 1000
 Buffer: 5 pre-characters
@@ -271,7 +271,7 @@ Buffer: 3 pre-characters
 
 Model 6: n3_TBF4HLTokeniser.h5
 
-Five Hidden Layers
+Four Hidden Layers
 LSTM cells: 40 x 40 x 27 x 27
 Epochs: 1000
 Buffer: 3 pre-characters
@@ -286,5 +286,60 @@ Buffer: 3 pre-characters
    $$$$$ ⁊ a mbréib ar sin t
    $$.i.eird a mbréib ar sin
    $arisi in tair i mbréib a
+
+
+Model 7: n5_TBF3HLTokeniser.h5
+
+Three Hidden Layers
+LSTM cells: 54 x 40 x 40
+Epochs: 1000
+Buffer: 5 pre-characters
+
+   Epoch 1/1000
+    - 8s - loss: 2.9379 - acc: 0.1830
+   Epoch 1000/1000
+    - 7s - loss: 0.4579 - acc: 0.7828
+
+   Time elapsed: 1.7887259469429653 hr
+
+   biuush bóinni for fír tha
+   .i. aní is maith ol sé do
+   arisd ⁊ tar mo ingen in d
+
+
+Model 8: n5_TBF2HLTokeniserV2.h5
+
+Two Hidden Layers
+LSTM cells: 54 x 54
+Epochs: 1000
+Buffer: 5 pre-characters
+
+   Epoch 1/1000
+    - 5s - loss: 2.9023 - acc: 0.1911
+   Epoch 1000/1000
+    - 5s - loss: 0.4501 - acc: 0.7795
+
+   Time elapsed: 1.2710270761118996 hr
+
+   biuus fodlid dún dia taba
+   .i. ataat téora oa dubgla
+   arisdi ra hétach documlát
+
+
+Model 9: n5_TBF3HLTokeniserV2.h5
+
+Three Hidden Layers
+LSTM cells: 54 x 54 x54
+Epochs: 1000
+Buffer: 5 pre-characters
+
+   Epoch 1/1000
+    
+   Epoch 1000/1000
+    
+
+   Time elapsed: 
+
+
 """
 
