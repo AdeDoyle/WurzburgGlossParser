@@ -123,7 +123,7 @@ print("Created Model...")
 
 
 # Save the model
-model.save('n5_TBF2HLTokeniserV2.h5')  # Name model
+model.save('n5_TBF3HLTokeniserV2.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
