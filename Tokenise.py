@@ -1,5 +1,6 @@
 """Level 1, 2, 2, 1, 2"""
 
+from functools import lru_cache
 from keras.models import load_model
 import pickle
 import re
@@ -13,6 +14,7 @@ from OpenDocx import get_text
 from SaveXlsx import save_xlsx
 
 
+@lru_cache(maxsize=500)
 def tokenise(model, intext):
     """Takes a trained language model and a text, returns the text tokenised as per the language model"""
     mod = load_model(model)
@@ -124,26 +126,26 @@ def top_toks(string, occurrences=0):
     return orderedtoklist
 
 
-mod1 = "n3_1HLTokeniser.h5"
-mod2 = "n3_2HLTokeniser.h5"
-mod3 = "n10_2HLTokeniser.h5"
-mod4 = "n3pad_2HLTokeniser.h5"
-mod4_200 = "n3pad_2HLTokeniserV2.h5"
-mod5 = "n5_1HLTokeniser.h5"
-mod6 = "n5_2HLTokeniser.h5"
-
-TBFmod1 = "n3_TBF1HLTokeniser.h5"
-TBFmod2 = "n3_TBF2HLTokeniser.h5"
-TBFmod3 = "n3_TBF4HLTokeniser.h5"
-TBFmod4 = "n5_TBF1HLTokeniser.h5"
-TBFmod5 = "n5_TBF2HLTokeniser.h5"
-TBFmod6 = "n5_TBF4HLTokeniser.h5"
-TBFmod7 = "n5_TBF3HLTokeniser.h5"
-TBFmod8 = "n5_TBF2HLTokeniserV2.h5"
-TBFmod9 = "n5_TBF3HLTokeniserV2.h5"
-TBFmod10 = "n5_TBF1HLTokeniserV2.h5"
-TBFmod11 = "n7_TBF1HLTokeniser.h5"
-TBFmod12 = "n3_TBF1HLTokeniserV2.h5"
+# mod1 = "n3_1HLTokeniser.h5"
+# mod2 = "n3_2HLTokeniser.h5"
+# mod3 = "n10_2HLTokeniser.h5"
+# mod4 = "n3pad_2HLTokeniser.h5"
+# mod4_200 = "n3pad_2HLTokeniserV2.h5"
+# mod5 = "n5_1HLTokeniser.h5"
+# mod6 = "n5_2HLTokeniser.h5"
+#
+# TBFmod1 = "n3_TBF1HLTokeniser.h5"
+# TBFmod2 = "n3_TBF2HLTokeniser.h5"
+# TBFmod3 = "n3_TBF4HLTokeniser.h5"
+# TBFmod4 = "n5_TBF1HLTokeniser.h5"
+# TBFmod5 = "n5_TBF2HLTokeniser.h5"
+# TBFmod6 = "n5_TBF4HLTokeniser.h5"
+# TBFmod7 = "n5_TBF3HLTokeniser.h5"
+# TBFmod8 = "n5_TBF2HLTokeniserV2.h5"
+# TBFmod9 = "n5_TBF3HLTokeniserV2.h5"
+# TBFmod10 = "n5_TBF1HLTokeniserV2.h5"
+# TBFmod11 = "n7_TBF1HLTokeniser.h5"
+# TBFmod12 = "n3_TBF1HLTokeniserV2.h5"
 
 
 # print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
