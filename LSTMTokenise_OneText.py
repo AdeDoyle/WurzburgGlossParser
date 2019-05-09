@@ -26,7 +26,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 3
+pre_characters = 7
 print("Set training parameters...")
 
 
@@ -108,10 +108,10 @@ print("One Hot encoded {}...".format(text_name))
 
 # Define model
 model = Sequential()
-# model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
-# model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-# model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
+model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
+model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
@@ -122,8 +122,8 @@ model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 
-# Save the model
-model.save('n3_TBF1HLTokeniserV2.h5')  # Name model
+# # Save the model
+# model.save('mod.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
@@ -166,11 +166,11 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 
 
 # test 1
-print(generate_seq(model, chardict, pre_characters, 'biu', 20))
+print(generate_seq(model, chardict, pre_characters, 'biuu sa', 20))
 # test 2
-print(generate_seq(model, chardict, pre_characters, '.i.', 20))
+print(generate_seq(model, chardict, pre_characters, '.i. biu', 20))
 # test 3
-print(generate_seq(model, chardict, pre_characters, 'ari', 20))
+print(generate_seq(model, chardict, pre_characters, 'ar is d', 20))
 
 
 """
@@ -391,12 +391,14 @@ Epochs: 1000
 Buffer: 3 pre-characters
 
    Epoch 1/1000
-    
+    - 3s - loss: 2.9066 - acc: 0.1946
    Epoch 1000/1000
-    
+    - 2s - loss: 1.3168 - acc: 0.4993
 
-   Time elapsed:
+   Time elapsed: 31.036637814839683 min
 
-
+   biur issin tair issin t
+   .i. tair issin tair iss
+   arissin tair issin tair
 """
 
