@@ -138,6 +138,12 @@ TBFmod3 = "n3_TBF4HLTokeniser.h5"
 TBFmod4 = "n5_TBF1HLTokeniser.h5"
 TBFmod5 = "n5_TBF2HLTokeniser.h5"
 TBFmod6 = "n5_TBF4HLTokeniser.h5"
+TBFmod7 = "n5_TBF3HLTokeniser.h5"
+TBFmod8 = "n5_TBF2HLTokeniserV2.h5"
+TBFmod9 = "n5_TBF3HLTokeniserV2.h5"
+TBFmod10 = "n5_TBF1HLTokeniserV2.h5"
+TBFmod11 = "n7_TBF1HLTokeniser.h5"
+TBFmod12 = "n3_TBF1HLTokeniserV2.h5"
 
 
 # print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
@@ -154,6 +160,12 @@ TBFmod6 = "n5_TBF4HLTokeniser.h5"
 # print(tokenise(TBFmod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(TBFmod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(TBFmod6, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod7, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod8, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod9, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod10, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod11, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(TBFmod12, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
 
 
