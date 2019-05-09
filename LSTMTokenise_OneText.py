@@ -26,7 +26,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 7
+pre_characters = 3
 print("Set training parameters...")
 
 
@@ -108,10 +108,10 @@ print("One Hot encoded {}...".format(text_name))
 
 # Define model
 model = Sequential()
-model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
-model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+# model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
+# model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
 model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+# model.add(LSTM(27, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
@@ -123,7 +123,7 @@ print("Created Model...")
 
 
 # Save the model
-model.save('n7_TBF1HLTokeniser.h5')  # Name model
+model.save('n3_TBF1HLTokeniserV2.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
@@ -166,11 +166,11 @@ def generate_seq(model, mapping, seq_length, seed_text, n_chars):
 
 
 # test 1
-print(generate_seq(model, chardict, pre_characters, 'biuus', 20))
+print(generate_seq(model, chardict, pre_characters, 'biu', 20))
 # test 2
-print(generate_seq(model, chardict, pre_characters, '.i. a', 20))
+print(generate_seq(model, chardict, pre_characters, '.i.', 20))
 # test 3
-print(generate_seq(model, chardict, pre_characters, 'arisd', 20))
+print(generate_seq(model, chardict, pre_characters, 'ari', 20))
 
 
 """
@@ -353,9 +353,9 @@ Epochs: 1000
 Buffer: 5 pre-characters
 
    Epoch 1/1000
-     3s - loss: 2.9010 - acc: 0.1840
+    - 3s - loss: 2.9010 - acc: 0.1840
    Epoch 1000/1000
-     3s - loss: 0.5609 - acc: 0.7711
+    - 3s - loss: 0.5609 - acc: 0.7711
 
    Time elapsed: 43.8698596517245 min
 
@@ -372,11 +372,30 @@ Epochs: 1000
 Buffer: 7 pre-characters
 
    Epoch 1/1000
-     
+    - 4s - loss: 2.8799 - acc: 0.1878
    Epoch 1000/1000
-     
+    - 3s - loss: 0.3248 - acc: 0.8892
 
-   Time elapsed: 
+   Time elapsed: 57.28009958267212 min
+
+   $$biuuso tri ⁊ fodmer ol ss
+   $$.i. argdait co suidi arda
+   $$arisde boí lacmait frie c
+
+
+Model 12: n3_TBF1HLTokeniserV2.h5
+
+One Hidden Layer
+LSTM cells: 54
+Epochs: 1000
+Buffer: 3 pre-characters
+
+   Epoch 1/1000
+    
+   Epoch 1000/1000
+    
+
+   Time elapsed:
 
 
 """
