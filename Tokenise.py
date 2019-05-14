@@ -15,10 +15,9 @@ from SaveXlsx import save_xlsx
 
 
 @lru_cache(maxsize=500)
-def tokenise(model, intext):
+def tokenise(model, intext, buffer=0):
     """Takes a trained language model and a text, returns the text tokenised as per the language model"""
     mod = load_model(model)
-    buffer = 0
     buffpat = re.compile(r'n\d{1,2}(pad)?_')
     buffpatitir = buffpat.finditer(model)
     for buff in buffpatitir:

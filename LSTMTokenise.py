@@ -205,20 +205,20 @@ def vec_decode(string_list):
 
 # Define model
 model = Sequential()
-model.add(LSTM(40, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(40, input_shape=(x_train.shape[1], x_train.shape[2])))
+model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
-tb = TensorBoard(log_dir="logs/{}".format(time.time()))
+tb = TensorBoard(log_dir="logs/{}".format("n5_54x54-24"))  # Name log file
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
+model.fit(x_train, y_train, epochs=24, validation_split=0.1, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 
 # Save the model
-model.save('n5_2HLTokeniser.h5')  # Name model
+model.save('n5_54x54-24.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mapping.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
