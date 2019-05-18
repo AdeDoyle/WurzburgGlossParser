@@ -1,6 +1,6 @@
 import pickle
 from functools import lru_cache
-from Tokenise import tokenise as tz
+from Tokenise import tokenise as tz, rev_tokenise as rtz, tokenise_combine as tzc
 from nltk import edit_distance as ed
 
 
@@ -43,11 +43,16 @@ from nltk import edit_distance as ed
 
 
 allmods = []
-# for size in [54]:
-#     for buff in [10]:
-#         NAME = "n{}_{}x{}-24.h5".format(buff, size, size)
-#         allmods.append(NAME)
+for size in [54]:
+    for buff in [5, 7, 10]:
+        NAME = "n{}_{}x{}-24.h5".format(buff, size, size)
+        allmods.append(NAME)
 
+allrmods = []
+for size in [54]:
+    for buff in [5, 7, 10]:
+        NAME = "rev-n{}_{}x{}-24.h5".format(buff, size, size)
+        allrmods.append(NAME)
 
 test_in = open("toktest.pkl", "rb")
 test_set = pickle.load(test_in)
@@ -83,13 +88,65 @@ def test_tzmod(mod):
     return avg_edist
 
 
+def test_rtzmod(mod):
+    edit_dists = []
+    count = 0
+    for x_pos in range(len(x_test)):
+        count += 1
+        x = x_test[x_pos]
+        y = clean_y(y_test[x_pos])
+        x_toks = rtz(mod, x)
+        e_dist = ed(y, x_toks)
+        edit_dists.append(e_dist)
+        # print(x)
+        # print(x_toks)
+        # print(y)
+        # print("Gloss {}/41: Edit Distance = {}".format(str(count), str(e_dist)))
+    avg_edist = sum(edit_dists) / len(edit_dists)
+    return avg_edist
+
+
+def test_tzcmod(mod, rmod):
+    edit_dists = []
+    count = 0
+    for x_pos in range(len(x_test)):
+        count += 1
+        x = x_test[x_pos]
+        y = clean_y(y_test[x_pos])
+        x_toks = tzc(mod, rmod, x)
+        e_dist = ed(y, x_toks)
+        edit_dists.append(e_dist)
+        # print(x)
+        # print(x_toks)
+        # print(y)
+        # print("Gloss {}/41: Edit Distance = {}".format(str(count), str(e_dist)))
+    avg_edist = sum(edit_dists) / len(edit_dists)
+    return avg_edist
+
+
+# modscores = []
+# for mod in allmods:
+#     print(mod)
+#     score = test_tzmod(mod)
+#     print("    {}".format(score))
+#     modscores.append(score)
+#
+# modscores = []
+# for mod in allrmods:
+#     print(mod)
+#     score = test_rtzmod(mod)
+#     print("    {}".format(score))
+#     modscores.append(score)
+
 modscores = []
 for mod in allmods:
-    print(mod)
-    score = test_tzmod(mod)
-    print("    {}".format(score))
-    modscores.append(score)
+    for rmod in allrmods:
+        print("Forward model: {}\nReverse model: {}".format(mod, rmod))
+        score = test_tzcmod(mod, rmod)
+        print("    {}".format(score))
+        modscores.append(score)
+
 
 best_score = min(modscores)
-print("Best Model: {}".format(allmods[modscores.index(best_score)]))
+print("Best Model:\n    {}\n    {}".format(allmods[modscores.index(best_score)], allrmods[modscores.index(best_score)]))
 

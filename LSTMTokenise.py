@@ -25,7 +25,7 @@ def time_elapsed(sec):
 
 
 # Set how many characters the model should look at before predicting an upcoming character
-pre_characters = 5
+pre_characters = 10
 print("Set training parameters...")
 
 
@@ -35,6 +35,11 @@ train_set = pickle.load(train_in)
 test_in = open("toktest.pkl", "rb")
 test_set = pickle.load(test_in)
 x_train = remove_non_glosses(train_set)
+temp = []
+for x_trainer in x_train[::-1]:  # Reverse x_train for reverse models
+    new_trainer = x_trainer[::-1]
+    temp.append(new_trainer)
+x_train = temp
 x_test, y_test = test_set[0], test_set[1]
 print("Loaded training and test data...")
 
@@ -210,7 +215,7 @@ model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
-tb = TensorBoard(log_dir="logs/{}".format("n5_54x54-24"))  # Name log file
+tb = TensorBoard(log_dir="logs/{}".format("rev-n10_54x54-24"))  # Name log file
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.fit(x_train, y_train, epochs=24, validation_split=0.1, verbose=2, callbacks=[tb])
@@ -218,7 +223,7 @@ print("Created Model...")
 
 
 # Save the model
-model.save('n5_54x54-24.h5')  # Name model
+model.save('rev-n10_54x54-24.h5')  # Name model
 # # Save the mapping
 # pickle.dump(chardict, open('char_mapping.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
@@ -265,7 +270,7 @@ print(generate_seq(model, chardict, pre_characters, '$$$$$', 20))
 # test 2
 print(generate_seq(model, chardict, pre_characters, '$$.i.', 20))
 # test 3
-print(generate_seq(model, chardict, pre_characters, '$aris', 20))
+print(generate_seq(model, chardict, pre_characters, '$sira', 20))
 
 
 """

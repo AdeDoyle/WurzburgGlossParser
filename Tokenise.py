@@ -30,8 +30,140 @@ def tokenise(model, intext, buffer=0):
     buffer_text = buffer * "$"
     text = buffer_text + intext
     mapping = pickle.load(open('char_mapping.pkl', 'rb'))
-    reverse = {i: c for c, i in mapping.items()}
-    letters = [i for i in intext]
+    outlist = []
+    for i in range(len(text) - buffer):
+        let = text[buffer]
+        text_chunk = text[:buffer]
+        outlist_text = "".join(outlist)
+        # if there are enough letters in the outlist to make predictions from
+        # take the chunk of letters to predict from from the outlist
+        if buffer <= len(outlist):
+            text_chunk = outlist_text[-buffer:]
+        # if there aren't enough letters in the outlist to make predictions from yet
+        # combine what's in the outlist with what's in the text
+        else:
+            text_chunk = text_chunk[:buffer - (len(outlist))] + outlist_text
+        encoded = [mapping[char] for char in text_chunk]
+        encoded = pad_sequences([encoded], maxlen=buffer, truncating='pre')
+        encoded = to_categorical(encoded, num_classes=len(mapping))
+        pred = mod.predict_classes(encoded, verbose=0)[0]
+        # if the letter were trying to predict isn't a space in the text
+        # predict a character
+        if let != " ":
+            # if the prediction is not a space
+            # just add the letter we were trying to predict to the outlist
+            if pred != 1:
+                outlist.append(let)
+            # if the prediction is a space
+            # add a space to the outlist followed by the letter that was in the text
+            else:
+                outlist.append(" " + let)
+        # if the letter we're trying to predict is a space in the text
+        # just append a space to the outlist
+        else:
+            outlist.append(" ")
+        text = text[1:]
+    outtext = "".join(outlist)
+    # outtext = " ".join(outtext.split("  "))
+    return outtext
+
+
+@lru_cache(maxsize=500)
+def rev_tokenise(model, intext, buffer=0):
+    """Takes a trained language model and a text, returns the text tokenised as per the language model"""
+    mod = load_model(model)
+    buffpat = re.compile(r'n\d{1,2}(pad)?_')
+    buffpatitir = buffpat.finditer(model)
+    for buff in buffpatitir:
+        if "pad" in buff.group():
+            padbuff = buff.group()
+            buff = "".join(padbuff.split("pad"))
+            buffer = int(buff[1:-1])
+        else:
+            buffer = int(buff.group()[1:-1])
+    buffer_text = buffer * "$"
+    text = buffer_text + intext[::-1]
+    mapping = pickle.load(open('char_mapping.pkl', 'rb'))
+    outlist = []
+    for i in range(len(text) - buffer):
+        let = text[buffer]
+        text_chunk = text[:buffer]
+        outlist_text = "".join(outlist)
+        # if there are enough letters in the outlist to make predictions from
+        # take the chunk of letters to predict from from the outlist
+        if buffer <= len(outlist):
+            text_chunk = outlist_text[-buffer:]
+        # if there aren't enough letters in the outlist to make predictions from yet
+        # combine what's in the outlist with what's in the text
+        else:
+            text_chunk = text_chunk[:buffer - (len(outlist))] + outlist_text
+        encoded = [mapping[char] for char in text_chunk]
+        encoded = pad_sequences([encoded], maxlen=buffer, truncating='pre')
+        encoded = to_categorical(encoded, num_classes=len(mapping))
+        pred = mod.predict_classes(encoded, verbose=0)[0]
+        # if the letter were trying to predict isn't a space in the text
+        # predict a character
+        if let != " ":
+            # if the prediction is not a space
+            # just add the letter we were trying to predict to the outlist
+            if pred != 1:
+                outlist.append(let)
+            # if the prediction is a space
+            # add a space to the outlist followed by the letter that was in the text
+            else:
+                outlist.append(" " + let)
+        # if the letter we're trying to predict is a space in the text
+        # just append a space to the outlist
+        else:
+            outlist.append(" ")
+        text = text[1:]
+    outtext = "".join(outlist)
+    # outtext = " ".join(outtext.split("  "))
+    outtext = outtext[::-1]
+    return outtext
+
+
+def predict(mapping, model, text, buffer):
+    encoded = [mapping[char] for char in text]
+    encoded = pad_sequences([encoded], maxlen=buffer, truncating='pre')
+    encoded = to_categorical(encoded, num_classes=len(mapping))
+    prediction = model.predict_classes(encoded, verbose=0)[0]
+    return prediction
+
+
+def rev_predict(mapping, rev_model, following_text, rev_buffer):
+    rev_encoded = [mapping[char] for char in following_text]
+    rev_encoded = pad_sequences([rev_encoded], maxlen=rev_buffer, truncating='pre')
+    rev_encoded = to_categorical(rev_encoded, num_classes=len(mapping))
+    rev_prediction = rev_model.predict_classes(rev_encoded, verbose=0)[0]
+    return rev_prediction
+
+
+@lru_cache(maxsize=500)
+def tokenise_combine(model, rev_model, intext, buffer=0):
+    """Takes a trained language model and a text, returns the text tokenised as per the language model"""
+    mod = load_model(model)
+    rev_mod = load_model(rev_model)
+    buffpat = re.compile(r'n\d{1,2}(pad)?_')
+    buffpatitir = buffpat.finditer(model)
+    for buff in buffpatitir:
+        if "pad" in buff.group():
+            padbuff = buff.group()
+            buff = "".join(padbuff.split("pad"))
+            buffer = int(buff[1:-1])
+        else:
+            buffer = int(buff.group()[1:-1])
+    rev_buffpatitir = buffpat.finditer(rev_model)
+    for rev_buff in rev_buffpatitir:
+        if "pad" in rev_buff.group():
+            padbuff = rev_buff.group()
+            rev_buff = "".join(padbuff.split("pad"))
+            rev_buffer = int(rev_buff[1:-1])
+        else:
+            rev_buffer = int(rev_buff.group()[1:-1])
+    buffer_text = buffer * "$"
+    text = buffer_text + intext
+    mapping = pickle.load(open('char_mapping.pkl', 'rb'))
     outlist = []
     for i in range(len(text) - buffer):
         let = text[buffer]
@@ -48,22 +180,63 @@ def tokenise(model, intext, buffer=0):
         # if the letter were trying to predict isn't a space in the text
         # predict a character
         if let != " ":
-            encoded = [mapping[char] for char in text_chunk]
-            encoded = pad_sequences([encoded], maxlen=buffer, truncating='pre')
-            encoded = to_categorical(encoded, num_classes=len(mapping))
-            pred = mod.predict_classes(encoded, verbose=0)[0]
+            pred = predict(mapping, mod, text_chunk, buffer)
             # if the prediction is not a space
             # just add the letter we were trying to predict to the outlist
             if pred != 1:
                 outlist.append(let)
             # if the prediction is a space
-            # add a space to the outlist followed by the letter that was in the text
+            # check if the reverse prediction agrees with the prediction
             else:
-                outlist.append(" " + let)
+                following_text = text[rev_buffer + 1:]
+                # if the remaining text is longer than the buffer length
+                # use all of it
+                if len(following_text) >= rev_buffer:
+                    following_text = following_text[:rev_buffer]
+                # if the remaining text is shorter than the buffer length
+                # add buffer characters to it until it's long enough
+                else:
+                    remainder = rev_buffer - len(following_text)
+                    following_text = following_text + ("$" * remainder)
+                # reverse the following text and make a reverse prediction to see what should come before it
+                following_text = following_text[::-1]
+                rev_pred = rev_predict(mapping, rev_mod, following_text, rev_buffer)
+                # if the reverse prediction agrees with the prediction on a space
+                # add a space to the outlist followed by the letter that was in the text
+                if rev_pred == 1:
+                    outlist.append(" " + let)
+                # if the reverse prediction disagrees with the prediction on a space
+                # just add the letter to the outlist
+                else:
+                    outlist.append(let)
         # if the letter we're trying to predict is a space in the text
-        # just append a space to the outlist
+        # check whether the forward model predicts there should be a space here
         else:
-            outlist.append(" ")
+            pred = predict(mapping, mod, text_chunk, buffer)
+            # if the prediction is also a space
+            # just add the space to the outlist
+            if pred == 1:
+                outlist.append(let)
+            # if the prediction is not a space
+            # check if the reverse prediction agrees with the prediction
+            else:
+                following_text = text[rev_buffer + 1:]
+                # if the remaining text is longer than the buffer length
+                # use all of it
+                if len(following_text) >= rev_buffer:
+                    following_text = following_text[:rev_buffer]
+                # if the remaining text is shorter than the buffer length
+                # add buffer characters to it until it's long enough
+                else:
+                    remainder = rev_buffer - len(following_text)
+                    following_text = following_text + ("$" * remainder)
+                # reverse the following text and make a reverse prediction to see what should come before it
+                following_text = following_text[::-1]
+                rev_pred = rev_predict(mapping, rev_mod, following_text, rev_buffer)
+                # if the reverse prediction does not agree with the prediction that there should not be a space
+                # add a space to the outlist
+                if rev_pred != 1:
+                    outlist.append(let)
         text = text[1:]
     outtext = "".join(outlist)
     # outtext = " ".join(outtext.split("  "))
@@ -145,6 +318,10 @@ def top_toks(string, occurrences=0):
 # TBFmod10 = "n5_TBF1HLTokeniserV2.h5"
 # TBFmod11 = "n7_TBF1HLTokeniser.h5"
 # TBFmod12 = "n3_TBF1HLTokeniserV2.h5"
+#
+# rmod1 = "rev-n5_54x54-24.h5"
+rmod2 = "rev-n7_54x54-24.h5"
+# rmod3 = "rev-n10_54x54-24.h5"
 
 
 # print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
@@ -167,6 +344,12 @@ def top_toks(string, occurrences=0):
 # print(tokenise(TBFmod10, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(TBFmod11, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(TBFmod12, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print()
+# print(rev_tokenise(rmod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print()
+# print(tokenise_combine("n10_54x54-24.h5", rmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
 
 
