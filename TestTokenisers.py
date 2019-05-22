@@ -44,14 +44,14 @@ from nltk import edit_distance as ed
 
 allmods = []
 for size in [54]:
-    for buff in [5, 7, 10]:
-        NAME = "n{}_{}x{}-24.h5".format(buff, size, size)
+    for buff in [7]:
+        NAME = "n{}_{}x{}-8-Wb-bi.h5".format(buff, size, size)
         allmods.append(NAME)
 
 allrmods = []
 for size in [54]:
-    for buff in [5, 7, 10]:
-        NAME = "rev-n{}_{}x{}-24.h5".format(buff, size, size)
+    for buff in [7]:
+        NAME = "rev-n{}_{}x{}-8-Wb-bi.h5".format(buff, size, size)
         allrmods.append(NAME)
 
 test_in = open("toktest.pkl", "rb")
@@ -124,29 +124,50 @@ def test_tzcmod(mod, rmod):
     return avg_edist
 
 
+# # Test Manually Tokenised Glosses against Untokenised Glosses
+# all_ed_dists = []
+# gl_count = 0
+# for x_pos in range(len(x_test)):
+#     gl_count += 1
+#     x = x_test[x_pos]
+#     y = clean_y(y_test[x_pos])
+#     ed_dist = ed(y, x)
+#     all_ed_dists.append(ed_dist)
+#     # print(x)
+#     # print(y)
+#     # print("Gloss {}/41: Edit Distance = {}".format(str(gl_count), str(ed_dist)))
+# avg_ed_dist = sum(all_ed_dists) / len(all_ed_dists)
+# print("Original Gloss Score:\n    {}".format(avg_ed_dist))
+
+
+# # Test Forward Models
 # modscores = []
 # for mod in allmods:
 #     print(mod)
 #     score = test_tzmod(mod)
 #     print("    {}".format(score))
 #     modscores.append(score)
-#
+# best_score = min(modscores)
+# print("Best Model:\n    {}".format(allmods[modscores.index(best_score)]))
+
+# # Test Reverse Models
 # modscores = []
 # for mod in allrmods:
 #     print(mod)
 #     score = test_rtzmod(mod)
 #     print("    {}".format(score))
 #     modscores.append(score)
+# best_score = min(modscores)
+# print("Best Model:\n    {}".format(allrmods[modscores.index(best_score)]))
 
-modscores = []
-for mod in allmods:
-    for rmod in allrmods:
-        print("Forward model: {}\nReverse model: {}".format(mod, rmod))
-        score = test_tzcmod(mod, rmod)
-        print("    {}".format(score))
-        modscores.append(score)
-
-
-best_score = min(modscores)
-print("Best Model:\n    {}\n    {}".format(allmods[modscores.index(best_score)], allrmods[modscores.index(best_score)]))
+# # Test Combined Forward and Reverse Models
+# modscores = []
+# for mod in allmods:
+#     for rmod in allrmods:
+#         print("Forward model: {}\nReverse model: {}".format(mod, rmod))
+#         score = test_tzcmod(mod, rmod)
+#         print("    {}".format(score))
+#         modscores.append(score)
+# best_score = min(modscores)
+# print("Best Model:\n    {}\n    {}".format(allmods[modscores.index(best_score)], allrmods[modscores.index(best_score)]))
 

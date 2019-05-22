@@ -42,7 +42,11 @@ def cleantext_CELT(filename):
             thishyphitem = hyphpatitem.group()
             hyph_gone = "".join(thishyphitem.split("-"))
             text = hyph_gone.join(text.split(thishyphitem))
+    text = " ".join(text.split("­"))
     text = " ".join(text.split("-"))
+    # Here the letter v is replaced with u wherever used
+    text = "u".join(text.split("v"))
+    text = "u".join(text.split("V"))
     # Here apostrophes are removed where they represent a split word
     apostlist = ["'s", "'S", "m' ", "d' ", "th' ", "t' ", "T' "]
     for apost in apostlist:
@@ -79,7 +83,7 @@ def cleantext_CELT(filename):
     text = "⁊".join(text.split("&"))
     text = " ⁊ ".join(text.split(" et "))
     # Here punctuation is removed
-    punclist = ['!', ',', '.', ':', ';', '?', "'", '‘', '’', '[', ']', '(', ')', '|', '/', '—']
+    punclist = ['!', ',', '.', ':', ';', '?', '"', "'", '‘', '’', '[', ']', '(', ')', '|', '/', '—', '_']
     for punc in punclist:
         text = "".join(text.split(punc))
     # Here punctuated items are reinserted into the text where they were replaced

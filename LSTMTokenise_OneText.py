@@ -1,4 +1,6 @@
 import time
+from os import listdir
+import os.path as op
 from OpenDocx import get_text
 import pickle
 from PrepareHandContent import remove_non_glosses
@@ -6,8 +8,7 @@ import numpy as np
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
 from keras.models import Sequential
-from keras.layers import LSTM
-from keras.layers import Dense
+from keras.layers import LSTM, Dense, Dropout
 from tensorflow.python.keras.callbacks import TensorBoard
 from keras.models import load_model
 
@@ -34,17 +35,32 @@ print("Set training parameters...")
 # one_text_in = open("toktrain.pkl", "rb")
 # one_text = " ".join(pickle.load(one_text_in))
 # text_name = "Wb. Training Glosses"
-# Import and clean Táin Bó Fraích for use as the single training text
-one_text = " ".join((get_text("TBF_cleaned")).split("\n"))
+
+# Import and clean CELT texts for use as the single training text
+clean_text_list = []
+all_clean_files = [f for f in listdir("CELT_Texts_Clean") if op.isfile(op.join("CELT_Texts_Clean", f))]
+for cf in all_clean_files:
+    cf = "".join(cf.split(".docx"))
+    if cf != ".DS_Store":
+        cf = op.join("CELT_Texts_Clean", cf)
+        clean_text_list.append(get_text(cf))
+one_text = " ".join(clean_text_list)
+one_text = " ".join(one_text.split("\n"))
 while "  " in one_text:
     one_text = " ".join(one_text.split("  "))
-text_name = "Táin Bó Fraích"
+text_name = "CELT Collection"
+
 # Import test and train sets for character mapping
 train_in = open("toktrain.pkl", "rb")
 train_set = pickle.load(train_in)
 test_in = open("toktest.pkl", "rb")
 test_set = pickle.load(test_in)
 x_train = remove_non_glosses(train_set)
+# temp = []  # Reverse x_train for reverse models
+# for x_trainer in x_train[::-1]:  # Reverse x_train for reverse models
+#     new_trainer = x_trainer[::-1]  # Reverse x_train for reverse models
+#     temp.append(new_trainer)  # Reverse x_train for reverse models
+# x_train = temp  # Reverse x_train for reverse models
 x_test, y_test = test_set[0], test_set[1]
 print("Loaded {}, training, and test data...".format(text_name))
 
@@ -107,23 +123,26 @@ print("One Hot encoded {}...".format(text_name))
 
 
 # Define model
+nodes = 54
+epochs = 10
+model_name = "n{}_{}x{}-{}-CELT-Collection-test.h5".format(pre_characters, nodes, nodes, epochs)  # Name model
 model = Sequential()
-model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
-model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
-model.add(LSTM(54, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
-model.add(LSTM(54, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
+model.add(LSTM(nodes, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 1 Hidden Layer
+# model.add(LSTM(nodes, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 2 Hidden Layers
+# model.add(LSTM(nodes, return_sequences=True, input_shape=(x_train.shape[1], x_train.shape[2])))  # 3 Hidden Layers
+model.add(LSTM(nodes, input_shape=(x_train.shape[1], x_train.shape[2])))  # 4 Hidden Layers
 model.add(Dense(vocab_size, activation='softmax'))
 print(model.summary())
 # Log the model
-tb = TensorBoard(log_dir="logs/{}".format(time.time()))
-# Compile model
+tb = TensorBoard(log_dir="logs/{}".format(model_name[:-3]))
+# Compile and fit model
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=1000, verbose=2, callbacks=[tb])
+model.fit(x_train, y_train, epochs=epochs, validation_split=0.1, verbose=2, callbacks=[tb])
 print("Created Model...")
 
 
-# # Save the model
-# model.save('mod.h5')  # Name model
+# Save the model
+model.save(model_name)
 # # Save the mapping
 # pickle.dump(chardict, open('char_mappingTBF.pkl', 'wb'))  # Name mapping
 print("Saved Model...")
