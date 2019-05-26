@@ -1,6 +1,7 @@
 """Level 2, 2, 2, 1, 1, 1, 1, 2, 2, 1"""
 
 from OpenDocx import get_text
+from functools import lru_cache
 from OpenPages import get_pages
 from GetSections import get_section
 from OrderGlosses import order_glosses, order_glosslist
@@ -20,6 +21,7 @@ def openhandlists(file):
     return filetext
 
 
+@lru_cache(maxsize=10)
 def splitglosses(file):
     """Splits the glosses from a gloss-hand file into a gloss list"""
     filetext = openhandlists(file)
