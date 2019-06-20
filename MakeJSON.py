@@ -1,6 +1,7 @@
 """Level 1"""
 
 from CombineInfoLists import combine_infolists
+import re
 
 
 def make_json(glosslist, headers=False):
@@ -74,6 +75,12 @@ def make_json(glosslist, headers=False):
             if isinstance(fn, list):
                 fncombine = '",\n                "'.join(fn)
                 fn = '[\n                "' + fncombine + '"\n            ]'
+                if "***" in fn:
+                    starpat = re.compile(r' \*\*\*.*\*\*\*')
+                    starpatitir = starpat.finditer(fn)
+                    for starfind in starpatitir:
+                        fnlist = fn.split(starfind.group())
+                        fn = "".join(fnlist)
                 jsonblank = jsonblank[:jsonblank.find("[y]") - 1] + fn + jsonblank[jsonblank.find("[y]") + 4:]
         jsonblank = jsonblank[:jsonblank.find("[z]")] + gtr + jsonblank[jsonblank.find("[z]") + 3:]
         jsonblanklist = [e, f, jsonblank]
