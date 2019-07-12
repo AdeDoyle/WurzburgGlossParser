@@ -12,6 +12,7 @@ from RemoveLatin import rem_lat
 from RemovePunctuation import rempunc_tok
 from OpenDocx import get_text
 from SaveXlsx import save_xlsx
+import os.path as op
 
 
 @lru_cache(maxsize=500)
@@ -211,6 +212,7 @@ def tokenise_combine(model, rev_model, intext, buffer=0):
                     outlist.append(let)
         # if the letter we're trying to predict is a space in the text
         # check whether the forward model predicts there should be a space here
+        # comment this section out for the tokenizer to only put in spaces but not take any out
         else:
             pred = predict(mapping, mod, text_chunk, buffer)
             # if the prediction is also a space
@@ -298,39 +300,83 @@ def top_toks(string, occurrences=0):
     return orderedtoklist
 
 
-# mod1 = "n3_1HLTokeniser.h5"
-# mod2 = "n3_2HLTokeniser.h5"
-# mod3 = "n10_2HLTokeniser.h5"
-# mod4 = "n3pad_2HLTokeniser.h5"
-# mod4_200 = "n3pad_2HLTokeniserV2.h5"
-# mod5 = "n5_1HLTokeniser.h5"
-# mod6 = "n5_2HLTokeniser.h5"
+# # Define the Models
+# forward_folder = "Tokenisation Forward Models"
+# celt_folder = op.join(forward_folder, "CELT Models")
+# tbf_folder = op.join(forward_folder, "TBF Models")
+# wb_folder = op.join(forward_folder, "Wb. Models")
+# reverse_folder = "Tokenisation Reverse Models"
 #
-# TBFmod1 = "n3_TBF1HLTokeniser.h5"
-# TBFmod2 = "n3_TBF2HLTokeniser.h5"
-# TBFmod3 = "n3_TBF4HLTokeniser.h5"
-# TBFmod4 = "n5_TBF1HLTokeniser.h5"
-# TBFmod5 = "n5_TBF2HLTokeniser.h5"
-# TBFmod6 = "n5_TBF4HLTokeniser.h5"
-# TBFmod7 = "n5_TBF3HLTokeniser.h5"
-# TBFmod8 = "n5_TBF2HLTokeniserV2.h5"
-# TBFmod9 = "n5_TBF3HLTokeniserV2.h5"
-# TBFmod10 = "n5_TBF1HLTokeniserV2.h5"
-# TBFmod11 = "n7_TBF1HLTokeniser.h5"
-# TBFmod12 = "n3_TBF1HLTokeniserV2.h5"
+# mod1 = op.join(wb_folder, "n3_1HLTokeniser.h5")
+# mod2 = op.join(wb_folder, "n3_2HLTokeniser.h5")
+# mod3 = op.join(wb_folder, "n3pad_2HLTokeniser.h5")
+# mod4 = op.join(wb_folder, "n3pad_2HLTokeniserV2.h5")
+# mod5 = op.join(wb_folder, "n5_1HLTokeniser.h5")
+# mod6 = op.join(wb_folder, "n5_2HLTokeniser.h5")
+# mod7 = op.join(wb_folder, "n5_40x40-24.h5")
+# mod8 = op.join(wb_folder, "n5_54x54-24.h5")
+# mod9 = op.join(wb_folder, "n7_40x40-24.h5")
+# mod10 = op.join(wb_folder, "n7_54x54-8-Wb-bi.h5")
+# mod11 = op.join(wb_folder, "n7_54x54-24.h5")
+# mod12 = op.join(wb_folder, "n10_2HLTokeniser.h5")
+# mod13 = op.join(wb_folder, "n10_40x40-24.h5")
+# mod14 = op.join(wb_folder, "n10_54x54-24.h5")
 #
-# rmod1 = "rev-n5_54x54-24.h5"
-rmod2 = "rev-n7_54x54-24.h5"
-# rmod3 = "rev-n10_54x54-24.h5"
+# CELTmod1 = op.join(celt_folder, "n5_54x54-6-CELT-Collection.h5")
+# CELTmod2 = op.join(celt_folder, "n5_54x54-7-CELT-Collection.h5")
+# CELTmod3 = op.join(celt_folder, "n5_54x54-24-CELT-Collection.h5")
+# CELTmod4 = op.join(celt_folder, "n7_54x54-7-CELT-Collection.h5")
+# CELTmod5 = op.join(celt_folder, "n7_54x54-8-CELT-Collection-bi.h5")
+# CELTmod6 = op.join(celt_folder, "n7_54x54-24-CELT-Collection.h5")
+# CELTmod7 = op.join(celt_folder, "n10_54x54-7-CELT-Collection.h5")
+# CELTmod8 = op.join(celt_folder, "n10_54x54-24-CELT-Collection.h5")
+#
+# TBFmod1 = op.join(tbf_folder, "n3_TBF1HLTokeniser.h5")
+# TBFmod2 = op.join(tbf_folder, "n3_TBF2HLTokeniser.h5")
+# TBFmod3 = op.join(tbf_folder, "n3_TBF4HLTokeniser.h5")
+# TBFmod4 = op.join(tbf_folder, "n5_TBF1HLTokeniser.h5")
+# TBFmod5 = op.join(tbf_folder, "n5_TBF2HLTokeniser.h5")
+# TBFmod6 = op.join(tbf_folder, "n5_TBF4HLTokeniser.h5")
+# TBFmod7 = op.join(tbf_folder, "n5_TBF3HLTokeniser.h5")
+# TBFmod8 = op.join(tbf_folder, "n5_TBF2HLTokeniserV2.h5")
+# TBFmod9 = op.join(tbf_folder, "n5_TBF3HLTokeniserV2.h5")
+# TBFmod10 = op.join(tbf_folder, "n5_TBF1HLTokeniserV2.h5")
+# TBFmod11 = op.join(tbf_folder, "n7_TBF1HLTokeniser.h5")
+# TBFmod12 = op.join(tbf_folder, "n3_TBF1HLTokeniserV2.h5")
+#
+# rmod1 = op.join(reverse_folder, "rev-n5_54x54-24.h5")
+# rmod2 = op.join(reverse_folder, "rev-n7_54x54-24.h5")
+# rmod3 = op.join(reverse_folder, "rev-n10_54x54-24.h5")
+# rmod4 = op.join(reverse_folder, "rev-n7_54x54-8-Wb-bi.h5")
+# rmod5 = op.join(reverse_folder, "rev-n5_54x54-7-CELT-Collection.h5")
+# rmod6 = op.join(reverse_folder, "rev-n7_54x54-7-CELT-Collection.h5")
+# rmod7 = op.join(reverse_folder, "rev-n10_54x54-7-CELT-Collection.h5")
+# rmod8 = op.join(reverse_folder, "rev-n7_54x54-8-CELT-Collection-bi.h5")
 
 
 # print(tokenise(mod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
-# print(tokenise(mod4_200, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(mod6, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod7, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod8, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod9, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod10, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod11, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod12, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod13, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(mod14, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print()
+# print(tokenise(CELTmod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod6, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod7, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise(CELTmod8, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
 # print(tokenise(TBFmod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(tokenise(TBFmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
@@ -348,9 +394,34 @@ rmod2 = "rev-n7_54x54-24.h5"
 # print(rev_tokenise(rmod1, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(rev_tokenise(rmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print(rev_tokenise(rmod3, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod4, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod5, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod6, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod7, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(rev_tokenise(rmod8, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
-# print(tokenise_combine("n10_54x54-24.h5", rmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
+# print(tokenise_combine(mod14, rmod2, ".i. biuusa ocirbáig darfarcennsi frimaccidóndu"))
 # print()
+
+
+# # Tokenise the set of Test Glosses
+# formod = op.join(wb_folder, "n7_54x54-8-Wb-bi.h5")
+# revmod = op.join(reverse_folder, "rev-n7_54x54-8-Wb-bi.h5")
+#
+# rawglosses = get_text("Untokenised Glosses")
+# cleanglosslist = []
+# for gloss in rawglosses.split("\n"):
+#     idpat = re.compile(r'\(\d\d?\w \d\d?\w?\) ')
+#     idpatitir = idpat.finditer(gloss)
+#     for idfound in idpatitir:
+#         glossid = idfound.group()
+#         glosstext = gloss[len(glossid):]
+#         cleanglosslist.append(glosstext)
+# cleanglosses = " ".join(cleanglosslist)
+# # Print the Test Glosses
+# print(cleanglosses)
+# # Print the Tokenised Test Glosses
+# print(tokenise_combine(formod, revmod, cleanglosses))
 
 
 # testlists = pickle.load(open('toktest.pkl', 'rb'))
