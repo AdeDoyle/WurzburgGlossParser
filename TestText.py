@@ -59,12 +59,12 @@ sections = testsectext("SG", 619, 654)
 #     print("")
 
 
-# # Find everything between given tags in a given section
+# # Find everything between given tags in a given section and prints either all, or as an ordered set
 # ordstr = ""
 # for pagelist in sections:
 #     ordstr += pagelist[1]
-# optag = "[GLat]"
-# cltag = "[/GLat]"
+# optag = "[Con]"
+# cltag = "[/Con]"
 # opcount = ordstr.count(optag)
 # print(opcount)
 # taglist = []
@@ -72,6 +72,8 @@ sections = testsectext("SG", 619, 654)
 #     ordstr = ordstr[ordstr.find(optag):]
 #     taglist.append(ordstr[:ordstr.find(cltag) + len(cltag)])
 #     ordstr = ordstr[ordstr.find(cltag) + len(cltag):]
+# # for tagged in sorted(list(set(taglist))):
+# #     print(tagged + "\n")
 # for tagged in taglist:
 #     print(tagged + "\n")
 
