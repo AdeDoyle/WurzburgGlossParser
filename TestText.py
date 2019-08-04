@@ -40,7 +40,7 @@ def testlatnums(text):
 
 # Select a section
 # sections = testsectext("Lat", 499, 712)
-sections = testsectext("SG", 619, 654)
+# sections = testsectext("SG", 499, 712)
 # sections = testsectext("Eng", 499, 712)
 # sections = testsectext("FN", 499, 712)
 
