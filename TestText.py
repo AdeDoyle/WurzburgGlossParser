@@ -63,10 +63,9 @@ def testlatnums(text):
 # ordstr = ""
 # for pagelist in sections:
 #     ordstr += pagelist[1]
-# optag = "[Con]"
-# cltag = "[/Con]"
+# optag = "[GLat]"
+# cltag = "[/GLat]"
 # opcount = ordstr.count(optag)
-# print(opcount)
 # taglist = []
 # for _ in range(opcount):
 #     ordstr = ordstr[ordstr.find(optag):]
