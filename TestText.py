@@ -38,15 +38,38 @@ def testlatnums(text):
     return numlist
 
 
+# Select a section
 # sections = testsectext("Lat", 499, 712)
 # sections = testsectext("SG", 499, 712)
 # sections = testsectext("Eng", 499, 712)
 # sections = testsectext("FN", 499, 712)
+
+
+# # Print an ordered list of all characters in a given section
+# ordstr = ""
+# for pagelist in sections:
+#     ordstr += pagelist[1]
+# print(sorted(list(set(ordstr))))
+
+
+# # Print everything in a given section with page numbers above
 # for pagelist in sections:
 #     print(pagelist[0])
 #     print(pagelist[1])
 #     print("")
 
+
+# # Find everything between given tags in a given
+# sections_compiled = ""
+# for pagelist in sections:
+#     sections_compiled += "{}\n{}\n\n".format(pagelist[0], pagelist[1])
+# secpat = re.compile(r'\[GLat\][\w \.\n:(\[\d\])(\[/\d\])(\[Con\])(\[/Con\])]*\[/GLat\]')
+# secpatitir = secpat.finditer(sections_compiled)
+# for i in secpatitir:
+#     print(i.group() + "\n")
+
+
+# # Calls the testlatnums function above then sorts and prints all potential/apparent failures
 # lattext = "\n\n".join(get_section(get_pages("Wurzburg Glosses", 499, 712), "Lat"))
-# for fail in testlatnums(lattext):
+# for fail in sorted(list(set(testlatnums(lattext)))):
 #     print(fail)
