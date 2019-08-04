@@ -40,7 +40,7 @@ def testlatnums(text):
 
 # Select a section
 # sections = testsectext("Lat", 499, 712)
-# sections = testsectext("SG", 499, 712)
+sections = testsectext("SG", 619, 654)
 # sections = testsectext("Eng", 499, 712)
 # sections = testsectext("FN", 499, 712)
 
@@ -59,14 +59,21 @@ def testlatnums(text):
 #     print("")
 
 
-# # Find everything between given tags in a given
-# sections_compiled = ""
+# # Find everything between given tags in a given section
+# ordstr = ""
 # for pagelist in sections:
-#     sections_compiled += "{}\n{}\n\n".format(pagelist[0], pagelist[1])
-# secpat = re.compile(r'\[GLat\][\w \.\n:(\[\d\])(\[/\d\])(\[Con\])(\[/Con\])]*\[/GLat\]')
-# secpatitir = secpat.finditer(sections_compiled)
-# for i in secpatitir:
-#     print(i.group() + "\n")
+#     ordstr += pagelist[1]
+# optag = "[GLat]"
+# cltag = "[/GLat]"
+# opcount = ordstr.count(optag)
+# print(opcount)
+# taglist = []
+# for _ in range(opcount):
+#     ordstr = ordstr[ordstr.find(optag):]
+#     taglist.append(ordstr[:ordstr.find(cltag) + len(cltag)])
+#     ordstr = ordstr[ordstr.find(cltag) + len(cltag):]
+# for tagged in taglist:
+#     print(tagged + "\n")
 
 
 # # Calls the testlatnums function above then sorts and prints all potential/apparent failures
