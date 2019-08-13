@@ -52,10 +52,9 @@ def get_latpageinfo(file, page):
                         linetext = linetext[:numpos]
                         lemma = linetext[linetext.rfind(" ") + 1:]
                         if "[" in lemma:
-                            tagpos = lemma.find("[")
-                            lemma = lemma[:tagpos]
+                            lemma = clear_tags(lemma)
                         lemmata.append(lemma)
-                        notagtext = clear_tags(linetext)
+                        notagtext = clear_tags(linetext, ["let"])
                         remnumpat = re.compile(
                             r'(\[NV\]|((Rom\. )?([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?(\d{1,2}[a-z]?\. )?))')
                         thisglossremnum = ""  # has to be put here for pages which begin mid-Latin-line
@@ -64,6 +63,21 @@ def get_latpageinfo(file, page):
                                 thisglossremnum = remnum.group()
                         remlen = len(thisglossremnum)
                         notagtext = notagtext[remlen:]
+                        fnpat = re.compile(r'\[/?[a-d]\]')
+                        fnpatitir = fnpat.finditer(notagtext)
+                        fns = []
+                        for fn in fnpatitir:
+                            fns.append(fn.group())
+                        if fns:
+                            for marker in fns:
+                                if "[/" in marker:
+                                    notagtext = "".join(notagtext.split(marker[0] + marker[-2:]))
+                                    supscr = "</em><sup>{}</sup><em>".format(marker[2:3])
+                                    notagtext = supscr.join(notagtext.split(marker))
+                            for marker in fns:
+                                if marker in notagtext:
+                                    supscr = "</em><sup>{}</sup><em>".format(marker[1:2])
+                                    notagtext = supscr.join(notagtext.split(marker))
                         lempos = notagtext.rfind(lemma)
                         positions.append(lempos)
                         found = True
@@ -79,8 +93,10 @@ def get_latpageinfo(file, page):
                         numpos = line.find(num)
                         linetext = linetext[:numpos]
                         lemma = linetext[linetext.rfind(" ") + 1:]
+                        if "[" in lemma:
+                            lemma = clear_tags(lemma)
                         lemmata.append(lemma)
-                        notagtext = clear_tags(linetext)
+                        notagtext = clear_tags(linetext, ["let"])
                         remnumpat = re.compile(
                             r'(\[NV\]|((Rom\. )?([IVX]{1,4}\. )?(\d{1,2}[a-z]?, )?(\d{1,2}[a-z]?\. )?))')
                         thisglossremnum = ""  # has to be put here for pages which begin mid-Latin-line
@@ -89,13 +105,44 @@ def get_latpageinfo(file, page):
                                 thisglossremnum = remnum.group()
                         remlen = len(thisglossremnum)
                         notagtext = notagtext[remlen:]
+                        fnpat = re.compile(r'\[/?[a-d]\]')
+                        fnpatitir = fnpat.finditer(notagtext)
+                        fns = []
+                        for fn in fnpatitir:
+                            fns.append(fn.group())
+                        if fns:
+                            for marker in fns:
+                                if "[/" in marker:
+                                    notagtext = "".join(notagtext.split(marker[0] + marker[-2:]))
+                                    supscr = "</em><sup>{}</sup><em>".format(marker[2:3])
+                                    notagtext = supscr.join(notagtext.split(marker))
+                            for marker in fns:
+                                if marker in notagtext:
+                                    supscr = "</em><sup>{}</sup><em>".format(marker[1:2])
+                                    notagtext = supscr.join(notagtext.split(marker))
                         lempos = notagtext.rfind(lemma)
                         positions.append(lempos)
                         found = True
                         break
     for i in range(len(glossnums)):
         # Compiles a list of the gloss, the Latin line, and the lemma for the gloss within the Latin line.
-        latininfolist.append([eachgloss[i], clear_tags(latpergloss[i], "NV"), clear_tags(lemmata[i]), positions[i]])
+        thislatperglos = latpergloss[i]
+        fnpat = re.compile(r'\[/?[a-d]\]')
+        fnpatitir = fnpat.finditer(thislatperglos)
+        fns = []
+        for fn in fnpatitir:
+            fns.append(fn.group())
+        if fns:
+            for marker in fns:
+                if "[/" in marker:
+                    thislatperglos = "".join(thislatperglos.split(marker[0] + marker[-2:]))
+                    supscr = "</em><sup>{}</sup><em>".format(marker[2:3])
+                    thislatperglos = supscr.join(thislatperglos.split(marker))
+            for marker in fns:
+                if marker in thislatperglos:
+                    supscr = "</em><sup>{}</sup><em>".format(marker[1:2])
+                    thislatperglos = supscr.join(thislatperglos.split(marker))
+        latininfolist.append([eachgloss[i], clear_tags(thislatperglos, ["NV"]), clear_tags(lemmata[i]), positions[i]])
     return latininfolist
 
 

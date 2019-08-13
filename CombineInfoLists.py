@@ -21,9 +21,20 @@ def combine_infolists(file, startpage=499, stoppage=712):
             glist = gloss[:3]
             if clear_tags(gloss[4]) == lat[3]:
                 # Ensures the gloss from one list matches the same gloss in the other list before combining contents.
-                glist.extend(lat[6:])
+                glist.extend(lat[6:8])
                 glist.extend(lat[4:6])
-                glist.extend(gloss[3:])
+                glist.extend(gloss[3:7])
+                if gloss[7]:
+                    if lat[8]:
+                        fnlist = [lat[8] + gloss[7]]
+                    else:
+                        fnlist = [gloss[7]]
+                elif lat[8]:
+                    fnlist = [lat[8]]
+                else:
+                    fnlist = [gloss[7]]
+                glist.extend(fnlist)
+                glist.extend(gloss[8:])
                 combolist.append(glist)
             else:
                 print("Error 2.\n%s\n%s" % (clear_tags(gloss[4]), remove_glossnums(lat[0])))

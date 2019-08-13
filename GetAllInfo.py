@@ -3,21 +3,25 @@
 from OpenPages import get_pages
 from GetSections import get_section
 from OrderGlosses import order_glosses
-from ClearTags import clear_tags
+from ClearTags import clear_tags, clear_spectags
 from GetLatInfo import get_latpageinfo
 from GetFolio import get_fol
+from OrderFootnotes import order_footlist
 import re
 
 
 def get_allinfo(file, startpage, stoppage=None):
     """Returns an infolist containing multiple sub-lists. The first sublist contains the headers for an info-table.
        Subsequent lists contain, respectively, for a set page range: page no., folio, gloss no., gloss text, Latin
-       lemma, verse, and Latin text."""
+       lemma, Position of lemma in Latin text, Latin verse number, and Latin text."""
     if stoppage is None:
         stoppage = startpage
-    infolist = [["Page", "Folio", "Gloss No.", "Gloss Text", "Lemma", "Lemma Position", "Verse", "Glossed Latin"]]
+    infolist = [["Page", "Folio", "Gloss No.", "Gloss Text", "Lemma", "Lemma Position", "Verse", "Glossed Latin",
+                 "Latin Footnotes"]]
     for page in range(startpage, stoppage + 1):
         thispage = page
+        # Gets all page Footnotes (for the Latin)
+        footnotelist = order_footlist(file, page)
         # Collect folio information, one page at a time
         foliolist = []
         for folinfo in get_fol(order_glosses(clear_tags("\n\n".join(get_section(get_pages(
@@ -59,6 +63,19 @@ def get_allinfo(file, startpage, stoppage=None):
             lempos = sublist[3]
             lemma = sublist[2]
             latin = sublist[1]
+            rawfns = []
+            fns = []
+            fnpat = re.compile(r'<sup>[a-d]</sup>')
+            fnpatitir = fnpat.finditer(latin)
+            for fn in fnpatitir:
+                rawfns.append(fn.group())
+            if rawfns:
+                for rawfn in rawfns:
+                    fnletter = rawfn[5:6]
+                    for fnote in footnotelist:
+                        fnoteid = fnote[:1]
+                        if fnletter == fnoteid:
+                            fns.append(clear_tags(fnote[:1] + ":" + fnote[1:]))
             # Identifies Latin Verse Numbers and Latin text for that verse
             # Adds '00. ' to the start of every latin line in the page's Latin list (for folios that start with no no.)
             # 'Rom. ' is removed later, but must be included here for regex to work
@@ -75,7 +92,8 @@ def get_allinfo(file, startpage, stoppage=None):
             # Adds glossno, glosstext, lemma, verseno, and Latin text to glosslistplus
             # Now glosslistplus is: pageno, folio, glossno, glosstext, lemma, lempos, verseno, and Latin text
             # Adds glosslistplus to infolist (which is returned once fixed)
-            glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, lempos, verseno, clear_tags(latin)])
+            glosslistplus.extend([glossno[:glossno.rfind(".")], glosstext, lemma, lempos, verseno,
+                                  clear_spectags(latin, ["NV"]), fns])
             infolist.append(glosslistplus)
     # Fixes versenos in infolist (combines numberless verses, adds chapter to verses with verseno only)
     # Adds all versenos from infolist to versenofixlist
