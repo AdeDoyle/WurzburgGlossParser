@@ -89,13 +89,24 @@ def agreement(annotator_list):
 # print(cohen_kappa_score(biannos[1], biannos[2]))
 # print(cohen_kappa_score(biannos[1], biannos[3]))
 # print(cohen_kappa_score(biannos[2], biannos[3]))
+#
+# # Get average agreement between Annotators
+# binums = list()
+# binums.append(cohen_kappa_score(biannos[0], biannos[1]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[2]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[1], biannos[2]))
+# binums.append(cohen_kappa_score(biannos[1], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[2], biannos[3]))
+# print(sum(binums) / len(binums))
 
 
 # # Gets Cappa for Round 1 of Annotation
 # direct = "IAA Files"
-# a0 = get_text(op.join(direct, "IAA_T1_JBC"))
-# a1 = get_text(op.join(direct, "IAA_T1_TF"))
-# annolist = [a0, a1]
+# a0 = get_text(op.join(direct, "IAA_T1_ADon"))
+# a1 = get_text(op.join(direct, "IAA_T1_JBC"))
+# a2 = get_text(op.join(direct, "IAA_T1_TF"))
+# annolist = [a0, a1, a2]
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
@@ -111,6 +122,15 @@ def agreement(annotator_list):
 #
 # biannos = agreement(annolist)
 # print(cohen_kappa_score(biannos[0], biannos[1]))
+# print(cohen_kappa_score(biannos[0], biannos[2]))
+# print(cohen_kappa_score(biannos[1], biannos[2]))
+#
+# # Get average agreement between Annotators Round 1
+# binums = list()
+# binums.append(cohen_kappa_score(biannos[0], biannos[1]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[2]))
+# binums.append(cohen_kappa_score(biannos[1], biannos[2]))
+# print(sum(binums) / len(binums))
 
 
 # # Gets Kohen's Kappa of Annotators to compare against tokenizer
@@ -139,6 +159,14 @@ def agreement(annotator_list):
 # print(cohen_kappa_score(biannos[0], biannos[2]))
 # print(cohen_kappa_score(biannos[0], biannos[3]))
 # print(cohen_kappa_score(biannos[0], biannos[4]))
+#
+# # Get average agreement between Tokenizer Annotators
+# binums = list()
+# binums.append(cohen_kappa_score(biannos[0], biannos[1]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[2]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[4]))
+# print(sum(binums) / len(binums))
 
 
 # # Gets Kohen's Kappa of test strings
