@@ -66,9 +66,10 @@ def agreement(annotator_list):
 # direct = "IAA Files"
 # a0 = get_text(op.join(direct, "IAA_AD"))
 # a1 = get_text(op.join(direct, "IAA_DW"))
-# a2 = get_text(op.join(direct, "IAA_MH"))
-# a3 = get_text(op.join(direct, "IAA_TF"))
-# annolist = [a0, a1, a2, a3]
+# a2 = get_text(op.join(direct, "IAA_JBC"))
+# a3 = get_text(op.join(direct, "IAA_MH"))
+# a4 = get_text(op.join(direct, "IAA_TF"))
+# annolist = [a0, a1, a2, a3, a4]
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
@@ -86,18 +87,26 @@ def agreement(annotator_list):
 # print(cohen_kappa_score(biannos[0], biannos[1]))
 # print(cohen_kappa_score(biannos[0], biannos[2]))
 # print(cohen_kappa_score(biannos[0], biannos[3]))
+# print(cohen_kappa_score(biannos[0], biannos[4]))
 # print(cohen_kappa_score(biannos[1], biannos[2]))
 # print(cohen_kappa_score(biannos[1], biannos[3]))
+# print(cohen_kappa_score(biannos[1], biannos[4]))
 # print(cohen_kappa_score(biannos[2], biannos[3]))
+# print(cohen_kappa_score(biannos[2], biannos[4]))
+# print(cohen_kappa_score(biannos[3], biannos[4]))
 #
 # # Get average agreement between Annotators
 # binums = list()
 # binums.append(cohen_kappa_score(biannos[0], biannos[1]))
 # binums.append(cohen_kappa_score(biannos[0], biannos[2]))
 # binums.append(cohen_kappa_score(biannos[0], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[4]))
 # binums.append(cohen_kappa_score(biannos[1], biannos[2]))
 # binums.append(cohen_kappa_score(biannos[1], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[1], biannos[4]))
 # binums.append(cohen_kappa_score(biannos[2], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[2], biannos[4]))
+# binums.append(cohen_kappa_score(biannos[3], biannos[4]))
 # print(sum(binums) / len(binums))
 
 
@@ -138,9 +147,10 @@ def agreement(annotator_list):
 # t0 = get_text(op.join(direct, "IAA_TMod1"))
 # a0 = get_text(op.join(direct, "IAA_AD"))
 # a1 = get_text(op.join(direct, "IAA_DW"))
-# a2 = get_text(op.join(direct, "IAA_MH"))
-# a3 = get_text(op.join(direct, "IAA_TF"))
-# annolist = [t0, a0, a1, a2, a3]
+# a2 = get_text(op.join(direct, "IAA_JBC"))
+# a3 = get_text(op.join(direct, "IAA_MH"))
+# a4 = get_text(op.join(direct, "IAA_TF"))
+# annolist = [t0, a0, a1, a2, a3, a4]
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
@@ -159,12 +169,14 @@ def agreement(annotator_list):
 # print(cohen_kappa_score(biannos[0], biannos[2]))
 # print(cohen_kappa_score(biannos[0], biannos[3]))
 # print(cohen_kappa_score(biannos[0], biannos[4]))
+# print(cohen_kappa_score(biannos[0], biannos[5]))
 #
 # # Get average agreement between Tokenizer Annotators
 # binums = list()
 # binums.append(cohen_kappa_score(biannos[0], biannos[1]))
 # binums.append(cohen_kappa_score(biannos[0], biannos[2]))
 # binums.append(cohen_kappa_score(biannos[0], biannos[3]))
+# binums.append(cohen_kappa_score(biannos[0], biannos[4]))
 # binums.append(cohen_kappa_score(biannos[0], biannos[4]))
 # print(sum(binums) / len(binums))
 
