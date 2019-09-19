@@ -62,6 +62,35 @@ def agreement(annotator_list):
     return bilists
 
 
+# Print all Annotators work, in order
+direct = "IAA Files"
+a0 = get_text(op.join(direct, "IAA_AD"))
+a1t1 = get_text(op.join(direct, "IAA_T1_ADon"))
+a2 = get_text(op.join(direct, "IAA_DW"))
+a3t1 = get_text(op.join(direct, "IAA_T1_JBC"))
+a3 = get_text(op.join(direct, "IAA_JBC"))
+a4 = get_text(op.join(direct, "IAA_MH"))
+a5t1 = get_text(op.join(direct, "IAA_T1_TF"))
+a5 = get_text(op.join(direct, "IAA_TF"))
+annolist = [a0, a1t1, a2, a3t1, a3, a4, a5t1, a5]
+
+allannoslist = list()
+for anno in annolist:
+    glosssplit = anno.split("\n")
+    annoglosslist = list()
+    for gl in glosssplit:
+        glpat = re.compile(r'\(\d{1,2}[a-d] \d{1,2}[a-d]?\) ')
+        glpatitir = glpat.finditer(gl)
+        for i in glpatitir:
+            annoglosslist.append("".join(gl.split(i.group())))
+    allannoslist.append(annoglosslist)
+annocombo = list()
+for i in range(len(allannoslist[0])):
+    thisglosslist = list()
+    thisgloss =
+    for j in range(len(allannoslist)):
+        thisglosslist.append()
+
 # # Gets Kohen's Kappa of Annotators
 # direct = "IAA Files"
 # a0 = get_text(op.join(direct, "IAA_AD"))
