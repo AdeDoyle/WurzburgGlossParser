@@ -1,6 +1,7 @@
 """Level 1"""
 
 from OpenDocx import get_text
+from SaveDocx import save_docx
 import re
 from sklearn.metrics import cohen_kappa_score
 import os.path as op
@@ -62,34 +63,45 @@ def agreement(annotator_list):
     return bilists
 
 
-# Print all Annotators work, in order
-direct = "IAA Files"
-a0 = get_text(op.join(direct, "IAA_AD"))
-a1t1 = get_text(op.join(direct, "IAA_T1_ADon"))
-a2 = get_text(op.join(direct, "IAA_DW"))
-a3t1 = get_text(op.join(direct, "IAA_T1_JBC"))
-a3 = get_text(op.join(direct, "IAA_JBC"))
-a4 = get_text(op.join(direct, "IAA_MH"))
-a5t1 = get_text(op.join(direct, "IAA_T1_TF"))
-a5 = get_text(op.join(direct, "IAA_TF"))
-annolist = [a0, a1t1, a2, a3t1, a3, a4, a5t1, a5]
+# # Print all Annotators work, in order
+# direct = "IAA Files"
+# a0 = get_text(op.join(direct, "IAA_AD"))
+# a1t1 = get_text(op.join(direct, "IAA_T1_ADon"))
+# a2 = get_text(op.join(direct, "IAA_DW"))
+# a3t1 = get_text(op.join(direct, "IAA_T1_JBC"))
+# a3 = get_text(op.join(direct, "IAA_JBC"))
+# a4 = get_text(op.join(direct, "IAA_MH"))
+# a5t1 = get_text(op.join(direct, "IAA_T1_TF"))
+# a5 = get_text(op.join(direct, "IAA_TF"))
+# # annolist = [a0, a1t1, a2, a3t1, a3, a4, a5t1, a5]  # All annotations
+# # annolist = [a1t1, a3t1, a5t1]  # Try 1 annotations
+# annolist = [a0, a2, a3, a4, a5]  # Final annotations
+#
+# allannoslist = list()
+# for anno in annolist:
+#     glosssplit = anno.split("\n")
+#     annoglosslist = list()
+#     for gl in glosssplit:
+#         # glpat = re.compile(r'\(\d{1,2}[a-d] \d{1,2}[a-d]?\) ')
+#         # glpatitir = glpat.finditer(gl)
+#         # for i in glpatitir:
+#         annoglosslist.append(gl)
+#     allannoslist.append(annoglosslist)
+# annocombo = list()
+# for i in range(len(allannoslist[0])):
+#     thiscombo = list()
+#     for j in allannoslist:
+#         thiscombo.append(j[i])
+#     annocombo.append(thiscombo)
+# outstring = ""
+# for combo in annocombo:
+#     count = 0
+#     for var in combo:
+#         count += 1
+#         outstring = outstring + "{}: {}\n".format(str(count), var)
+#     outstring = outstring + "\n"
+# save_docx(outstring, "Compare Annotators")
 
-allannoslist = list()
-for anno in annolist:
-    glosssplit = anno.split("\n")
-    annoglosslist = list()
-    for gl in glosssplit:
-        glpat = re.compile(r'\(\d{1,2}[a-d] \d{1,2}[a-d]?\) ')
-        glpatitir = glpat.finditer(gl)
-        for i in glpatitir:
-            annoglosslist.append("".join(gl.split(i.group())))
-    allannoslist.append(annoglosslist)
-annocombo = list()
-for i in range(len(allannoslist[0])):
-    thisglosslist = list()
-    thisgloss =
-    for j in range(len(allannoslist)):
-        thisglosslist.append()
 
 # # Gets Kohen's Kappa of Annotators
 # direct = "IAA Files"
