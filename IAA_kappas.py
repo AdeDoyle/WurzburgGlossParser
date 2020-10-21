@@ -7,7 +7,7 @@ from sklearn.metrics import cohen_kappa_score
 import os.path as op
 
 
-def agreement(annotator_list):
+def find_agreement(annotator_list):
     """Finds inter-annotator agreement on whether a space should follow a given letter
        Returns a binary list for each annotator as compared to other annotators"""
     alist = annotator_list
@@ -63,19 +63,54 @@ def agreement(annotator_list):
     return bilists
 
 
-# # Print all Annotators work, in order
+def compare_agreement(binary_agreements_list):
+    """Takes a list of annotators' individual binary agreement on spacing points as compared to all other annotators.
+       Compares each pair of annotators once and returns a list of tuples containing the numbers of each annotator and
+       a Cohen's Kappa score for agreement between each two annotators."""
+    comparrisons_list = list()
+    compared_annotators = list()
+    for i, first_annotator in enumerate(binary_agreements_list):
+        for j, second_annotator in enumerate(binary_agreements_list):
+            if i != j and f'{i} and {j}' not in compared_annotators and f'{j} and {i}' not in compared_annotators:
+                comparrisons_list.append((i, j, cohen_kappa_score(first_annotator, second_annotator)))
+                compared_annotators.append(f'{i} and {j}')
+                compared_annotators.append(f'{j} and {i}')
+    return comparrisons_list
+
+
+# # Create a .docx file containing different annotators' glosses to compare
+#
 # direct = "IAA Files"
+# direct_mod = "IAA Files Mod Irish"
 # a0 = get_text(op.join(direct, "IAA_AD"))
-# a1t1 = get_text(op.join(direct, "IAA_T1_ADon"))
+# a1ng = get_text(op.join(direct, "IAA_T1_ADon"))
 # a2 = get_text(op.join(direct, "IAA_DW"))
-# a3t1 = get_text(op.join(direct, "IAA_T1_JBC"))
 # a3 = get_text(op.join(direct, "IAA_JBC"))
+# a3ng = get_text(op.join(direct, "IAA_T1_JBC"))
 # a4 = get_text(op.join(direct, "IAA_MH"))
-# a5t1 = get_text(op.join(direct, "IAA_T1_TF"))
 # a5 = get_text(op.join(direct, "IAA_TF"))
-# # annolist = [a0, a1t1, a2, a3t1, a3, a4, a5t1, a5]  # All annotations
-# # annolist = [a1t1, a3t1, a5t1]  # Try 1 annotations
-# annolist = [a0, a2, a3, a4, a5]  # Final annotations
+# a5ng = get_text(op.join(direct, "IAA_T1_TF"))
+# a6ng = get_text(op.join(direct, "IAA_expert-41_BB"))
+# a7ng = get_text(op.join(direct, "IAA_expert-41_FQ"))
+# e0 = get_text(op.join(direct, "IAA_expert_BB"))
+# e1 = get_text(op.join(direct, "IAA_expert_FQ"))
+# original = get_text(op.join(direct_mod, "Mod. Ir. Originals"))
+# o0 = get_text(op.join(direct_mod, "IAA_CS"))
+# o1 = get_text(op.join(direct_mod, "IAA_IG"))
+# o2 = get_text(op.join(direct_mod, "IAA_KD"))
+# s0 = get_text(op.join(direct_mod, "IAA_TF"))
+# s1 = get_text(op.join(direct_mod, "IAA_JBC"))
+# s2 = get_text(op.join(direct_mod, "IAA_OD"))
+# # annolist = [a0, a1ng, a2, a3, a3ng, a4, a5, a5ng, a6ng, a7ng]  # All annotations
+# # annolist = [a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators without guidelines
+# # annolist = [a0, a2, a3, a4, a5]  # All annotators with guidelines
+# # annolist = [e0, e1]  # Expert annotations (includes 1 extra gloss)
+# # annolist = [o0, o1, o2]  # Modern Irish, ordinary annotators
+# # annolist = [s0, s1, s2]  # Modern Irish, student annotators
+# # annolist = [original, o0, o1, o2]  # Modern Irish, ordinary annotators vs original
+# # annolist = [original, s0, s1, s2]  # Modern Irish, student annotators vs original
+# # annolist = [o0, o1, o2, s0, s1, s2]  # Modern Irish, all annotators
+# # annolist = [original, s0, s1, s2, o0, o1, o2]  # Modern Irish, all annotators vs original
 #
 # allannoslist = list()
 # for anno in annolist:
@@ -100,17 +135,47 @@ def agreement(annotator_list):
 #         count += 1
 #         outstring = outstring + "{}: {}\n".format(str(count), var)
 #     outstring = outstring + "\n"
-# save_docx(outstring, "Compare Annotators")
+# print(outstring)
+# # save_docx(outstring, "Compare Annotators")
 
 
-# # Gets Kohen's Kappa of Annotators
+# Gets Kohen's Kappa of Annotators
+#
 # direct = "IAA Files"
+# direct_mod = "IAA Files Mod Irish"
 # a0 = get_text(op.join(direct, "IAA_AD"))
-# a1 = get_text(op.join(direct, "IAA_DW"))
-# a2 = get_text(op.join(direct, "IAA_JBC"))
-# a3 = get_text(op.join(direct, "IAA_MH"))
-# a4 = get_text(op.join(direct, "IAA_TF"))
-# annolist = [a0, a1, a2, a3, a4]
+# a1ng = get_text(op.join(direct, "IAA_T1_ADon"))
+# a2 = get_text(op.join(direct, "IAA_DW"))
+# a3 = get_text(op.join(direct, "IAA_JBC"))
+# a3ng = get_text(op.join(direct, "IAA_T1_JBC"))
+# a4 = get_text(op.join(direct, "IAA_MH"))
+# a5 = get_text(op.join(direct, "IAA_TF"))
+# a5ng = get_text(op.join(direct, "IAA_T1_TF"))
+# a6ng = get_text(op.join(direct, "IAA_expert-41_BB"))
+# a7ng = get_text(op.join(direct, "IAA_expert-41_FQ"))
+# e0 = get_text(op.join(direct, "IAA_expert_BB"))
+# e1 = get_text(op.join(direct, "IAA_expert_FQ"))
+# original = get_text(op.join(direct_mod, "Mod. Ir. Originals"))
+# o0 = get_text(op.join(direct_mod, "IAA_CS"))
+# o1 = get_text(op.join(direct_mod, "IAA_IG"))
+# o2 = get_text(op.join(direct_mod, "IAA_KD"))
+# s0 = get_text(op.join(direct_mod, "IAA_TF"))
+# s1 = get_text(op.join(direct_mod, "IAA_JBC"))
+# s2 = get_text(op.join(direct_mod, "IAA_OD"))
+# # annolist = [a0, a2, a3, a4, a5]  # Non-expert annotators only (with guidelines)
+# # annolist = [a2, a3, a4, a5]  # Non-expert annotators only, excluding Adrian (with guidelines)
+# # annolist = [a0, a1ng, a3ng, a5ng]  # Non-expert annotators only (no guidelines)
+# # annolist = [a0, a1ng, a3ng, a5ng]  # Non-expert annotators only, excluding Adrian (no guidelines)
+# # annolist = [a6ng, a7ng]  # Expert annotators only (no guidelines)
+# # annolist = [e0, e1]  # Expert annotators only - 1 extra gloss (no guidelines)
+# # annolist = [a0, a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators (no guidelines)
+# # annolist = [a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators, excluding Adrian  (no guidelines)
+# # annolist = [o0, o1, o2]  # Modern Irish, ordinary annotators
+# # annolist = [s0, s1, s2]  # Modern Irish, student annotators
+# # annolist = [original, o0, o1, o2]  # Modern Irish, ordinary annotators vs original
+# # annolist = [original, s0, s1, s2]  # Modern Irish, student annotators vs original
+# # annolist = [o0, o1, o2, s0, s1, s2]  # Modern Irish, all annotators
+# # annolist = [original, s0, s1, s2, o0, o1, o2]  # Modern Irish, all annotators vs original
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
@@ -124,62 +189,16 @@ def agreement(annotator_list):
 #     while "  " in annolist[i]:
 #         annolist[i] = " ".join(annolist[i].split("  "))
 #
-# biannos = agreement(annolist)
-# print(cohen_kappa_score(biannos[0], biannos[1]))
-# print(cohen_kappa_score(biannos[0], biannos[2]))
-# print(cohen_kappa_score(biannos[0], biannos[3]))
-# print(cohen_kappa_score(biannos[0], biannos[4]))
-# print(cohen_kappa_score(biannos[1], biannos[2]))
-# print(cohen_kappa_score(biannos[1], biannos[3]))
-# print(cohen_kappa_score(biannos[1], biannos[4]))
-# print(cohen_kappa_score(biannos[2], biannos[3]))
-# print(cohen_kappa_score(biannos[2], biannos[4]))
-# print(cohen_kappa_score(biannos[3], biannos[4]))
+# biannos = find_agreement(annolist)
+# if all(biannocheck == biannos[0] for biannocheck in biannos):
+#     print("Perfect Agreement: all kappa scores = 1.0")
+# else:
+#     for kappa_score in compare_agreement(biannos):
+#         print(f'{kappa_score[0]} and {kappa_score[1]}: {kappa_score[2]}')
 #
 # # Get average agreement between Annotators
-# binums = list()
-# binums.append(cohen_kappa_score(biannos[0], biannos[1]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[2]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[3]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[4]))
-# binums.append(cohen_kappa_score(biannos[1], biannos[2]))
-# binums.append(cohen_kappa_score(biannos[1], biannos[3]))
-# binums.append(cohen_kappa_score(biannos[1], biannos[4]))
-# binums.append(cohen_kappa_score(biannos[2], biannos[3]))
-# binums.append(cohen_kappa_score(biannos[2], biannos[4]))
-# binums.append(cohen_kappa_score(biannos[3], biannos[4]))
-# print(sum(binums) / len(binums))
-
-
-# # Gets Cappa for Round 1 of Annotation
-# direct = "IAA Files"
-# a0 = get_text(op.join(direct, "IAA_T1_ADon"))
-# a1 = get_text(op.join(direct, "IAA_T1_JBC"))
-# a2 = get_text(op.join(direct, "IAA_T1_TF"))
-# annolist = [a0, a1, a2]
 #
-# for i in range(len(annolist)):
-#     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
-#     annolist[i] = " ".join(annolist[i].split("\n"))
-#     annolist[i] = "".join(annolist[i].split("*"))
-#     annolist[i] = "".join(annolist[i].split("-"))
-#     rempat = re.compile(r'\(\d\d?\w \d\d?\w?\) ')
-#     rempatitir = rempat.finditer(annolist[i])
-#     for j in rempatitir:
-#         annolist[i] = "".join(annolist[i].split(j.group()))
-#     while "  " in annolist[i]:
-#         annolist[i] = " ".join(annolist[i].split("  "))
-#
-# biannos = agreement(annolist)
-# print(cohen_kappa_score(biannos[0], biannos[1]))
-# print(cohen_kappa_score(biannos[0], biannos[2]))
-# print(cohen_kappa_score(biannos[1], biannos[2]))
-#
-# # Get average agreement between Annotators Round 1
-# binums = list()
-# binums.append(cohen_kappa_score(biannos[0], biannos[1]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[2]))
-# binums.append(cohen_kappa_score(biannos[1], biannos[2]))
+# binums = [k[2] for k in compare_agreement(biannos)]
 # print(sum(binums) / len(binums))
 
 
@@ -187,11 +206,19 @@ def agreement(annotator_list):
 # direct = "IAA Files"
 # t0 = get_text(op.join(direct, "IAA_TMod1"))
 # a0 = get_text(op.join(direct, "IAA_AD"))
-# a1 = get_text(op.join(direct, "IAA_DW"))
-# a2 = get_text(op.join(direct, "IAA_JBC"))
-# a3 = get_text(op.join(direct, "IAA_MH"))
-# a4 = get_text(op.join(direct, "IAA_TF"))
-# annolist = [t0, a0, a1, a2, a3, a4]
+# a1ng = get_text(op.join(direct, "IAA_T1_ADon"))
+# a2 = get_text(op.join(direct, "IAA_DW"))
+# a3 = get_text(op.join(direct, "IAA_JBC"))
+# a3ng = get_text(op.join(direct, "IAA_T1_JBC"))
+# a4 = get_text(op.join(direct, "IAA_MH"))
+# a5 = get_text(op.join(direct, "IAA_TF"))
+# a5ng = get_text(op.join(direct, "IAA_T1_TF"))
+# a6ng = get_text(op.join(direct, "IAA_expert-41_BB"))
+# a7ng = get_text(op.join(direct, "IAA_expert-41_FQ"))
+# # annolist = [t0, a0, a2, a3, a4, a5]  # Non-expert annotators only (with guidelines) vs. model
+# # annolist = [t0, a0, a1ng, a3ng, a5ng]  # Non-expert annotators only (no guidelines) vs. model
+# # annolist = [t0, a6ng, a7ng]  # Expert annotators only (no guidelines) vs. model
+# # annolist = [t0, a0, a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators (no guidelines) vs. model
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
@@ -205,20 +232,11 @@ def agreement(annotator_list):
 #     while "  " in annolist[i]:
 #         annolist[i] = " ".join(annolist[i].split("  "))
 #
-# biannos = agreement(annolist)
-# print(cohen_kappa_score(biannos[0], biannos[1]))
-# print(cohen_kappa_score(biannos[0], biannos[2]))
-# print(cohen_kappa_score(biannos[0], biannos[3]))
-# print(cohen_kappa_score(biannos[0], biannos[4]))
-# print(cohen_kappa_score(biannos[0], biannos[5]))
+# biannos = find_agreement(annolist)
+# for kappa_score in compare_agreement(biannos)[:len(biannos)-1]:
+#     print(f'{kappa_score[0]} and {kappa_score[1]}: {kappa_score[2]}')
 #
-# # Get average agreement between Tokenizer Annotators
-# binums = list()
-# binums.append(cohen_kappa_score(biannos[0], biannos[1]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[2]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[3]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[4]))
-# binums.append(cohen_kappa_score(biannos[0], biannos[4]))
+# binums = [k[2] for k in compare_agreement(biannos)[:len(biannos)-1]]
 # print(sum(binums) / len(binums))
 
 
@@ -228,14 +246,14 @@ def agreement(annotator_list):
 # a3 = "ab cd ef gh ij kl mn op qr st uv wx yz"
 # annolist = [a1, a2, a3]
 #
-# biannos = agreement(annolist)
+# biannos = find_agreement(annolist)
 # print(cohen_kappa_score(biannos[0], biannos[1]))
 # print(cohen_kappa_score(biannos[0], biannos[2]))
 # print(cohen_kappa_score(biannos[1], biannos[2]))
 #
 # # Test Agreement function (three ways: 1. run, 2. print, 3. for-loop print)
-# agreement(annolist)
-# print(agreement(annolist))
-# for i in agreement(annolist):
+# find_agreement(annolist)
+# print(find_agreement(annolist))
+# for i in find_agreement(annolist):
 #     print(i)
 
