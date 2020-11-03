@@ -139,7 +139,7 @@ def compare_agreement(binary_agreements_list):
 # # save_docx(outstring, "Compare Annotators")
 
 
-# Gets Kohen's Kappa of Annotators
+# # Gets Kohen's Kappa of Annotators
 #
 # direct = "IAA Files"
 # direct_mod = "IAA Files Mod Irish"
@@ -165,7 +165,7 @@ def compare_agreement(binary_agreements_list):
 # # annolist = [a0, a2, a3, a4, a5]  # Non-expert annotators only (with guidelines)
 # # annolist = [a2, a3, a4, a5]  # Non-expert annotators only, excluding Adrian (with guidelines)
 # # annolist = [a0, a1ng, a3ng, a5ng]  # Non-expert annotators only (no guidelines)
-# # annolist = [a0, a1ng, a3ng, a5ng]  # Non-expert annotators only, excluding Adrian (no guidelines)
+# # annolist = [a1ng, a3ng, a5ng]  # Non-expert annotators only, excluding Adrian (no guidelines)
 # # annolist = [a6ng, a7ng]  # Expert annotators only (no guidelines)
 # # annolist = [e0, e1]  # Expert annotators only - 1 extra gloss (no guidelines)
 # # annolist = [a0, a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators (no guidelines)
