@@ -7,32 +7,39 @@ import re
 def make_json(glosslist, headers=False):
     """Takes a list of sublists, each sublist containing a gloss and related information, returns a json package for
        each gloss"""
+    # Create a high level blank of the JSON document to hold all data
     jsonformat0 = """[x]"""
+    # Create a high-mid level blank to be reused in the JSON document each time a new epistle begins
     jsonformat1 = """{
     "epistle": "[x]",
     "folios": [y]
 }"""
+    # Create a low-mid level blank to be reused in the JSON document each time a new folio begins
     jsonformat2 = """{
         "folio": "[x]",
         "glosses": [y]
     }"""
+    # Create a low level blank to be reused in the JSON document for each new gloss
     jsonformat3 = """{
-            "tphPage": "[a]",
-            "glossNo": "[b]",
-            "latLine": "[c]",
-            "latin": "[d]",
-            "lemma": "[e]",
-            "lemPos": "[f]",
+            "tphPage": "[p]",
+            "glossNo": "[gn]",
+            "latLine": "[v]",
+            "latin": "[la]",
+            "lemma": "[le]",
+            "lemPos": "[lp]",
             "glossFullTags": "[g]",
             "glossHand": "[h]",
-            "glossText": "[w]",
-            "glossFNs": "[x]",
-            "footnotes": "[y]",
-            "glossTrans": "[z]"
+            "glossText": "[gt]",
+            "glossTokens1": "",
+            "glossTokens2": "",
+            "glossFNs": "[gfn]",
+            "footnotes": "[fn]",
+            "newNotes": "[nn]",
+            "glossTrans": "[tr]"
         }"""
     if headers:
         glosslist = glosslist[1:]
-    #  This gets level 3
+    # Identify all low level data for each gloss from the combined information list of glosses
     jsonglosslist1 = []
     foliohandswap = False
     for gloss in glosslist:
@@ -49,7 +56,8 @@ def make_json(glosslist, headers=False):
         gt = gloss[9]
         gfn = gloss[10]
         fn = gloss[11]
-        gtr = gloss[12]
+        an = gloss[12]
+        gtr = gloss[13]
         h = "Hand Two"
         if f == "f. 33a":
             foliohandswap = True
@@ -59,18 +67,19 @@ def make_json(glosslist, headers=False):
             for i in fn:
                 if "prima" in i:
                     h = "Hand One (Prima Manus)"
-        jsonblank = jsonblank[:jsonblank.find("[a]")] + str(p) + jsonblank[jsonblank.find("[a]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[b]")] + gn + jsonblank[jsonblank.find("[b]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[c]")] + v + jsonblank[jsonblank.find("[c]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[d]")] + la + jsonblank[jsonblank.find("[d]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[e]")] + le + jsonblank[jsonblank.find("[e]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[f]")] + str(lp) + jsonblank[jsonblank.find("[f]") + 3:]
+        # Replace the marker for each datum in the low level JSON blank with appropriate data for the gloss
+        jsonblank = jsonblank[:jsonblank.find("[p]")] + str(p) + jsonblank[jsonblank.find("[p]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[gn]")] + gn + jsonblank[jsonblank.find("[gn]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[v]")] + v + jsonblank[jsonblank.find("[v]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[la]")] + la + jsonblank[jsonblank.find("[la]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[le]")] + le + jsonblank[jsonblank.find("[le]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[lp]")] + str(lp) + jsonblank[jsonblank.find("[lp]") + 4:]
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
         jsonblank = jsonblank[:jsonblank.rfind("[h]")] + h + jsonblank[jsonblank.rfind("[h]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[w]")] + gt + jsonblank[jsonblank.find("[w]") + 3:]
-        jsonblank = jsonblank[:jsonblank.find("[x]")] + gfn + jsonblank[jsonblank.find("[x]") + 3:]
+        jsonblank = jsonblank[:jsonblank.find("[gt]")] + gt + jsonblank[jsonblank.find("[gt]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[gfn]")] + gfn + jsonblank[jsonblank.find("[gfn]") + 5:]
         if not fn:
-            jsonblank = jsonblank[:jsonblank.find("[y]") - 1] + "null" + jsonblank[jsonblank.find("[y]") + 4:]
+            jsonblank = jsonblank[:jsonblank.find("[fn]") - 1] + "null" + jsonblank[jsonblank.find("[fn]") + 5:]
         elif fn:
             if isinstance(fn, list):
                 fncombine = '",\n                "'.join(fn)
@@ -81,10 +90,15 @@ def make_json(glosslist, headers=False):
                     for starfind in starpatitir:
                         fnlist = fn.split(starfind.group())
                         fn = "".join(fnlist)
-                jsonblank = jsonblank[:jsonblank.find("[y]") - 1] + fn + jsonblank[jsonblank.find("[y]") + 4:]
-        jsonblank = jsonblank[:jsonblank.find("[z]")] + gtr + jsonblank[jsonblank.find("[z]") + 3:]
+                jsonblank = jsonblank[:jsonblank.find("[fn]") - 1] + fn + jsonblank[jsonblank.find("[fn]") + 5:]
+        if not an:
+            jsonblank = jsonblank[:jsonblank.find("[nn]") - 1] + "null" + jsonblank[jsonblank.find("[nn]") + 5:]
+        elif an:
+            jsonblank = jsonblank[:jsonblank.find("[nn]")] + an + jsonblank[jsonblank.find("[nn]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[tr]")] + gtr + jsonblank[jsonblank.find("[tr]") + 4:]
         jsonblanklist = [e, f, jsonblank]
         jsonglosslist1.append(jsonblanklist)
+    # Identify all low-mid level data for each new folio from the combined information list of glosses
     jsonglosslist2 = []
     curep = "unknown"
     curfol = "unknown"
@@ -162,5 +176,9 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-# wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
-# print(make_json(wbglosslist, True))
+# if __name__ == "__main__":
+#
+#     wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
+#     print(make_json(wbglosslist, True))
+#     wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
+#     print(make_json(wbglosslist, True))

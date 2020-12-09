@@ -13,10 +13,10 @@ def combine_infolists(file, startpage=499, stoppage=712):
     latinfo = get_allinfo(file, startpage, stoppage)
     del latinfo[0]
     combolist = [["Epistle", "Page", "Folio", "Verse", "Latin", "Lemma", "Lemma Position", "Gloss No.",
-                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "Relevant Footnotes", "Gloss Translation"]]
+                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "Relevant Footnotes", "Adrian's Notes",
+                  "Gloss Translation"]]
     if len(glossinfo) == len(latinfo):
-        for i in range(len(glossinfo)):
-            gloss = glossinfo[i]
+        for i, gloss in enumerate(glossinfo):
             lat = latinfo[i]
             glist = gloss[:3]
             if clear_tags(gloss[4]) == lat[3]:
@@ -45,3 +45,5 @@ def combine_infolists(file, startpage=499, stoppage=712):
 
 # for combo in combine_infolists("Wurzburg Glosses", 499, 500):
 #     print(combo)
+# for combo in combine_infolists("Wurzburg Glosses", 704, 705):
+#     print(combo[:3] + [combo[7]] + combo[-3:])

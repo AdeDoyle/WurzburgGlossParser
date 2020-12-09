@@ -92,8 +92,10 @@ def compare_agreement(binary_agreements_list):
 # a5ng = get_text(op.join(direct, "IAA_T1_TF"))
 # a6ng = get_text(op.join(direct, "IAA_expert-41_BB"))
 # a7ng = get_text(op.join(direct, "IAA_expert-41_FQ"))
+# a8ng = get_text(op.join(direct, "IAA_expert-41_EL"))
 # e0 = get_text(op.join(direct, "IAA_expert_BB"))
 # e1 = get_text(op.join(direct, "IAA_expert_FQ"))
+# e2 = get_text(op.join(direct, "IAA_expert_EL"))
 # original = get_text(op.join(direct_mod, "Mod. Ir. Originals"))
 # o0 = get_text(op.join(direct_mod, "IAA_CS"))
 # o1 = get_text(op.join(direct_mod, "IAA_IG"))
@@ -101,10 +103,10 @@ def compare_agreement(binary_agreements_list):
 # s0 = get_text(op.join(direct_mod, "IAA_TF"))
 # s1 = get_text(op.join(direct_mod, "IAA_JBC"))
 # s2 = get_text(op.join(direct_mod, "IAA_OD"))
-# # annolist = [a0, a1ng, a2, a3, a3ng, a4, a5, a5ng, a6ng, a7ng]  # All annotations
-# # annolist = [a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators without guidelines
+# # annolist = [a0, a1ng, a2, a3, a3ng, a4, a5, a5ng, a6ng, a7ng, a8ng]  # All annotations
+# # annolist = [a1ng, a3ng, a5ng, a6ng, a7ng, a8ng]  # All annotators without guidelines
 # # annolist = [a0, a2, a3, a4, a5]  # All annotators with guidelines
-# # annolist = [e0, e1]  # Expert annotations (includes 1 extra gloss)
+# # annolist = [e0, e1, e2]  # Expert annotations (includes 1 extra gloss)
 # # annolist = [o0, o1, o2]  # Modern Irish, ordinary annotators
 # # annolist = [s0, s1, s2]  # Modern Irish, student annotators
 # # annolist = [original, o0, o1, o2]  # Modern Irish, ordinary annotators vs original
@@ -153,8 +155,10 @@ def compare_agreement(binary_agreements_list):
 # a5ng = get_text(op.join(direct, "IAA_T1_TF"))
 # a6ng = get_text(op.join(direct, "IAA_expert-41_BB"))
 # a7ng = get_text(op.join(direct, "IAA_expert-41_FQ"))
+# a8ng = get_text(op.join(direct, "IAA_expert-41_EL"))
 # e0 = get_text(op.join(direct, "IAA_expert_BB"))
 # e1 = get_text(op.join(direct, "IAA_expert_FQ"))
+# e2 = get_text(op.join(direct, "IAA_expert_EL"))
 # original = get_text(op.join(direct_mod, "Mod. Ir. Originals"))
 # o0 = get_text(op.join(direct_mod, "IAA_CS"))
 # o1 = get_text(op.join(direct_mod, "IAA_IG"))
@@ -166,10 +170,10 @@ def compare_agreement(binary_agreements_list):
 # # annolist = [a2, a3, a4, a5]  # Non-expert annotators only, excluding Adrian (with guidelines)
 # # annolist = [a0, a1ng, a3ng, a5ng]  # Non-expert annotators only (no guidelines)
 # # annolist = [a1ng, a3ng, a5ng]  # Non-expert annotators only, excluding Adrian (no guidelines)
-# # annolist = [a6ng, a7ng]  # Expert annotators only (no guidelines)
-# # annolist = [e0, e1]  # Expert annotators only - 1 extra gloss (no guidelines)
-# # annolist = [a0, a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators (no guidelines)
-# # annolist = [a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators, excluding Adrian  (no guidelines)
+# # annolist = [a6ng, a7ng, a8ng]  # Expert annotators only (no guidelines)
+# # annolist = [e0, e1, e2]  # Expert annotators only - 1 extra gloss (no guidelines)
+# # annolist = [a0, a1ng, a3ng, a5ng, a6ng, a7ng, a8ng]  # All annotators (no guidelines)
+# # annolist = [a1ng, a3ng, a5ng, a6ng, a7ng, a8ng]  # All annotators, excluding Adrian  (no guidelines)
 # # annolist = [o0, o1, o2]  # Modern Irish, ordinary annotators
 # # annolist = [s0, s1, s2]  # Modern Irish, student annotators
 # # annolist = [original, o0, o1, o2]  # Modern Irish, ordinary annotators vs original
@@ -215,10 +219,11 @@ def compare_agreement(binary_agreements_list):
 # a5ng = get_text(op.join(direct, "IAA_T1_TF"))
 # a6ng = get_text(op.join(direct, "IAA_expert-41_BB"))
 # a7ng = get_text(op.join(direct, "IAA_expert-41_FQ"))
+# a8ng = get_text(op.join(direct, "IAA_expert-41_EL"))
 # # annolist = [t0, a0, a2, a3, a4, a5]  # Non-expert annotators only (with guidelines) vs. model
 # # annolist = [t0, a0, a1ng, a3ng, a5ng]  # Non-expert annotators only (no guidelines) vs. model
-# # annolist = [t0, a6ng, a7ng]  # Expert annotators only (no guidelines) vs. model
-# # annolist = [t0, a0, a1ng, a3ng, a5ng, a6ng, a7ng]  # All annotators (no guidelines) vs. model
+# # annolist = [t0, a6ng, a7ng, a8ng]  # Expert annotators only (no guidelines) vs. model
+# # annolist = [t0, a0, a1ng, a3ng, a5ng, a6ng, a7ng, a8ng]  # All annotators (no guidelines) vs. model
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""

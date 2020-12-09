@@ -8,16 +8,13 @@ from OpenPages import get_pages
 @lru_cache(maxsize=1000)
 def get_section(fulltext, section="No Section"):
     """Gets and returns list of instances of just the text between a particular set of section tags"""
-    if section != "Lat":
-        if section != "SG":
-            if section != "Eng":
-                if section != "FN":
-                    section = "No Section"
+    if section not in ["Lat", "SG", "Eng", "FN", "AN"]:
+        section = "No Section"
     if section != "No Section":
         secs = get_tagtext(fulltext, section)
     else:
         secremovetext = fulltext
-        seclist = ["Lat", "SG", "Eng", "FN"]
+        seclist = ["Lat", "SG", "Eng", "FN", "AN"]
         for sec in seclist:
             opentag = ("[" + sec + "]")
             closetag = ("[/" + sec + "]")

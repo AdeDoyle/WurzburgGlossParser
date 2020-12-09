@@ -8,7 +8,7 @@ from OrderGlosses import order_glosses, order_glosslist
 from ClearTags import clear_tags, clear_spectags
 from GetFolio import get_fol
 from GetTrans import get_transpagesinfo
-from OrderFootnotes import order_footlist
+from OrderFootnotes import order_footlist, order_newlist
 import re
 
 
@@ -19,13 +19,39 @@ def get_glinfo(file, startpage=499, stoppage=712):
        (with [GLat][/GLat] tags converted to html italics tags) for every gloss in Wb."""
     curepist = "Unknown"
     infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes",
-                 "Relevant Footnotes", "Gloss Translation"]]
+                 "Relevant Footnotes", "Adrian's Notes", "Gloss Translation"]]
     pagestrans = get_transpagesinfo(file, startpage, stoppage)
     for page in range(startpage, stoppage + 1):
         thispage = page
         pagetext = get_pages(file, thispage, thispage)
         # Gets all page Footnotes for the first time (for the gloss)
         footnotelist = order_footlist(file, page)
+        # Gets all notes supplied by me (for the gloss)
+        notelist = order_newlist(file, page)
+        newnotelist = list()
+        notefol = False
+        if notelist != ['']:
+            for notenum, note in enumerate(notelist):
+                noteidpat = re.compile(r'\[/?f\. \d{1,2}[a-d]\]')
+                noteiditer = noteidpat.findall(note)
+                if noteiditer:
+                    for folinfo in noteiditer:
+                        note = "".join(note.split(folinfo))
+                    folinfo = "".join(i for i in noteiditer[0] if i not in ["[", "]", "/"])
+                    if notenum == 0:
+                        notefol = folinfo
+                    elif notefol != folinfo:
+                        notefol = folinfo
+                notenumpat = re.compile(r'^\d{1,2}\. ')
+                notenumiter = notenumpat.findall(note)
+                if not notenumiter:
+                    raise RuntimeError("Personal note found without link to gloss number")
+                elif len(notenumiter) > 1 or notenumiter[0] != note[:len(notenumiter[0])]:
+                    raise RuntimeError("Multiple possible gloss numbers found for personal note")
+                elif notenumiter[0] == note[:len(notenumiter[0])]:
+                    glossnum = notenumiter[0][:-2]
+                    note = note[len(notenumiter[0]):]
+                newnotelist.append([notefol, glossnum, note])
         # Checks for a new epistle on the current page.
         epfunc = get_tagtext(pagetext, "H2")
         if epfunc:
@@ -108,9 +134,20 @@ def get_glinfo(file, startpage=499, stoppage=712):
                                 glossfnlist.append(clear_tags(fnote[:1] + ":" + fnote[1:]))
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
-                    # fnstring = clear_tags('",\n                "'.join(glossfnlist))
-                # thisglosslist.extend([glossfulltags, basegloss, footnotesgloss, "[{" + fnstring + "}]"])
                     thisglosslist.extend([glossfulltags, basegloss, footnotesgloss, glossfnlist])
+                if newnotelist:
+                    for note in newnotelist:
+                        folinfo = note[0]
+                        glossnum = note[1]
+                        notetext = note[2]
+                        if folinfo == thisglosslist[2] and glossnum == thisglosslist[3]:
+                            thisglosslist.extend([notetext])
+                        else:
+                            anstring = ""
+                            thisglosslist.extend([anstring])
+                elif not newnotelist:
+                    anstring = ""
+                    thisglosslist.extend([anstring])
             infolist.append(thisglosslist)
     # add translations to the end of the infolists where they are available
     for infoset in infolist:
@@ -187,7 +224,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
             elif not curpage:
                 curpage = infoset[1]
                 footnotelist = order_footlist(file, curpage)
-            trans = infoset[8]
+            trans = infoset[9]
             # finds which translations have footnotes, looks for the associated footnote i the list generated above
             if "<sup>" in trans:
                 superscriptpat = re.compile(r'<sup>\w</sup>')
@@ -218,3 +255,6 @@ def get_glinfo(file, startpage=499, stoppage=712):
 # for glossinfolist in get_glinfo("Wurzburg Glosses", 499, 509):
 #     print(glossinfolist[7])
 # print(get_glinfo("Wurzburg Glosses", 499, 499))
+
+# for i in get_glinfo("Wurzburg Glosses", 705, 705):
+#     print(i[:4] + [i[8]])
