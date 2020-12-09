@@ -4,6 +4,7 @@ from MakeJSON import make_json
 from SaveJSON import save_json
 import os
 import json
+from ClearTags import clear_tags
 from tkinter import *
 
 
@@ -66,7 +67,7 @@ def select_glossnum(glosses, glossnum):
             gl_num = gloss["glossNo"]
             if gl_num == glossnum:
                 hand = gloss['glossHand']
-                gloss_text = gloss['glossText']
+                gloss_text = gloss['glossFullTags']
                 trans = gloss['glossTrans']
                 toks1 = gloss['glossTokens1']
                 toks2 = gloss['glossTokens1']
@@ -132,12 +133,22 @@ if __name__ == "__main__":
                 gloss = gloss_data['glossFullTags']
                 tok_1 = gloss_data['glossTokens1']
                 tok_2 = gloss_data['glossTokens2']
-                token_list = [[i, "<Unknown>"] for i in gloss.split(" ")]
+                token_list = [[i, "<unknown>"] for i in clear_tags(gloss).split(" ")]
                 if not tok_1 and not tok_2:
-                    gloss_data["glossTokens1"] = token_list
-                    gloss_data['glossTokens2'] = token_list
-                    tok_1 = gloss_data['glossTokens1']
-                    tok_2 = gloss_data['glossTokens2']
+                    tok_1 = token_list
+                    tok_2 = token_list
+                    gloss_data["glossTokens1"] = tok_1
+                    gloss_data['glossTokens2'] = tok_2
+                elif not tok_1:
+                    tok_1 = token_list
+                    gloss_data["glossTokens1"] = tok_1
+                elif not tok_2:
+                    tok_2 = token_list
+                    gloss_data['glossTokens2'] = tok_2
+
+    # Save the updated JSON file
+    with open("Wb. Manual Tokenisation.json", 'w', encoding="utf-8") as wb_json:
+        json.dump(wb_data, wb_json, indent=4, ensure_ascii=False)
 
     # Create the GUI
     root = Tk()
