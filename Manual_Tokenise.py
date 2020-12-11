@@ -6,11 +6,53 @@ import os
 import json
 from ClearTags import clear_tags
 from tkinter import *
+from tkinter import font
 
 
 pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
             "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
             "<Latin>", "<unknown>"]
+
+
+def italicise(ital_text):
+    italics_font = font.Font(ital_text, ital_text.cget("font"))
+    italics_font.configure(slant="italic")
+    ital_text.tag_configure("italic", font=italics_font)
+    current_tags = ital_text.tag_names("sel.first")
+
+
+def update_json(file_name, file_object):
+    """Save JSON file, overwrite old file by the same name if necessary"""
+    with open(file_name, 'w', encoding="utf-8") as json_file:
+        json.dump(file_object, json_file, indent=4, ensure_ascii=False)
+
+
+def update_empty_toks(file_name, json_doc):
+    """Go through all glosses looking for tokenisation fields that are empty
+       replace any empty fields with tokens from the gloss and their POS tags
+       update the .json file containing the data"""
+    for epistle in json_doc:
+        folios = epistle['folios']
+        for folio_data in folios:
+            glosses = folio_data['glosses']
+            for gloss_data in glosses:
+                gloss = gloss_data['glossFullTags']
+                tok_1 = gloss_data['glossTokens1']
+                tok_2 = gloss_data['glossTokens2']
+                token_list = [[i, "<unknown>"] for i in clear_tags(gloss).split(" ")]
+                if not tok_1 and not tok_2:
+                    tok_1 = token_list
+                    tok_2 = token_list
+                    gloss_data["glossTokens1"] = tok_1
+                    gloss_data['glossTokens2'] = tok_2
+                elif not tok_1:
+                    tok_1 = token_list
+                    gloss_data["glossTokens1"] = tok_1
+                elif not tok_2:
+                    tok_2 = token_list
+                    gloss_data['glossTokens2'] = tok_2
+    update_json(file_name, json_doc)
+    return f'{json_doc} updated: Tokenisation fields generated for empty strings.'
 
 
 def show_epistles(json_file):
@@ -67,7 +109,7 @@ def select_glossnum(glosses, glossnum):
             gl_num = gloss["glossNo"]
             if gl_num == glossnum:
                 hand = gloss['glossHand']
-                gloss_text = gloss['glossFullTags']
+                gloss_text = gloss['glossText']
                 trans = gloss['glossTrans']
                 toks1 = gloss['glossTokens1']
                 toks2 = gloss['glossTokens1']
@@ -120,56 +162,75 @@ if __name__ == "__main__":
     with open("Wb. Manual Tokenisation.json", 'r', encoding="utf-8") as wb_json:
         wb_data = json.load(wb_json)
 
-    # If the tokenised fields are empty (the JSON file has just been generated) lists of tokens and POS to them
+    # Check if any of the tokenisation fields are empty
+    empty_tokfields = False
     for epistle in wb_data:
-        ep_name = epistle['epistle']
         folios = epistle['folios']
         for folio_data in folios:
-            folio = folio_data['folio']
             glosses = folio_data['glosses']
             for gloss_data in glosses:
-                number = gloss_data['glossNo']
-                hand = gloss_data['glossHand']
-                gloss = gloss_data['glossFullTags']
                 tok_1 = gloss_data['glossTokens1']
                 tok_2 = gloss_data['glossTokens2']
-                token_list = [[i, "<unknown>"] for i in clear_tags(gloss).split(" ")]
-                if not tok_1 and not tok_2:
-                    tok_1 = token_list
-                    tok_2 = token_list
-                    gloss_data["glossTokens1"] = tok_1
-                    gloss_data['glossTokens2'] = tok_2
-                elif not tok_1:
-                    tok_1 = token_list
-                    gloss_data["glossTokens1"] = tok_1
-                elif not tok_2:
-                    tok_2 = token_list
-                    gloss_data['glossTokens2'] = tok_2
+                if not tok_1 or not tok_2:
+                    empty_tokfields = True
+                    break
+            if empty_tokfields:
+                break
+        if empty_tokfields:
+            break
+    # If any of the tokenisation fields, for any gloss, are empty (eg. if the JSON file has just been generated)
+    # add lists of tokens and their POS tags, for each gloss, to the gloss's tokenisation fields
+    if empty_tokfields:
+        update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
 
-    # Save the updated JSON file
-    with open("Wb. Manual Tokenisation.json", 'w', encoding="utf-8") as wb_json:
-        json.dump(wb_data, wb_json, indent=4, ensure_ascii=False)
+    # Select the first gloss, from the first folio, from the first epistle as the starting gloss
+    epistles = show_epistles(wb_data)
+    open_ep = epistles[0]
+    open_folio = show_folcols(select_epistle(open_ep))[0]
+    open_glossnum = show_glossnums(select_folcol(select_epistle(open_ep), open_folio))[0]
+    open_glossdata = select_glossnum(select_folcol(select_epistle(open_ep), open_folio), open_glossnum)
+    open_hand = open_glossdata[0]
+    open_gloss = open_glossdata[1]
+    open_trans = open_glossdata[2]
+    open_toks1 = open_glossdata[3]
+    open_toks2 = open_glossdata[4]
+    open_glossid = open_folio + open_glossnum
+
+    cur_glossid = open_glossid
+    cur_hand = open_hand
+    cur_gloss = open_gloss
+    cur_trans = open_trans
+    cur_toks1 = open_toks1
+    cur_toks2 = open_toks2
 
     # Create the GUI
     root = Tk()
     root.title("Manual Tokenisation Window")
     root.geometry("1200x500")
 
-    # Create GUI text displays (to show the gloss hand, the original gloss text, and the gloss translation)
+    # Create GUI text labels (to show the gloss hand, the original gloss text, and the gloss translation)
+    gloss_label = Label(root, width=80, height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:", font=("Helvetica", 16))
+    gloss_text = Label(root, width=80, height=3, text=open_gloss, font=("Courier", 16))
+    trans_label = Label(root, width=80, height=1, text="Translation:", font=("Helvetica", 16))
+    trans_text = Label(root, width=80, height=3, text=open_trans, font=("Courier", 16))
+    gloss_label.grid(row=1, column=1)
+    gloss_text.grid(row=2, column=1)
+    trans_label.grid(row=3, column=1)
+    trans_text.grid(row=4, column=1)
 
     # Create GUI text-boxes (to edit the tokenisation fields by inserting or removing spaces)
-    tokenise_text_1 = Text(root, width=80, height=3, font=("Courier", 16))
-    tokenise_text_2 = Text(root, width=80, height=3, font=("Courier", 16))
-    tokenise_text_1.pack(pady=20)
-    tokenise_text_2.pack(pady=20)
+    tokenise_text_1 = Text(root, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 16))
+    tokenise_text_2 = Text(root, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 16))
+    tokenise_text_1.grid(row=5, column=1)
+    tokenise_text_2.grid(row=6, column=1)
 
     # Create GUI buttons
-    save_button = Button(root, text="Save", command=save_tokens)
-    save_button.pack(pady=20)
-    next_button = Button(root, text="Next", command=next_gloss)
-    next_button.pack(pady=21)
     back_button = Button(root, text="Back", command=last_gloss)
-    back_button.pack(pady=22)
+    back_button.grid(row=7, column=0, pady=20)
+    save_button = Button(root, text="Save", command=save_tokens)
+    save_button.grid(row=7, column=1, pady=20)
+    next_button = Button(root, text="Next", command=next_gloss)
+    next_button.grid(row=7, column=2, pady=20)
 
     # Run the GUI
     root.mainloop()
