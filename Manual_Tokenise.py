@@ -6,19 +6,11 @@ import os
 import json
 from ClearTags import clear_tags
 from tkinter import *
-from tkinter import font
 
 
 pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
             "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
             "<Latin>", "<unknown>"]
-
-
-def italicise(ital_text):
-    italics_font = font.Font(ital_text, ital_text.cget("font"))
-    italics_font.configure(slant="italic")
-    ital_text.tag_configure("italic", font=italics_font)
-    current_tags = ital_text.tag_names("sel.first")
 
 
 def update_json(file_name, file_object):
@@ -186,7 +178,8 @@ if __name__ == "__main__":
     # Select the first gloss, from the first folio, from the first epistle as the starting gloss
     epistles = show_epistles(wb_data)
     open_ep = epistles[0]
-    open_folio = show_folcols(select_epistle(open_ep))[0]
+    open_fols = show_folcols(select_epistle(open_ep))
+    open_folio = open_fols[0]
     open_glossnum = show_glossnums(select_folcol(select_epistle(open_ep), open_folio))[0]
     open_glossdata = select_glossnum(select_folcol(select_epistle(open_ep), open_folio), open_glossnum)
     open_hand = open_glossdata[0]
@@ -196,6 +189,7 @@ if __name__ == "__main__":
     open_toks2 = open_glossdata[4]
     open_glossid = open_folio + open_glossnum
 
+    cur_fols = open_fols
     cur_glossid = open_glossid
     cur_hand = open_hand
     cur_gloss = open_gloss
@@ -206,31 +200,70 @@ if __name__ == "__main__":
     # Create the GUI
     root = Tk()
     root.title("Manual Tokenisation Window")
-    root.geometry("1200x500")
+    root.geometry("900x750")
 
-    # Create GUI text labels (to show the gloss hand, the original gloss text, and the gloss translation)
-    gloss_label = Label(root, width=80, height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:", font=("Helvetica", 16))
-    gloss_text = Label(root, width=80, height=3, text=open_gloss, font=("Courier", 16))
-    trans_label = Label(root, width=80, height=1, text="Translation:", font=("Helvetica", 16))
-    trans_text = Label(root, width=80, height=3, text=open_trans, font=("Courier", 16))
-    gloss_label.grid(row=1, column=1)
-    gloss_text.grid(row=2, column=1)
-    trans_label.grid(row=3, column=1)
-    trans_text.grid(row=4, column=1)
+    # Create frames for all following widgets
 
-    # Create GUI text-boxes (to edit the tokenisation fields by inserting or removing spaces)
-    tokenise_text_1 = Text(root, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 16))
-    tokenise_text_2 = Text(root, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 16))
-    tokenise_text_1.grid(row=5, column=1)
-    tokenise_text_2.grid(row=6, column=1)
+    options_frame = LabelFrame(root, padx=20, pady=20)
+    options_frame.pack(padx=10, pady=10, anchor='w')
+
+    nav_frame = LabelFrame(root, padx=20, pady=20)
+    nav_frame.pack(padx=10, pady=10, anchor='w')
+
+    text_frame = LabelFrame(root, padx=20, pady=20)
+    text_frame.pack(padx=10, pady=10, anchor='w')
+
+    toks_frames = LabelFrame(root, padx=20, pady=20)
+    toks_frames.pack(padx=10, pady=10, anchor='w')
+
+    toks1_frame = LabelFrame(toks_frames, padx=10, pady=10)
+    toks1_frame.grid(row=0, column=0, pady=5)
+
+    toks2_frame = LabelFrame(toks_frames, padx=10, pady=10)
+    toks2_frame.grid(row=0, column=1, pady=5)
+
+    # Create top-bar dropdown menus
+    selected_ep = StringVar()
+    selected_ep.set(open_ep)
+    ep_drop = OptionMenu(options_frame, selected_ep, *epistles)
+    ep_drop.grid(row=0, column=0)
 
     # Create GUI buttons
-    back_button = Button(root, text="Back", command=last_gloss)
-    back_button.grid(row=7, column=0, pady=20)
-    save_button = Button(root, text="Save", command=save_tokens)
-    save_button.grid(row=7, column=1, pady=20)
-    next_button = Button(root, text="Next", command=next_gloss)
-    next_button.grid(row=7, column=2, pady=20)
+    back_button = Button(nav_frame, text="Back", command=last_gloss)
+    back_button.grid(row=0, column=0, padx=5, pady=5)
+    save_button = Button(nav_frame, text="Save", command=save_tokens)
+    save_button.grid(row=0, column=1, padx=5, pady=5)
+    next_button = Button(nav_frame, text="Next", command=next_gloss)
+    next_button.grid(row=0, column=2, padx=5, pady=5)
+
+    # Create GUI text labels (to show the gloss hand, the original gloss text, and the gloss translation)
+    gloss_label = Label(text_frame, height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
+                        font=("Helvetica", 16))
+    gloss_text = Label(text_frame, width=80, height=3, text=open_gloss, font=("Courier", 12))
+    trans_label = Label(text_frame, height=1, text="Translation:", font=("Helvetica", 16))
+    trans_text = Label(text_frame, width=80, height=3, text=open_trans, font=("Courier", 12))
+    gloss_label.pack(anchor='w')
+    gloss_text.pack(anchor='w')
+    trans_label.pack(anchor='w')
+    trans_text.pack(anchor='w')
+
+    # Create GUI text-boxes (to edit the tokenisation fields by inserting or removing spaces)
+    tokenise_text_1 = Text(text_frame, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
+    tokenise_text_2 = Text(text_frame, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
+    tokenise_text_1.pack(anchor='w')
+    tokenise_text_2.pack(anchor='w')
+
+    # Create lables for the tokens and POS tags (style 1)
+    toks1_label = Label(toks1_frame, text="Tokens (1)", font=("Helvetica", 16))
+    toks1_label.grid(row=0, column=0, padx=5, pady=5)
+    pos1_label = Label(toks1_frame, text="POS tags", font=("Helvetica", 16))
+    pos1_label.grid(row=0, column=1, padx=5, pady=5)
+
+    # Create lables for the tokens and POS tags (style 2)
+    toks2_label = Label(toks2_frame, text="Tokens (2)", font=("Helvetica", 16))
+    toks2_label.grid(row=0, column=0, padx=5, pady=5)
+    pos2_label = Label(toks2_frame, text="POS tags", font=("Helvetica", 16))
+    pos2_label.grid(row=0, column=1, padx=5, pady=5)
 
     # Run the GUI
     root.mainloop()
