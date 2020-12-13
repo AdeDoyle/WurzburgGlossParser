@@ -109,6 +109,78 @@ def select_glossnum(glosses, glossnum):
     return gloss_data
 
 
+def delete_textframe():
+    text_frame.destroy()
+
+
+def delete_glossdrop():
+    gloss_drop.destroy()
+
+
+def delete_foldrop():
+    fol_drop.destroy()
+
+
+def update_glosstext(event=None):
+    cur_ep = selected_ep.get()
+    cur_folio = selected_fol.get()
+    cur_glossnum = selected_gloss.get()
+    cur_glossid = cur_folio + cur_glossnum
+    cur_glossdata = select_glossnum(select_folcol(select_epistle(cur_ep), cur_folio), cur_glossnum)
+    cur_hand = cur_glossdata[0]
+    cur_gloss = cur_glossdata[1]
+    cur_trans = cur_glossdata[2]
+    cur_toks1 = cur_glossdata[3]
+    cur_toks2 = cur_glossdata[4]
+
+    delete_textframe()
+
+    text_frame = LabelFrame(root, padx=20, pady=20)
+    text_frame.grid(row=2, column=0, padx=10, pady=10)
+
+    gloss_label = Label(text_frame, height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
+                        font=("Helvetica", 16))
+    gloss_text = Label(text_frame, width=80, height=3, text=cur_gloss, font=("Courier", 12))
+    trans_label = Label(text_frame, height=1, text="Translation:", font=("Helvetica", 16))
+    trans_text = Label(text_frame, width=80, height=3, text=cur_trans, font=("Courier", 12))
+    gloss_label.pack(anchor='w')
+    gloss_text.pack(anchor='w')
+    trans_label.pack(anchor='w')
+    trans_text.pack(anchor='w')
+
+    tokenise_text_1 = Text(text_frame, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
+    tokenise_text_2 = Text(text_frame, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
+    tokenise_text_1.pack(anchor='w')
+    tokenise_text_2.pack(anchor='w')
+
+
+def update_glosses(event=None):
+    cur_ep = selected_ep.get()
+    cur_folio = selected_fol.get()
+    cur_glossnums = show_glossnums(select_folcol(select_epistle(cur_ep), cur_folio))
+    cur_glossnum = cur_glossnums[0]
+
+    delete_glossdrop()
+
+    selected_gloss = StringVar()
+    selected_gloss.set(cur_glossnum)
+    gloss_drop = OptionMenu(options_frame, selected_gloss, *cur_glossnums, command=update_glosstext)
+    gloss_drop.grid(row=0, column=2)
+
+
+def update_fols(event=None):
+    cur_ep = selected_ep.get()
+    cur_fols = show_folcols(select_epistle(cur_ep))
+    cur_folio = cur_fols[0]
+
+    delete_foldrop()
+
+    selected_fol = StringVar()
+    selected_fol.set(cur_folio)
+    fol_drop = OptionMenu(options_frame, selected_fol, *cur_fols, command=update_glosses)
+    fol_drop.grid(row=0, column=1)
+
+
 def update_toklists():
     pass
 
@@ -124,6 +196,10 @@ def next_gloss():
 
 def last_gloss():
     save_tokens()
+    pass
+
+
+def reconfigure_all():
     pass
 
 
@@ -177,10 +253,12 @@ if __name__ == "__main__":
 
     # Select the first gloss, from the first folio, from the first epistle as the starting gloss
     epistles = show_epistles(wb_data)
+
     open_ep = epistles[0]
     open_fols = show_folcols(select_epistle(open_ep))
     open_folio = open_fols[0]
-    open_glossnum = show_glossnums(select_folcol(select_epistle(open_ep), open_folio))[0]
+    open_glossnums = show_glossnums(select_folcol(select_epistle(open_ep), open_folio))
+    open_glossnum = open_glossnums[0]
     open_glossdata = select_glossnum(select_folcol(select_epistle(open_ep), open_folio), open_glossnum)
     open_hand = open_glossdata[0]
     open_gloss = open_glossdata[1]
@@ -189,13 +267,6 @@ if __name__ == "__main__":
     open_toks2 = open_glossdata[4]
     open_glossid = open_folio + open_glossnum
 
-    cur_fols = open_fols
-    cur_glossid = open_glossid
-    cur_hand = open_hand
-    cur_gloss = open_gloss
-    cur_trans = open_trans
-    cur_toks1 = open_toks1
-    cur_toks2 = open_toks2
 
     # Create the GUI
     root = Tk()
@@ -205,16 +276,16 @@ if __name__ == "__main__":
     # Create frames for all following widgets
 
     options_frame = LabelFrame(root, padx=20, pady=20)
-    options_frame.pack(padx=10, pady=10, anchor='w')
+    options_frame.grid(row=0, column=0, padx=10, pady=10, sticky="W")
 
     nav_frame = LabelFrame(root, padx=20, pady=20)
-    nav_frame.pack(padx=10, pady=10, anchor='w')
+    nav_frame.grid(row=1, column=0, padx=10, pady=10, sticky="W")
 
     text_frame = LabelFrame(root, padx=20, pady=20)
-    text_frame.pack(padx=10, pady=10, anchor='w')
+    text_frame.grid(row=2, column=0, padx=10, pady=10, sticky="W")
 
     toks_frames = LabelFrame(root, padx=20, pady=20)
-    toks_frames.pack(padx=10, pady=10, anchor='w')
+    toks_frames.grid(row=3, column=0, padx=10, pady=10, sticky="W")
 
     toks1_frame = LabelFrame(toks_frames, padx=10, pady=10)
     toks1_frame.grid(row=0, column=0, pady=5)
@@ -225,8 +296,18 @@ if __name__ == "__main__":
     # Create top-bar dropdown menus
     selected_ep = StringVar()
     selected_ep.set(open_ep)
-    ep_drop = OptionMenu(options_frame, selected_ep, *epistles)
+    ep_drop = OptionMenu(options_frame, selected_ep, *epistles, command=update_fols)
     ep_drop.grid(row=0, column=0)
+
+    selected_fol = StringVar()
+    selected_fol.set(open_folio)
+    fol_drop = OptionMenu(options_frame, selected_fol, *open_fols, command=update_glosses)
+    fol_drop.grid(row=0, column=1)
+
+    selected_gloss = StringVar()
+    selected_gloss.set(open_glossnum)
+    gloss_drop = OptionMenu(options_frame, selected_gloss, *open_glossnums, command=update_glosstext)
+    gloss_drop.grid(row=0, column=2)
 
     # Create GUI buttons
     back_button = Button(nav_frame, text="Back", command=last_gloss)
@@ -237,7 +318,7 @@ if __name__ == "__main__":
     next_button.grid(row=0, column=2, padx=5, pady=5)
 
     # Create GUI text labels (to show the gloss hand, the original gloss text, and the gloss translation)
-    gloss_label = Label(text_frame, height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
+    gloss_label = Label(text_frame, height=2, text=f"Gloss ({open_glossid[3:]}) – {open_hand}:",
                         font=("Helvetica", 16))
     gloss_text = Label(text_frame, width=80, height=3, text=open_gloss, font=("Courier", 12))
     trans_label = Label(text_frame, height=1, text="Translation:", font=("Helvetica", 16))
