@@ -1,3 +1,4 @@
+
 from CombineInfoLists import combine_infolists
 from MakeJSON import make_json
 from SaveJSON import save_json
@@ -6,243 +7,293 @@ import json
 from ClearTags import clear_tags
 from tkinter import *
 
-class UI:
-    def __init__(self,
-            open_ep,
-            epistles,
-            open_folio,
-            open_fols,
-            open_gloss,
-            open_glossnum,
-            open_glossnums):
 
-        self.open_ep=open_ep
-        self.epistles=epistles
-        self.open_folio=open_folio
-        self.open_fols=open_fols
-        self.open_gloss=open_gloss
-        self.open_glossnum=open_glossnum
-        self.open_glossnums=open_glossnums
+pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
+            "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
+            "<Latin>", "<unknown>"]
+
+
+class UI:
+
+    def __init__(self, wb_data):
+
+        self.wb_data = wb_data
+        self.epistles = show_epistles(wb_data)
+
+        self.open_ep = self.epistles[0]
+        self.open_fols = show_folcols(select_epistle(self.open_ep))
+        self.open_folio = self.open_fols[0]
+        self.open_glossnums = show_glossnums(select_folcol(select_epistle(self.open_ep), self.open_folio))
+        self.open_glossnum = self.open_glossnums[0]
+        self.open_glossid = self.open_folio + self.open_glossnum
+        self.open_glossdata = select_glossnum(select_folcol(select_epistle(self.open_ep), self.open_folio),
+                                              self.open_glossnum)
+        self.open_hand = self.open_glossdata[0]
+        self.open_gloss = self.open_glossdata[1]
+        self.open_trans = self.open_glossdata[2]
+        self.open_toks1 = self.open_glossdata[3]
+        self.open_toks2 = self.open_glossdata[4]
 
         # Create the GUI
         self.root = Tk()
         self.root.title("Manual Tokenisation Window")
         self.root.geometry("900x750")
 
-
-        self.render_page(
-                self.root,
-                open_ep=self.open_ep,
-                epistles=self.epistles,
-                open_folio=self.open_folio,
-                open_fols=self.open_fols,
-                open_gloss=self.open_gloss,
-                open_glossnum=self.open_glossnum,
-                open_glossnums=self.open_glossnums
-                )
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.open_ep,
+            cur_fols=self.open_fols,
+            cur_folio=self.open_folio,
+            cur_glossnums=self.open_glossnums,
+            cur_glossnum=self.open_glossnum,
+            cur_glossid=self.open_glossid,
+            cur_hand=self.open_hand,
+            cur_gloss=self.open_gloss,
+            cur_trans=self.open_trans,
+            cur_toks1=self.open_toks1,
+            cur_toks2=self.open_toks2
+        )
 
     def start(self):
         self.root.mainloop()
 
-    def render_page(self, 
-            root,
-            open_ep,
-            epistles,
-            open_folio,
-            open_fols,
-            open_gloss,
-            open_glossnum,
-            open_glossnums
-            ):
-        # Create frames for all following widgets
-        self.current_rendered_page = {
+    def create_gloss_info(self, selected_epistle, selected_folio, selected_glossnum):
+        selected_glossdata = select_glossnum(select_folcol(select_epistle(selected_epistle),
+                                                           selected_folio), selected_glossnum)
+        return {
+            "selected_epistle": selected_epistle,
+            "selected_fols": show_folcols(select_epistle(selected_epistle)),
+            "selected_folio": selected_folio,
+            "selected_glossnums": show_glossnums(select_folcol(select_epistle(selected_epistle), selected_folio)),
+            "selected_glossnum": selected_glossnum,
+            "selected_glossid": selected_folio + selected_glossnum,
+            "selected_hand": selected_glossdata[0],
+            "selected_gloss": selected_glossdata[1],
+            "selected_trans": selected_glossdata[2],
+            "selected_toks1": selected_glossdata[3],
+            "selected_toks2": selected_glossdata[4]
         }
-        self.current_rendered_page["options_frame"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_page["options_frame"].grid(row=0, column=0, padx=10, pady=10, sticky="W")
 
-        self.current_rendered_page["nav_frame"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_page["nav_frame"].grid(row=1, column=0, padx=10, pady=10, sticky="W")
+    def change_gloss(self, event=None):
+        new_selected_glossnum = self.current_rendered_window["current_selected_gloss"].get()
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
+            selected_folio=self.current_rendered_window["current_selected_folio"].get(),
+            selected_glossnum=new_selected_glossnum
+        )
 
-        self.current_rendered_page["text_frame"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_page["text_frame"].grid(row=2, column=0, padx=10, pady=10, sticky="W")
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=self.selected_gloss_info["selected_toks1"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"],
+        )
 
-        self.current_rendered_page["toks_frames"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_page["toks_frames"].grid(row=3, column=0, padx=10, pady=10, sticky="W")
+    def change_folio(self, event=None):
+        new_selected_folio = self.current_rendered_window["current_selected_folio"].get()
+        cur_ep = self.current_rendered_window["current_selected_epistle"].get()
+        cur_glossnums = show_glossnums(select_folcol(select_epistle(cur_ep), new_selected_folio))
+        new_selected_glossnum = cur_glossnums[0]
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
+            selected_folio=new_selected_folio,
+            selected_glossnum=new_selected_glossnum
+        )
 
-        self.current_rendered_page["toks1_frame"] = LabelFrame(
-               self.current_rendered_page["toks_frames"], padx=10, pady=10)
-        self.current_rendered_page["toks1_frame"].grid(row=0, column=0, pady=5)
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=self.selected_gloss_info["selected_toks1"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"],
+        )
 
-        self.current_rendered_page["toks2_frame"] = LabelFrame(
-                self.current_rendered_page["toks_frames"], padx=10, pady=10)
-        self.current_rendered_page["toks2_frame"].grid(row=0, column=1, pady=5)
+    def change_epistle(self, event=None):
+        new_selected_epistle = self.current_rendered_window["current_selected_epistle"].get()
+        cur_fols = show_folcols(select_epistle(new_selected_epistle))
+        new_selected_folio = cur_fols[0]
+        cur_glossnums = show_glossnums(select_folcol(select_epistle(new_selected_epistle), new_selected_folio))
+        new_selected_glossnum = cur_glossnums[0]
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=new_selected_epistle,
+            selected_folio=new_selected_folio,
+            selected_glossnum=new_selected_glossnum
+        )
+
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=self.selected_gloss_info["selected_toks1"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"],
+        )
+
+    def render_gloss(self, root, epistles, cur_ep, cur_fols, cur_folio, cur_glossnums, cur_glossnum, cur_glossid,
+                     cur_hand, cur_gloss, cur_trans, cur_toks1, cur_toks2):
+
+        # Create frames for all following widgets
+        if hasattr(self, "current_rendered_window"):
+            self.current_rendered_window["options_frame"].destroy()
+            self.current_rendered_window["nav_frame"].destroy()
+            self.current_rendered_window["text_frame"].destroy()
+            self.current_rendered_window["toks_frames"].destroy()
+            self.current_rendered_window["toks1_frame"].destroy()
+            self.current_rendered_window["toks2_frame"].destroy()
+            self.current_rendered_window["ep_drop"].destroy()
+            self.current_rendered_window["fol_drop"].destroy()
+            self.current_rendered_window["gloss_drop"].destroy()
+            self.current_rendered_window["back_button"].destroy()
+            self.current_rendered_window["save_button"].destroy()
+            self.current_rendered_window["next_button"].destroy()
+            self.current_rendered_window["gloss_label"].destroy()
+            self.current_rendered_window["gloss_text"].destroy()
+            self.current_rendered_window["trans_label"].destroy()
+            self.current_rendered_window["trans_text"].destroy()
+            self.current_rendered_window["tokenise_text_1"].destroy()
+            self.current_rendered_window["tokenise_text_2"].destroy()
+            self.current_rendered_window["toks1_label"].destroy()
+            self.current_rendered_window["pos1_label"].destroy()
+            self.current_rendered_window["toks2_label"].destroy()
+            self.current_rendered_window["pos2_label"].destroy()
+
+        # Define the type of data which will be in the drop-down menus
+        self.current_rendered_window = {
+            "current_selected_epistle": StringVar(),
+            "current_selected_folio": StringVar(),
+            "current_selected_gloss": StringVar()
+        }
+
+        self.current_rendered_window["current_selected_epistle"].set(cur_ep)
+        self.current_rendered_window["current_selected_folio"].set(cur_folio)
+        self.current_rendered_window["current_selected_gloss"].set(cur_glossnum)
+
+        # Create display frames for the window
+        self.current_rendered_window["options_frame"] = LabelFrame(root, padx=20, pady=20)
+        self.current_rendered_window["options_frame"].grid(row=0, column=0, padx=10, pady=10, sticky="W")
+
+        self.current_rendered_window["nav_frame"] = LabelFrame(root, padx=20, pady=20)
+        self.current_rendered_window["nav_frame"].grid(row=1, column=0, padx=10, pady=10, sticky="W")
+
+        self.current_rendered_window["text_frame"] = LabelFrame(root, padx=20, pady=20)
+        self.current_rendered_window["text_frame"].grid(row=2, column=0, padx=10, pady=10, sticky="W")
+
+        self.current_rendered_window["toks_frames"] = LabelFrame(root, padx=20, pady=20)
+        self.current_rendered_window["toks_frames"].grid(row=3, column=0, padx=10, pady=10, sticky="W")
+
+        self.current_rendered_window["toks1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
+                                                                 padx=10, pady=10)
+        self.current_rendered_window["toks1_frame"].grid(row=0, column=0, pady=5)
+
+        self.current_rendered_window["toks2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
+                                                                 padx=10, pady=10)
+        self.current_rendered_window["toks2_frame"].grid(row=0, column=1, pady=5)
 
         # Create top-bar dropdown menus
-        selected_ep = StringVar()
-        selected_ep.set(open_ep)
-        self.current_rendered_page["ep_drop"] = OptionMenu(
-                self.current_rendered_page["options_frame"],
-                selected_ep,
-                *epistles, command=self.update_fols)
-        self.current_rendered_page["ep_drop"].grid(row=0, column=0)
+        self.current_rendered_window["ep_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
+                                                             self.current_rendered_window["current_selected_epistle"],
+                                                             *epistles, command=self.change_epistle)
+        self.current_rendered_window["ep_drop"].grid(row=0, column=0)
 
-        self.current_rendered_page["selected_fol"] = StringVar()
-        self.current_rendered_page["selected_fol"].set(open_folio)
-        self.current_rendered_page["fol_drop"] = OptionMenu(
-                self.current_rendered_page["options_frame"],
-               self.current_rendered_page["selected_fol"],
-               *open_fols,
-               command=self.update_glosses)
-        self.current_rendered_page["fol_drop"].grid(row=0, column=1)
+        self.current_rendered_window["fol_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
+                                                              self.current_rendered_window["current_selected_folio"],
+                                                              *cur_fols, command=self.change_folio)
+        self.current_rendered_window["fol_drop"].grid(row=0, column=1)
 
-        self.current_rendered_page["selected_gloss"] = StringVar()
-        self.current_rendered_page["selected_gloss"].set(open_glossnum)
-        self.current_rendered_page["gloss_drop"] = OptionMenu(
-               self.current_rendered_page["options_frame"], 
-               self.current_rendered_page["selected_gloss"],
-               *open_glossnums, command=self.update_glosstext)
-        self.current_rendered_page["gloss_drop"].grid(row=0, column=2)
+        self.current_rendered_window["gloss_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
+                                                                self.current_rendered_window["current_selected_gloss"],
+                                                                *cur_glossnums, command=self.change_gloss)
+        self.current_rendered_window["gloss_drop"].grid(row=0, column=2)
 
         # Create GUI buttons
-        self.current_rendered_page["back_button"] = Button(
-                self.current_rendered_page["nav_frame"],
-                text="Back",
-                command=self.last_gloss)
-        self.current_rendered_page["back_button"].grid(row=0, column=0, padx=5, pady=5)
-        self.current_rendered_page["save_button"] = Button(
-                self.current_rendered_page["nav_frame"],
-                text="Save",
-                command=self.save_tokens)
-        self.current_rendered_page["save_button"].grid(row=0, column=1, padx=5, pady=5)
-        self.current_rendered_page["next_button"] = Button(
-                self.current_rendered_page["nav_frame"],
-                text="Next", command=self.next_gloss)
-        self.current_rendered_page["next_button"].grid(row=0, column=2, padx=5, pady=5)
+        self.current_rendered_window["back_button"] = Button(self.current_rendered_window["nav_frame"],
+                                                             text="Back", command=self.last_gloss)
+        self.current_rendered_window["back_button"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["save_button"] = Button(self.current_rendered_window["nav_frame"],
+                                                             text="Save", command=self.save_tokens)
+        self.current_rendered_window["save_button"].grid(row=0, column=1, padx=5, pady=5)
+        self.current_rendered_window["next_button"] = Button(self.current_rendered_window["nav_frame"],
+                                                             text="Next", command=self.next_gloss)
+        self.current_rendered_window["next_button"].grid(row=0, column=2, padx=5, pady=5)
 
         # Create GUI text labels (to show the gloss hand, the original gloss text, and the gloss translation)
-        self.current_rendered_page["gloss_label"] = Label(
-                self.current_rendered_page["text_frame"],
-                height=2, text=f"Gloss ({open_glossid[3:]}) – {open_hand}:", font=("Helvetica", 16))
+        self.current_rendered_window["gloss_label"] = Label(self.current_rendered_window["text_frame"],
+                                                            height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
+                                                            font=("Helvetica", 16))
+        self.current_rendered_window["gloss_text"] = Label(self.current_rendered_window["text_frame"],
+                                                           width=80, height=3, text=cur_gloss, font=("Courier", 12))
 
-        self.current_rendered_page["gloss_text"] = Label(
-                self.current_rendered_page["text_frame"],
-                width=80, height=3, text=open_gloss, font=("Courier", 12))
+        self.current_rendered_window["trans_label"] = Label(self.current_rendered_window["text_frame"],
+                                                            height=1, text="Translation:", font=("Helvetica", 16))
 
-        self.current_rendered_page["trans_label"] = Label(
-                self.current_rendered_page["text_frame"],
-                height=1, text="Translation:", font=("Helvetica", 16))
-
-        self.current_rendered_page["trans_text"] = Label(
-                self.current_rendered_page["text_frame"],
-                width=80, height=3, text=open_trans, font=("Courier", 12))
-        self.current_rendered_page["gloss_label"].pack(anchor='w')
-        self.current_rendered_page["gloss_text"].pack(anchor='w')
-        self.current_rendered_page["trans_label"].pack(anchor='w')
-        self.current_rendered_page["trans_text"].pack(anchor='w')
+        self.current_rendered_window["trans_text"] = Label(self.current_rendered_window["text_frame"],
+                                                           width=80, height=3, text=cur_trans, font=("Courier", 12))
+        self.current_rendered_window["gloss_label"].pack(anchor='w')
+        self.current_rendered_window["gloss_text"].pack(anchor='w')
+        self.current_rendered_window["trans_label"].pack(anchor='w')
+        self.current_rendered_window["trans_text"].pack(anchor='w')
 
         # Create GUI text-boxes (to edit the tokenisation fields by inserting or removing spaces)
-        self.current_rendered_page["tokenise_text_1"] = Text(
-                self.current_rendered_page["text_frame"],
-                width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
-        self.current_rendered_page["tokenise_text_2"] = Text(
-                self.current_rendered_page["text_frame"],
-                width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
-        self.current_rendered_page["tokenise_text_1"].pack(anchor='w')
-        self.current_rendered_page["tokenise_text_2"].pack(anchor='w')
+        self.current_rendered_window["tokenise_text_1"] = Text(self.current_rendered_window["text_frame"], width=80,
+                                                               height=3, borderwidth=1, relief="solid",
+                                                               font=("Courier", 12))
+        self.current_rendered_window["tokenise_text_2"] = Text(self.current_rendered_window["text_frame"], width=80,
+                                                               height=3, borderwidth=1, relief="solid",
+                                                               font=("Courier", 12))
+        self.current_rendered_window["tokenise_text_1"].pack(anchor='w')
+        self.current_rendered_window["tokenise_text_2"].pack(anchor='w')
 
         # Create lables for the tokens and POS tags (style 1)
-        self.current_rendered_page["toks1_label"] = Label(
-                self.current_rendered_page["toks1_frame"],
-                text="Tokens (1)", font=("Helvetica", 16))
-        self.current_rendered_page["toks1_label"].grid(row=0, column=0, padx=5, pady=5)
-        self.current_rendered_page["pos1_label"] = Label(
-                self.current_rendered_page["toks1_frame"],
-                text="POS tags", font=("Helvetica", 16))
-        self.current_rendered_page["pos1_label"].grid(row=0, column=1, padx=5, pady=5)
+        self.current_rendered_window["toks1_label"] = Label(self.current_rendered_window["toks1_frame"],
+                                                            text="Tokens (1)", font=("Helvetica", 16))
+        self.current_rendered_window["toks1_label"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["pos1_label"] = Label(self.current_rendered_window["toks1_frame"],
+                                                           text="POS tags", font=("Helvetica", 16))
+        self.current_rendered_window["pos1_label"].grid(row=0, column=1, padx=5, pady=5)
 
         # Create lables for the tokens and POS tags (style 2)
-        self.current_rendered_page["toks2_label"] = Label(
-                self.current_rendered_page["toks2_frame"],
-                text="Tokens (2)", font=("Helvetica", 16))
-        self.current_rendered_page["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
-        self.current_rendered_page["pos2_label"] = Label(
-                self.current_rendered_page["toks2_frame"]
-                , text="POS tags", font=("Helvetica", 16))
-        self.current_rendered_page["pos2_label"].grid(row=0, column=1, padx=5, pady=5)
-
-
-    def update_fols(self, event=None):
-        cur_ep = selected_ep.get()
-        cur_fols = show_folcols(select_epistle(cur_ep))
-        cur_folio = cur_fols[0]
-
-        delete_foldrop()
-
-        selected_fol = StringVar()
-        selected_fol.set(cur_folio)
-        fol_drop = OptionMenu(options_frame, selected_fol, *cur_fols, command=update_glosses)
-        fol_drop.grid(row=0, column=1)
-
-    def update_glosstext(self, event=None):
-        cur_ep = selected_ep.get()
-        cur_folio = selected_fol.get()
-        cur_glossnum = selected_gloss.get()
-        cur_glossid = cur_folio + cur_glossnum
-        cur_glossdata = select_glossnum(select_folcol(select_epistle(cur_ep), cur_folio), cur_glossnum)
-        cur_hand = cur_glossdata[0]
-        cur_gloss = cur_glossdata[1]
-        cur_trans = cur_glossdata[2]
-        cur_toks1 = cur_glossdata[3]
-        cur_toks2 = cur_glossdata[4]
-
-        delete_textframe()
-
-        text_frame = LabelFrame(root, padx=20, pady=20)
-        text_frame.grid(row=2, column=0, padx=10, pady=10)
-
-        gloss_label = Label(text_frame, height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
-                            font=("Helvetica", 16))
-        gloss_text = Label(text_frame, width=80, height=3, text=cur_gloss, font=("Courier", 12))
-        trans_label = Label(text_frame, height=1, text="Translation:", font=("Helvetica", 16))
-        trans_text = Label(text_frame, width=80, height=3, text=cur_trans, font=("Courier", 12))
-        gloss_label.pack(anchor='w')
-        gloss_text.pack(anchor='w')
-        trans_label.pack(anchor='w')
-        trans_text.pack(anchor='w')
-
-        tokenise_text_1 = Text(text_frame, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
-        tokenise_text_2 = Text(text_frame, width=80, height=3, borderwidth=1, relief="solid", font=("Courier", 12))
-        tokenise_text_1.pack(anchor='w')
-        tokenise_text_2.pack(anchor='w')
-
+        self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
+                                                            text="Tokens (2)", font=("Helvetica", 16))
+        self.current_rendered_window["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["pos2_label"] = Label(self.current_rendered_window["toks2_frame"],
+                                                           text="POS tags", font=("Helvetica", 16))
+        self.current_rendered_window["pos2_label"].grid(row=0, column=1, padx=5, pady=5)
 
     def last_gloss(self):
-        save_tokens()
+        self.save_tokens()
         pass
 
     def save_tokens(self):
         pass
 
-    def update_glosses(self, event=None):
-        cur_ep = selected_ep.get()
-        cur_folio = selected_fol.get()
-        cur_glossnums = show_glossnums(select_folcol(select_epistle(cur_ep), cur_folio))
-        cur_glossnum = cur_glossnums[0]
-
-        delete_glossdrop()
-
-        selected_gloss = StringVar()
-        selected_gloss.set(cur_glossnum)
-        gloss_drop = OptionMenu(options_frame, selected_gloss, *cur_glossnums, command=update_glosstext)
-        gloss_drop.grid(row=0, column=2)
-
     def next_gloss(self):
-        save_tokens()
+        self.save_tokens()
         pass
-
-pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
-            "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
-            "<Latin>", "<unknown>"]
 
 
 def update_json(file_name, file_object):
@@ -341,34 +392,6 @@ def select_glossnum(glosses, glossnum):
     return gloss_data
 
 
-def delete_textframe():
-    text_frame.destroy()
-
-
-def delete_glossdrop():
-    gloss_drop.destroy()
-
-
-def delete_foldrop():
-    fol_drop.destroy()
-
-
-
-
-
-
-def update_toklists():
-    pass
-
-
-
-
-
-
-def reconfigure_all():
-    pass
-
-
 if __name__ == "__main__":
 
     # Navigate to a directory containing a JSON file of the Wb. Glosses
@@ -417,28 +440,8 @@ if __name__ == "__main__":
     if empty_tokfields:
         update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
 
-    # Select the first gloss, from the first folio, from the first epistle as the starting gloss
-    epistles = show_epistles(wb_data)
-
-    open_ep = epistles[0]
-    open_fols = show_folcols(select_epistle(open_ep))
-    open_folio = open_fols[0]
-    open_glossnums = show_glossnums(select_folcol(select_epistle(open_ep), open_folio))
-    open_glossnum = open_glossnums[0]
-    open_glossdata = select_glossnum(select_folcol(select_epistle(open_ep), open_folio), open_glossnum)
-    open_hand = open_glossdata[0]
-    open_gloss = open_glossdata[1]
-    open_trans = open_glossdata[2]
-    open_toks1 = open_glossdata[3]
-    open_toks2 = open_glossdata[4]
-    open_glossid = open_folio + open_glossnum
+    # Start the UI
     ui = UI(
-                open_ep=open_ep,
-                epistles=epistles,
-                open_folio=open_folio,
-                open_fols=open_fols,
-                open_gloss=open_gloss,
-                open_glossnum=open_glossnum,
-                open_glossnums=open_glossnums
-            )
+        wb_data=wb_data
+    )
     ui.start()
