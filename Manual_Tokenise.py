@@ -6,19 +6,16 @@ import os
 import json
 from ClearTags import clear_tags
 from tkinter import *
-
-
-pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
-            "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
-            "<Latin>", "<unknown>"]
+from tkinter import ttk
 
 
 class UI:
 
-    def __init__(self, wb_data):
+    def __init__(self, wb_data, pos_tags):
 
         self.wb_data = wb_data
         self.epistles = show_epistles(wb_data)
+        self.pos_tags = pos_tags
 
         self.open_ep = self.epistles[0]
         self.open_fols = show_folcols(select_epistle(self.open_ep))
@@ -29,15 +26,15 @@ class UI:
         self.open_glossdata = select_glossnum(select_folcol(select_epistle(self.open_ep), self.open_folio),
                                               self.open_glossnum)
         self.open_hand = self.open_glossdata[0]
-        self.open_gloss = self.open_glossdata[1]
-        self.open_trans = self.open_glossdata[2]
+        self.open_gloss = set_spacing(self.open_glossdata[1])
+        self.open_trans = set_spacing(self.open_glossdata[2])
         self.open_toks1 = self.open_glossdata[3]
         self.open_toks2 = self.open_glossdata[4]
 
         # Create the GUI
         self.root = Tk()
         self.root.title("Manual Tokenisation Window")
-        self.root.geometry("900x750")
+        self.root.geometry("900x900")
 
         self.render_gloss(
             self.root,
@@ -69,8 +66,8 @@ class UI:
             "selected_glossnum": selected_glossnum,
             "selected_glossid": selected_folio + selected_glossnum,
             "selected_hand": selected_glossdata[0],
-            "selected_gloss": selected_glossdata[1],
-            "selected_trans": selected_glossdata[2],
+            "selected_gloss": set_spacing(selected_glossdata[1]),
+            "selected_trans": set_spacing(selected_glossdata[2]),
             "selected_toks1": selected_glossdata[3],
             "selected_toks2": selected_glossdata[4]
         }
@@ -245,28 +242,44 @@ class UI:
         self.current_rendered_window["gloss_label"] = Label(self.current_rendered_window["text_frame"],
                                                             height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
                                                             font=("Helvetica", 16))
-        self.current_rendered_window["gloss_text"] = Label(self.current_rendered_window["text_frame"],
-                                                           width=80, height=3, text=cur_gloss, font=("Courier", 12))
+        self.current_rendered_window["gloss_text"] = Text(self.current_rendered_window["text_frame"],
+                                                          width=80, height=5, font=("Courier", 12))
+        self.current_rendered_window["gloss_text"].insert(1.0, cur_gloss)
+        self.current_rendered_window["gloss_text"].config(state=DISABLED)
 
         self.current_rendered_window["trans_label"] = Label(self.current_rendered_window["text_frame"],
                                                             height=1, text="Translation:", font=("Helvetica", 16))
+        self.current_rendered_window["trans_text"] = Text(self.current_rendered_window["text_frame"],
+                                                          width=80, height=5, font=("Courier", 12))
+        self.current_rendered_window["trans_text"].insert(1.0, cur_trans)
+        self.current_rendered_window["trans_text"].config(state=DISABLED)
 
-        self.current_rendered_window["trans_text"] = Label(self.current_rendered_window["text_frame"],
-                                                           width=80, height=3, text=cur_trans, font=("Courier", 12))
         self.current_rendered_window["gloss_label"].pack(anchor='w')
-        self.current_rendered_window["gloss_text"].pack(anchor='w')
+        self.current_rendered_window["gloss_text"].pack(pady=5, anchor='w')
         self.current_rendered_window["trans_label"].pack(anchor='w')
-        self.current_rendered_window["trans_text"].pack(anchor='w')
+        self.current_rendered_window["trans_text"].pack(pady=5, anchor='w')
 
         # Create GUI text-boxes (to edit the tokenisation fields by inserting or removing spaces)
+        self.current_rendered_window["tokenise_label_1"] = Label(self.current_rendered_window["text_frame"],
+                                                                 height=2, text=f"Tokenise (1st Standard)",
+                                                                 font=("Helvetica", 16))
         self.current_rendered_window["tokenise_text_1"] = Text(self.current_rendered_window["text_frame"], width=80,
-                                                               height=3, borderwidth=1, relief="solid",
+                                                               height=5, borderwidth=1, relief="solid",
                                                                font=("Courier", 12))
+        self.current_rendered_window["tokenise_text_1"].insert(1.0, set_spacing(" ".join([i[0] for i in cur_toks1])))
+
+        self.current_rendered_window["tokenise_label_2"] = Label(self.current_rendered_window["text_frame"],
+                                                                 height=1, text="Tokenise (2nd Standard)",
+                                                                 font=("Helvetica", 16))
         self.current_rendered_window["tokenise_text_2"] = Text(self.current_rendered_window["text_frame"], width=80,
-                                                               height=3, borderwidth=1, relief="solid",
+                                                               height=5, borderwidth=1, relief="solid",
                                                                font=("Courier", 12))
-        self.current_rendered_window["tokenise_text_1"].pack(anchor='w')
-        self.current_rendered_window["tokenise_text_2"].pack(anchor='w')
+        self.current_rendered_window["tokenise_text_2"].insert(1.0, set_spacing(" ".join([i[0] for i in cur_toks2])))
+
+        self.current_rendered_window["tokenise_label_1"].pack(anchor='w')
+        self.current_rendered_window["tokenise_text_1"].pack(pady=5, anchor='w')
+        self.current_rendered_window["tokenise_label_2"].pack(anchor='w')
+        self.current_rendered_window["tokenise_text_2"].pack(pady=5, anchor='w')
 
         # Create lables for the tokens and POS tags (style 1)
         self.current_rendered_window["toks1_label"] = Label(self.current_rendered_window["toks1_frame"],
@@ -276,6 +289,20 @@ class UI:
                                                            text="POS tags", font=("Helvetica", 16))
         self.current_rendered_window["pos1_label"].grid(row=0, column=1, padx=5, pady=5)
 
+        # Create tokens and POS menus for the tokens and POS tags (style 1)
+        for i, pos_token in enumerate(cur_toks1):
+            token = pos_token[0]
+            tag = pos_token[1]
+            self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
+                                                                   text=token, font=("Helvetica", 12))
+            self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
+
+            unknown_pos = StringVar()
+            unknown_pos.set(tag)
+            self.current_rendered_window[f"pos_drop1.{i}"] = OptionMenu(self.current_rendered_window["toks1_frame"],
+                                                                        unknown_pos, *self.pos_tags)
+            self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=1, sticky='w')
+
         # Create lables for the tokens and POS tags (style 2)
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Tokens (2)", font=("Helvetica", 16))
@@ -283,6 +310,20 @@ class UI:
         self.current_rendered_window["pos2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                            text="POS tags", font=("Helvetica", 16))
         self.current_rendered_window["pos2_label"].grid(row=0, column=1, padx=5, pady=5)
+
+        # Create tokens and POS menus for the tokens and POS tags (style 1)
+        for i, pos_token in enumerate(cur_toks2):
+            token = pos_token[0]
+            tag = pos_token[1]
+            self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
+                                                                   text=token, font=("Helvetica", 12))
+            self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
+
+            unknown_pos = StringVar()
+            unknown_pos.set(tag)
+            self.current_rendered_window[f"pos_drop2.{i}"] = OptionMenu(self.current_rendered_window["toks2_frame"],
+                                                                        unknown_pos, *self.pos_tags)
+            self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=1, sticky='w')
 
     def last_gloss(self):
         self.save_tokens()
@@ -294,6 +335,28 @@ class UI:
     def next_gloss(self):
         self.save_tokens()
         pass
+
+
+def set_spacing(text):
+    max_linelen = 80
+    text_cuts = list()
+    if len(text) > max_linelen:
+        first_cut = text[:max_linelen]
+        last_spacepoint = first_cut.rfind(" ")
+        text_cuts.append(first_cut[:last_spacepoint])
+        remainder = text[last_spacepoint + 1:]
+        if len(remainder) < max_linelen:
+            text_cuts.append(remainder)
+        else:
+            while len(remainder) > max_linelen:
+                next_cut = remainder[:max_linelen]
+                last_spacepoint = next_cut.rfind(" ")
+                text_cuts.append(next_cut[:last_spacepoint])
+                remainder = remainder[last_spacepoint + 1:]
+                if len(remainder) < max_linelen:
+                    text_cuts.append(remainder)
+        text = "\n".join(text_cuts)
+    return text
 
 
 def update_json(file_name, file_object):
@@ -440,8 +503,13 @@ if __name__ == "__main__":
     if empty_tokfields:
         update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
 
+    pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
+                "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
+                "<Latin>", "<unknown>"]
+
     # Start the UI
     ui = UI(
-        wb_data=wb_data
+        wb_data=wb_data,
+        pos_tags=pos_tags
     )
     ui.start()
