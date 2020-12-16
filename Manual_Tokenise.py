@@ -156,24 +156,40 @@ class UI:
 
         # Create frames for all following widgets
         if hasattr(self, "current_rendered_window"):
-            self.current_rendered_window["options_frame"].destroy()
+
+            self.current_rendered_window["main_frame"].destroy()
+            self.current_rendered_window["main_canvas"].destroy()
+            self.current_rendered_window["main_scrollbar"].destroy()
+            self.current_rendered_window["secondary_frame"].destroy()
+
             self.current_rendered_window["nav_frame"].destroy()
+            self.current_rendered_window["options_frame"].destroy()
+            self.current_rendered_window["nav_buttons_frame"].destroy()
             self.current_rendered_window["text_frame"].destroy()
             self.current_rendered_window["toks_frames"].destroy()
             self.current_rendered_window["toks1_frame"].destroy()
             self.current_rendered_window["toks2_frame"].destroy()
+            self.current_rendered_window["buttons_frame"].destroy()
+
             self.current_rendered_window["ep_drop"].destroy()
             self.current_rendered_window["fol_drop"].destroy()
             self.current_rendered_window["gloss_drop"].destroy()
+
             self.current_rendered_window["back_button"].destroy()
-            self.current_rendered_window["save_button"].destroy()
             self.current_rendered_window["next_button"].destroy()
+            self.current_rendered_window["update_button"].destroy()
+            self.current_rendered_window["save_button"].destroy()
+
             self.current_rendered_window["gloss_label"].destroy()
             self.current_rendered_window["gloss_text"].destroy()
             self.current_rendered_window["trans_label"].destroy()
             self.current_rendered_window["trans_text"].destroy()
+
+            self.current_rendered_window["tokenise_label_1"].destroy()
             self.current_rendered_window["tokenise_text_1"].destroy()
+            self.current_rendered_window["tokenise_label_2"].destroy()
             self.current_rendered_window["tokenise_text_2"].destroy()
+
             self.current_rendered_window["toks1_label"].destroy()
             self.current_rendered_window["pos1_label"].destroy()
             self.current_rendered_window["toks2_label"].destroy()
@@ -190,26 +206,68 @@ class UI:
         self.current_rendered_window["current_selected_folio"].set(cur_folio)
         self.current_rendered_window["current_selected_gloss"].set(cur_glossnum)
 
+        # Create a main frame with a canvas so that it's possible use a scroll bar
+        self.current_rendered_window["main_frame"] = Frame(root)
+        self.current_rendered_window["main_frame"].pack(fill=BOTH, expand=1)
+
+        self.current_rendered_window["main_canvas"] = Canvas(self.current_rendered_window["main_frame"])
+        self.current_rendered_window["main_canvas"].pack(side=LEFT, fill=BOTH, expand=1)
+
+        self.current_rendered_window["main_scrollbar"] = ttk.Scrollbar(
+            self.current_rendered_window["main_frame"],
+            orient=VERTICAL, command=self.current_rendered_window["main_canvas"].yview
+        )
+        self.current_rendered_window["main_scrollbar"].pack(side=RIGHT, fill=Y)
+
+        self.current_rendered_window["main_canvas"].configure(
+            yscrollcommand=self.current_rendered_window["main_scrollbar"].set
+        )
+        self.current_rendered_window["main_canvas"].bind(
+            '<Configure>',
+            lambda e: self.current_rendered_window["main_canvas"].configure(
+                scrollregion=self.current_rendered_window["main_canvas"].bbox("all")
+            )
+        )
+
+        self.current_rendered_window["secondary_frame"] = Frame(self.current_rendered_window["main_canvas"])
+        self.current_rendered_window["main_canvas"].create_window(
+            (0, 0),
+            window=self.current_rendered_window["secondary_frame"],
+            anchor="nw"
+        )
+
         # Create display frames for the window
-        self.current_rendered_window["options_frame"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_window["options_frame"].grid(row=0, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["nav_frame"] = Frame(self.current_rendered_window["secondary_frame"],
+                                                          padx=5, pady=5)
+        self.current_rendered_window["nav_frame"].grid(row=0, column=0, padx=10, pady=10, sticky="W")
 
-        self.current_rendered_window["nav_frame"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_window["nav_frame"].grid(row=1, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["options_frame"] = Frame(self.current_rendered_window["nav_frame"],
+                                                              padx=5, pady=5)
+        self.current_rendered_window["options_frame"].grid(row=0, column=0, padx=5, pady=5, sticky="W")
 
-        self.current_rendered_window["text_frame"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_window["text_frame"].grid(row=2, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["nav_buttons_frame"] = Frame(self.current_rendered_window["nav_frame"],
+                                                                  padx=5, pady=5)
+        self.current_rendered_window["nav_buttons_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="W")
 
-        self.current_rendered_window["toks_frames"] = LabelFrame(root, padx=20, pady=20)
-        self.current_rendered_window["toks_frames"].grid(row=3, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["text_frame"] = Frame(self.current_rendered_window["secondary_frame"],
+                                                           padx=5, pady=5)
+        self.current_rendered_window["text_frame"].grid(row=1, column=0, padx=10, pady=10, sticky="W")
+
+        self.current_rendered_window["toks_frames"] = Frame(self.current_rendered_window["secondary_frame"],
+                                                            padx=5, pady=5)
+        self.current_rendered_window["toks_frames"].grid(row=2, column=0, padx=10, pady=10, sticky="W")
 
         self.current_rendered_window["toks1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
-                                                                 padx=10, pady=10)
-        self.current_rendered_window["toks1_frame"].grid(row=0, column=0, pady=5)
+                                                                 padx=5, pady=5)
+        self.current_rendered_window["toks1_frame"].grid(row=0, column=0, padx=5, pady=5)
 
         self.current_rendered_window["toks2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
-                                                                 padx=10, pady=10)
-        self.current_rendered_window["toks2_frame"].grid(row=0, column=1, pady=5)
+                                                                 padx=5, pady=5)
+        self.current_rendered_window["toks2_frame"].grid(row=0, column=1, padx=5, pady=5)
+
+        self.current_rendered_window["buttons_frame"] = Frame(self.current_rendered_window["toks_frames"],
+                                                              padx=5, pady=5)
+        self.current_rendered_window["buttons_frame"].grid(row=0, column=2, padx=5, pady=5, sticky="NW")
 
         # Create top-bar dropdown menus
         self.current_rendered_window["ep_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
@@ -228,20 +286,27 @@ class UI:
         self.current_rendered_window["gloss_drop"].grid(row=0, column=2)
 
         # Create GUI buttons
-        self.current_rendered_window["back_button"] = Button(self.current_rendered_window["nav_frame"],
+        self.current_rendered_window["back_button"] = Button(self.current_rendered_window["nav_buttons_frame"],
                                                              text="Back", command=self.last_gloss)
         self.current_rendered_window["back_button"].grid(row=0, column=0, padx=5, pady=5)
-        self.current_rendered_window["save_button"] = Button(self.current_rendered_window["nav_frame"],
-                                                             text="Save", command=self.save_tokens)
-        self.current_rendered_window["save_button"].grid(row=0, column=1, padx=5, pady=5)
-        self.current_rendered_window["next_button"] = Button(self.current_rendered_window["nav_frame"],
-                                                             text="Next", command=self.next_gloss)
-        self.current_rendered_window["next_button"].grid(row=0, column=2, padx=5, pady=5)
 
-        # Create GUI text labels (to show the gloss hand, the original gloss text, and the gloss translation)
+        self.current_rendered_window["next_button"] = Button(self.current_rendered_window["nav_buttons_frame"],
+                                                             text="Next", command=self.next_gloss)
+        self.current_rendered_window["next_button"].grid(row=0, column=1, padx=5, pady=5)
+
+        self.current_rendered_window["update_button"] = Button(self.current_rendered_window["buttons_frame"],
+                                                               text="Update Tokens", command=self.update_tokens)
+        self.current_rendered_window["update_button"].grid(row=0, column=0, padx=5, pady=5, sticky="w")
+
+        self.current_rendered_window["save_button"] = Button(self.current_rendered_window["buttons_frame"],
+                                                             text="Save", command=self.save_tokens)
+        self.current_rendered_window["save_button"].grid(row=1, column=0, padx=5, pady=5, sticky="w")
+
+        # Create GUI text display boxes
         self.current_rendered_window["gloss_label"] = Label(self.current_rendered_window["text_frame"],
                                                             height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
                                                             font=("Helvetica", 16))
+
         self.current_rendered_window["gloss_text"] = Text(self.current_rendered_window["text_frame"],
                                                           width=80, height=5, font=("Courier", 12))
         self.current_rendered_window["gloss_text"].insert(1.0, cur_gloss)
@@ -249,6 +314,7 @@ class UI:
 
         self.current_rendered_window["trans_label"] = Label(self.current_rendered_window["text_frame"],
                                                             height=1, text="Translation:", font=("Helvetica", 16))
+
         self.current_rendered_window["trans_text"] = Text(self.current_rendered_window["text_frame"],
                                                           width=80, height=5, font=("Courier", 12))
         self.current_rendered_window["trans_text"].insert(1.0, cur_trans)
@@ -259,7 +325,7 @@ class UI:
         self.current_rendered_window["trans_label"].pack(anchor='w')
         self.current_rendered_window["trans_text"].pack(pady=5, anchor='w')
 
-        # Create GUI text-boxes (to edit the tokenisation fields by inserting or removing spaces)
+        # Create GUI text editing boxes
         self.current_rendered_window["tokenise_label_1"] = Label(self.current_rendered_window["text_frame"],
                                                                  height=2, text=f"Tokenise (1st Standard)",
                                                                  font=("Helvetica", 16))
@@ -325,16 +391,124 @@ class UI:
                                                                         unknown_pos, *self.pos_tags)
             self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=1, sticky='w')
 
-    def last_gloss(self):
-        self.save_tokens()
+    def update_tokens(self):
         pass
 
     def save_tokens(self):
         pass
 
+    def last_gloss(self):
+        self.save_tokens()
+
+        current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
+        current_folio = self.current_rendered_window["current_selected_folio"].get()
+        current_epistle = self.current_rendered_window["current_selected_epistle"].get()
+
+        current_glossnums = show_glossnums(select_folcol(select_epistle(current_epistle), current_folio))
+        current_fols = show_folcols(select_epistle(current_epistle))
+        epistles = self.epistles
+
+        if current_glossnum != current_glossnums[0]:
+            go_to_epistle = current_epistle
+            go_to_folio = current_folio
+            next_position = current_glossnums.index(current_glossnum) - 1
+            go_to_gloss = current_glossnums[next_position]
+        elif current_folio != current_fols[0]:
+            go_to_epistle = current_epistle
+            next_position = current_fols.index(current_folio) - 1
+            go_to_folio = current_fols[next_position]
+            next_glossnums = show_glossnums(select_folcol(select_epistle(go_to_epistle), go_to_folio))
+            go_to_gloss = next_glossnums[-1]
+        elif current_epistle != epistles[0]:
+            next_position = epistles.index(current_epistle) - 1
+            go_to_epistle = epistles[next_position]
+            next_fols = show_folcols(select_epistle(go_to_epistle))
+            go_to_folio = next_fols[-1]
+            next_glossnums = show_glossnums(select_folcol(select_epistle(go_to_epistle), go_to_folio))
+            go_to_gloss = next_glossnums[-1]
+        else:
+            go_to_gloss = current_glossnum
+            go_to_folio = current_folio
+            go_to_epistle = current_epistle
+
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=go_to_epistle,
+            selected_folio=go_to_folio,
+            selected_glossnum=go_to_gloss
+        )
+
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=self.selected_gloss_info["selected_toks1"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"],
+        )
+
     def next_gloss(self):
         self.save_tokens()
-        pass
+
+        current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
+        current_folio = self.current_rendered_window["current_selected_folio"].get()
+        current_epistle = self.current_rendered_window["current_selected_epistle"].get()
+
+        current_glossnums = show_glossnums(select_folcol(select_epistle(current_epistle), current_folio))
+        current_fols = show_folcols(select_epistle(current_epistle))
+        epistles = self.epistles
+
+        if current_glossnum != current_glossnums[-1]:
+            go_to_epistle = current_epistle
+            go_to_folio = current_folio
+            next_position = current_glossnums.index(current_glossnum) + 1
+            go_to_gloss = current_glossnums[next_position]
+        elif current_folio != current_fols[-1]:
+            go_to_epistle = current_epistle
+            next_position = current_fols.index(current_folio) + 1
+            go_to_folio = current_fols[next_position]
+            next_glossnums = show_glossnums(select_folcol(select_epistle(go_to_epistle), go_to_folio))
+            go_to_gloss = next_glossnums[0]
+        elif current_epistle != epistles[-1]:
+            next_position = epistles.index(current_epistle) + 1
+            go_to_epistle = epistles[next_position]
+            next_fols = show_folcols(select_epistle(go_to_epistle))
+            go_to_folio = next_fols[0]
+            next_glossnums = show_glossnums(select_folcol(select_epistle(go_to_epistle), go_to_folio))
+            go_to_gloss = next_glossnums[0]
+        else:
+            go_to_gloss = current_glossnum
+            go_to_folio = current_folio
+            go_to_epistle = current_epistle
+
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=go_to_epistle,
+            selected_folio=go_to_folio,
+            selected_glossnum=go_to_gloss
+        )
+
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=self.selected_gloss_info["selected_toks1"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"],
+        )
+
 
 
 def set_spacing(text):
