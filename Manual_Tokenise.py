@@ -177,7 +177,8 @@ class UI:
 
             self.current_rendered_window["back_button"].destroy()
             self.current_rendered_window["next_button"].destroy()
-            self.current_rendered_window["update_button"].destroy()
+            self.current_rendered_window["update_toks_button"].destroy()
+            self.current_rendered_window["update_pos_button"].destroy()
             self.current_rendered_window["save_button"].destroy()
 
             self.current_rendered_window["gloss_label"].destroy()
@@ -259,11 +260,11 @@ class UI:
 
         self.current_rendered_window["toks1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                  padx=5, pady=5)
-        self.current_rendered_window["toks1_frame"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["toks1_frame"].grid(row=0, column=0, padx=5, pady=5, sticky="NW")
 
         self.current_rendered_window["toks2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                  padx=5, pady=5)
-        self.current_rendered_window["toks2_frame"].grid(row=0, column=1, padx=5, pady=5)
+        self.current_rendered_window["toks2_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
 
         self.current_rendered_window["buttons_frame"] = Frame(self.current_rendered_window["toks_frames"],
                                                               padx=5, pady=5)
@@ -294,13 +295,17 @@ class UI:
                                                              text="Next", command=self.next_gloss)
         self.current_rendered_window["next_button"].grid(row=0, column=1, padx=5, pady=5)
 
-        self.current_rendered_window["update_button"] = Button(self.current_rendered_window["buttons_frame"],
-                                                               text="Update Tokens", command=self.update_tokens)
-        self.current_rendered_window["update_button"].grid(row=0, column=0, padx=5, pady=5, sticky="w")
+        self.current_rendered_window["update_toks_button"] = Button(self.current_rendered_window["buttons_frame"],
+                                                                    text="Update Tokens", command=self.update_tokens)
+        self.current_rendered_window["update_toks_button"].grid(row=0, column=0, padx=5, pady=5, sticky="w")
+
+        self.current_rendered_window["update_pos_button"] = Button(self.current_rendered_window["buttons_frame"],
+                                                                   text="Update POS-tags", command=self.update_pos)
+        self.current_rendered_window["update_pos_button"].grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
         self.current_rendered_window["save_button"] = Button(self.current_rendered_window["buttons_frame"],
                                                              text="Save", command=self.save_tokens)
-        self.current_rendered_window["save_button"].grid(row=1, column=0, padx=5, pady=5, sticky="w")
+        self.current_rendered_window["save_button"].grid(row=2, column=0, padx=5, pady=5, sticky="w")
 
         # Create GUI text display boxes
         self.current_rendered_window["gloss_label"] = Label(self.current_rendered_window["text_frame"],
@@ -356,6 +361,7 @@ class UI:
         self.current_rendered_window["pos1_label"].grid(row=0, column=1, padx=5, pady=5)
 
         # Create tokens and POS menus for the tokens and POS tags (style 1)
+        self.cur_toks1 = cur_toks1
         for i, pos_token in enumerate(cur_toks1):
             token = pos_token[0]
             tag = pos_token[1]
@@ -370,6 +376,7 @@ class UI:
             self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=1, sticky='w')
 
         # Create lables for the tokens and POS tags (style 2)
+        self.cur_toks2 = cur_toks2
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Tokens (2)", font=("Helvetica", 16))
         self.current_rendered_window["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
@@ -392,6 +399,35 @@ class UI:
             self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=1, sticky='w')
 
     def update_tokens(self):
+        string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
+        tokens_1 = self.cur_toks1
+
+        string_2 = self.current_rendered_window["tokenise_text_2"].get(1.0, END)
+        tokens_2 = self.cur_toks2
+
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
+            selected_folio=self.current_rendered_window["current_selected_folio"].get(),
+            selected_glossnum=self.current_rendered_window["current_selected_gloss"].get()
+        )
+
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=refresh_tokens(string_1, tokens_1),
+            cur_toks2=refresh_tokens(string_2, tokens_2),
+        )
+
+    def update_pos(self):
         pass
 
     def save_tokens(self):
@@ -510,7 +546,6 @@ class UI:
         )
 
 
-
 def set_spacing(text):
     max_linelen = 80
     text_cuts = list()
@@ -531,6 +566,27 @@ def set_spacing(text):
                     text_cuts.append(remainder)
         text = "\n".join(text_cuts)
     return text
+
+
+def refresh_tokens(string, tokens):
+    return_tokens = list()
+    string = " ".join(string.split("\n")).strip()
+    test_against = [[i, "<unknown>"] for i in string.split(" ")]
+    if tokens == test_against:
+        return tokens
+    else:
+        for i, tok_pos in enumerate(tokens):
+            token = tok_pos[0]
+            if [token, "<unknown>"] in test_against:
+                match_place = test_against.index([token, "<unknown>"])
+                removal = test_against[:match_place + 1]
+                if len(removal) > 1:
+                    return_tokens = return_tokens + removal[:-1]
+                test_against = test_against[match_place + 1:]
+                return_tokens.append(tok_pos)
+        if test_against:
+            return_tokens = return_tokens + test_against
+        return return_tokens
 
 
 def update_json(file_name, file_object):
