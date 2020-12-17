@@ -11,8 +11,9 @@ from tkinter import ttk
 
 class UI:
 
-    def __init__(self, wb_data, pos_tags):
+    def __init__(self, file_name, wb_data, pos_tags):
 
+        self.file_name = file_name
         self.wb_data = wb_data
         self.epistles = show_epistles(wb_data)
         self.pos_tags = pos_tags
@@ -177,8 +178,7 @@ class UI:
 
             self.current_rendered_window["back_button"].destroy()
             self.current_rendered_window["next_button"].destroy()
-            self.current_rendered_window["update_toks_button"].destroy()
-            self.current_rendered_window["update_pos_button"].destroy()
+            self.current_rendered_window["update_button"].destroy()
             self.current_rendered_window["save_button"].destroy()
 
             self.current_rendered_window["gloss_label"].destroy()
@@ -295,13 +295,9 @@ class UI:
                                                              text="Next", command=self.next_gloss)
         self.current_rendered_window["next_button"].grid(row=0, column=1, padx=5, pady=5)
 
-        self.current_rendered_window["update_toks_button"] = Button(self.current_rendered_window["buttons_frame"],
-                                                                    text="Update Tokens", command=self.update_tokens)
-        self.current_rendered_window["update_toks_button"].grid(row=0, column=0, padx=5, pady=5, sticky="w")
-
-        self.current_rendered_window["update_pos_button"] = Button(self.current_rendered_window["buttons_frame"],
-                                                                   text="Update POS-tags", command=self.update_pos)
-        self.current_rendered_window["update_pos_button"].grid(row=1, column=0, padx=5, pady=5, sticky="w")
+        self.current_rendered_window["update_button"] = Button(self.current_rendered_window["buttons_frame"],
+                                                               text="Update Tokens", command=self.update_tokens)
+        self.current_rendered_window["update_button"].grid(row=0, column=0, padx=5, pady=5, sticky="w")
 
         self.current_rendered_window["save_button"] = Button(self.current_rendered_window["buttons_frame"],
                                                              text="Save", command=self.save_tokens)
@@ -369,10 +365,11 @@ class UI:
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
 
-            unknown_pos = StringVar()
-            unknown_pos.set(tag)
+            self.current_rendered_window[f"type1_pos{i}"] = StringVar()
+            self.current_rendered_window[f"type1_pos{i}"].set(tag)
             self.current_rendered_window[f"pos_drop1.{i}"] = OptionMenu(self.current_rendered_window["toks1_frame"],
-                                                                        unknown_pos, *self.pos_tags)
+                                                                        self.current_rendered_window[f"type1_pos{i}"],
+                                                                        *self.pos_tags)
             self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=1, sticky='w')
 
         # Create lables for the tokens and POS tags (style 2)
@@ -392,18 +389,29 @@ class UI:
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
 
-            unknown_pos = StringVar()
-            unknown_pos.set(tag)
+            self.current_rendered_window[f"type2_pos{i}"] = StringVar()
+            self.current_rendered_window[f"type2_pos{i}"].set(tag)
             self.current_rendered_window[f"pos_drop2.{i}"] = OptionMenu(self.current_rendered_window["toks2_frame"],
-                                                                        unknown_pos, *self.pos_tags)
+                                                                        self.current_rendered_window[f"type2_pos{i}"],
+                                                                        *self.pos_tags)
             self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=1, sticky='w')
 
     def update_tokens(self):
         string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
         tokens_1 = self.cur_toks1
+        updated_pos1 = [self.current_rendered_window[f"type1_pos{i}"].get() for i in range(len(tokens_1))]
+        if len(tokens_1) != len(updated_pos1):
+            raise RuntimeError("Different counts found for tokens before and after POS-tagging")
+        elif [i[1] for i in tokens_1] != updated_pos1:
+            tokens_1 = [[i[0], j] for i, j in zip(tokens_1, updated_pos1)]
 
         string_2 = self.current_rendered_window["tokenise_text_2"].get(1.0, END)
         tokens_2 = self.cur_toks2
+        updated_pos2 = [self.current_rendered_window[f"type2_pos{i}"].get() for i in range(len(tokens_2))]
+        if len(tokens_2) != len(updated_pos2):
+            raise RuntimeError("Different counts found for tokens before and after POS-tagging")
+        elif [i[1] for i in tokens_2] != updated_pos2:
+            tokens_2 = [[i[0], j] for i, j in zip(tokens_2, updated_pos2)]
 
         self.selected_gloss_info = self.create_gloss_info(
             selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
@@ -427,11 +435,32 @@ class UI:
             cur_toks2=refresh_tokens(string_2, tokens_2),
         )
 
-    def update_pos(self):
-        pass
-
     def save_tokens(self):
-        pass
+        self.update_tokens()
+
+        file_name = self.file_name
+        main_file = self.wb_data
+        current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
+        current_folio = self.current_rendered_window["current_selected_folio"].get()
+        current_epistle = self.current_rendered_window["current_selected_epistle"].get()
+        tokens_1 = self.cur_toks1
+        tokens_2 = self.cur_toks2
+
+        for epistle in main_file:
+            ep_name = epistle['epistle']
+            if ep_name == current_epistle:
+                folios = epistle['folios']
+                for folio_data in folios:
+                    fol_num = folio_data['folio']
+                    if fol_num == current_folio:
+                        glosses = folio_data['glosses']
+                        for gloss_data in glosses:
+                            gloss_no = gloss_data['glossNo']
+                            if gloss_no == current_glossnum:
+                                gloss_data["glossTokens1"] = tokens_1
+                                gloss_data['glossTokens2'] = tokens_2
+                                break
+        update_json(file_name, main_file)
 
     def last_gloss(self):
         self.save_tokens()
@@ -607,7 +636,7 @@ def update_empty_toks(file_name, json_doc):
                 gloss = gloss_data['glossFullTags']
                 tok_1 = gloss_data['glossTokens1']
                 tok_2 = gloss_data['glossTokens2']
-                token_list = [[i, "<unknown>"] for i in clear_tags(gloss).split(" ")]
+                token_list = [[i, "<unknown>"] if i != ".i." else [i, "ADV"] for i in clear_tags(gloss).split(" ")]
                 if not tok_1 and not tok_2:
                     tok_1 = token_list
                     tok_2 = token_list
@@ -739,6 +768,7 @@ if __name__ == "__main__":
 
     # Start the UI
     ui = UI(
+        file_name="Wb. Manual Tokenisation.json",
         wb_data=wb_data,
         pos_tags=pos_tags
     )
