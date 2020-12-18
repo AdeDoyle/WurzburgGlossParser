@@ -337,7 +337,7 @@ class UI:
         self.current_rendered_window["trans_label"].pack(anchor='w')
         self.current_rendered_window["trans_text"].pack(pady=5, anchor='w')
 
-        # Create GUI text editing boxes
+        # Create GUI text labels and editing boxes
         self.current_rendered_window["tokenise_label_1"] = Label(self.current_rendered_window["text_frame"],
                                                                  height=2, text=f"Tokenise (1st Standard)",
                                                                  font=("Helvetica", 16))
@@ -596,6 +596,8 @@ class UI:
         text = " ".join(text.split("\n")).strip()
         text = self.set_spacing(text)
         finds = list()
+        if "<em>et</em>" in text:
+            text = "<em>&&</em>".join(text.split("<em>et</em>")).strip()
         if "<em>" in text:
             find_points = list()
             emcount = text.count("<em>")
@@ -617,8 +619,8 @@ class UI:
 
         text_in_box = text_box.get(1.0, END)
 
-        for find in finds:
-            used_points = list()
+        used_points = list()
+        for i, find in enumerate(finds):
             if find not in text_in_box:
                 raise RuntimeError(f"Could not find text to italicise in textbox:\n    {find}\n    {text_in_box}")
             else:
@@ -646,7 +648,15 @@ class UI:
                     line_end_point = end_point
                 start_point = Decimal(f"{start_line}.{line_start_point}")
                 end_point = Decimal(f"{end_line}.{line_end_point}")
-                text_box.tag_add("italics", start_point, end_point)
+                finds[i] = [start_point, end_point]
+        if "&&" in text_in_box:
+            text_in_box = "et".join(text_in_box.split("&&"))
+            text_box.delete(1.0, END)
+            text_box.insert(1.0, text_in_box)
+        for placed_find in finds:
+            start_point = placed_find[0]
+            end_point = placed_find[1]
+            text_box.tag_add("italics", start_point, end_point)
 
     def set_spacing(self, text):
         text = " ".join(text.split("\n")).strip()
