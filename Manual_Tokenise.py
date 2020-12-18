@@ -4,9 +4,11 @@ from MakeJSON import make_json
 from SaveJSON import save_json
 import os
 import json
+from decimal import Decimal
 from ClearTags import clear_tags
 from tkinter import *
 from tkinter import ttk
+from tkinter import font
 
 
 class UI:
@@ -17,6 +19,7 @@ class UI:
         self.wb_data = wb_data
         self.epistles = show_epistles(wb_data)
         self.pos_tags = pos_tags
+        self.max_linelen = 80
 
         self.open_ep = self.epistles[0]
         self.open_fols = show_folcols(select_epistle(self.open_ep))
@@ -27,8 +30,8 @@ class UI:
         self.open_glossdata = select_glossnum(select_folcol(select_epistle(self.open_ep), self.open_folio),
                                               self.open_glossnum)
         self.open_hand = self.open_glossdata[0]
-        self.open_gloss = set_spacing(self.open_glossdata[1])
-        self.open_trans = set_spacing(self.open_glossdata[2])
+        self.open_gloss = self.open_glossdata[1]
+        self.open_trans = self.open_glossdata[2]
         self.open_toks1 = self.open_glossdata[3]
         self.open_toks2 = self.open_glossdata[4]
 
@@ -67,8 +70,8 @@ class UI:
             "selected_glossnum": selected_glossnum,
             "selected_glossid": selected_folio + selected_glossnum,
             "selected_hand": selected_glossdata[0],
-            "selected_gloss": set_spacing(selected_glossdata[1]),
-            "selected_trans": set_spacing(selected_glossdata[2]),
+            "selected_gloss": selected_glossdata[1],
+            "selected_trans": selected_glossdata[2],
             "selected_toks1": selected_glossdata[3],
             "selected_toks2": selected_glossdata[4]
         }
@@ -308,17 +311,25 @@ class UI:
                                                             height=2, text=f"Gloss ({cur_glossid[3:]}) – {cur_hand}:",
                                                             font=("Helvetica", 16))
 
+        gloss_points = self.emp_points(cur_gloss)
+        clean_gloss = gloss_points[0]
+        gloss_emphs = gloss_points[1]
         self.current_rendered_window["gloss_text"] = Text(self.current_rendered_window["text_frame"],
                                                           width=80, height=5, font=("Courier", 12))
-        self.current_rendered_window["gloss_text"].insert(1.0, cur_gloss)
+        self.current_rendered_window["gloss_text"].insert(1.0, clean_gloss)
+        self.italicise_text(self.current_rendered_window["gloss_text"], gloss_emphs)
         self.current_rendered_window["gloss_text"].config(state=DISABLED)
 
         self.current_rendered_window["trans_label"] = Label(self.current_rendered_window["text_frame"],
                                                             height=1, text="Translation:", font=("Helvetica", 16))
 
+        trans_points = self.emp_points(cur_trans)
+        clean_trans = trans_points[0]
+        trans_emphs = trans_points[1]
         self.current_rendered_window["trans_text"] = Text(self.current_rendered_window["text_frame"],
                                                           width=80, height=5, font=("Courier", 12))
-        self.current_rendered_window["trans_text"].insert(1.0, cur_trans)
+        self.current_rendered_window["trans_text"].insert(1.0, clean_trans)
+        self.italicise_text(self.current_rendered_window["trans_text"], trans_emphs)
         self.current_rendered_window["trans_text"].config(state=DISABLED)
 
         self.current_rendered_window["gloss_label"].pack(anchor='w')
@@ -333,7 +344,8 @@ class UI:
         self.current_rendered_window["tokenise_text_1"] = Text(self.current_rendered_window["text_frame"], width=80,
                                                                height=5, borderwidth=1, relief="solid",
                                                                font=("Courier", 12))
-        self.current_rendered_window["tokenise_text_1"].insert(1.0, set_spacing(" ".join([i[0] for i in cur_toks1])))
+        self.current_rendered_window["tokenise_text_1"].insert(1.0,
+                                                               self.set_spacing(" ".join([i[0] for i in cur_toks1])))
 
         self.current_rendered_window["tokenise_label_2"] = Label(self.current_rendered_window["text_frame"],
                                                                  height=1, text="Tokenise (2nd Standard)",
@@ -341,7 +353,8 @@ class UI:
         self.current_rendered_window["tokenise_text_2"] = Text(self.current_rendered_window["text_frame"], width=80,
                                                                height=5, borderwidth=1, relief="solid",
                                                                font=("Courier", 12))
-        self.current_rendered_window["tokenise_text_2"].insert(1.0, set_spacing(" ".join([i[0] for i in cur_toks2])))
+        self.current_rendered_window["tokenise_text_2"].insert(1.0,
+                                                               self.set_spacing(" ".join([i[0] for i in cur_toks2])))
 
         self.current_rendered_window["tokenise_label_1"].pack(anchor='w')
         self.current_rendered_window["tokenise_text_1"].pack(pady=5, anchor='w')
@@ -574,27 +587,88 @@ class UI:
             cur_toks2=self.selected_gloss_info["selected_toks2"],
         )
 
+    def emp_points(self, text):
+        suppat = re.compile(r'<sup>\w*</sup>')
+        suppatiter = suppat.findall(text)
+        if suppatiter:
+            for suptag in suppatiter:
+                text = "".join(text.split(suptag))
+        text = " ".join(text.split("\n")).strip()
+        text = self.set_spacing(text)
+        finds = list()
+        if "<em>" in text:
+            find_points = list()
+            emcount = text.count("<em>")
+            for _ in range(emcount):
+                find_open = text.find("<em>")
+                text = text[:find_open] + text[find_open + 4:]
+                find_close = text.find("</em>")
+                text = text[:find_close] + text[find_close + 5:]
+                find_points.append([find_open, find_close])
+            for points in find_points:
+                finds.append(text[points[0]: points[1]])
+        return [text, finds]
 
-def set_spacing(text):
-    max_linelen = 80
-    text_cuts = list()
-    if len(text) > max_linelen:
-        first_cut = text[:max_linelen]
-        last_spacepoint = first_cut.rfind(" ")
-        text_cuts.append(first_cut[:last_spacepoint])
-        remainder = text[last_spacepoint + 1:]
-        if len(remainder) < max_linelen:
-            text_cuts.append(remainder)
-        else:
-            while len(remainder) > max_linelen:
-                next_cut = remainder[:max_linelen]
-                last_spacepoint = next_cut.rfind(" ")
-                text_cuts.append(next_cut[:last_spacepoint])
-                remainder = remainder[last_spacepoint + 1:]
-                if len(remainder) < max_linelen:
-                    text_cuts.append(remainder)
-        text = "\n".join(text_cuts)
-    return text
+    def italicise_text(self, text_box, finds):
+        italics_font = font.Font(text_box, text_box.cget("font"))
+        italics_font.configure(weight="bold", slant="italic")
+
+        text_box.tag_configure("italics", font=italics_font)
+
+        text_in_box = text_box.get(1.0, END)
+
+        for find in finds:
+            used_points = list()
+            if find not in text_in_box:
+                raise RuntimeError(f"Could not find text to italicise in textbox:\n    {find}\n    {text_in_box}")
+            else:
+                start_point = text_in_box.find(find)
+                end_point = start_point + len(find)
+                found_at = [start_point, end_point]
+                if found_at in used_points:
+                    while found_at in used_points:
+                        reduced_text = text_in_box[end_point:]
+                        start_point = end_point + reduced_text.find(find)
+                        end_point = start_point + len(find)
+                        found_at = [start_point, end_point]
+                used_points.append(found_at)
+                text_to_startpoint = text_in_box[:start_point]
+                text_to_endpoint = text_in_box[:end_point]
+                start_line = text_to_startpoint.count("\n") + 1
+                end_line = text_to_endpoint.count("\n") + 1
+                if "\n" in text_to_startpoint:
+                    line_start_point = len(text_in_box[text_to_startpoint.rfind("\n") + 1: start_point])
+                else:
+                    line_start_point = start_point
+                if "\n" in text_to_endpoint:
+                    line_end_point = len(text_in_box[text_to_endpoint.rfind("\n") + 1: end_point])
+                else:
+                    line_end_point = end_point
+                start_point = Decimal(f"{start_line}.{line_start_point}")
+                end_point = Decimal(f"{end_line}.{line_end_point}")
+                text_box.tag_add("italics", start_point, end_point)
+
+    def set_spacing(self, text):
+        text = " ".join(text.split("\n")).strip()
+        max_linelen = self.max_linelen
+        text_cuts = list()
+        if len(text) > max_linelen:
+            first_cut = text[:max_linelen]
+            last_spacepoint = first_cut.rfind(" ")
+            text_cuts.append(first_cut[:last_spacepoint])
+            remainder = text[last_spacepoint + 1:]
+            if len(remainder) < max_linelen:
+                text_cuts.append(remainder)
+            else:
+                while len(remainder) > max_linelen:
+                    next_cut = remainder[:max_linelen]
+                    last_spacepoint = next_cut.rfind(" ")
+                    text_cuts.append(next_cut[:last_spacepoint])
+                    remainder = remainder[last_spacepoint + 1:]
+                    if len(remainder) < max_linelen:
+                        text_cuts.append(remainder)
+            text = "\n".join(text_cuts)
+        return text
 
 
 def refresh_tokens(string, tokens):
