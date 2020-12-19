@@ -721,6 +721,8 @@ def update_empty_toks(file_name, json_doc):
                 tok_1 = gloss_data['glossTokens1']
                 tok_2 = gloss_data['glossTokens2']
                 token_list = [[i, "<unknown>"] if i != ".i." else [i, "ADV"] for i in clear_tags(gloss).split(" ")]
+                token_list = [[i, "<Latin>"] if i in ["et"] else [i, j] for i, j in token_list]
+                token_list = [[i, "CCONJ"] if i in ["⁊", "ɫ", "ɫ."] else [i, j] for i, j in token_list]
                 if not tok_1 and not tok_2:
                     tok_1 = token_list
                     tok_2 = token_list
