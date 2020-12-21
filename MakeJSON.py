@@ -1,7 +1,9 @@
 """Level 1"""
 
-from CombineInfoLists import combine_infolists
 import re
+from CombineInfoLists import combine_infolists
+from conllu import parse, TokenList
+import json
 
 
 def make_json(glosslist, headers=False):
@@ -176,9 +178,67 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-# if __name__ == "__main__":
-#
-#     wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
-#     print(make_json(wbglosslist, True))
-#     wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
-#     print(make_json(wbglosslist, True))
+def make_lex_json(conllu_file):
+    with open(conllu_file, "r", encoding="utf-8") as conllu_file_import:
+        text_file = conllu_file_import.read()
+    sentences = parse(text_file)
+    all_words = list()
+    for sentence in sentences:
+        words = [(i.get("lemma"), i.get("form").lower(), i.get("upos"), i.get("feats")) for i in sentence][0]
+        if not words[3]:
+            words = tuple([i for i in words[:3]] + ["_"])
+        words = tuple([i for i in words[:3]] + ["|".join([f"{j}={words[3].get(j)}" for j in words[3] if j != "_"])])
+        if not words[3]:
+            words = tuple([i for i in words[:3]] + ["_"])
+        all_words.append(words)
+    all_words = sorted(list(set([i for i in all_words if i[0] not in ['_', 'False']])))
+    all_POS = sorted(list(set([i[2] for i in all_words])))
+    all_POS = sorted(list(set(all_POS + ["SYM", "X", "<unknown>", "<Latin>", "<Latin CCONJ>"])))
+    json_file = [{
+        "part_of_speech": pos,
+        "lemmata": [i for i in all_words if i[2] == pos]
+    } for pos in all_POS]
+    for pos_data in json_file:
+        relevant_lem_data = pos_data.get("lemmata")
+        relevant_lemmata = sorted(list(set([i[0] for i in relevant_lem_data])))
+        pos_data["lemmata"] = [{
+            "lemma": lemma,
+            "tokens": [j for j in relevant_lem_data if j[0] == lemma]
+        } for lemma in relevant_lemmata]
+        for lemmata_data in pos_data.get("lemmata"):
+            relevant_tok_data = lemmata_data.get("tokens")
+            relevant_tokens = sorted(list(set([k[1] for k in relevant_tok_data])))
+            lemmata_data["tokens"] = [{
+                "token": token,
+                "feature_sets": [l[3].split("|") for l in relevant_tok_data if l[1] == token]
+            } for token in relevant_tokens]
+            for token_data in lemmata_data.get("tokens"):
+                relevant_features_data = token_data.get("feature_sets")
+                token_data["feature_sets"] = [{
+                    "feature_set": m + 1,
+                    "features": n
+                } if n != ['_'] else {
+                    "feature_set": m,
+                    "features": None
+                } for m, n in enumerate(relevant_features_data)]
+                for feature_data in token_data.get("feature_sets"):
+                    relative_features = feature_data.get("features")
+                    if relative_features:
+                        feature_data["features"] = [{
+                            o.split("=")[0]: o.split("=")[1]for o in relative_features
+                        }]
+    json_file = json.dumps(json_file, indent=4, ensure_ascii=False)
+    return json_file
+
+
+if __name__ == "__main__":
+
+    wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
+    print(make_json(wbglosslist, True))
+    # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
+    # print(make_json(wbglosslist, True))
+
+    # make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+    print(make_lex_json("sga_dipsgg-ud-test_split_POS.conllu"))
+    # # make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+    # print(make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu"))

@@ -1,6 +1,6 @@
 
 from CombineInfoLists import combine_infolists
-from MakeJSON import make_json
+from MakeJSON import make_json, make_lex_json
 from SaveJSON import save_json
 import os
 import json
@@ -13,13 +13,17 @@ from tkinter import font
 
 class UI:
 
-    def __init__(self, file_name, wb_data, pos_tags):
+    def __init__(self, file_name, wb_data, lexica):
 
         self.file_name = file_name
         self.wb_data = wb_data
         self.epistles = show_epistles(wb_data)
-        self.pos_tags = pos_tags
-        self.max_linelen = 80
+        self.lexicon_1 = lexica[0]
+        self.lexicon_2 = lexica[1]
+        self.pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
+                         "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
+                         "<Latin>", "<Latin CCONJ>", "<unknown>"]
+        self.max_linelen = 110
 
         self.open_ep = self.epistles[0]
         self.open_fols = show_folcols(select_epistle(self.open_ep))
@@ -38,7 +42,7 @@ class UI:
         # Create the GUI
         self.root = Tk()
         self.root.title("Manual Tokenisation Window")
-        self.root.geometry("900x900")
+        self.root.geometry("1200x900")
 
         self.render_gloss(
             self.root,
@@ -315,7 +319,7 @@ class UI:
         clean_gloss = gloss_points[0]
         gloss_emphs = gloss_points[1]
         self.current_rendered_window["gloss_text"] = Text(self.current_rendered_window["text_frame"],
-                                                          width=80, height=5, font=("Courier", 12))
+                                                          width=self.max_linelen, height=5, font=("Courier", 12))
         self.current_rendered_window["gloss_text"].insert(1.0, clean_gloss)
         self.italicise_text(self.current_rendered_window["gloss_text"], gloss_emphs)
         self.current_rendered_window["gloss_text"].config(state=DISABLED)
@@ -327,7 +331,7 @@ class UI:
         clean_trans = trans_points[0]
         trans_emphs = trans_points[1]
         self.current_rendered_window["trans_text"] = Text(self.current_rendered_window["text_frame"],
-                                                          width=80, height=5, font=("Courier", 12))
+                                                          width=self.max_linelen, height=5, font=("Courier", 12))
         self.current_rendered_window["trans_text"].insert(1.0, clean_trans)
         self.italicise_text(self.current_rendered_window["trans_text"], trans_emphs)
         self.current_rendered_window["trans_text"].config(state=DISABLED)
@@ -341,18 +345,18 @@ class UI:
         self.current_rendered_window["tokenise_label_1"] = Label(self.current_rendered_window["text_frame"],
                                                                  height=2, text=f"Tokenise (1st Standard)",
                                                                  font=("Helvetica", 16))
-        self.current_rendered_window["tokenise_text_1"] = Text(self.current_rendered_window["text_frame"], width=80,
-                                                               height=5, borderwidth=1, relief="solid",
-                                                               font=("Courier", 12))
+        self.current_rendered_window["tokenise_text_1"] = Text(self.current_rendered_window["text_frame"],
+                                                               width=self.max_linelen, height=5, borderwidth=1,
+                                                               relief="solid", font=("Courier", 12))
         self.current_rendered_window["tokenise_text_1"].insert(1.0,
                                                                self.set_spacing(" ".join([i[0] for i in cur_toks1])))
 
         self.current_rendered_window["tokenise_label_2"] = Label(self.current_rendered_window["text_frame"],
                                                                  height=1, text="Tokenise (2nd Standard)",
                                                                  font=("Helvetica", 16))
-        self.current_rendered_window["tokenise_text_2"] = Text(self.current_rendered_window["text_frame"], width=80,
-                                                               height=5, borderwidth=1, relief="solid",
-                                                               font=("Courier", 12))
+        self.current_rendered_window["tokenise_text_2"] = Text(self.current_rendered_window["text_frame"],
+                                                               width=self.max_linelen, height=5, borderwidth=1,
+                                                               relief="solid", font=("Courier", 12))
         self.current_rendered_window["tokenise_text_2"].insert(1.0,
                                                                self.set_spacing(" ".join([i[0] for i in cur_toks2])))
 
@@ -361,19 +365,25 @@ class UI:
         self.current_rendered_window["tokenise_label_2"].pack(anchor='w')
         self.current_rendered_window["tokenise_text_2"].pack(pady=5, anchor='w')
 
-        # Create lables for the tokens and POS tags (style 1)
+        # Create lables for the tokens, POS tags and headwords (style 1)
         self.current_rendered_window["toks1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                             text="Tokens (1)", font=("Helvetica", 16))
         self.current_rendered_window["toks1_label"].grid(row=0, column=0, padx=5, pady=5)
+
         self.current_rendered_window["pos1_label"] = Label(self.current_rendered_window["toks1_frame"],
-                                                           text="POS tags", font=("Helvetica", 16))
+                                                           text="POS", font=("Helvetica", 16))
         self.current_rendered_window["pos1_label"].grid(row=0, column=1, padx=5, pady=5)
 
-        # Create tokens and POS menus for the tokens and POS tags (style 1)
+        self.current_rendered_window["head1_label"] = Label(self.current_rendered_window["toks1_frame"],
+                                                            text="Headword", font=("Helvetica", 16))
+        self.current_rendered_window["head1_label"].grid(row=0, column=2, padx=5, pady=5)
+
+        # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 1)
         self.cur_toks1 = cur_toks1
         for i, pos_token in enumerate(cur_toks1):
             token = pos_token[0]
             tag = pos_token[1]
+            head = pos_token[2]
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -385,19 +395,30 @@ class UI:
                                                                         *self.pos_tags)
             self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=1, sticky='w')
 
-        # Create lables for the tokens and POS tags (style 2)
+            self.current_rendered_window[f"head_word1.{i}"] = Text(self.current_rendered_window["toks1_frame"],
+                                                                   height=1, width=12, font=("Helvetica", 12))
+            self.current_rendered_window[f"head_word1.{i}"].insert(1.0, head)
+            self.current_rendered_window[f"head_word1.{i}"].grid(row=i + 1, column=2, sticky='w')
+
+        # Create lables for the tokens, POS tags and headwords (style 2)
         self.cur_toks2 = cur_toks2
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Tokens (2)", font=("Helvetica", 16))
         self.current_rendered_window["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
+
         self.current_rendered_window["pos2_label"] = Label(self.current_rendered_window["toks2_frame"],
-                                                           text="POS tags", font=("Helvetica", 16))
+                                                           text="POS", font=("Helvetica", 16))
         self.current_rendered_window["pos2_label"].grid(row=0, column=1, padx=5, pady=5)
 
-        # Create tokens and POS menus for the tokens and POS tags (style 1)
+        self.current_rendered_window["head2_label"] = Label(self.current_rendered_window["toks2_frame"],
+                                                            text="Headword", font=("Helvetica", 16))
+        self.current_rendered_window["head2_label"].grid(row=0, column=2, padx=5, pady=5)
+
+        # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 2)
         for i, pos_token in enumerate(cur_toks2):
             token = pos_token[0]
             tag = pos_token[1]
+            head = pos_token[2]
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -409,22 +430,33 @@ class UI:
                                                                         *self.pos_tags)
             self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=1, sticky='w')
 
+            self.current_rendered_window[f"head_word2.{i}"] = Text(self.current_rendered_window["toks2_frame"],
+                                                                   height=1, width=12, font=("Helvetica", 12))
+            self.current_rendered_window[f"head_word2.{i}"].insert(1.0, head)
+            self.current_rendered_window[f"head_word2.{i}"].grid(row=i + 1, column=2, sticky='w')
+
     def update_tokens(self):
         string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
         tokens_1 = self.cur_toks1
         updated_pos1 = [self.current_rendered_window[f"type1_pos{i}"].get() for i in range(len(tokens_1))]
+        updated_head1 = [self.current_rendered_window[f"head_word1.{i}"].get(1.0, END) for i in range(len(tokens_1))]
         if len(tokens_1) != len(updated_pos1):
             raise RuntimeError("Different counts found for tokens before and after POS-tagging")
-        elif [i[1] for i in tokens_1] != updated_pos1:
-            tokens_1 = [[i[0], j] for i, j in zip(tokens_1, updated_pos1)]
+        if [i[1] for i in tokens_1] != updated_pos1:
+            tokens_1 = [[i[0], j, i[2]] for i, j in zip(tokens_1, updated_pos1)]
+        if [i[2] for i in tokens_1] != updated_head1:
+            tokens_1 = [[i[0], i[1], j.strip()] for i, j in zip(tokens_1, updated_head1)]
 
         string_2 = self.current_rendered_window["tokenise_text_2"].get(1.0, END)
         tokens_2 = self.cur_toks2
         updated_pos2 = [self.current_rendered_window[f"type2_pos{i}"].get() for i in range(len(tokens_2))]
+        updated_head2 = [self.current_rendered_window[f"head_word2.{i}"].get(1.0, END) for i in range(len(tokens_2))]
         if len(tokens_2) != len(updated_pos2):
             raise RuntimeError("Different counts found for tokens before and after POS-tagging")
-        elif [i[1] for i in tokens_2] != updated_pos2:
-            tokens_2 = [[i[0], j] for i, j in zip(tokens_2, updated_pos2)]
+        if [i[1] for i in tokens_2] != updated_pos2:
+            tokens_2 = [[i[0], j, i[2]] for i, j in zip(tokens_2, updated_pos2)]
+        if [i[2] for i in tokens_2] != updated_head2:
+            tokens_2 = [[i[0], i[1], j.strip()] for i, j in zip(tokens_2, updated_head2)]
 
         self.selected_gloss_info = self.create_gloss_info(
             selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
@@ -720,9 +752,11 @@ def update_empty_toks(file_name, json_doc):
                 gloss = gloss_data['glossFullTags']
                 tok_1 = gloss_data['glossTokens1']
                 tok_2 = gloss_data['glossTokens2']
-                token_list = [[i, "<unknown>"] if i != ".i." else [i, "ADV"] for i in clear_tags(gloss).split(" ")]
-                token_list = [[i, "<Latin>"] if i in ["et"] else [i, j] for i, j in token_list]
-                token_list = [[i, "CCONJ"] if i in ["⁊", "ɫ", "ɫ."] else [i, j] for i, j in token_list]
+                token_list = [[i, "<unknown>", "<unknown>"] if i != ".i."
+                              else [i, "ADV", ".i."] for i in clear_tags(gloss).split(" ")]
+                token_list = [[i, "<Latin CCONJ>", "et"] if i in ["et"] else [i, j, k] for i, j, k in token_list]
+                token_list = [[i, "CCONJ", "ocus"] if i in ["⁊"] else [i, j, k] for i, j, k in token_list]
+                token_list = [[i, "CCONJ", "nó"] if i in ["ɫ", "ɫ."] else [i, j, k] for i, j, k in token_list]
                 if not tok_1 and not tok_2:
                     tok_1 = token_list
                     tok_2 = token_list
@@ -795,7 +829,7 @@ def select_glossnum(glosses, glossnum):
                 gloss_text = gloss['glossText']
                 trans = gloss['glossTrans']
                 toks1 = gloss['glossTokens1']
-                toks2 = gloss['glossTokens1']
+                toks2 = gloss['glossTokens2']
                 gloss_data = [hand, gloss_text, trans, toks1, toks2]
     return gloss_data
 
@@ -815,7 +849,7 @@ if __name__ == "__main__":
         os.mkdir("Manual_Tokenise_Files")
         os.chdir(tokenise_dir)
 
-    # Create a JSON document in the Manual Tokenisation folder if it doesn't exist already
+    # Create a JSON document of the Wb. Glosses in the Manual Tokenisation folder if it doesn't exist already
     dir_contents = os.listdir()
     if "Wb. Manual Tokenisation.json" not in dir_contents:
         os.chdir(maindir)
@@ -823,9 +857,55 @@ if __name__ == "__main__":
         os.chdir(tokenise_dir)
         save_json(make_json(wbglosslist, True), "Wb. Manual Tokenisation")
 
-    # Open the JSON file for use in the GUI
+    # Open the Wb. JSON file for use in the GUI
     with open("Wb. Manual Tokenisation.json", 'r', encoding="utf-8") as wb_json:
         wb_data = json.load(wb_json)
+
+    # Create 2 JSON documents of OI Lexica in the Manual Tokenisation folder from the two Sg. CoNNL_U files,
+    # one for each tokenisation type, if they doesn't exist already
+
+    # Lexicon 1 = combined-tokens style
+    dir_contents = os.listdir()
+    if "Lexicon_1.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json1, "Lexicon_1")
+
+    # Lexicon 2 = separated-tokens style
+    if "Lexicon_2.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json2, "Lexicon_2")
+
+    # Create a working copy of each of the OI Lexica created above for use in the GUI, if they doesn't exist already
+    # These will be updated with new tokens and POS from Wb. which will not be saved to in the originals above
+
+    # Lexicon 1 = combined-tokens style
+    dir_contents = os.listdir()
+    if "Working_lexicon_file_1.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json1, "Working_lexicon_file_1")
+
+    # Open the first Lexicon JSON file for use in the GUI
+    with open("Working_lexicon_file_1.json", 'r', encoding="utf-8") as lex1_working_json:
+        working_lexicon_1 = json.load(lex1_working_json)
+
+    # Lexicon 2 = separated-tokens style
+    if "Working_lexicon_file_2.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json2, "Working_lexicon_file_2")
+
+    # Open the second Lexicon JSON file for use in the GUI
+    with open("Working_lexicon_file_2.json", 'r', encoding="utf-8") as lex2_working_json:
+        working_lexicon_2 = json.load(lex2_working_json)
+
+    working_lexica = [working_lexicon_1, working_lexicon_2]
 
     # Check if any of the tokenisation fields are empty
     empty_tokfields = False
@@ -848,14 +928,11 @@ if __name__ == "__main__":
     if empty_tokfields:
         update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
 
-    pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
-                "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
-                "<Latin>", "<unknown>"]
 
     # Start the UI
     ui = UI(
         file_name="Wb. Manual Tokenisation.json",
         wb_data=wb_data,
-        pos_tags=pos_tags
+        lexica=working_lexica
     )
     ui.start()
