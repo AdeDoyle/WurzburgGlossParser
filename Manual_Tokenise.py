@@ -81,7 +81,6 @@ class UI:
         }
 
     def change_gloss(self, event=None):
-        self.save_tokens()
 
         new_selected_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         self.selected_gloss_info = self.create_gloss_info(
@@ -107,7 +106,6 @@ class UI:
         )
 
     def change_folio(self, event=None):
-        self.save_tokens()
 
         new_selected_folio = self.current_rendered_window["current_selected_folio"].get()
         cur_ep = self.current_rendered_window["current_selected_epistle"].get()
@@ -136,7 +134,6 @@ class UI:
         )
 
     def change_epistle(self, event=None):
-        self.save_tokens()
 
         new_selected_epistle = self.current_rendered_window["current_selected_epistle"].get()
         cur_fols = show_folcols(select_epistle(new_selected_epistle))
@@ -526,7 +523,6 @@ class UI:
         update_json(file_name, main_file)
 
     def last_gloss(self):
-        self.save_tokens()
 
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         current_folio = self.current_rendered_window["current_selected_folio"].get()
@@ -582,7 +578,6 @@ class UI:
         )
 
     def next_gloss(self):
-        self.save_tokens()
 
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         current_folio = self.current_rendered_window["current_selected_folio"].get()
