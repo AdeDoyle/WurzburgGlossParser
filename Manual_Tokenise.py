@@ -81,6 +81,8 @@ class UI:
         }
 
     def change_gloss(self, event=None):
+        self.save_tokens()
+
         new_selected_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         self.selected_gloss_info = self.create_gloss_info(
             selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
@@ -105,6 +107,8 @@ class UI:
         )
 
     def change_folio(self, event=None):
+        self.save_tokens()
+
         new_selected_folio = self.current_rendered_window["current_selected_folio"].get()
         cur_ep = self.current_rendered_window["current_selected_epistle"].get()
         cur_glossnums = show_glossnums(select_folcol(select_epistle(cur_ep), new_selected_folio))
@@ -132,6 +136,8 @@ class UI:
         )
 
     def change_epistle(self, event=None):
+        self.save_tokens()
+
         new_selected_epistle = self.current_rendered_window["current_selected_epistle"].get()
         cur_fols = show_folcols(select_epistle(new_selected_epistle))
         new_selected_folio = cur_fols[0]
@@ -308,7 +314,7 @@ class UI:
 
         self.current_rendered_window["save_button"] = Button(self.current_rendered_window["buttons_frame"],
                                                              text="Save", command=self.save_tokens)
-        self.current_rendered_window["save_button"].grid(row=2, column=0, padx=5, pady=5, sticky="w")
+        self.current_rendered_window["save_button"].grid(row=1, column=0, padx=5, pady=5, sticky="w")
 
         # Create GUI text display boxes
         self.current_rendered_window["gloss_label"] = Label(self.current_rendered_window["text_frame"],
@@ -384,6 +390,12 @@ class UI:
             token = pos_token[0]
             tag = pos_token[1]
             head = pos_token[2]
+            finds = " ".join(gloss_emphs)
+            finds_list = " ".join(finds.split("\n")).split(" ")
+            if token in finds_list and tag == "<unknown>":
+                tag = "<Latin>"
+                if head == "<unknown>":
+                    head = "<Latin>"
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -401,7 +413,6 @@ class UI:
             self.current_rendered_window[f"head_word1.{i}"].grid(row=i + 1, column=2, sticky='w')
 
         # Create lables for the tokens, POS tags and headwords (style 2)
-        self.cur_toks2 = cur_toks2
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Tokens (2)", font=("Helvetica", 16))
         self.current_rendered_window["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
@@ -415,10 +426,17 @@ class UI:
         self.current_rendered_window["head2_label"].grid(row=0, column=2, padx=5, pady=5)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 2)
+        self.cur_toks2 = cur_toks2
         for i, pos_token in enumerate(cur_toks2):
             token = pos_token[0]
             tag = pos_token[1]
             head = pos_token[2]
+            finds = " ".join(gloss_emphs)
+            finds_list = " ".join(finds.split("\n")).split(" ")
+            if token in finds_list and tag == "<unknown>":
+                tag = "<Latin>"
+                if head == "<unknown>":
+                    head = "<Latin>"
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -652,6 +670,7 @@ class UI:
         text_in_box = text_box.get(1.0, END)
 
         used_points = list()
+        find_points = list()
         for i, find in enumerate(finds):
             if find not in text_in_box:
                 raise RuntimeError(f"Could not find text to italicise in textbox:\n    {find}\n    {text_in_box}")
@@ -680,12 +699,12 @@ class UI:
                     line_end_point = end_point
                 start_point = Decimal(f"{start_line}.{line_start_point}")
                 end_point = Decimal(f"{end_line}.{line_end_point}")
-                finds[i] = [start_point, end_point]
+                find_points.append([start_point, end_point])
         if "&&" in text_in_box:
             text_in_box = "et".join(text_in_box.split("&&"))
             text_box.delete(1.0, END)
             text_box.insert(1.0, text_in_box)
-        for placed_find in finds:
+        for placed_find in find_points:
             start_point = placed_find[0]
             end_point = placed_find[1]
             text_box.tag_add("italics", start_point, end_point)
@@ -716,14 +735,14 @@ class UI:
 def refresh_tokens(string, tokens):
     return_tokens = list()
     string = " ".join(string.split("\n")).strip()
-    test_against = [[i, "<unknown>"] for i in string.split(" ")]
+    test_against = [[i, "<unknown>", "<unknown>"] for i in string.split(" ")]
     if tokens == test_against:
         return tokens
     else:
         for i, tok_pos in enumerate(tokens):
             token = tok_pos[0]
-            if [token, "<unknown>"] in test_against:
-                match_place = test_against.index([token, "<unknown>"])
+            if [token, "<unknown>", "<unknown>"] in test_against:
+                match_place = test_against.index([token, "<unknown>", "<unknown>"])
                 removal = test_against[:match_place + 1]
                 if len(removal) > 1:
                     return_tokens = return_tokens + removal[:-1]
