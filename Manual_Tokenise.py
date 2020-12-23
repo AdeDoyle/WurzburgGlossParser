@@ -9,6 +9,7 @@ from ClearTags import clear_tags
 from tkinter import *
 from tkinter import ttk
 from tkinter import font
+from nltk import edit_distance
 
 
 class UI:
@@ -42,7 +43,7 @@ class UI:
         # Create the GUI
         self.root = Tk()
         self.root.title("Manual Tokenisation Window")
-        self.root.geometry("1200x900")
+        self.root.geometry("1200x800")
 
         self.render_gloss(
             self.root,
@@ -179,7 +180,9 @@ class UI:
             self.current_rendered_window["text_frame"].destroy()
             self.current_rendered_window["toks_frames"].destroy()
             self.current_rendered_window["toks1_frame"].destroy()
+            self.current_rendered_window["head_opts_1_frame"].destroy()
             self.current_rendered_window["toks2_frame"].destroy()
+            self.current_rendered_window["head_opts_2_frame"].destroy()
             self.current_rendered_window["buttons_frame"].destroy()
 
             self.current_rendered_window["ep_drop"].destroy()
@@ -272,13 +275,21 @@ class UI:
                                                                  padx=5, pady=5)
         self.current_rendered_window["toks1_frame"].grid(row=0, column=0, padx=5, pady=5, sticky="NW")
 
+        self.current_rendered_window["head_opts_1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
+                                                                       padx=5, pady=5)
+        self.current_rendered_window["head_opts_1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+
         self.current_rendered_window["toks2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                  padx=5, pady=5)
-        self.current_rendered_window["toks2_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["toks2_frame"].grid(row=0, column=2, padx=5, pady=5, sticky="NW")
+
+        self.current_rendered_window["head_opts_2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
+                                                                       padx=5, pady=5)
+        self.current_rendered_window["head_opts_2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
 
         self.current_rendered_window["buttons_frame"] = Frame(self.current_rendered_window["toks_frames"],
                                                               padx=5, pady=5)
-        self.current_rendered_window["buttons_frame"].grid(row=0, column=2, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["buttons_frame"].grid(row=0, column=4, padx=5, pady=5, sticky="NW")
 
         # Create top-bar dropdown menus
         self.current_rendered_window["ep_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
@@ -384,6 +395,7 @@ class UI:
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 1)
         self.cur_toks1 = cur_toks1
         for i, pos_token in enumerate(cur_toks1):
+            lexicon1 = self.lexicon_1
             token = pos_token[0]
             tag = pos_token[1]
             head = pos_token[2]
@@ -392,7 +404,26 @@ class UI:
             if token in finds_list and tag == "<unknown>":
                 tag = "<Latin>"
                 if head == "<unknown>":
-                    head = "<Latin>"
+                    head = "Latin ?"
+            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " ?"):
+                lex_toks = list()
+                for level_1 in lexicon1:
+                    lex_pos = level_1.get("part_of_speech")
+                    if lex_pos == tag:
+                        lex_lemmata = level_1.get("lemmata")
+                        for level_2 in lex_lemmata:
+                            lex_lemma = level_2.get("lemma")
+                            lex_tokens = level_2.get("tokens")
+                            lex_toks = lex_toks + [[lex_token.get("token"), lex_lemma] for lex_token in lex_tokens]
+                if lex_toks:
+                    head_candidates = [i for i in lex_toks if i[0] == token]
+                    if not head_candidates:
+                        ed_dists = [edit_distance(token, i[0]) for i in lex_toks]
+                        lex_toks = [i + [j] for i, j in zip(lex_toks, ed_dists)]
+                        lowest_ed = min(ed_dists)
+                        head_candidates = [i[:2] for i in lex_toks if i[2] == lowest_ed]
+                    head_candidate = head_candidates[0]
+                    head = f"{head_candidate[1]} ?"
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -408,6 +439,11 @@ class UI:
                                                                    height=1, width=12, font=("Helvetica", 12))
             self.current_rendered_window[f"head_word1.{i}"].insert(1.0, head)
             self.current_rendered_window[f"head_word1.{i}"].grid(row=i + 1, column=2, sticky='w')
+
+            self.current_rendered_window[f"suggest_head1.{i}"] = Button(self.current_rendered_window["toks1_frame"],
+                                                                        text=" ? ",
+                                                                        command=lambda but=i: self.suggest_head_1(but))
+            self.current_rendered_window[f"suggest_head1.{i}"].grid(row=i + 1, column=3, padx=5, pady=5)
 
         # Create lables for the tokens, POS tags and headwords (style 2)
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
@@ -425,6 +461,7 @@ class UI:
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 2)
         self.cur_toks2 = cur_toks2
         for i, pos_token in enumerate(cur_toks2):
+            lexicon2 = self.lexicon_2
             token = pos_token[0]
             tag = pos_token[1]
             head = pos_token[2]
@@ -433,7 +470,26 @@ class UI:
             if token in finds_list and tag == "<unknown>":
                 tag = "<Latin>"
                 if head == "<unknown>":
-                    head = "<Latin>"
+                    head = "Latin ?"
+            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " ?"):
+                lex_toks = list()
+                for level_1 in lexicon2:
+                    lex_pos = level_1.get("part_of_speech")
+                    if lex_pos == tag:
+                        lex_lemmata = level_1.get("lemmata")
+                        for level_2 in lex_lemmata:
+                            lex_lemma = level_2.get("lemma")
+                            lex_tokens = level_2.get("tokens")
+                            lex_toks = lex_toks + [[lex_token.get("token"), lex_lemma] for lex_token in lex_tokens]
+                if lex_toks:
+                    head_candidates = [i for i in lex_toks if i[0] == token]
+                    if not head_candidates:
+                        ed_dists = [edit_distance(token, i[0]) for i in lex_toks]
+                        lex_toks = [i + [j] for i, j in zip(lex_toks, ed_dists)]
+                        lowest_ed = min(ed_dists)
+                        head_candidates = [i[:2] for i in lex_toks if i[2] == lowest_ed]
+                    head_candidate = head_candidates[0]
+                    head = f"{head_candidate[1]} ?"
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -449,6 +505,143 @@ class UI:
                                                                    height=1, width=12, font=("Helvetica", 12))
             self.current_rendered_window[f"head_word2.{i}"].insert(1.0, head)
             self.current_rendered_window[f"head_word2.{i}"].grid(row=i + 1, column=2, sticky='w')
+
+            self.current_rendered_window[f"suggest_head2.{i}"] = Button(self.current_rendered_window["toks2_frame"],
+                                                                        text=" ? ",
+                                                                        command=lambda but=i: self.suggest_head_2(but))
+            self.current_rendered_window[f"suggest_head2.{i}"].grid(row=i + 1, column=3, padx=5, pady=5)
+
+    def remove_head_options1(self):
+        self.current_rendered_window["head_opts_1_frame"].destroy()
+        self.current_rendered_window["head_opts_1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
+                                                                       padx=5, pady=5)
+        self.current_rendered_window["head_opts_1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+
+    def remove_head_options2(self):
+        self.current_rendered_window["head_opts_2_frame"].destroy()
+        self.current_rendered_window["head_opts_2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
+                                                                       padx=5, pady=5)
+        self.current_rendered_window["head_opts_2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
+
+    def select_head_1(self, head, button_num):
+        self.current_rendered_window[f"head_word1.{button_num}"].delete(1.0, END)
+        self.current_rendered_window[f"head_word1.{button_num}"].insert(1.0, head)
+        self.remove_head_options1()
+
+    def select_head_2(self, head, button_num):
+        self.current_rendered_window[f"head_word2.{button_num}"].delete(1.0, END)
+        self.current_rendered_window[f"head_word2.{button_num}"].insert(1.0, head)
+        self.remove_head_options2()
+
+    def suggest_head_1(self, button_num):
+        all_tokens = self.cur_toks1
+        updated_tokens = [self.current_rendered_window[f"toks1_tok_{i}"].cget("text") for i in range(len(all_tokens))]
+        token = updated_tokens[button_num]
+        updated_pos = [self.current_rendered_window[f"type1_pos{i}"].get() for i in range(len(all_tokens))]
+        tag = updated_pos[button_num]
+
+        lex_toks = list()
+        for level_1 in self.lexicon_1:
+            lex_pos = level_1.get("part_of_speech")
+            if lex_pos == tag:
+                lex_lemmata = level_1.get("lemmata")
+                for level_2 in lex_lemmata:
+                    lex_lemma = level_2.get("lemma")
+                    lex_tokens = level_2.get("tokens")
+                    lex_toks = lex_toks + [[lex_token.get("token"), lex_lemma] for lex_token in lex_tokens]
+        if lex_toks:
+            ed_dists = [edit_distance(token, i[0]) for i in lex_toks]
+            lex_toks = [i + [j] for i, j in zip(lex_toks, ed_dists)]
+            lex_toks.sort(key=lambda x: x[2])
+            if len(lex_toks) > 50:
+                lex_toks = lex_toks[:50]
+
+            for i, option in enumerate(lex_toks):
+                self.current_rendered_window[f"tok_button{i}"] = Button(
+                    self.current_rendered_window["head_opts_1_frame"],
+                    text=option[0], width=15,
+                    command=lambda head=option[1]: self.select_head_1(head, button_num)
+                )
+                self.current_rendered_window[f"tok_button{i}"].grid(row=2 + i, column=0, padx=5, pady=5, sticky="e")
+
+                self.current_rendered_window[f"head{i}"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                                 text=option[1], font=("Helvetica", 10))
+                self.current_rendered_window[f"head{i}"].grid(row=2 + i, column=1, padx=5, pady=5)
+
+                self.current_rendered_window[f"ed_dist{i}"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                                    text=option[2], font=("Helvetica", 10))
+                self.current_rendered_window[f"ed_dist{i}"].grid(row=2 + i, column=2, padx=5, pady=5)
+
+        self.current_rendered_window["killme1"] = Button(self.current_rendered_window["head_opts_1_frame"],
+                                                         text=" X ", command=self.remove_head_options1)
+        self.current_rendered_window["killme1"].grid(row=0, column=3, padx=5, pady=5, sticky="NE")
+
+        self.current_rendered_window["tok_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                          text="Token", font=("Helvetica", 12))
+        self.current_rendered_window["tok_label"].grid(row=1, column=0, padx=5, pady=5)
+
+        self.current_rendered_window["head_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                          text="Headword", font=("Helvetica", 12))
+        self.current_rendered_window["head_label"].grid(row=1, column=1, padx=5, pady=5)
+
+        self.current_rendered_window["ed_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                         text="Edit Dist.", font=("Helvetica", 12))
+        self.current_rendered_window["ed_label"].grid(row=1, column=2, padx=5, pady=5)
+
+    def suggest_head_2(self, button_num):
+        all_tokens = self.cur_toks2
+        updated_tokens = [self.current_rendered_window[f"toks2_tok_{i}"].cget("text") for i in range(len(all_tokens))]
+        token = updated_tokens[button_num]
+        updated_pos = [self.current_rendered_window[f"type2_pos{i}"].get() for i in range(len(all_tokens))]
+        tag = updated_pos[button_num]
+
+        lex_toks = list()
+        for level_1 in self.lexicon_2:
+            lex_pos = level_1.get("part_of_speech")
+            if lex_pos == tag:
+                lex_lemmata = level_1.get("lemmata")
+                for level_2 in lex_lemmata:
+                    lex_lemma = level_2.get("lemma")
+                    lex_tokens = level_2.get("tokens")
+                    lex_toks = lex_toks + [[lex_token.get("token"), lex_lemma] for lex_token in lex_tokens]
+        if lex_toks:
+            ed_dists = [edit_distance(token, i[0]) for i in lex_toks]
+            lex_toks = [i + [j] for i, j in zip(lex_toks, ed_dists)]
+            lex_toks.sort(key=lambda x: x[2])
+            if len(lex_toks) > 50:
+                lex_toks = lex_toks[:50]
+
+            for i, option in enumerate(lex_toks):
+                self.current_rendered_window[f"tok_button{i}"] = Button(
+                    self.current_rendered_window["head_opts_2_frame"],
+                    text=option[0], width=15,
+                    command=lambda head=option[1]: self.select_head_2(head, button_num)
+                )
+                self.current_rendered_window[f"tok_button{i}"].grid(row=2 + i, column=0, padx=5, pady=5, sticky="e")
+
+                self.current_rendered_window[f"head{i}"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                                 text=option[1], font=("Helvetica", 10))
+                self.current_rendered_window[f"head{i}"].grid(row=2 + i, column=1, padx=5, pady=5)
+
+                self.current_rendered_window[f"ed_dist{i}"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                                    text=option[2], font=("Helvetica", 10))
+                self.current_rendered_window[f"ed_dist{i}"].grid(row=2 + i, column=2, padx=5, pady=5)
+
+        self.current_rendered_window["killme2"] = Button(self.current_rendered_window["head_opts_2_frame"],
+                                                         text=" X ", command=self.remove_head_options2)
+        self.current_rendered_window["killme2"].grid(row=0, column=2, padx=5, pady=5, sticky="NE")
+
+        self.current_rendered_window["tok_label"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                          text="Similar Token", font=("Helvetica", 12))
+        self.current_rendered_window["tok_label"].grid(row=1, column=0, padx=5, pady=5)
+
+        self.current_rendered_window["head_label"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                           text="Headword", font=("Helvetica", 12))
+        self.current_rendered_window["head_label"].grid(row=1, column=1, padx=5, pady=5)
+
+        self.current_rendered_window["ed_label"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                         text="Edit Dist.", font=("Helvetica", 12))
+        self.current_rendered_window["ed_label"].grid(row=1, column=2, padx=5, pady=5)
 
     def update_tokens(self):
         string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
