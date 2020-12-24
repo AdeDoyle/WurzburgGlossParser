@@ -10,6 +10,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import font
 from nltk import edit_distance
+import unidecode
 
 
 class UI:
@@ -422,7 +423,25 @@ class UI:
                         lex_toks = [i + [j] for i, j in zip(lex_toks, ed_dists)]
                         lowest_ed = min(ed_dists)
                         head_candidates = [i[:2] for i in lex_toks if i[2] == lowest_ed]
-                    head_candidate = head_candidates[0]
+                    if len(head_candidates) > 1:
+                        sec_ed_dists = [edit_distance(token, i[1]) for i in head_candidates]
+                        head_match_dists = [i + [j] for i, j in zip(head_candidates, sec_ed_dists)]
+                        sec_lowest_ed = min(sec_ed_dists)
+                        head_candidates = [i[:2] for i in head_match_dists if i[2] == sec_lowest_ed]
+                        if len(head_candidates) == 1:
+                            head_candidate = head_candidates[0]
+                        else:
+                            third_ed_dists = [
+                                edit_distance(unidecode.unidecode(token),
+                                              unidecode.unidecode(i[0]))
+                                for i in head_candidates
+                            ]
+                            third_lowest_ed = min(third_ed_dists)
+                            head_candidate = head_candidates[third_ed_dists.index(third_lowest_ed)]
+                    elif len(head_candidates) == 1:
+                        head_candidate = head_candidates[0]
+                    else:
+                        raise RuntimeError(f"Could not find appropriate candidate in list:\n    {head_candidates}")
                     head = f"{head_candidate[1]} ?"
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
@@ -488,7 +507,25 @@ class UI:
                         lex_toks = [i + [j] for i, j in zip(lex_toks, ed_dists)]
                         lowest_ed = min(ed_dists)
                         head_candidates = [i[:2] for i in lex_toks if i[2] == lowest_ed]
-                    head_candidate = head_candidates[0]
+                    if len(head_candidates) > 1:
+                        sec_ed_dists = [edit_distance(token, i[1]) for i in head_candidates]
+                        head_match_dists = [i + [j] for i, j in zip(head_candidates, sec_ed_dists)]
+                        sec_lowest_ed = min(sec_ed_dists)
+                        head_candidates = [i[:2] for i in head_match_dists if i[2] == sec_lowest_ed]
+                        if len(head_candidates) == 1:
+                            head_candidate = head_candidates[0]
+                        else:
+                            third_ed_dists = [
+                                edit_distance(unidecode.unidecode(token),
+                                              unidecode.unidecode(i[0]))
+                                for i in head_candidates
+                            ]
+                            third_lowest_ed = min(third_ed_dists)
+                            head_candidate = head_candidates[third_ed_dists.index(third_lowest_ed)]
+                    elif len(head_candidates) == 1:
+                        head_candidate = head_candidates[0]
+                    else:
+                        raise RuntimeError(f"Could not find appropriate candidate in list:\n    {head_candidates}")
                     head = f"{head_candidate[1]} ?"
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
