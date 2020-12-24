@@ -184,16 +184,13 @@ def make_lex_json(conllu_file):
     sentences = parse(text_file)
     all_words = list()
     for sentence in sentences:
-        words = [(i.get("lemma"), i.get("form").lower(), i.get("upos"), i.get("feats")) for i in sentence][0]
-        if not words[3]:
-            words = tuple([i for i in words[:3]] + ["_"])
-        words = tuple([i for i in words[:3]] + ["|".join([f"{j}={words[3].get(j)}" for j in words[3] if j != "_"])])
-        if not words[3]:
-            words = tuple([i for i in words[:3]] + ["_"])
-        all_words.append(words)
+        words = [(i.get("lemma"), i.get("form").lower(), i.get("upos"), i.get("feats")) for i in sentence]
+        words = [i if i[3] else tuple([j for j in i[:3]] + ["_"]) for i in words]
+        words = [i if i[3] == "_"
+                 else tuple([j for j in i[:3]] + ["|".join([f"{k}={i[3].get(k)}" for k in i[3]])]) for i in words]
+        all_words = all_words + words
     all_words = sorted(list(set([i for i in all_words if i[0] not in ['_', 'False']])))
     all_POS = sorted(list(set([i[2] for i in all_words])))
-    all_POS = sorted(list(set(all_POS + ["SYM", "X", "<unknown>", "<Latin>", "<Latin CCONJ>"])))
     json_file = [{
         "part_of_speech": pos,
         "lemmata": [i for i in all_words if i[2] == pos]

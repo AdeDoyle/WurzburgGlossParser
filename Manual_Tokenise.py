@@ -103,7 +103,7 @@ class UI:
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
             cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"]
         )
 
     def change_folio(self, event=None):
@@ -131,7 +131,7 @@ class UI:
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
             cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"]
         )
 
     def change_epistle(self, event=None):
@@ -160,7 +160,7 @@ class UI:
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
             cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"]
         )
 
     def render_gloss(self, root, epistles, cur_ep, cur_fols, cur_folio, cur_glossnums, cur_glossnum, cur_glossid,
@@ -534,6 +534,8 @@ class UI:
         self.remove_head_options2()
 
     def suggest_head_1(self, button_num):
+        self.remove_head_options1()
+
         all_tokens = self.cur_toks1
         updated_tokens = [self.current_rendered_window[f"toks1_tok_{i}"].cget("text") for i in range(len(all_tokens))]
         token = updated_tokens[button_num]
@@ -557,6 +559,29 @@ class UI:
                 lex_toks = lex_toks[:50]
 
             for i, option in enumerate(lex_toks):
+                features = list()
+                for level_1 in self.lexicon_1:
+                    lex_pos = level_1.get("part_of_speech")
+                    if lex_pos == tag:
+                        lex_lemmata = level_1.get("lemmata")
+                        for level_2 in lex_lemmata:
+                            lex_lemma = level_2.get("lemma")
+                            if lex_lemma == option[1]:
+                                lex_tokens = level_2.get("tokens")
+                                for level_3 in lex_tokens:
+                                    lex_token = level_3.get("token")
+                                    if lex_token == option[0]:
+                                        lex_feat_sets = level_3.get("feature_sets")
+                                        for level_4 in lex_feat_sets:
+                                            lex_feature_set = level_4.get("features")
+                                            for level_5 in lex_feature_set:
+                                                features.append(";  ".join([f"{feat}={level_5.get(feat)}"
+                                                                           for feat in level_5]))
+                if len(features) > 1:
+                    for j, feature in enumerate(features):
+                        features[j] = f"{j + 1}. {feature}"
+                features = "\n".join(features)
+
                 self.current_rendered_window[f"tok_button{i}"] = Button(
                     self.current_rendered_window["head_opts_1_frame"],
                     text=option[0], width=15,
@@ -572,23 +597,34 @@ class UI:
                                                                     text=option[2], font=("Helvetica", 10))
                 self.current_rendered_window[f"ed_dist{i}"].grid(row=2 + i, column=2, padx=5, pady=5)
 
+                self.current_rendered_window[f"feat_str{i}"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                                     text=features,
+                                                                     font=("Helvetica", 10), justify=LEFT)
+                self.current_rendered_window[f"feat_str{i}"].grid(row=2 + i, column=3, padx=5, pady=5, sticky="w")
+
         self.current_rendered_window["killme1"] = Button(self.current_rendered_window["head_opts_1_frame"],
                                                          text=" X ", command=self.remove_head_options1)
-        self.current_rendered_window["killme1"].grid(row=0, column=3, padx=5, pady=5, sticky="NE")
+        self.current_rendered_window["killme1"].grid(row=0, column=4, padx=5, pady=5, sticky="NE")
 
         self.current_rendered_window["tok_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
                                                           text="Token", font=("Helvetica", 12))
         self.current_rendered_window["tok_label"].grid(row=1, column=0, padx=5, pady=5)
 
         self.current_rendered_window["head_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
-                                                          text="Headword", font=("Helvetica", 12))
+                                                           text="Headword", font=("Helvetica", 12))
         self.current_rendered_window["head_label"].grid(row=1, column=1, padx=5, pady=5)
 
         self.current_rendered_window["ed_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
                                                          text="Edit Dist.", font=("Helvetica", 12))
         self.current_rendered_window["ed_label"].grid(row=1, column=2, padx=5, pady=5)
 
+        self.current_rendered_window["featsets_label"] = Label(self.current_rendered_window["head_opts_1_frame"],
+                                                               text="Features", font=("Helvetica", 12))
+        self.current_rendered_window["featsets_label"].grid(row=1, column=3, padx=5, pady=5)
+
     def suggest_head_2(self, button_num):
+        self.remove_head_options2()
+
         all_tokens = self.cur_toks2
         updated_tokens = [self.current_rendered_window[f"toks2_tok_{i}"].cget("text") for i in range(len(all_tokens))]
         token = updated_tokens[button_num]
@@ -612,6 +648,29 @@ class UI:
                 lex_toks = lex_toks[:50]
 
             for i, option in enumerate(lex_toks):
+                features = list()
+                for level_1 in self.lexicon_2:
+                    lex_pos = level_1.get("part_of_speech")
+                    if lex_pos == tag:
+                        lex_lemmata = level_1.get("lemmata")
+                        for level_2 in lex_lemmata:
+                            lex_lemma = level_2.get("lemma")
+                            if lex_lemma == option[1]:
+                                lex_tokens = level_2.get("tokens")
+                                for level_3 in lex_tokens:
+                                    lex_token = level_3.get("token")
+                                    if lex_token == option[0]:
+                                        lex_feat_sets = level_3.get("feature_sets")
+                                        for level_4 in lex_feat_sets:
+                                            lex_feature_set = level_4.get("features")
+                                            for level_5 in lex_feature_set:
+                                                features.append(";  ".join([f"{feat}={level_5.get(feat)}"
+                                                                           for feat in level_5]))
+                if len(features) > 1:
+                    for j, feature in enumerate(features):
+                        features[j] = f"{j + 1}. {feature}"
+                features = "\n".join(features)
+
                 self.current_rendered_window[f"tok_button{i}"] = Button(
                     self.current_rendered_window["head_opts_2_frame"],
                     text=option[0], width=15,
@@ -627,9 +686,14 @@ class UI:
                                                                     text=option[2], font=("Helvetica", 10))
                 self.current_rendered_window[f"ed_dist{i}"].grid(row=2 + i, column=2, padx=5, pady=5)
 
+                self.current_rendered_window[f"feat_str{i}"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                                     text=features,
+                                                                     font=("Helvetica", 10), justify=LEFT)
+                self.current_rendered_window[f"feat_str{i}"].grid(row=2 + i, column=3, padx=5, pady=5, sticky="w")
+
         self.current_rendered_window["killme2"] = Button(self.current_rendered_window["head_opts_2_frame"],
                                                          text=" X ", command=self.remove_head_options2)
-        self.current_rendered_window["killme2"].grid(row=0, column=2, padx=5, pady=5, sticky="NE")
+        self.current_rendered_window["killme2"].grid(row=0, column=4, padx=5, pady=5, sticky="NE")
 
         self.current_rendered_window["tok_label"] = Label(self.current_rendered_window["head_opts_2_frame"],
                                                           text="Similar Token", font=("Helvetica", 12))
@@ -642,6 +706,10 @@ class UI:
         self.current_rendered_window["ed_label"] = Label(self.current_rendered_window["head_opts_2_frame"],
                                                          text="Edit Dist.", font=("Helvetica", 12))
         self.current_rendered_window["ed_label"].grid(row=1, column=2, padx=5, pady=5)
+
+        self.current_rendered_window["featsets_label"] = Label(self.current_rendered_window["head_opts_2_frame"],
+                                                               text="Features", font=("Helvetica", 12))
+        self.current_rendered_window["featsets_label"].grid(row=1, column=3, padx=5, pady=5)
 
     def update_tokens(self):
         string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
@@ -685,7 +753,7 @@ class UI:
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
             cur_toks1=refresh_tokens(string_1, tokens_1),
-            cur_toks2=refresh_tokens(string_2, tokens_2),
+            cur_toks2=refresh_tokens(string_2, tokens_2)
         )
 
     def save_tokens(self):
@@ -714,6 +782,98 @@ class UI:
                                 gloss_data['glossTokens2'] = tokens_2
                                 break
         update_json(file_name, main_file)
+
+        working_file1 = self.lexicon_1
+        for tok1 in tokens_1:
+            tok1_pos = tok1[1]
+            tok1_head = tok1[2]
+            if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok1_head[-2:] != " ?":
+                tok1_form = tok1[0]
+                if tok1_form not in [".i."]:
+                    all_filepos = [level_1.get("part_of_speech") for level_1 in working_file1]
+                    if tok1_pos in all_filepos:
+                        file_pos_data = working_file1[all_filepos.index(tok1_pos)].get("lemmata")
+                        all_filelemmata = [level_2.get("lemma") for level_2 in file_pos_data]
+                        if tok1_head in all_filelemmata:
+                            file_tok_data = file_pos_data[all_filelemmata.index(tok1_head)].get("tokens")
+                            all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
+                            if tok1_form not in all_filetoks:
+                                filetoks_plus = sorted(list(set(
+                                    [level_3.get("token") for level_3 in file_tok_data] + [tok1_form]
+                                )))
+                                correct_position = filetoks_plus.index(tok1_form)
+                                insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                                file_tok_data = file_tok_data[:correct_position] + [
+                                    insert
+                                ] + file_tok_data[correct_position:]
+                        else:
+                            filelemmata_plus = sorted(list(set(
+                                [level_2.get("lemma") for level_2 in file_pos_data] + [tok1_head]
+                            )))
+                            correct_position = filelemmata_plus.index(tok1_head)
+                            insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                            insert = {'lemma': tok1_head, 'tokens': [insert]}
+                            file_pos_data = file_pos_data[:correct_position] + [
+                                insert
+                            ] + file_pos_data[correct_position:]
+                    else:
+                        filepos_plus = sorted(list(set(
+                            [level_1.get("part_of_speech") for level_1 in working_file1] + [tok1_pos]
+                        )))
+                        correct_position = filepos_plus.index(tok1_pos)
+                        insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                        insert = {'lemma': tok1_head, 'tokens': [insert]}
+                        insert = {'part_of_speech': tok1_pos, 'lemmata': [insert]}
+                        working_file1 = working_file1[:correct_position] + [insert] + working_file1[correct_position:]
+        # working_file1
+        # with open(working_file1, 'w', encoding="utf-8") as workfile1:
+        #     json.dump(working_file1, workfile1, indent=4, ensure_ascii=False)
+
+        working_file2 = self.lexicon_2
+        for tok2 in tokens_2:
+            tok2_pos = tok2[1]
+            tok2_head = tok2[2]
+            if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok2_head[-2:] != " ?":
+                tok2_form = tok2[0]
+                if tok2_form not in [".i."]:
+                    all_filepos = [level_1.get("part_of_speech") for level_1 in working_file2]
+                    if tok2_pos in all_filepos:
+                        file_pos_data = working_file2[all_filepos.index(tok2_pos)].get("lemmata")
+                        all_filelemmata = [level_2.get("lemma") for level_2 in file_pos_data]
+                        if tok2_head in all_filelemmata:
+                            file_tok_data = file_pos_data[all_filelemmata.index(tok2_head)].get("tokens")
+                            all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
+                            if tok2_form not in all_filetoks:
+                                filetoks_plus = sorted(list(set(
+                                    [level_3.get("token") for level_3 in file_tok_data] + [tok2_form]
+                                )))
+                                correct_position = filetoks_plus.index(tok2_form)
+                                insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                                file_tok_data = file_tok_data[:correct_position] + [
+                                    insert
+                                ] + file_tok_data[correct_position:]
+                        else:
+                            filelemmata_plus = sorted(list(set(
+                                [level_2.get("lemma") for level_2 in file_pos_data] + [tok2_head]
+                            )))
+                            correct_position = filelemmata_plus.index(tok2_head)
+                            insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                            insert = {'lemma': tok2_head, 'tokens': [insert]}
+                            file_pos_data = file_pos_data[:correct_position] + [
+                                insert
+                            ] + file_pos_data[correct_position:]
+                    else:
+                        filepos_plus = sorted(list(set(
+                            [level_1.get("part_of_speech") for level_1 in working_file2] + [tok2_pos]
+                        )))
+                        correct_position = filepos_plus.index(tok2_pos)
+                        insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                        insert = {'lemma': tok2_head, 'tokens': [insert]}
+                        insert = {'part_of_speech': tok2_pos, 'lemmata': [insert]}
+                        working_file2 = working_file2[:correct_position] + [insert] + working_file2[correct_position:]
+        # working_file2
+        # with open(working_file2, 'w', encoding="utf-8") as workfile2:
+        #     json.dump(working_file2, workfile2, indent=4, ensure_ascii=False)
 
     def last_gloss(self):
 
@@ -767,7 +927,7 @@ class UI:
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
             cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"]
         )
 
     def next_gloss(self):
@@ -822,7 +982,7 @@ class UI:
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
             cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"]
         )
 
     def emp_points(self, text):
