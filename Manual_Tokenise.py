@@ -825,9 +825,8 @@ class UI:
                         insert = {'lemma': tok1_head, 'tokens': [insert]}
                         insert = {'part_of_speech': tok1_pos, 'lemmata': [insert]}
                         working_file1 = working_file1[:correct_position] + [insert] + working_file1[correct_position:]
-        # working_file1
-        # with open(working_file1, 'w', encoding="utf-8") as workfile1:
-        #     json.dump(working_file1, workfile1, indent=4, ensure_ascii=False)
+        with open("Working_lexicon_file_1.json", 'w', encoding="utf-8") as workfile1:
+            json.dump(working_file1, workfile1, indent=4, ensure_ascii=False)
 
         working_file2 = self.lexicon_2
         for tok2 in tokens_2:
@@ -871,9 +870,8 @@ class UI:
                         insert = {'lemma': tok2_head, 'tokens': [insert]}
                         insert = {'part_of_speech': tok2_pos, 'lemmata': [insert]}
                         working_file2 = working_file2[:correct_position] + [insert] + working_file2[correct_position:]
-        # working_file2
-        # with open(working_file2, 'w', encoding="utf-8") as workfile2:
-        #     json.dump(working_file2, workfile2, indent=4, ensure_ascii=False)
+        with open("Working_lexicon_file_2.json", 'w', encoding="utf-8") as workfile2:
+            json.dump(working_file2, workfile2, indent=4, ensure_ascii=False)
 
     def last_gloss(self):
 
