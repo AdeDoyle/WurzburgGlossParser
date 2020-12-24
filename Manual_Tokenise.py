@@ -806,6 +806,12 @@ class UI:
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
+                                file_pos_data[all_filelemmata.index(tok1_head)] = {
+                                    'lemma': tok1_head, 'tokens': file_tok_data
+                                }
+                                working_file1[all_filepos.index(tok1_pos)] = {
+                                    'part_of_speech': tok1_pos, 'lemmata': file_pos_data
+                                }
                         else:
                             filelemmata_plus = sorted(list(set(
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok1_head]
@@ -816,6 +822,9 @@ class UI:
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
                             ] + file_pos_data[correct_position:]
+                            working_file1[all_filepos.index(tok1_pos)] = {
+                                'part_of_speech': tok1_pos, 'lemmata': file_pos_data
+                            }
                     else:
                         filepos_plus = sorted(list(set(
                             [level_1.get("part_of_speech") for level_1 in working_file1] + [tok1_pos]
@@ -851,6 +860,12 @@ class UI:
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
+                                file_pos_data[all_filelemmata.index(tok2_head)] = {
+                                    'lemma': tok2_head, 'tokens': file_tok_data
+                                }
+                                working_file2[all_filepos.index(tok2_pos)] = {
+                                    'part_of_speech': tok2_pos, 'lemmata': file_pos_data
+                                }
                         else:
                             filelemmata_plus = sorted(list(set(
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok2_head]
@@ -861,6 +876,9 @@ class UI:
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
                             ] + file_pos_data[correct_position:]
+                            working_file2[all_filepos.index(tok2_pos)] = {
+                                'part_of_speech': tok2_pos, 'lemmata': file_pos_data
+                            }
                     else:
                         filepos_plus = sorted(list(set(
                             [level_1.get("part_of_speech") for level_1 in working_file2] + [tok2_pos]
