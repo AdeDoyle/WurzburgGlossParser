@@ -227,19 +227,20 @@ class UI:
         self.current_rendered_window["main_frame"].pack(fill=BOTH, expand=1)
 
         self.current_rendered_window["main_canvas"] = Canvas(self.current_rendered_window["main_frame"])
-        self.current_rendered_window["main_canvas"].pack(side=LEFT, fill=BOTH, expand=1)
 
         self.current_rendered_window["main_scrollbar"] = ttk.Scrollbar(
             self.current_rendered_window["main_frame"],
             orient=VERTICAL, command=self.current_rendered_window["main_canvas"].yview
         )
-        self.current_rendered_window["main_scrollbar"].pack(side=RIGHT, fill=Y)
 
         self.current_rendered_window["horizontal_scrollbar"] = ttk.Scrollbar(
             self.current_rendered_window["main_frame"],
             orient=HORIZONTAL, command=self.current_rendered_window["main_canvas"].xview
         )
+
         self.current_rendered_window["horizontal_scrollbar"].pack(side=BOTTOM, fill=X)
+        self.current_rendered_window["main_canvas"].pack(side=LEFT, fill=BOTH, expand=1)
+        self.current_rendered_window["main_scrollbar"].pack(side=RIGHT, fill=Y)
 
         self.current_rendered_window["main_canvas"].configure(
             yscrollcommand=self.current_rendered_window["main_scrollbar"].set,
