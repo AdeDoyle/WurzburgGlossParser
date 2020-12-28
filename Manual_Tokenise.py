@@ -751,6 +751,7 @@ class UI:
         self.current_rendered_window["head_opts1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                        padx=5, pady=5)
         self.current_rendered_window["head_opts1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+        self.update_tokens()
 
         all_tokens = self.cur_toks1
         updated_tokens = [self.current_rendered_window[f"toks1_tok_{i}"].cget("text") for i in range(len(all_tokens))]
@@ -787,8 +788,8 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"]
+            cur_toks1=self.cur_toks1,
+            cur_toks2=self.cur_toks2
         )
 
     def suggest_head_2(self, button_num):
@@ -796,6 +797,7 @@ class UI:
         self.current_rendered_window["head_opts2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                        padx=5, pady=5)
         self.current_rendered_window["head_opts2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
+        self.update_tokens()
 
         all_tokens = self.cur_toks2
         updated_tokens = [self.current_rendered_window[f"toks2_tok_{i}"].cget("text") for i in range(len(all_tokens))]
@@ -832,8 +834,8 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks1=self.selected_gloss_info["selected_toks1"],
-            cur_toks2=self.selected_gloss_info["selected_toks2"]
+            cur_toks1=self.cur_toks1,
+            cur_toks2=self.cur_toks2
         )
 
     def update_tokens(self):
