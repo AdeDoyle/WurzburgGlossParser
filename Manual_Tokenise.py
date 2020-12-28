@@ -173,6 +173,7 @@ class UI:
             self.current_rendered_window["main_frame"].destroy()
             self.current_rendered_window["main_canvas"].destroy()
             self.current_rendered_window["main_scrollbar"].destroy()
+            self.current_rendered_window["horizontal_scrollbar"].destroy()
             self.current_rendered_window["secondary_frame"].destroy()
 
             self.current_rendered_window["nav_frame"].destroy()
@@ -234,8 +235,15 @@ class UI:
         )
         self.current_rendered_window["main_scrollbar"].pack(side=RIGHT, fill=Y)
 
+        self.current_rendered_window["horizontal_scrollbar"] = ttk.Scrollbar(
+            self.current_rendered_window["main_frame"],
+            orient=HORIZONTAL, command=self.current_rendered_window["main_canvas"].xview
+        )
+        self.current_rendered_window["horizontal_scrollbar"].pack(side=BOTTOM, fill=X)
+
         self.current_rendered_window["main_canvas"].configure(
-            yscrollcommand=self.current_rendered_window["main_scrollbar"].set
+            yscrollcommand=self.current_rendered_window["main_scrollbar"].set,
+            xscrollcommand=self.current_rendered_window["horizontal_scrollbar"].set
         )
         self.current_rendered_window["main_canvas"].bind(
             '<Configure>',
@@ -611,9 +619,10 @@ class UI:
                                         lex_feat_sets = level_3.get("feature_sets")
                                         for level_4 in lex_feat_sets:
                                             lex_feature_set = level_4.get("features")
-                                            for level_5 in lex_feature_set:
-                                                features.append(";  ".join([f"{feat}={level_5.get(feat)}"
-                                                                           for feat in level_5]))
+                                            if lex_feature_set:
+                                                for level_5 in lex_feature_set:
+                                                    features.append(";  ".join([f"{feat}={level_5.get(feat)}"
+                                                                               for feat in level_5]))
                 if len(features) > 1:
                     for j, feature in enumerate(features):
                         features[j] = f"{j + 1}. {feature}"
@@ -700,9 +709,10 @@ class UI:
                                         lex_feat_sets = level_3.get("feature_sets")
                                         for level_4 in lex_feat_sets:
                                             lex_feature_set = level_4.get("features")
-                                            for level_5 in lex_feature_set:
-                                                features.append(";  ".join([f"{feat}={level_5.get(feat)}"
-                                                                           for feat in level_5]))
+                                            if lex_feature_set:
+                                                for level_5 in lex_feature_set:
+                                                    features.append(";  ".join([f"{feat}={level_5.get(feat)}"
+                                                                               for feat in level_5]))
                 if len(features) > 1:
                     for j, feature in enumerate(features):
                         features[j] = f"{j + 1}. {feature}"
