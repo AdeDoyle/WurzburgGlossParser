@@ -867,6 +867,49 @@ class UI:
             selected_glossnum=self.current_rendered_window["current_selected_gloss"].get()
         )
 
+        if " ".join(string_2.split("\n")).strip().split(" ") == [
+            i[0] for i in self.selected_gloss_info["selected_toks2"]
+        ] and " ".join(string_1.split("\n")).strip().split(" ") != [
+            i[0] for i in self.selected_gloss_info["selected_toks1"]
+        ]:
+            neutral_posheads = [
+                ['ADV', '.i.'],
+                ['ADV', '⁊rl.'],
+                ['<Latin>', 'Latin *'],
+                ['<Latin CCONJ>', 'et'],
+                ['<unknown>', '<unknown>']
+            ]
+            if [i[1:] for i in tokens_2] == [i[1:] if i[1:] in neutral_posheads else ["?", "?"] for i in tokens_2]:
+                string_2 = "".join([i for i in string_1])
+                tokens_2 = [i for i in tokens_1]
+
+        if len(tokens_1) == len(tokens_2) and [x[0] for x in tokens_1] == [y[0] for y in tokens_2]:
+            tokens_2 = [i if (i[1:] != ['<unknown>', '<unknown>'] and j[1:] == ['<unknown>', '<unknown>'])
+                        else j for i, j in zip(tokens_1, tokens_2)]
+            tokens_1 = [i if (i[1:] != ['<unknown>', '<unknown>'] and j[1:] == ['<unknown>', '<unknown>'])
+                        else j for i, j in zip(tokens_2, tokens_1)]
+        else:
+            used_y_index = list()
+            match_index = list()
+            for x, x_tok in enumerate(tokens_1):
+                for y, y_tok in enumerate(tokens_2):
+                    if x_tok != y_tok and x_tok[0] == y_tok[0] and (
+                            x_tok[1:] == ['<unknown>', '<unknown>'] or y_tok[1:] == ['<unknown>', '<unknown>']
+                    ):
+                        if y not in used_y_index and (len(match_index) == 0 or y > match_index[-1][1]):
+                            used_y_index.append(y)
+                            if x_tok[1:] == ['<unknown>', '<unknown>'] or y_tok[1:] == ['<unknown>', '<unknown>']:
+                                match_index.append([x, y])
+                                break
+            if match_index:
+                match_index = [[i, tokens_2[j]] if tokens_2[j][1:] != ['<unknown>', '<unknown>'] else [tokens_1[i], j]
+                               for i, j in match_index]
+                for match in match_index:
+                    if isinstance(match[0], int):
+                        tokens_1[match[0]] = match[1]
+                    elif isinstance(match[1], int):
+                        tokens_2[match[1]] = match[0]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
