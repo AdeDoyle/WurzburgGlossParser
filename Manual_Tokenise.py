@@ -423,8 +423,8 @@ class UI:
             if token in finds_list and tag == "<unknown>":
                 tag = "<Latin>"
                 if head == "<unknown>":
-                    head = "Latin ?"
-            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " ?"):
+                    head = "Latin *"
+            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " *"):
                 lex_toks = list()
                 for level_1 in lexicon1:
                     lex_pos = level_1.get("part_of_speech")
@@ -460,7 +460,7 @@ class UI:
                         head_candidate = head_candidates[0]
                     else:
                         raise RuntimeError(f"Could not find appropriate candidate in list:\n    {head_candidates}")
-                    head = f"{head_candidate[1]} ?"
+                    head = f"{head_candidate[1]} *"
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -507,8 +507,8 @@ class UI:
             if token in finds_list and tag == "<unknown>":
                 tag = "<Latin>"
                 if head == "<unknown>":
-                    head = "Latin ?"
-            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " ?"):
+                    head = "Latin *"
+            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " *"):
                 lex_toks = list()
                 for level_1 in lexicon2:
                     lex_pos = level_1.get("part_of_speech")
@@ -544,7 +544,7 @@ class UI:
                         head_candidate = head_candidates[0]
                     else:
                         raise RuntimeError(f"Could not find appropriate candidate in list:\n    {head_candidates}")
-                    head = f"{head_candidate[1]} ?"
+                    head = f"{head_candidate[1]} *"
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
@@ -891,8 +891,10 @@ class UI:
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         current_folio = self.current_rendered_window["current_selected_folio"].get()
         current_epistle = self.current_rendered_window["current_selected_epistle"].get()
-        tokens_1 = self.cur_toks1
-        tokens_2 = self.cur_toks2
+        tokens_1 = [[i, j, ""] if "Latin *" in k else [i, j, k] for i, j, k in self.cur_toks1]
+        tokens_1 = [[i, j, "".join(k.split(" *"))] if " *" in k else [i, j, k] for i, j, k in tokens_1]
+        tokens_2 = [[i, j, ""] if "Latin *" in k else [i, j, k] for i, j, k in self.cur_toks2]
+        tokens_2 = [[i, j, "".join(k.split(" *"))] if " *" in k else [i, j, k] for i, j, k in tokens_2]
 
         for epistle in main_file:
             ep_name = epistle['epistle']
@@ -914,7 +916,7 @@ class UI:
         for tok1 in tokens_1:
             tok1_pos = tok1[1]
             tok1_head = tok1[2]
-            if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok1_head[-2:] != " ?":
+            if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok1_head[-2:] != " *":
                 tok1_form = tok1[0]
                 if tok1_form not in [".i."]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file1]
@@ -968,7 +970,7 @@ class UI:
         for tok2 in tokens_2:
             tok2_pos = tok2[1]
             tok2_head = tok2[2]
-            if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok2_head[-2:] != " ?":
+            if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok2_head[-2:] != " *":
                 tok2_form = tok2[0]
                 if tok2_form not in [".i."]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file2]
@@ -1017,6 +1019,28 @@ class UI:
                         working_file2 = working_file2[:correct_position] + [insert] + working_file2[correct_position:]
         with open("Working_lexicon_file_2.json", 'w', encoding="utf-8") as workfile2:
             json.dump(working_file2, workfile2, indent=4, ensure_ascii=False)
+
+        self.selected_gloss_info = self.create_gloss_info(
+            selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
+            selected_folio=self.current_rendered_window["current_selected_folio"].get(),
+            selected_glossnum=self.current_rendered_window["current_selected_gloss"].get()
+        )
+
+        self.render_gloss(
+            self.root,
+            epistles=self.epistles,
+            cur_ep=self.selected_gloss_info["selected_epistle"],
+            cur_fols=self.selected_gloss_info["selected_fols"],
+            cur_folio=self.selected_gloss_info["selected_folio"],
+            cur_glossnums=self.selected_gloss_info["selected_glossnums"],
+            cur_glossnum=self.selected_gloss_info["selected_glossnum"],
+            cur_glossid=self.selected_gloss_info["selected_glossid"],
+            cur_hand=self.selected_gloss_info["selected_hand"],
+            cur_gloss=self.selected_gloss_info["selected_gloss"],
+            cur_trans=self.selected_gloss_info["selected_trans"],
+            cur_toks1=self.selected_gloss_info["selected_toks1"],
+            cur_toks2=self.selected_gloss_info["selected_toks2"]
+        )
 
     def last_gloss(self):
         self.remove_head_options1()
@@ -1268,6 +1292,7 @@ def update_empty_toks(file_name, json_doc):
                 tok_2 = gloss_data['glossTokens2']
                 token_list = [[i, "<unknown>", "<unknown>"] if i != ".i."
                               else [i, "ADV", ".i."] for i in clear_tags(gloss).split(" ")]
+                token_list = [[i, "ADV", "⁊rl."] if i in ["rl.", "⁊rl."] else [i, j, k] for i, j, k in token_list]
                 token_list = [[i, "<Latin CCONJ>", "et"] if i in ["et"] else [i, j, k] for i, j, k in token_list]
                 token_list = [[i, "CCONJ", "ocus"] if i in ["⁊"] else [i, j, k] for i, j, k in token_list]
                 token_list = [[i, "CCONJ", "nó"] if i in ["ɫ", "ɫ."] else [i, j, k] for i, j, k in token_list]
