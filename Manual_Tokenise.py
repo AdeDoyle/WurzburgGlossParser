@@ -876,6 +876,7 @@ class UI:
                 ['ADV', '.i.'],
                 ['ADV', '⁊rl.'],
                 ['<Latin>', 'Latin *'],
+                ['<Latin>', ''],
                 ['<Latin CCONJ>', 'et'],
                 ['<unknown>', '<unknown>']
             ]
