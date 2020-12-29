@@ -5510,6 +5510,15 @@
                         ]
                     },
                     {
+                        "token": "chétne",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
+                            }
+                        ]
+                    },
+                    {
                         "token": "chétni",
                         "feature_sets": [
                             {
@@ -21876,6 +21885,20 @@
                             {
                                 "feature_set": 0,
                                 "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "⁊rl.",
+                "tokens": [
+                    {
+                        "token": "rl.",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
                             }
                         ]
                     }
@@ -63263,6 +63286,20 @@
                 ]
             },
             {
+                "lemma": "tuistiu",
+                "tokens": [
+                    {
+                        "token": "tuiste",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "tulchube",
                 "tokens": [
                     {
@@ -71716,6 +71753,20 @@
                         ]
                     }
                 ]
+            },
+            {
+                "lemma": "Ísu",
+                "tokens": [
+                    {
+                        "token": "ísu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -72398,6 +72449,15 @@
                         ]
                     },
                     {
+                        "token": "hóre",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
+                            }
+                        ]
+                    },
+                    {
                         "token": "húare",
                         "feature_sets": [
                             {
@@ -72430,6 +72490,15 @@
                             {
                                 "feature_set": 0,
                                 "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "óre",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
                             }
                         ]
                     },
@@ -79632,6 +79701,20 @@
                 ]
             },
             {
+                "lemma": "cretid",
+                "tokens": [
+                    {
+                        "token": "cretim",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cruthaigidir",
                 "tokens": [
                     {
@@ -83379,6 +83462,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nécomnacht",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
                             }
                         ]
                     }
