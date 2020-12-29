@@ -11,6 +11,10 @@ from tkinter import ttk
 from tkinter import font
 from nltk import edit_distance
 import unidecode
+import platform
+
+
+plt = platform.system()
 
 
 class UI:
@@ -173,6 +177,12 @@ class UI:
             cur_toks2=self.selected_gloss_info["selected_toks2"]
         )
 
+    def mouse_wheel(self, event):
+        if plt == "Windows":
+            self.current_rendered_window["main_canvas"].yview_scroll(-1 * (event.delta // 120), "units")
+        elif plt == "Darwin":
+            self.current_rendered_window["main_canvas"].yview_scroll(-1 * event.delta, "units")
+
     def render_gloss(self, root, epistles, cur_ep, cur_fols, cur_folio, cur_glossnums, cur_glossnum, cur_glossid,
                      cur_hand, cur_gloss, cur_trans, cur_toks1, cur_toks2):
 
@@ -269,46 +279,59 @@ class UI:
             anchor="nw"
         )
 
+        self.current_rendered_window["main_canvas"].bind("<MouseWheel>", self.mouse_wheel)
+        self.current_rendered_window["secondary_frame"].bind("<MouseWheel>", self.mouse_wheel)
+
         # Create display frames for the window
         self.current_rendered_window["nav_frame"] = Frame(self.current_rendered_window["secondary_frame"],
                                                           padx=5, pady=5)
         self.current_rendered_window["nav_frame"].grid(row=0, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["nav_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["options_frame"] = Frame(self.current_rendered_window["nav_frame"],
                                                               padx=5, pady=5)
         self.current_rendered_window["options_frame"].grid(row=0, column=0, padx=5, pady=5, sticky="W")
+        self.current_rendered_window["options_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["nav_buttons_frame"] = Frame(self.current_rendered_window["nav_frame"],
                                                                   padx=5, pady=5)
         self.current_rendered_window["nav_buttons_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="W")
+        self.current_rendered_window["nav_buttons_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["text_frame"] = Frame(self.current_rendered_window["secondary_frame"],
                                                            padx=5, pady=5)
         self.current_rendered_window["text_frame"].grid(row=1, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["text_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["toks_frames"] = Frame(self.current_rendered_window["secondary_frame"],
                                                             padx=5, pady=5)
         self.current_rendered_window["toks_frames"].grid(row=2, column=0, padx=10, pady=10, sticky="W")
+        self.current_rendered_window["toks_frames"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["toks1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                  padx=5, pady=5)
         self.current_rendered_window["toks1_frame"].grid(row=0, column=0, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["toks1_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["head_opts1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                        padx=5, pady=5)
         self.current_rendered_window["head_opts1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["head_opts1_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["toks2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                  padx=5, pady=5)
         self.current_rendered_window["toks2_frame"].grid(row=0, column=2, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["toks2_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["head_opts2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                        padx=5, pady=5)
         self.current_rendered_window["head_opts2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["head_opts2_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["buttons_frame"] = Frame(self.current_rendered_window["toks_frames"],
                                                               padx=5, pady=5)
         self.current_rendered_window["buttons_frame"].grid(row=0, column=4, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["buttons_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create top-bar dropdown menus
         self.current_rendered_window["ep_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
