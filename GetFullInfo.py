@@ -50,7 +50,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     raise RuntimeError("Multiple possible gloss numbers found for personal note")
                 elif notenumiter[0] == note[:len(notenumiter[0])]:
                     glossnum = notenumiter[0][:-2]
-                    note = note[len(notenumiter[0]):]
+                    note = note[len(notenumiter[0]):].strip()
                 newnotelist.append([notefol, glossnum, note])
         # Checks for a new epistle on the current page.
         epfunc = get_tagtext(pagetext, "H2")
@@ -141,10 +141,15 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         glossnum = note[1]
                         notetext = note[2]
                         if folinfo == thisglosslist[2] and glossnum == thisglosslist[3]:
-                            thisglosslist.extend([notetext])
+                            if len(thisglosslist) == 8:
+                                thisglosslist.extend([notetext])
+                            elif len(thisglosslist) == 9:
+                                if thisglosslist[8] == "":
+                                    thisglosslist[8] = notetext
                         else:
                             anstring = ""
-                            thisglosslist.extend([anstring])
+                            if len(thisglosslist) == 8:
+                                thisglosslist.extend([anstring])
                 elif not newnotelist:
                     anstring = ""
                     thisglosslist.extend([anstring])
@@ -256,5 +261,5 @@ def get_glinfo(file, startpage=499, stoppage=712):
 #     print(glossinfolist[7])
 # print(get_glinfo("Wurzburg Glosses", 499, 499))
 
-# for i in get_glinfo("Wurzburg Glosses", 705, 705):
-#     print(i[:4] + [i[8]])
+# for i in get_glinfo("Wurzburg Glosses", 624, 625):
+#     print(i[:4] + i[8:])
