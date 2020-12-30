@@ -19,13 +19,15 @@ plt = platform.system()
 
 class UI:
 
-    def __init__(self, file_name, wb_data, lexica):
+    def __init__(self, file_name, wb_data, lexica, primary_lexica):
 
         self.file_name = file_name
         self.wb_data = wb_data
         self.epistles = show_epistles(wb_data)
         self.lexicon_1 = lexica[0]
         self.lexicon_2 = lexica[1]
+        self.primary_lexicon_1 = primary_lexica[0]
+        self.primary_lexicon_2 = primary_lexica[1]
         self.pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
                          "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
                          "<Latin>", "<Latin CCONJ>", "<unknown>"]
@@ -71,6 +73,7 @@ class UI:
 
     def start(self):
         self.root.mainloop()
+        self.clear_lexica()
 
     def create_gloss_info(self, selected_epistle, selected_folio, selected_glossnum):
         selected_glossdata = select_glossnum(select_folcol(select_epistle(selected_epistle),
@@ -1317,6 +1320,175 @@ class UI:
             text = "\n".join(text_cuts)
         return text
 
+    def check_lex_origin(self, check_list, orig_lex):
+        if len(check_list) == 4:
+            check_pos_tag, check_lemma, check_token, check_feat_vals = check_list[0], check_list[1], \
+                                                                       check_list[2], check_list[3]
+        elif len(check_list) == 3:
+            check_pos_tag, check_lemma, check_token, check_feat_vals = check_list[0], check_list[1], \
+                                                                       check_list[2], False
+        else:
+            raise RuntimeError("Unexpected check-list length")
+        check_found = False
+        for pos_level in orig_lex:
+            pos_tag = pos_level.get("part_of_speech")
+            if pos_tag == check_pos_tag:
+                lemmata_list = pos_level.get("lemmata")
+                for lemmata_level in lemmata_list:
+                    lemma = lemmata_level.get("lemma")
+                    if lemma == check_lemma:
+                        tokens_list = lemmata_level.get("tokens")
+                        for tokens_level in tokens_list:
+                            token = tokens_level.get("token")
+                            if token == check_token:
+                                if check_feat_vals:
+                                    feat_sets_list = tokens_level.get("feature_sets")
+                                    for feat_sets_level in feat_sets_list:
+                                        features_list = feat_sets_level.get("features")
+                                        if features_list:
+                                            features_level = features_list[0]
+                                            feat_keys = [i for i in features_level]
+                                            feat_vals = [features_level.get(i) for i in features_level]
+                                            feat_vals = "|".join(f"{i}={j}" for i, j in zip(feat_keys, feat_vals))
+                                            if feat_vals == check_feat_vals:
+                                                check_found = True
+                                                return check_found
+                                else:
+                                    check_found = True
+                                    return check_found
+        return check_found
+
+    def check_tokenised_file(self, checklist):
+        main_file = self.wb_data
+        checknum = checklist[0]
+        checklist = checklist[1:]
+        all_toks = list()
+        for epistle in main_file:
+            folios = epistle['folios']
+            for folio_data in folios:
+                glosses = folio_data['glosses']
+                for gloss_data in glosses:
+                    tokens = gloss_data[f"glossTokens{checknum}"]
+                    tokens = [(i[1], i[2], i[0]) if [i[1], i[2]] not in [
+                        ['<unknown>', '<unknown>'],
+                        ['<Latin>', ''],
+                        ['<Latin CCONJ>', 'et']
+                    ] else [] for i in tokens]
+                    tokens = [i for i in tokens if i]
+                    if tokens:
+                        all_toks = all_toks + tokens
+        all_toks = sorted(list(set(all_toks)))
+        all_toks = [[i[0], i[1], i[2]] for i in all_toks]
+        results = [[i, True] if i in all_toks else [i, False] for i in checklist]
+        return results
+
+    def clear_lexica(self):
+        check_lex1 = list()
+        for pos_level in self.lexicon_1:
+            pos_tag = pos_level.get("part_of_speech")
+            lemmata_list = pos_level.get("lemmata")
+            for lemmata_level in lemmata_list:
+                lemma = lemmata_level.get("lemma")
+                tokens_list = lemmata_level.get("tokens")
+                for tokens_level in tokens_list:
+                    token = tokens_level.get("token")
+                    feat_sets_list = tokens_level.get("feature_sets")
+                    for feat_sets_level in feat_sets_list:
+                        features_list = feat_sets_level.get("features")
+                        if features_list:
+                            features_level = features_list[0]
+                            feat_keys = [i for i in features_level]
+                            feat_vals = [features_level.get(i) for i in features_level]
+                            feat_vals = "|".join(f"{i}={j}" for i, j in zip(feat_keys, feat_vals))
+                            check = [pos_tag, lemma, token, feat_vals]
+                            if not self.check_lex_origin(check, self.primary_lexicon_1):
+                                check_lex1.append(check)
+                        else:
+                            check = [pos_tag, lemma, token]
+                            if not self.check_lex_origin(check, self.primary_lexicon_1):
+                                check_lex1.append(check)
+
+        check_lex2 = list()
+        for pos_level in self.lexicon_2:
+            pos_tag = pos_level.get("part_of_speech")
+            lemmata_list = pos_level.get("lemmata")
+            for lemmata_level in lemmata_list:
+                lemma = lemmata_level.get("lemma")
+                tokens_list = lemmata_level.get("tokens")
+                for tokens_level in tokens_list:
+                    token = tokens_level.get("token")
+                    feat_sets_list = tokens_level.get("feature_sets")
+                    for feat_sets_level in feat_sets_list:
+                        features_list = feat_sets_level.get("features")
+                        if features_list:
+                            features_level = features_list[0]
+                            feat_keys = [i for i in features_level]
+                            feat_vals = [features_level.get(i) for i in features_level]
+                            feat_vals = "|".join(f"{i}={j}" for i, j in zip(feat_keys, feat_vals))
+                            check = [pos_tag, lemma, token, feat_vals]
+                            if not self.check_lex_origin(check, self.primary_lexicon_2):
+                                check_lex2.append(check)
+                        else:
+                            check = [pos_tag, lemma, token]
+                            if not self.check_lex_origin(check, self.primary_lexicon_2):
+                                check_lex2.append(check)
+
+        if check_lex1:
+            check_lex1 = [1] + check_lex1
+            checked_lex1 = self.check_tokenised_file(check_lex1)
+            failed_lex1 = [i[0] for i in checked_lex1 if not i[1]]
+            for failed_input in failed_lex1:
+                failed_pos = failed_input[0]
+                failed_head = failed_input[1]
+                failed_token = failed_input[2]
+                for pl, pos_level in enumerate(self.lexicon_1):
+                    pos_tag = pos_level.get("part_of_speech")
+                    if pos_tag == failed_pos:
+                        lemmata_list = pos_level.get("lemmata")
+                        for ll, lemmata_level in enumerate(lemmata_list):
+                            lemma = lemmata_level.get("lemma")
+                            if lemma == failed_head:
+                                tokens_list = lemmata_level.get("tokens")
+                                for tl, tokens_level in enumerate(tokens_list):
+                                    token = tokens_level.get("token")
+                                    if token == failed_token:
+                                        del tokens_list[tl]
+                                        if not tokens_list:
+                                            del lemmata_list[ll]
+                                        if not lemmata_list:
+                                            del self.lexicon_1[pl]
+                                        break
+            with open("Working_lexicon_file_1.json", 'w', encoding="utf-8") as workfile1:
+                json.dump(self.lexicon_1, workfile1, indent=4, ensure_ascii=False)
+
+        if check_lex2:
+            check_lex2 = [2] + check_lex2
+            checked_lex2 = self.check_tokenised_file(check_lex2)
+            failed_lex2 = [i[0] for i in checked_lex2 if not i[1]]
+            for failed_input in failed_lex2:
+                failed_pos = failed_input[0]
+                failed_head = failed_input[1]
+                failed_token = failed_input[2]
+                for pl, pos_level in enumerate(self.lexicon_2):
+                    pos_tag = pos_level.get("part_of_speech")
+                    if pos_tag == failed_pos:
+                        lemmata_list = pos_level.get("lemmata")
+                        for ll, lemmata_level in enumerate(lemmata_list):
+                            lemma = lemmata_level.get("lemma")
+                            if lemma == failed_head:
+                                tokens_list = lemmata_level.get("tokens")
+                                for tl, tokens_level in enumerate(tokens_list):
+                                    token = tokens_level.get("token")
+                                    if token == failed_token:
+                                        del tokens_list[tl]
+                                        if not tokens_list:
+                                            del lemmata_list[ll]
+                                        if not lemmata_list:
+                                            del self.lexicon_2[pl]
+                                        break
+            with open("Working_lexicon_file_2.json", 'w', encoding="utf-8") as workfile2:
+                json.dump(self.lexicon_2, workfile2, indent=4, ensure_ascii=False)
+
 
 def refresh_tokens(string, tokens):
     return_tokens = list()
@@ -1478,12 +1650,22 @@ if __name__ == "__main__":
         os.chdir(tokenise_dir)
         save_json(sg_json1, "Lexicon_1")
 
+    # Open the first Lexicon JSON file for use in the GUI
+    with open("Lexicon_1.json", 'r', encoding="utf-8") as lex1_json:
+        original_lexicon_1 = json.load(lex1_json)
+
     # Lexicon 2 = separated-tokens style
     if "Lexicon_2.json" not in dir_contents:
         os.chdir(maindir)
         sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
         os.chdir(tokenise_dir)
         save_json(sg_json2, "Lexicon_2")
+
+    # Open the first Lexicon JSON file for use in the GUI
+    with open("Lexicon_2.json", 'r', encoding="utf-8") as lex2_json:
+        original_lexicon_2 = json.load(lex2_json)
+
+    original_lexica = [original_lexicon_1, original_lexicon_2]
 
     # Create a working copy of each of the OI Lexica created above for use in the GUI, if they doesn't exist already
     # These will be updated with new tokens and POS from Wb. which will not be saved to in the originals above
@@ -1539,6 +1721,7 @@ if __name__ == "__main__":
     ui = UI(
         file_name="Wb. Manual Tokenisation.json",
         wb_data=wb_data,
-        lexica=working_lexica
+        lexica=working_lexica,
+        primary_lexica=original_lexica
     )
     ui.start()
