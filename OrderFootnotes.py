@@ -40,7 +40,7 @@ def order_newlist(file, page):
 # for i in order_footlist("Wurzburg Glosses", 500):
 #     print(i)
 
-# print(order_newnotes("Wurzburg Glosses", 705))
-# print(order_newlist("Wurzburg Glosses", 705))
-# for i in order_newlist("Wurzburg Glosses", 705):
+# print(order_newnotes("Wurzburg Glosses", 625))
+# print(order_newlist("Wurzburg Glosses", 625))
+# for i in order_newlist("Wurzburg Glosses", 625):
 #     print(i)
