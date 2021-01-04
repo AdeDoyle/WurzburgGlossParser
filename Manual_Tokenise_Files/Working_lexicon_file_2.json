@@ -26292,6 +26292,20 @@
                 ]
             },
             {
+                "lemma": "adcumbe",
+                "tokens": [
+                    {
+                        "token": "aithchumbe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "adercéne",
                 "tokens": [
                     {
@@ -42641,6 +42655,15 @@
                         ]
                     },
                     {
+                        "token": "ṅdúil",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "ṅdúli",
                         "feature_sets": [
                             {
@@ -42684,6 +42707,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "dúlem",
+                "tokens": [
+                    {
+                        "token": "dúlem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -86200,6 +86237,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ruigensat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
