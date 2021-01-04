@@ -215,7 +215,7 @@ def make_lex_json(conllu_file):
                     "feature_set": m + 1,
                     "features": n
                 } if n != ['_'] else {
-                    "feature_set": m,
+                    "feature_set": m + 1,
                     "features": None
                 } for m, n in enumerate(relevant_features_data)]
                 for feature_data in token_data.get("feature_sets"):
