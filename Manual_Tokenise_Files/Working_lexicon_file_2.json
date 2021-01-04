@@ -24175,6 +24175,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "ɫ.",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": []
+                            }
+                        ]
                     }
                 ]
             },
@@ -70780,37 +70789,6 @@
                                         "Number": "Plur",
                                         "Person": "3",
                                         "PronType": "Emp"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "son",
-                "tokens": [
-                    {
-                        "token": "son",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "són",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
                                     }
                                 ]
                             }

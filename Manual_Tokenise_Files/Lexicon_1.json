@@ -69893,37 +69893,6 @@
                 ]
             },
             {
-                "lemma": "son",
-                "tokens": [
-                    {
-                        "token": "son",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "són",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "suide",
                 "tokens": [
                     {
