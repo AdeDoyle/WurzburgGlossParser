@@ -1001,7 +1001,7 @@ class UI:
                                     [level_3.get("token") for level_3 in file_tok_data] + [tok1_form]
                                 )))
                                 correct_position = filetoks_plus.index(tok1_form)
-                                insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                                insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
@@ -1016,7 +1016,7 @@ class UI:
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok1_head]
                             )))
                             correct_position = filelemmata_plus.index(tok1_head)
-                            insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                            insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
                             insert = {'lemma': tok1_head, 'tokens': [insert]}
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
@@ -1029,7 +1029,7 @@ class UI:
                             [level_1.get("part_of_speech") for level_1 in working_file1] + [tok1_pos]
                         )))
                         correct_position = filepos_plus.index(tok1_pos)
-                        insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                        insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
                         insert = {'lemma': tok1_head, 'tokens': [insert]}
                         insert = {'part_of_speech': tok1_pos, 'lemmata': [insert]}
                         working_file1 = working_file1[:correct_position] + [insert] + working_file1[correct_position:]
@@ -1055,7 +1055,7 @@ class UI:
                                     [level_3.get("token") for level_3 in file_tok_data] + [tok2_form]
                                 )))
                                 correct_position = filetoks_plus.index(tok2_form)
-                                insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                                insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
@@ -1070,7 +1070,7 @@ class UI:
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok2_head]
                             )))
                             correct_position = filelemmata_plus.index(tok2_head)
-                            insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                            insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
                             insert = {'lemma': tok2_head, 'tokens': [insert]}
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
@@ -1083,7 +1083,7 @@ class UI:
                             [level_1.get("part_of_speech") for level_1 in working_file2] + [tok2_pos]
                         )))
                         correct_position = filepos_plus.index(tok2_pos)
-                        insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': []}]}
+                        insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
                         insert = {'lemma': tok2_head, 'tokens': [insert]}
                         insert = {'part_of_speech': tok2_pos, 'lemmata': [insert]}
                         working_file2 = working_file2[:correct_position] + [insert] + working_file2[correct_position:]
@@ -1491,8 +1491,26 @@ class UI:
 
 
 def refresh_tokens(string, tokens):
+    """if new tokens have been added by adding spacing within the text-boxes
+       return the new list of tokens, while keeping the data for tokens which are unchanged"""
     return_tokens = list()
     string = " ".join(string.split("\n")).strip()
+    if "Pelagius:" in string:
+        string = "Pelagius :".join(string.split("Pelagius:")).strip()
+    if "Origenes:" in string:
+        string = "Origenes :".join(string.split("Origenes:")).strip()
+    if "Hieronymus:" in string:
+        string = "Hieronymus :".join(string.split("Hieronymus:")).strip()
+    if "Gregorius:" in string:
+        string = "Gregorius :".join(string.split("Gregorius:")).strip()
+    if "pænitentiam.:" in string:
+        string = "pænitentiam. :".join(string.split("pænitentiam.:")).strip()
+    if "perditio:" in string:
+        string = "perditio :".join(string.split("perditio:")).strip()
+    if "peccat:" in string:
+        string = "peccat :".join(string.split("peccat:")).strip()
+    if "non:" in string:
+        string = "non :".join(string.split("non:")).strip()
     test_against = [[i, "<unknown>", "<unknown>"] for i in string.split(" ")]
     if tokens == test_against:
         return tokens
@@ -1612,6 +1630,81 @@ def select_glossnum(glosses, glossnum):
     return gloss_data
 
 
+def transfer_wb_toks(add_to_file, add_from_file, tok_style):
+    """add tokens to a lexicon from a json manually tokenised .json document if they are not already in it"""
+    add_toks = list()
+    for epistle in add_from_file:
+        folios = epistle['folios']
+        for folio_data in folios:
+            glosses = folio_data['glosses']
+            for gloss_data in glosses:
+
+                tokens = gloss_data[f"glossTokens{tok_style}"]
+                tokens = [(i[1], i[2], i[0]) if [i[1], i[2]] not in [
+                    ['<unknown>', '<unknown>'],
+                    ['<Latin>', ''],
+                    ['<Latin CCONJ>', 'et']
+                ] else () for i in tokens]
+                tokens = [i for i in tokens if i]
+                if tokens:
+                    add_toks = add_toks + tokens
+    add_toks = sorted(list(set(add_toks)))
+    add_toks = [[i[0], i[1], i[2]] for i in add_toks]
+
+    json_file = json.loads(add_to_file)
+    for tok in add_toks:
+        tok_pos = tok[0]
+        tok_head = tok[1]
+        if tok_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok_head[-2:] != " *":
+            tok_form = tok[2]
+            all_filepos = [level_1.get("part_of_speech") for level_1 in json_file]
+            if tok_pos in all_filepos:
+                file_pos_data = json_file[all_filepos.index(tok_pos)].get("lemmata")
+                all_filelemmata = [level_2.get("lemma") for level_2 in file_pos_data]
+                if tok_head in all_filelemmata:
+                    file_tok_data = file_pos_data[all_filelemmata.index(tok_head)].get("tokens")
+                    all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
+                    if tok_form not in all_filetoks:
+                        filetoks_plus = sorted(list(set(
+                            [level_3.get("token") for level_3 in file_tok_data] + [tok_form]
+                        )))
+                        correct_position = filetoks_plus.index(tok_form)
+                        insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                        file_tok_data = file_tok_data[:correct_position] + [
+                            insert
+                        ] + file_tok_data[correct_position:]
+                        file_pos_data[all_filelemmata.index(tok_head)] = {
+                            'lemma': tok_head, 'tokens': file_tok_data
+                        }
+                        json_file[all_filepos.index(tok_pos)] = {
+                            'part_of_speech': tok_pos, 'lemmata': file_pos_data
+                        }
+                else:
+                    filelemmata_plus = sorted(list(set(
+                        [level_2.get("lemma") for level_2 in file_pos_data] + [tok_head]
+                    )))
+                    correct_position = filelemmata_plus.index(tok_head)
+                    insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                    insert = {'lemma': tok_head, 'tokens': [insert]}
+                    file_pos_data = file_pos_data[:correct_position] + [
+                        insert
+                    ] + file_pos_data[correct_position:]
+                    json_file[all_filepos.index(tok_pos)] = {
+                        'part_of_speech': tok_pos, 'lemmata': file_pos_data
+                    }
+            else:
+                filepos_plus = sorted(list(set(
+                    [level_1.get("part_of_speech") for level_1 in json_file] + [tok_pos]
+                )))
+                correct_position = filepos_plus.index(tok_pos)
+                insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                insert = {'lemma': tok_head, 'tokens': [insert]}
+                insert = {'part_of_speech': tok_pos, 'lemmata': [insert]}
+                json_file = json_file[:correct_position] + [insert] + json_file[correct_position:]
+
+    return json.dumps(json_file, indent=4, ensure_ascii=False)
+
+
 if __name__ == "__main__":
 
     # Navigate to a directory containing a JSON file of the Wb. Glosses
@@ -1639,62 +1732,6 @@ if __name__ == "__main__":
     with open("Wb. Manual Tokenisation.json", 'r', encoding="utf-8") as wb_json:
         wb_data = json.load(wb_json)
 
-    # Create 2 JSON documents of OI Lexica in the Manual Tokenisation folder from the two Sg. CoNNL_U files,
-    # one for each tokenisation type, if they doesn't exist already
-
-    # Lexicon 1 = combined-tokens style
-    dir_contents = os.listdir()
-    if "Lexicon_1.json" not in dir_contents:
-        os.chdir(maindir)
-        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
-        os.chdir(tokenise_dir)
-        save_json(sg_json1, "Lexicon_1")
-
-    # Open the first Lexicon JSON file for use in the GUI
-    with open("Lexicon_1.json", 'r', encoding="utf-8") as lex1_json:
-        original_lexicon_1 = json.load(lex1_json)
-
-    # Lexicon 2 = separated-tokens style
-    if "Lexicon_2.json" not in dir_contents:
-        os.chdir(maindir)
-        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
-        os.chdir(tokenise_dir)
-        save_json(sg_json2, "Lexicon_2")
-
-    # Open the first Lexicon JSON file for use in the GUI
-    with open("Lexicon_2.json", 'r', encoding="utf-8") as lex2_json:
-        original_lexicon_2 = json.load(lex2_json)
-
-    original_lexica = [original_lexicon_1, original_lexicon_2]
-
-    # Create a working copy of each of the OI Lexica created above for use in the GUI, if they doesn't exist already
-    # These will be updated with new tokens and POS from Wb. which will not be saved to in the originals above
-
-    # Lexicon 1 = combined-tokens style
-    dir_contents = os.listdir()
-    if "Working_lexicon_file_1.json" not in dir_contents:
-        os.chdir(maindir)
-        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
-        os.chdir(tokenise_dir)
-        save_json(sg_json1, "Working_lexicon_file_1")
-
-    # Open the first Lexicon JSON file for use in the GUI
-    with open("Working_lexicon_file_1.json", 'r', encoding="utf-8") as lex1_working_json:
-        working_lexicon_1 = json.load(lex1_working_json)
-
-    # Lexicon 2 = separated-tokens style
-    if "Working_lexicon_file_2.json" not in dir_contents:
-        os.chdir(maindir)
-        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
-        os.chdir(tokenise_dir)
-        save_json(sg_json2, "Working_lexicon_file_2")
-
-    # Open the second Lexicon JSON file for use in the GUI
-    with open("Working_lexicon_file_2.json", 'r', encoding="utf-8") as lex2_working_json:
-        working_lexicon_2 = json.load(lex2_working_json)
-
-    working_lexica = [working_lexicon_1, working_lexicon_2]
-
     # Check if any of the tokenisation fields are empty
     empty_tokfields = False
     for epistle in wb_data:
@@ -1715,6 +1752,117 @@ if __name__ == "__main__":
     # add lists of tokens and their POS tags, for each gloss, to the gloss's tokenisation fields
     if empty_tokfields:
         update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
+
+
+    # Create 2 JSON documents of OI Lexica in the Manual Tokenisation folder from the two Sg. CoNNL_U files,
+    # one for each tokenisation type, if they doesn't exist already, otherwise, update them if necessary
+
+    # Lexicon 1 = combined-tokens style
+    dir_contents = os.listdir()
+    if "Lexicon_1.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json1, "Lexicon_1")
+        # Open the first Lexicon JSON file for use in the GUI
+        with open("Lexicon_1.json", 'r', encoding="utf-8") as lex1_json:
+            original_lexicon_1 = json.load(lex1_json)
+    else:
+        # Ensure that no changes have been made to the Sg. file that requrie the current lexicon to be amended
+        # if any such changes have been made, replace the current lexicon
+        with open("Lexicon_1.json", 'r', encoding="utf-8") as lex1_json:
+            original_lexicon_1 = json.load(lex1_json)
+        os.chdir(maindir)
+        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+        os.chdir(tokenise_dir)
+        if original_lexicon_1 != json.loads(sg_json1):
+            os.remove("Lexicon_1.json")
+            save_json(sg_json1, "Lexicon_1")
+        # Open the first Lexicon JSON file for use in the GUI
+        with open("Lexicon_1.json", 'r', encoding="utf-8") as lex1_json:
+            original_lexicon_1 = json.load(lex1_json)
+
+    # Lexicon 2 = separated-tokens style
+    if "Lexicon_2.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json2, "Lexicon_2")
+        # Open the first Lexicon JSON file for use in the GUI
+        with open("Lexicon_2.json", 'r', encoding="utf-8") as lex2_json:
+            original_lexicon_2 = json.load(lex2_json)
+    else:
+        # Ensure that no changes have been made to the Sg. file that requrie the current lexicon to be amended
+        # if any such changes have been made, replace the current lexicon
+        with open("Lexicon_2.json", 'r', encoding="utf-8") as lex2_json:
+            original_lexicon_2 = json.load(lex2_json)
+        os.chdir(maindir)
+        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        os.chdir(tokenise_dir)
+        if original_lexicon_2 != json.loads(sg_json2):
+            os.remove("Lexicon_2.json")
+            save_json(sg_json2, "Lexicon_2")
+        # Open the first Lexicon JSON file for use in the GUI
+        with open("Lexicon_2.json", 'r', encoding="utf-8") as lex2_json:
+            original_lexicon_2 = json.load(lex2_json)
+
+    original_lexica = [original_lexicon_1, original_lexicon_2]
+
+    # Create a working copy of each of the OI Lexica created above for use in the GUI, if they doesn't exist already
+    # These will be updated with new tokens and POS from Wb. which will not be saved to in the originals above
+
+    # Working Lexicon 1 = combined-tokens style
+    dir_contents = os.listdir()
+    if "Working_lexicon_file_1.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json1, "Working_lexicon_file_1")
+        # Open the first Lexicon JSON file for use in the GUI
+        with open("Working_lexicon_file_1.json", 'r', encoding="utf-8") as lex1_working_json:
+            working_lexicon_1 = json.load(lex1_working_json)
+    # Check for any tokens, lemmata or parts-of-speech which don't occur in either the Sg. file of the Wb. file
+    # if any exist, delete them.
+    else:
+        with open("Working_lexicon_file_1.json", 'r', encoding="utf-8") as lex1_working_json:
+            working_lexicon_1 = json.load(lex1_working_json)
+        os.chdir(maindir)
+        sg_json1 = make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
+        os.chdir(tokenise_dir)
+        sg_json1 = transfer_wb_toks(sg_json1, wb_data, 1)
+        if working_lexicon_1 != json.loads(sg_json1):
+            os.remove("Working_lexicon_file_1.json")
+            save_json(sg_json1, "Working_lexicon_file_1")
+        # Open the first Lexicon JSON file for use in the GUI
+        with open("Working_lexicon_file_1.json", 'r', encoding="utf-8") as lex1_working_json:
+            working_lexicon_1 = json.load(lex1_working_json)
+
+    # Working Lexicon 2 = separated-tokens style
+    if "Working_lexicon_file_2.json" not in dir_contents:
+        os.chdir(maindir)
+        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        os.chdir(tokenise_dir)
+        save_json(sg_json2, "Working_lexicon_file_2")
+        # Open the second Lexicon JSON file for use in the GUI
+        with open("Working_lexicon_file_2.json", 'r', encoding="utf-8") as lex2_working_json:
+            working_lexicon_2 = json.load(lex2_working_json)
+    # Check for any tokens, lemmata or parts-of-speech which don't occur in either the Sg. file of the Wb. file
+    # if any exist, delete them.
+    else:
+        with open("Working_lexicon_file_2.json", 'r', encoding="utf-8") as lex2_working_json:
+            working_lexicon_2 = json.load(lex2_working_json)
+        os.chdir(maindir)
+        sg_json2 = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        os.chdir(tokenise_dir)
+        sg_json2 = transfer_wb_toks(sg_json2, wb_data, 2)
+        if working_lexicon_2 != json.loads(sg_json2):
+            os.remove("Working_lexicon_file_2.json")
+            save_json(sg_json2, "Working_lexicon_file_2")
+        # Open the second Lexicon JSON file for use in the GUI
+        with open("Working_lexicon_file_2.json", 'r', encoding="utf-8") as lex2_working_json:
+            working_lexicon_2 = json.load(lex2_working_json)
+
+    working_lexica = [working_lexicon_1, working_lexicon_2]
 
 
     # Start the UI
