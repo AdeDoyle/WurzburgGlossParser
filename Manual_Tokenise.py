@@ -893,11 +893,23 @@ class UI:
             selected_glossnum=self.current_rendered_window["current_selected_gloss"].get()
         )
 
-        if " ".join(string_2.split("\n")).strip().split(" ") == [
-            i[0] for i in self.selected_gloss_info["selected_toks2"]
-        ] and " ".join(string_1.split("\n")).strip().split(" ") != [
-            i[0] for i in self.selected_gloss_info["selected_toks1"]
-        ]:
+        # if string 1 is updated from the last save, but string 2 is the same as the last save
+        # OR
+        # if string 1 is updated but tokens 1, tokens 2 and string 2 match each other
+        # it means that  spaces have probably been introduced into string 1
+        # copy string 2 from string 1, and tokens 2 from tokens 1
+        if (
+            " ".join(string_2.split("\n")).strip().split(" ") == [
+                i[0] for i in self.selected_gloss_info["selected_toks2"]
+            ]
+            and " ".join(string_1.split("\n")).strip().split(" ") != [
+                i[0] for i in self.selected_gloss_info["selected_toks1"]
+            ]
+        ) or (
+            " ".join(string_2.split("\n")).strip().split(" ") == [i[0] for i in tokens_2]
+            and [i[0] for i in tokens_1] == [i[0] for i in tokens_2]
+            and " ".join(string_1.split("\n")).strip().split(" ") != [i[0] for i in tokens_1]
+        ):
             neutral_posheads = [
                 ['ADV', '.i.'],
                 ['ADV', '⁊rl.'],
@@ -906,6 +918,7 @@ class UI:
                 ['<Latin CCONJ>', 'et'],
                 ['<unknown>', '<unknown>']
             ]
+            # if none of the headwords or POS tags have been assigned to tokens in token-list 2
             if [i[1:] for i in tokens_2] == [i[1:] if i[1:] in neutral_posheads else ["?", "?"] for i in tokens_2]:
                 string_2 = "".join([i for i in string_1])
                 tokens_2 = [i for i in tokens_1]
@@ -1315,7 +1328,7 @@ class UI:
                     last_spacepoint = next_cut.rfind(" ")
                     text_cuts.append(next_cut[:last_spacepoint])
                     remainder = remainder[last_spacepoint + 1:]
-                    if len(remainder) < max_linelen:
+                    if len(remainder) <= max_linelen:
                         text_cuts.append(remainder)
             text = "\n".join(text_cuts)
         return text
