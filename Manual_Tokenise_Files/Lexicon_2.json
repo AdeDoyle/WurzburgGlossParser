@@ -10056,6 +10056,26 @@
                 ]
             },
             {
+                "lemma": "imdibthe",
+                "tokens": [
+                    {
+                        "token": "impdibthe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "imgabthach",
                 "tokens": [
                     {
@@ -10131,26 +10151,6 @@
                                         "Case": "Nom",
                                         "Degree": "Pos",
                                         "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "impdibthe",
-                "tokens": [
-                    {
-                        "token": "impdibthe",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
                                         "Number": "Sing"
                                     }
                                 ]
