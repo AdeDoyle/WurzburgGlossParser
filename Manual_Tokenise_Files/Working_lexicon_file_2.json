@@ -12101,6 +12101,15 @@
                         ]
                     },
                     {
+                        "token": "máam",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "máanu",
                         "feature_sets": [
                             {
@@ -30093,6 +30102,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "asgnam",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -45320,7 +45338,7 @@
                 ]
             },
             {
-                "lemma": "fodaitiu",
+                "lemma": "foditiu",
                 "tokens": [
                     {
                         "token": "fodaitiu",
@@ -45333,6 +45351,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "foditiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -50274,6 +50301,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "imned",
+                "tokens": [
+                    {
+                        "token": "imnid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -64480,6 +64521,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tuarcun",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
