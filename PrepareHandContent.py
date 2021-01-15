@@ -226,6 +226,11 @@ def create_tokeniser_test_training():
                     "10d36.", "11a24.", "12a22.", "12c9.", "12c29.", "12c32.", "12c36.", "14a8.", "14c2a.", "14c18.",
                     "14c23.", "14d17.", "14d26.", "15a18.", "16d8.", "17d27.", "18a14.", "18c6.", "19b6.", "21a8.",
                     "21c19.", "23b7.", "23d10.", "26b6.", "27a24.", "28c2.", "28d16.", "29d19.", "30b4.", "31c7."]
+    preferred_order = ["16d8.", "12c29.", "14d26.", "12c9.", "21c19.", "21a8.", "14c18.", "9b4.", "5b28.", "10d23.",
+                       "14d17.", "12c36.", "6c9.", "12c32.", "6c7.", "29d19.", "27a24.", "9a14.", "23d10.", "15a18.",
+                       "10d36.", "14c23.", "12a22.", "10b27.", "10c21.", "9c20.", "14a8.", "23b7.", "19b6.", "28d16.",
+                       "18a14.", "28c2.", "14c2a.", "30b4.", "11a24.", "17d27.", "26b6.", "31c7.", "2c4.", "18c6.",
+                       "5b11."]
     # Takes Manually Tokenised test-set glosses from file and adds them to a dictionary so they can be found using the
     # list above as keys
     man_tok_glosslist = get_text("Manually Tokenised Glosses").split("\n")
@@ -241,15 +246,18 @@ def create_tokeniser_test_training():
             mtgid_fix = "".join(mtgid_fix.split(")"))
             mtgs_with_ids[mtgid_fix] = mtgloss
     # Creates the test and training lists
-    testglosses = []
-    testglosses_tokenised = []
-    trainglosses = []
+    temp_testglosses = {}
+    temp_testglosses_tokenised = {}
+    trainglosses = list()
     for g in glist:
         if g[0] in testglossids:
-            testglosses.append(g[1])
-            testglosses_tokenised.append(mtgs_with_ids.get(g[0]))
+            temp_testglosses[g[0]] = g[1]
+            temp_testglosses_tokenised[g[0]] = mtgs_with_ids.get(g[0])
         else:
             trainglosses.append(g[1])
+    # Put the test set in the preferred order (based on Paradigms and Glosses)
+    testglosses = [temp_testglosses.get(i) for i in preferred_order]
+    testglosses_tokenised = [temp_testglosses_tokenised.get(i) for i in preferred_order]
     # Combines the untokenised and tokenised test-set
     testglosses_set = [testglosses, testglosses_tokenised]
     # Saves the test and train sets to pickle files

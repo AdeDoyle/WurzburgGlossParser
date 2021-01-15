@@ -1,11 +1,11 @@
 """Level 1, 2, 2, 1, 2"""
 
 from functools import lru_cache
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import pickle
 import re
-from keras.preprocessing.sequence import pad_sequences
-from keras.utils import to_categorical
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.utils import to_categorical
 from RemoveNewlines import remove_newlines, get_pages, get_section, clear_tags, order_glosses, remove_brackets,\
     remove_glossnums
 from RemoveLatin import rem_lat

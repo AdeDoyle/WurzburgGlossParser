@@ -21319,6 +21319,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "i",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -35335,6 +35344,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "cómtínól",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -41554,6 +41572,20 @@
                 ]
             },
             {
+                "lemma": "dérnum",
+                "tokens": [
+                    {
+                        "token": "dernum",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dét",
                 "tokens": [
                     {
@@ -42536,6 +42568,15 @@
                 "lemma": "díltud",
                 "tokens": [
                     {
+                        "token": "diltuth",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "díltod",
                         "feature_sets": [
                             {
@@ -42621,6 +42662,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "díth",
+                "tokens": [
+                    {
+                        "token": "díith",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -47657,6 +47712,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "gabál",
+                "tokens": [
+                    {
+                        "token": "gabáal",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -68221,6 +68290,15 @@
                         ]
                     },
                     {
+                        "token": "tú",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "ṅdo",
                         "feature_sets": [
                             {
@@ -72989,6 +73067,20 @@
     {
         "part_of_speech": "PUNCT",
         "lemmata": [
+            {
+                "lemma": ".",
+                "tokens": [
+                    {
+                        "token": ".",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
             {
                 "lemma": ":",
                 "tokens": [
@@ -83009,6 +83101,20 @@
                 ]
             },
             {
+                "lemma": "doecmala",
+                "tokens": [
+                    {
+                        "token": "ercómlássát",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "doeipen",
                 "tokens": [
                     {
@@ -88645,6 +88751,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rogabad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }

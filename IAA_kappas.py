@@ -209,6 +209,12 @@ def compare_agreement(binary_agreements_list):
 # # Gets Kohen's Kappa of Annotators to compare against tokenizer
 # direct = "IAA Files"
 # t0 = get_text(op.join(direct, "IAA_TMod1"))
+# t1 = get_text(op.join(direct, "IAA_TMod2"))
+# t2 = get_text(op.join(direct, "IAA_TMod3"))
+# t3 = get_text(op.join(direct, "IAA_TMod4"))
+# t4 = get_text(op.join(direct, "IAA_SgMod1"))
+# t5 = get_text(op.join(direct, "IAA_SgMod2"))
+#
 # a0 = get_text(op.join(direct, "IAA_AD"))
 # a1ng = get_text(op.join(direct, "IAA_T1_ADon"))
 # a2 = get_text(op.join(direct, "IAA_DW"))
@@ -223,7 +229,7 @@ def compare_agreement(binary_agreements_list):
 # # annolist = [t0, a0, a2, a3, a4, a5]  # Non-expert annotators only (with guidelines) vs. model
 # # annolist = [t0, a0, a1ng, a3ng, a5ng]  # Non-expert annotators only (no guidelines) vs. model
 # # annolist = [t0, a6ng, a7ng, a8ng]  # Expert annotators only (no guidelines) vs. model
-# # annolist = [t0, a0, a1ng, a3ng, a5ng, a6ng, a7ng, a8ng]  # All annotators (no guidelines) vs. model
+# # annolist = [t4, a0, a1ng, a3ng, a5ng, a6ng, a7ng, a8ng]  # All annotators (no guidelines) vs. model
 #
 # for i in range(len(annolist)):
 #     """Clean the text by removing new lines, stars, hyphens, gloss identifiers, and double spaces"""
