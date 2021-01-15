@@ -913,6 +913,8 @@ class UI:
             neutral_posheads = [
                 ['ADV', '.i.'],
                 ['ADV', '⁊rl.'],
+                ['CCONJ', '⁊'],
+                ['CCONJ', 'nó'],
                 ['<Latin>', 'Latin *'],
                 ['<Latin>', ''],
                 ['<Latin CCONJ>', 'et'],
@@ -1001,7 +1003,7 @@ class UI:
             tok1_head = tok1[2]
             if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok1_head[-2:] != " *":
                 tok1_form = tok1[0]
-                if tok1_form not in [".i."]:
+                if tok1_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file1]
                     if tok1_pos in all_filepos:
                         file_pos_data = working_file1[all_filepos.index(tok1_pos)].get("lemmata")
@@ -1055,7 +1057,7 @@ class UI:
             tok2_head = tok2[2]
             if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok2_head[-2:] != " *":
                 tok2_form = tok2[0]
-                if tok2_form not in [".i."]:
+                if tok2_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file2]
                     if tok2_pos in all_filepos:
                         file_pos_data = working_file2[all_filepos.index(tok2_pos)].get("lemmata")

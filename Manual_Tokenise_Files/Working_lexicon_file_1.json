@@ -3163,6 +3163,15 @@
                 "lemma": "báeth",
                 "tokens": [
                     {
+                        "token": "baid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "baéth",
                         "feature_sets": [
                             {
@@ -30228,6 +30237,20 @@
                 ]
             },
             {
+                "lemma": "amairsech",
+                "tokens": [
+                    {
+                        "token": "amhirissig",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "amnair",
                 "tokens": [
                     {
@@ -32798,6 +32821,29 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "báeth",
+                "tokens": [
+                    {
+                        "token": "baid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "báith",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -44411,6 +44457,20 @@
                 ]
             },
             {
+                "lemma": "esbetu",
+                "tokens": [
+                    {
+                        "token": "esbetu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "escarae",
                 "tokens": [
                     {
@@ -46530,6 +46590,20 @@
                 ]
             },
             {
+                "lemma": "foile",
+                "tokens": [
+                    {
+                        "token": "foili",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "foillsigud",
                 "tokens": [
                     {
@@ -47990,6 +48064,20 @@
                 ]
             },
             {
+                "lemma": "fugell",
+                "tokens": [
+                    {
+                        "token": "fugell",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "fuin",
                 "tokens": [
                     {
@@ -49149,6 +49237,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "glicce",
+                "tokens": [
+                    {
+                        "token": "glicci",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -57497,6 +57599,20 @@
                 ]
             },
             {
+                "lemma": "opar",
+                "tokens": [
+                    {
+                        "token": "oiprib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "optait",
                 "tokens": [
                     {
@@ -65775,6 +65891,20 @@
                 ]
             },
             {
+                "lemma": "túaichle",
+                "tokens": [
+                    {
+                        "token": "tuaichli",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "túarcon",
                 "tokens": [
                     {
@@ -67854,110 +67984,6 @@
                 ]
             },
             {
-                "lemma": "da",
-                "tokens": [
-                    {
-                        "token": "da",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "de",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "deib",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "di",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "dib",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "dá",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "dé",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "dí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ndi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ndib",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ndá",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "deich",
                 "tokens": [
                     {
@@ -68075,6 +68101,15 @@
                     },
                     {
                         "token": "ndib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ndá",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
