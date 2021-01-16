@@ -1646,7 +1646,7 @@ def select_glossnum(glosses, glossnum):
 
 
 def transfer_wb_toks(add_to_file, add_from_file, tok_style):
-    """add tokens to a lexicon from a json manually tokenised .json document if they are not already in it"""
+    """add tokens to a lexicon from a manually tokenised .json document if they are not already in it"""
     add_toks = list()
     for epistle in add_from_file:
         folios = epistle['folios']
@@ -1720,6 +1720,33 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
     return json.dumps(json_file, indent=4, ensure_ascii=False)
 
 
+def update_base_file(base_file, file_dir):
+    """update any newNotes in the working manual tokenisation file that have been changed in the main text file"""
+    cur_dir = os.getcwd()
+    os.chdir(file_dir)
+    updated_text_file = combine_infolists("Wurzburg Glosses", 499, 712)
+    os.chdir(cur_dir)
+    updated_text_file = json.loads(make_json(updated_text_file, True))
+    if updated_text_file != base_file:
+        for i, level_0 in enumerate(updated_text_file):
+            upd_folios = level_0.get('folios')
+            folios = base_file[i].get('folios')
+            if upd_folios != folios:
+                for j, level_1 in enumerate(upd_folios):
+                    upd_glosses = level_1.get('glosses')
+                    glosses = folios[j].get('glosses')
+                    if upd_glosses != glosses:
+                        for k, level_2 in enumerate(upd_glosses):
+                            upd_newnote = level_2.get('newNotes')
+                            newnote = glosses[k].get('newNotes')
+                            if upd_newnote != newnote:
+                                glosses[k]['newNotes'] = upd_newnote
+                    if upd_glosses == glosses:
+                        print("woo")
+    update_json("Wb. Manual Tokenisation.json", base_file)
+    return base_file
+
+
 if __name__ == "__main__":
 
     # Navigate to a directory containing a JSON file of the Wb. Glosses
@@ -1746,6 +1773,7 @@ if __name__ == "__main__":
     # Open the Wb. JSON file for use in the GUI
     with open("Wb. Manual Tokenisation.json", 'r', encoding="utf-8") as wb_json:
         wb_data = json.load(wb_json)
+        wb_data = update_base_file(wb_data, maindir)
 
     # Check if any of the tokenisation fields are empty
     empty_tokfields = False
