@@ -15371,6 +15371,20 @@
                 ]
             },
             {
+                "lemma": "toirsech",
+                "tokens": [
+                    {
+                        "token": "toirsech",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "toirthech",
                 "tokens": [
                     {
@@ -24830,6 +24844,15 @@
                         ]
                     },
                     {
+                        "token": "nitam",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "nitat",
                         "feature_sets": [
                             {
@@ -29134,6 +29157,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "aircur",
+                "tokens": [
+                    {
+                        "token": "aircur",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -38327,6 +38364,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cundrath",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -47624,6 +47670,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "forás",
+                "tokens": [
+                    {
+                        "token": "forás",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -59298,7 +59358,7 @@
                 ]
             },
             {
-                "lemma": "riuth",
+                "lemma": "rith",
                 "tokens": [
                     {
                         "token": "rith",
@@ -59363,6 +59423,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "roth",
+                "tokens": [
+                    {
+                        "token": "routh",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -63469,6 +63543,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "tig",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -64489,6 +64572,15 @@
                 "tokens": [
                     {
                         "token": "thorbe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "torbe",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -70869,6 +70961,15 @@
                                         "PronType": "Emp"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "sni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -83226,6 +83327,20 @@
                 ]
             },
             {
+                "lemma": "docomra",
+                "tokens": [
+                    {
+                        "token": "toncomra",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "docuirethar",
                 "tokens": [
                     {
@@ -86621,6 +86736,15 @@
                 "lemma": "doérig",
                 "tokens": [
                     {
+                        "token": "dergemarni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "ṅdeirsed",
                         "feature_sets": [
                             {
@@ -87355,6 +87479,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "forcanit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -88154,6 +88287,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "fomoinethar",
+                "tokens": [
+                    {
+                        "token": "fomnar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -89161,6 +89308,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "frisbrudi",
+                "tokens": [
+                    {
+                        "token": "frisbrúdémor",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -91398,6 +91559,15 @@
                 "lemma": "pridchid",
                 "tokens": [
                     {
+                        "token": "praidchas",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "predchim",
                         "feature_sets": [
                             {
@@ -92285,6 +92455,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "slucid",
+                "tokens": [
+                    {
+                        "token": "roslogeth",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
