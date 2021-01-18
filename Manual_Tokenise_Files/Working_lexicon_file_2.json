@@ -73263,6 +73263,15 @@
                 "lemma": "…",
                 "tokens": [
                     {
+                        "token": "..",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "...",
                         "feature_sets": [
                             {
@@ -91089,6 +91098,15 @@
             {
                 "lemma": "rolaimethar",
                 "tokens": [
+                    {
+                        "token": "laimir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "llámar",
                         "feature_sets": [
