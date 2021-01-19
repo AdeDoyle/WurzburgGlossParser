@@ -3324,6 +3324,20 @@
                 ]
             },
             {
+                "lemma": "car",
+                "tokens": [
+                    {
+                        "token": "car",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "casaldae",
                 "tokens": [
                     {
@@ -6412,6 +6426,20 @@
                 ]
             },
             {
+                "lemma": "deróil",
+                "tokens": [
+                    {
+                        "token": "deroil",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dess",
                 "tokens": [
                     {
@@ -6876,6 +6904,20 @@
                     },
                     {
                         "token": "drog",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "dron",
+                "tokens": [
+                    {
+                        "token": "dron",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -9451,6 +9493,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "glé",
+                "tokens": [
+                    {
+                        "token": "glé",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -14680,6 +14736,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "sulbir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -19376,6 +19441,15 @@
                                         "PronType": "Prs"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "dúb",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -30447,6 +30521,15 @@
                 "lemma": "anim",
                 "tokens": [
                     {
+                        "token": "anam",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "anmmain",
                         "feature_sets": [
                             {
@@ -31306,6 +31389,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "aincis",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -32681,6 +32773,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bríathar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -34559,6 +34660,15 @@
             {
                 "lemma": "cléibéne",
                 "tokens": [
+                    {
+                        "token": "clebene",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "clebéne",
                         "feature_sets": [
@@ -48209,6 +48319,20 @@
                 ]
             },
             {
+                "lemma": "fulang",
+                "tokens": [
+                    {
+                        "token": "folog",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "fál",
                 "tokens": [
                     {
@@ -55045,6 +55169,15 @@
                 "lemma": "machdad",
                 "tokens": [
                     {
+                        "token": "macdath",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "machdad",
                         "feature_sets": [
                             {
@@ -55648,6 +55781,20 @@
                 ]
             },
             {
+                "lemma": "menmnaige",
+                "tokens": [
+                    {
+                        "token": "menmnihi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "mertrech",
                 "tokens": [
                     {
@@ -55953,6 +56100,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "moídem",
+                "tokens": [
+                    {
+                        "token": "maidem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -58940,6 +59101,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rectire",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -65845,6 +66015,15 @@
                         ]
                     },
                     {
+                        "token": "tobe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "tóbe",
                         "feature_sets": [
                             {
@@ -67166,6 +67345,20 @@
                 ]
             },
             {
+                "lemma": "ét",
+                "tokens": [
+                    {
+                        "token": "het",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "étan",
                 "tokens": [
                     {
@@ -68038,6 +68231,20 @@
                 "tokens": [
                     {
                         "token": "cethar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "cethracha",
+                "tokens": [
+                    {
+                        "token": "cetarcoti",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -86033,6 +86240,20 @@
                 ]
             },
             {
+                "lemma": "doluigi",
+                "tokens": [
+                    {
+                        "token": "dilgid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "domeiccethar",
                 "tokens": [
                     {
@@ -91893,6 +92114,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rulaimur",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }

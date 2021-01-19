@@ -45,9 +45,9 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 notenumpat = re.compile(r'^\d{1,2}[a-z]?\. ')
                 notenumiter = notenumpat.findall(note)
                 if not notenumiter:
-                    raise RuntimeError("Personal note found without link to gloss number")
+                    raise RuntimeError(f"Personal note found without link to gloss number.\nNote: {note}")
                 elif len(notenumiter) > 1 or notenumiter[0] != note[:len(notenumiter[0])]:
-                    raise RuntimeError("Multiple possible gloss numbers found for personal note")
+                    raise RuntimeError(f"Multiple possible gloss numbers found for personal note.\nNote: {note}")
                 elif notenumiter[0] == note[:len(notenumiter[0])]:
                     glossnum = notenumiter[0][:-2]
                     note = note[len(notenumiter[0]):].strip()
