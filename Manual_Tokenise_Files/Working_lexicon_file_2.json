@@ -7020,6 +7020,20 @@
                 ]
             },
             {
+                "lemma": "dásachtach",
+                "tokens": [
+                    {
+                        "token": "dasachtaich",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "déchendae",
                 "tokens": [
                     {
@@ -21656,6 +21670,20 @@
                 ]
             },
             {
+                "lemma": "cenathe",
+                "tokens": [
+                    {
+                        "token": "cenathe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "comparit",
                 "tokens": [
                     {
@@ -22054,6 +22082,20 @@
                     },
                     {
                         "token": "sís",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "súas",
+                "tokens": [
+                    {
+                        "token": "soos",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -32830,6 +32872,20 @@
                 ]
             },
             {
+                "lemma": "callann",
+                "tokens": [
+                    {
+                        "token": "kal֊",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "carachtar",
                 "tokens": [
                     {
@@ -39721,6 +39777,20 @@
                 ]
             },
             {
+                "lemma": "demon",
+                "tokens": [
+                    {
+                        "token": "demon",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "denum",
                 "tokens": [
                     {
@@ -45966,6 +46036,20 @@
                 ]
             },
             {
+                "lemma": "foichleóir",
+                "tokens": [
+                    {
+                        "token": "foichlorib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "foil",
                 "tokens": [
                     {
@@ -47604,6 +47688,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "féchem",
+                "tokens": [
+                    {
+                        "token": "fech",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -59278,6 +59376,20 @@
                 ]
             },
             {
+                "lemma": "sabbait",
+                "tokens": [
+                    {
+                        "token": "sabati",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "sabindae",
                 "tokens": [
                     {
@@ -68244,6 +68356,20 @@
                 ]
             },
             {
+                "lemma": "cair",
+                "tokens": [
+                    {
+                        "token": "coir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cita",
                 "tokens": [
                     {
@@ -71493,6 +71619,20 @@
                 ]
             },
             {
+                "lemma": "ní",
+                "tokens": [
+                    {
+                        "token": "ni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "s",
                 "tokens": [
                     {
@@ -72333,6 +72473,20 @@
                                         "PronType": "Prs"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tob",
+                "tokens": [
+                    {
+                        "token": "dob",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -74853,6 +75007,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "adgair",
+                "tokens": [
+                    {
+                        "token": "ragart",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }

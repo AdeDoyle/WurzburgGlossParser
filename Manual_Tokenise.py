@@ -1736,13 +1736,25 @@ def update_base_file(base_file, file_dir):
                     upd_glosses = level_1.get('glosses')
                     glosses = folios[j].get('glosses')
                     if upd_glosses != glosses:
+                        if len(upd_glosses) > len(glosses):
+                            while len(upd_glosses) > len(glosses):
+                                upd_glossnums = [upd_gloss_data.get("glossNo") for upd_gloss_data in upd_glosses]
+                                glossnums = [gloss_data.get("glossNo") for gloss_data in glosses]
+                                for k, upd_glossnumber in enumerate(upd_glossnums):
+                                    if upd_glossnumber not in glossnums:
+                                        for upd_gloss_data in upd_glosses:
+                                            if upd_gloss_data.get("glossNo") == upd_glossnumber:
+                                                glosses = glosses[:k] + [upd_gloss_data] + glosses[k:]
+                            folios[j]['glosses'] = glosses
                         for k, level_2 in enumerate(upd_glosses):
                             upd_newnote = level_2.get('newNotes')
                             newnote = glosses[k].get('newNotes')
                             if upd_newnote != newnote:
                                 glosses[k]['newNotes'] = upd_newnote
-                    if upd_glosses == glosses:
-                        print("woo")
+                            upd_glosshand = level_2.get('glossHand')
+                            glosshand = glosses[k].get('glossHand')
+                            if upd_glosshand != glosshand:
+                                glosses[k]['glossHand'] = upd_glosshand
     update_json("Wb. Manual Tokenisation.json", base_file)
     return base_file
 
