@@ -70,20 +70,20 @@ def make_json(glosslist, headers=False):
                 if "prima" in i:
                     h = "Hand One (Prima Manus)"
                     # print(i)
-        mixed_hand_list = ["8d3", "8d13", "11b3", "17b4", "17d15"]
+        mixed_hand_list = ["8d3", "8d13", "11b3", "17b4", "17d15", "21d6", "24b8"]
         if an:
             if "a prima manu" in an or "prima manus" in an:
-                if "not <em>a prima manu</em>" in an:
-                    if foliohandswap:
-                        h = "Hand Three"
-                    else:
-                        h = "Hand Two"
-                elif f[3:] + gn in mixed_hand_list:
+                if f[3:] + gn in mixed_hand_list:
                     if foliohandswap:
                         h = "Hand Three"
                     else:
                         h = "Hand Two"
                     h = f"Hand One (Prima Manus) and {h}"
+                elif "not <em>a prima manu</em>" in an:
+                    if foliohandswap:
+                        h = "Hand Three"
+                    else:
+                        h = "Hand Two"
                 else:
                     h = "Hand One (Prima Manus)"
         # Replace the marker for each datum in the low level JSON blank with appropriate data for the gloss

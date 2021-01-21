@@ -68779,20 +68779,6 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Polarity": "Pos",
-                                        "PronType": "Int",
-                                        "Tense": "Pres",
-                                        "VerbType": "Cop"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
                                         "PronType": "Int"
                                     }
                                 ]
