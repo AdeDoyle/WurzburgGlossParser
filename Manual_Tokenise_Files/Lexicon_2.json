@@ -38364,6 +38364,25 @@
                 ]
             },
             {
+                "lemma": "dair",
+                "tokens": [
+                    {
+                        "token": "daur",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dam",
                 "tokens": [
                     {
@@ -38415,25 +38434,6 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "daur",
-                "tokens": [
-                    {
-                        "token": "daur",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
                                         "Number": "Sing"
                                     }
                                 ]
