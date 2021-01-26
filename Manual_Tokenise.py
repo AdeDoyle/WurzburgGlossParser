@@ -913,7 +913,7 @@ class UI:
             neutral_posheads = [
                 ['ADV', '.i.'],
                 ['ADV', '⁊rl.'],
-                ['CCONJ', '⁊'],
+                ['CCONJ', 'ocus'],
                 ['CCONJ', 'nó'],
                 ['<Latin>', 'Latin *'],
                 ['<Latin>', ''],

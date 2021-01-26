@@ -5965,6 +5965,52 @@
                 ]
             },
             {
+                "lemma": "cían",
+                "tokens": [
+                    {
+                        "token": "chían",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cian",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Gender": "Fem",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cóir",
                 "tokens": [
                     {
@@ -6054,6 +6100,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "da",
+                "tokens": [
+                    {
+                        "token": "da",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -9115,6 +9175,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "frithortae",
+                "tokens": [
+                    {
+                        "token": "frithortæ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -23896,6 +23970,15 @@
                         ]
                     },
                     {
+                        "token": "thúas",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "tuas",
                         "feature_sets": [
                             {
@@ -25474,6 +25557,24 @@
                     },
                     {
                         "token": "rubu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rupsa",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rupu",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -27084,6 +27185,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "accubur",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -31768,6 +31878,20 @@
                 ]
             },
             {
+                "lemma": "barae",
+                "tokens": [
+                    {
+                        "token": "barain",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "barr",
                 "tokens": [
                     {
@@ -34538,6 +34662,20 @@
                 ]
             },
             {
+                "lemma": "cenélugad",
+                "tokens": [
+                    {
+                        "token": "cheinélugud",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cerdchae",
                 "tokens": [
                     {
@@ -35490,6 +35628,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "coimdiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -38369,6 +38516,15 @@
                         ]
                     },
                     {
+                        "token": "chumachti",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "chumachtu",
                         "feature_sets": [
                             {
@@ -39746,30 +39902,11 @@
                         ]
                     },
                     {
-                        "token": "chían",
+                        "token": "ceín",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "cian",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
+                                "features": null
                             }
                         ]
                     },
@@ -45201,6 +45338,15 @@
                         ]
                     },
                     {
+                        "token": "etergne",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "netargna",
                         "feature_sets": [
                             {
@@ -45648,6 +45794,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "fectæ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -46007,6 +46162,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "fetarlicce",
+                "tokens": [
+                    {
+                        "token": "fetarlici",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -46599,7 +46768,25 @@
                 "lemma": "fochraic",
                 "tokens": [
                     {
+                        "token": "fochric",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "fochricc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "fochrice",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -49043,6 +49230,20 @@
                 ]
             },
             {
+                "lemma": "fírían",
+                "tokens": [
+                    {
+                        "token": "firiónaib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "fót",
                 "tokens": [
                     {
@@ -49935,6 +50136,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "gluas",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -57964,6 +58174,15 @@
                 "lemma": "nuiednisse",
                 "tokens": [
                     {
+                        "token": "nuiednise",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "nuiednissi",
                         "feature_sets": [
                             {
@@ -59645,6 +59864,20 @@
                                         "Number": "Plur"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "reilic",
+                "tokens": [
+                    {
+                        "token": "rreilic",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -63658,6 +63891,20 @@
                 ]
             },
             {
+                "lemma": "tacráth",
+                "tokens": [
+                    {
+                        "token": "tacráth",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "taidbech",
                 "tokens": [
                     {
@@ -64083,6 +64330,20 @@
                 ]
             },
             {
+                "lemma": "tairngire",
+                "tokens": [
+                    {
+                        "token": "tairngeri",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "taitnem",
                 "tokens": [
                     {
@@ -64225,6 +64486,15 @@
             {
                 "lemma": "tech",
                 "tokens": [
+                    {
+                        "token": "taig",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "taigæ",
                         "feature_sets": [
@@ -64673,6 +64943,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tindnacuil",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -65664,6 +65943,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "toísech",
+                "tokens": [
+                    {
+                        "token": "thoissech",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -71560,6 +71853,15 @@
                         ]
                     },
                     {
+                        "token": "mu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "mui",
                         "feature_sets": [
                             {
@@ -72060,6 +72362,20 @@
                                         "PronType": "Ana"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "sní",
+                "tokens": [
+                    {
+                        "token": "sni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -73838,6 +74154,15 @@
                     },
                     {
                         "token": "á",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ↄ",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -78261,6 +78586,15 @@
                         ]
                     },
                     {
+                        "token": "asmberr",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "asrobair",
                         "feature_sets": [
                             {
@@ -80958,6 +81292,15 @@
                         ]
                     },
                     {
+                        "token": "rusmbói",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "taat",
                         "feature_sets": [
                             {
@@ -82389,6 +82732,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "conricc",
+                "tokens": [
+                    {
+                        "token": "comairsem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -90505,6 +90862,29 @@
                 ]
             },
             {
+                "lemma": "frisoirg",
+                "tokens": [
+                    {
+                        "token": "friscomurt",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "fritumchomart",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "fristabair",
                 "tokens": [
                     {
@@ -91015,8 +91395,17 @@
                 ]
             },
             {
-                "lemma": "gniid",
+                "lemma": "gníid",
                 "tokens": [
+                    {
+                        "token": "gnid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "gniid",
                         "feature_sets": [
@@ -91810,6 +92199,20 @@
                                         "Voice": "Pass"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "inotat",
+                "tokens": [
+                    {
+                        "token": "inotsat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }

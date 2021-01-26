@@ -5864,6 +5864,52 @@
                 ]
             },
             {
+                "lemma": "cían",
+                "tokens": [
+                    {
+                        "token": "chían",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cian",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Gender": "Fem",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cóir",
                 "tokens": [
                     {
@@ -38771,34 +38817,6 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "chían",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "cian",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -87769,7 +87787,7 @@
                 ]
             },
             {
-                "lemma": "gniid",
+                "lemma": "gníid",
                 "tokens": [
                     {
                         "token": "gniid",
