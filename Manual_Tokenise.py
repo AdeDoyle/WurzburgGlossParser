@@ -30,7 +30,7 @@ class UI:
         self.primary_lexicon_2 = primary_lexica[1]
         self.pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
                          "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
-                         "<Latin>", "<Latin CCONJ>", "<unknown>"]
+                         "<Latin>", "<Latin CCONJ>", "<Greek>", "<unknown>"]
         self.max_linelen = 110
 
         self.open_ep = self.epistles[0]
@@ -450,7 +450,7 @@ class UI:
                 tag = "<Latin>"
                 if head == "<unknown>":
                     head = "Latin *"
-            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " *"):
+            if tag not in ["<Latin>", "<Greek>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " *"):
                 lex_toks = list()
                 for level_1 in lexicon1:
                     lex_pos = level_1.get("part_of_speech")
@@ -534,7 +534,7 @@ class UI:
                 tag = "<Latin>"
                 if head == "<unknown>":
                     head = "Latin *"
-            if tag not in ["<Latin>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " *"):
+            if tag not in ["<Latin>", "<Greek>", "<unknown>"] and (head == "<unknown>" or head[-2:] == " *"):
                 lex_toks = list()
                 for level_1 in lexicon2:
                     lex_pos = level_1.get("part_of_speech")
@@ -887,6 +887,14 @@ class UI:
         if [i[2] for i in tokens_2] != updated_head2:
             tokens_2 = [[i[0], i[1], j.strip()] for i, j in zip(tokens_2, updated_head2)]
 
+        tokens_1 = [i if i[1:] not in [
+            ['<Greek>', 'Latin *'], ['<Greek>', '<unknown>']
+        ] else [i[0], i[1], 'Greek *'] for i in tokens_1]
+
+        tokens_2 = [i if i[1:] not in [
+            ['<Greek>', 'Latin *'], ['<Greek>', '<unknown>']
+        ] else [i[0], i[1], 'Greek *'] for i in tokens_2]
+
         self.selected_gloss_info = self.create_gloss_info(
             selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
             selected_folio=self.current_rendered_window["current_selected_folio"].get(),
@@ -918,6 +926,8 @@ class UI:
                 ['<Latin>', 'Latin *'],
                 ['<Latin>', ''],
                 ['<Latin CCONJ>', 'et'],
+                ['<Greek>', 'Greek *'],
+                ['<Greek>', ''],
                 ['<unknown>', '<unknown>']
             ]
             # if none of the headwords or POS tags have been assigned to tokens in token-list 2
@@ -976,9 +986,9 @@ class UI:
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         current_folio = self.current_rendered_window["current_selected_folio"].get()
         current_epistle = self.current_rendered_window["current_selected_epistle"].get()
-        tokens_1 = [[i, j, ""] if "Latin *" in k else [i, j, k] for i, j, k in self.cur_toks1]
+        tokens_1 = [[i, j, ""] if k in ["Latin *", "Greek *"] else [i, j, k] for i, j, k in self.cur_toks1]
         tokens_1 = [[i, j, "".join(k.split(" *"))] if " *" in k else [i, j, k] for i, j, k in tokens_1]
-        tokens_2 = [[i, j, ""] if "Latin *" in k else [i, j, k] for i, j, k in self.cur_toks2]
+        tokens_2 = [[i, j, ""] if k in ["Latin *", "Greek *"] else [i, j, k] for i, j, k in self.cur_toks2]
         tokens_2 = [[i, j, "".join(k.split(" *"))] if " *" in k else [i, j, k] for i, j, k in tokens_2]
 
         for epistle in main_file:
@@ -1001,7 +1011,7 @@ class UI:
         for tok1 in tokens_1:
             tok1_pos = tok1[1]
             tok1_head = tok1[2]
-            if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok1_head[-2:] != " *":
+            if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok1_head[-2:] != " *":
                 tok1_form = tok1[0]
                 if tok1_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file1]
@@ -1055,7 +1065,7 @@ class UI:
         for tok2 in tokens_2:
             tok2_pos = tok2[1]
             tok2_head = tok2[2]
-            if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok2_head[-2:] != " *":
+            if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok2_head[-2:] != " *":
                 tok2_form = tok2[0]
                 if tok2_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file2]
@@ -1387,7 +1397,8 @@ class UI:
                     tokens = [(i[1], i[2], i[0]) if [i[1], i[2]] not in [
                         ['<unknown>', '<unknown>'],
                         ['<Latin>', ''],
-                        ['<Latin CCONJ>', 'et']
+                        ['<Latin CCONJ>', 'et'],
+                        ['<Greek>', '']
                     ] else [] for i in tokens]
                     tokens = [i for i in tokens if i]
                     if tokens:
@@ -1658,7 +1669,8 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
                 tokens = [(i[1], i[2], i[0]) if [i[1], i[2]] not in [
                     ['<unknown>', '<unknown>'],
                     ['<Latin>', ''],
-                    ['<Latin CCONJ>', 'et']
+                    ['<Latin CCONJ>', 'et'],
+                    ['<Greek>', '']
                 ] else () for i in tokens]
                 tokens = [i for i in tokens if i]
                 if tokens:
@@ -1670,7 +1682,7 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
     for tok in add_toks:
         tok_pos = tok[0]
         tok_head = tok[1]
-        if tok_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>"] and tok_head[-2:] != " *":
+        if tok_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok_head[-2:] != " *":
             tok_form = tok[2]
             all_filepos = [level_1.get("part_of_speech") for level_1 in json_file]
             if tok_pos in all_filepos:
