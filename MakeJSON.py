@@ -2,6 +2,7 @@
 
 import re
 from CombineInfoLists import combine_infolists
+from ClearTags import clear_tags
 from conllu import parse, TokenList
 import json
 
@@ -60,6 +61,8 @@ def make_json(glosslist, headers=False):
         fn = gloss[11]
         an = gloss[12]
         gtr = gloss[13]
+        if "[/" in gtr:
+            gtr = clear_tags(gtr)
         h = "Hand Two"
         if f == "f. 33a":
             foliohandswap = True
