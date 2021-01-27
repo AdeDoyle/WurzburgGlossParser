@@ -53208,25 +53208,6 @@
                 ]
             },
             {
-                "lemma": "lugae",
-                "tokens": [
-                    {
-                        "token": "lugu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "luib",
                 "tokens": [
                     {
@@ -53274,6 +53255,25 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "luige",
+                "tokens": [
+                    {
+                        "token": "lugu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
                                         "Number": "Sing"
                                     }
                                 ]
