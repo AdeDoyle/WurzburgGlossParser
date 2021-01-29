@@ -67512,20 +67512,6 @@
                 "lemma": "ná",
                 "tokens": [
                     {
-                        "token": "na",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "nad",
                         "feature_sets": [
                             {
@@ -67576,20 +67562,6 @@
                     },
                     {
                         "token": "nnád",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ná",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -72361,6 +72333,19 @@
                     },
                     {
                         "token": "nná",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Polarity": "Neg"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ná",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
