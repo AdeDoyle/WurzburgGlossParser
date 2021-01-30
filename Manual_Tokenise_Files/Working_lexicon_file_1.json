@@ -6953,6 +6953,20 @@
                 ]
             },
             {
+                "lemma": "domundae",
+                "tokens": [
+                    {
+                        "token": "domundi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "donn",
                 "tokens": [
                     {
@@ -20438,6 +20452,15 @@
                         ]
                     },
                     {
+                        "token": "form",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "forru",
                         "feature_sets": [
                             {
@@ -23774,6 +23797,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "dono",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -25670,6 +25702,15 @@
                                         "VerbType": "Cop"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "pu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -30264,6 +30305,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "airmitiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -32203,6 +32253,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ballaib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -38111,6 +38170,29 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "cosnam",
+                "tokens": [
+                    {
+                        "token": "coisnimi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cosnama",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -44090,6 +44172,15 @@
                         ]
                     },
                     {
+                        "token": "dǽ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "ṅdea",
                         "feature_sets": [
                             {
@@ -49894,6 +49985,15 @@
                                         "Prefix": "Yes"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "féid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -64904,6 +65004,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "thabirt",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -75044,6 +75153,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "pól",
+                "tokens": [
+                    {
+                        "token": "pool",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -87599,6 +87722,20 @@
                 ]
             },
             {
+                "lemma": "dofásaig",
+                "tokens": [
+                    {
+                        "token": "dofarsiged",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dofúairc",
                 "tokens": [
                     {
@@ -89435,6 +89572,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "doreg",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
