@@ -51206,22 +51206,46 @@
                 ]
             },
             {
-                "lemma": "lae",
+                "lemma": "lagat",
                 "tokens": [
                     {
-                        "token": "lai",
+                        "token": "lagait",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Case": "Gen",
+                                        "Case": "Dat",
                                         "Number": "Sing"
                                     }
                                 ]
                             }
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "lemma": "lainne",
+                "tokens": [
+                    {
+                        "token": "lainne",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "laithe",
+                "tokens": [
                     {
                         "token": "laithe",
                         "feature_sets": [
@@ -51267,44 +51291,6 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "lagat",
-                "tokens": [
-                    {
-                        "token": "lagait",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "lainne",
-                "tokens": [
-                    {
-                        "token": "lainne",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -52546,6 +52532,25 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "lá",
+                "tokens": [
+                    {
+                        "token": "lai",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
                                         "Number": "Sing"
                                     }
                                 ]
