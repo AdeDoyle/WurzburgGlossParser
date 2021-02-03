@@ -38639,10 +38639,10 @@
                 ]
             },
             {
-                "lemma": "debaid",
+                "lemma": "debrath",
                 "tokens": [
                     {
-                        "token": "debuid",
+                        "token": "debrath",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -38658,10 +38658,10 @@
                 ]
             },
             {
-                "lemma": "debrath",
+                "lemma": "debuith",
                 "tokens": [
                     {
-                        "token": "debrath",
+                        "token": "debuid",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -66947,19 +66947,6 @@
                         ]
                     },
                     {
-                        "token": "tu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PartType": "Vb"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "ṅdo",
                         "feature_sets": [
                             {
@@ -67633,6 +67620,19 @@
                             },
                             {
                                 "feature_set": 2,
+                                "features": [
+                                    {
+                                        "PartType": "Vb"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rr",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
                                 "features": [
                                     {
                                         "PartType": "Vb"
@@ -80506,18 +80506,6 @@
                                         "Voice": "Pass"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Pass"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -80827,6 +80815,23 @@
                                         "PronType": "Rel",
                                         "Tense": "Past",
                                         "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ucad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Pass"
                                     }
                                 ]
                             }
@@ -88776,6 +88781,23 @@
                         ]
                     },
                     {
+                        "token": "icc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "recar",
                         "feature_sets": [
                             {
@@ -88800,23 +88822,6 @@
                                         "Person": "3",
                                         "Tense": "Pres",
                                         "Voice": "Pass"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ricc",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
                                     }
                                 ]
                             }

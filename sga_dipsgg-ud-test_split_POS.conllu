@@ -18322,7 +18322,7 @@
 18	friu	fri	ADP	_	AdpType=Prep|Definite=Ind|Number=Plur|Person=3|PronType=Prs	_	_	_	_
 19	ɫ	nó	CCONJ	_	_	_	_	_	_
 20	do	do	ADP	_	AdpType=Prep|Definite=Ind	_	_	_	_
-21	debuid	debaid	NOUN	_	Case=Dat|Number=Sing	_	_	_	_
+21	debuid	debuith	NOUN	_	Case=Dat|Number=Sing	_	_	_	_
 
 # sent_id = 1762
 # reference = 68b10
@@ -32568,11 +32568,11 @@
 
 # sent_id = 2960
 # reference = 199b12
-# text = ce r ricc
+# text = ce rr icc
 # translation = why? (lit. what does it reach?)
 1	ce	cía	PRON	_	PronType=Int	_	_	_	_
-2	r	ro	PART	_	PartType=Vb	_	_	_	_
-3	ricc	roicc	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|Voice=Act	_	_	_	_
+2	rr	ro	PART	_	PartType=Vb	_	_	_	_
+3	icc	roicc	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Pres|Voice=Act	_	_	_	_
 
 # sent_id = 2961
 # reference = 199b13
@@ -33608,14 +33608,14 @@
 
 # sent_id = 3039
 # reference = 202b8
-# text = .i. tre ímpuud .i. tu cad a tosuch fo diud
+# text = .i. tre ímpuud .i. t ucad a tosuch fo diud
 # translation = i.e. by anastrophe, i.e. its beginning has been put at the end
 1	.i.	.i.	ADV	_	Abbr=Yes	_	_	_	_
 2	tre	tre	ADP	_	AdpType=Prep|Definite=Ind	_	_	_	_
 3	ímpuud	impúd	NOUN	_	Case=Acc|Number=Sing	_	_	_	_
 4	.i.	.i.	ADV	_	Abbr=Yes	_	_	_	_
-5	tu	do	PART	_	PartType=Vb	_	_	_	_
-6	cad	dobeir	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Past|Voice=Pass	_	_	_	_
+5	t	do	PART	_	PartType=Vb	_	_	_	_
+6	ucad	dobeir	VERB	_	Mood=Ind|Number=Sing|Person=3|Tense=Past|Voice=Pass	_	_	_	_
 7	a	a	PRON	_	Gender=Fem|Number=Sing|Person=3|Poss=Yes|PronType=Prs	_	_	_	_
 8	tosuch	tosach	NOUN	_	Case=Nom|Number=Sing	_	_	_	_
 9	fo	fo	ADP	_	AdpType=Prep|Definite=Ind	_	_	_	_

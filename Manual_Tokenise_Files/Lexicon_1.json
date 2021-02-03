@@ -39419,10 +39419,10 @@
                 ]
             },
             {
-                "lemma": "debaid",
+                "lemma": "debrath",
                 "tokens": [
                     {
-                        "token": "debuid",
+                        "token": "debrath",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -39438,10 +39438,10 @@
                 ]
             },
             {
-                "lemma": "debrath",
+                "lemma": "debuith",
                 "tokens": [
                     {
-                        "token": "debrath",
+                        "token": "debuid",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
