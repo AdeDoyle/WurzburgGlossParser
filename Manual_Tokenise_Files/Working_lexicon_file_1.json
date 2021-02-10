@@ -76890,6 +76890,15 @@
                 "lemma": "…",
                 "tokens": [
                     {
+                        "token": ".",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "..",
                         "feature_sets": [
                             {
