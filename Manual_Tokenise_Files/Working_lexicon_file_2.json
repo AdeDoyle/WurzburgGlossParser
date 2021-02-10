@@ -19501,15 +19501,6 @@
                         ]
                     },
                     {
-                        "token": "dúnni",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
                         "token": "ṅdi",
                         "feature_sets": [
                             {
