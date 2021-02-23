@@ -16982,27 +16982,6 @@
                                         "Number": "Sing"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 4,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -17116,22 +17095,6 @@
                                         "Case": "Gen",
                                         "Degree": "Pos",
                                         "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "nuile",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Degree": "Pos",
-                                        "Gender": "Neut",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -69674,11 +69637,44 @@
                 "lemma": "uile",
                 "tokens": [
                     {
+                        "token": "huile",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "huili",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Plur"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nuile",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Number": "Sing"
+                                    }
+                                ]
                             }
                         ]
                     }
