@@ -31,6 +31,13 @@ class UI:
         self.pos_tags = ["ADJ", "ADP", "ADV", "AUX", "CCONJ", "DET", "INTJ", "NOUN", "NUM",
                          "PART", "PRON", "PROPN", "PUNCT", "SCONJ", "SYM", "VERB", "X",
                          "<Latin>", "<Latin CCONJ>", "<Greek>", "<unknown>"]
+        self.adp_feats = {"AdpType": ["N/A", "Prep"],
+                          "Case": ["N/A", "Acc", "Dat"],
+                          "Definite": ["N/A", "Def", "Ind"],
+                          "Gender": ["N/A", "Masc", "Neut", "Masc,Neut", "Fem"],
+                          "Number": ["N/A", "Sing",  "Plur"],
+                          "Person": ["N/A", "1",  "2", "3"],
+                          "PronType": ["N/A", "Art", "Prs"]}
         self.max_linelen = 110
 
         self.open_ep = self.epistles[0]
@@ -429,13 +436,17 @@ class UI:
                                                             text="Tokens (1)", font=("Helvetica", 16))
         self.current_rendered_window["toks1_label"].grid(row=0, column=0, padx=5, pady=5)
 
-        self.current_rendered_window["pos1_label"] = Label(self.current_rendered_window["toks1_frame"],
-                                                           text="POS", font=("Helvetica", 16))
-        self.current_rendered_window["pos1_label"].grid(row=0, column=1, padx=5, pady=5)
-
         self.current_rendered_window["head1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                             text="Headword", font=("Helvetica", 16))
-        self.current_rendered_window["head1_label"].grid(row=0, column=2, padx=5, pady=5)
+        self.current_rendered_window["head1_label"].grid(row=0, column=1, padx=5, pady=5)
+
+        self.current_rendered_window["pos1_label"] = Label(self.current_rendered_window["toks1_frame"],
+                                                           text="POS", font=("Helvetica", 16))
+        self.current_rendered_window["pos1_label"].grid(row=0, column=2, padx=5, pady=5)
+
+        self.current_rendered_window["feats1_label"] = Label(self.current_rendered_window["toks1_frame"],
+                                                             text="Features", font=("Helvetica", 16))
+        self.current_rendered_window["feats1_label"].grid(row=0, column=3, padx=5, pady=5)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 1)
         self.cur_toks1 = cur_toks1
@@ -444,6 +455,9 @@ class UI:
             token = pos_token[0]
             tag = pos_token[1]
             head = pos_token[2]
+            feats = pos_token[3]
+            if feats:
+                feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
             finds = " ".join(gloss_emphs)
             finds_list = " ".join(finds.split("\n")).split(" ")
             if token in finds_list and tag == "<unknown>":
@@ -489,37 +503,77 @@ class UI:
                     head = f"{head_candidate[1]} *"
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
-            self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
+            self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='ne')
+
+            self.current_rendered_window[f"head_word1.{i}"] = Text(self.current_rendered_window["toks1_frame"],
+                                                                   height=1, width=12, font=("Helvetica", 12))
+            self.current_rendered_window[f"head_word1.{i}"].insert(1.0, head)
+            self.current_rendered_window[f"head_word1.{i}"].grid(row=i + 1, column=1, padx=5, pady=5, sticky='nw')
 
             self.current_rendered_window[f"type1_pos{i}"] = StringVar()
             self.current_rendered_window[f"type1_pos{i}"].set(tag)
             self.current_rendered_window[f"pos_drop1.{i}"] = OptionMenu(self.current_rendered_window["toks1_frame"],
                                                                         self.current_rendered_window[f"type1_pos{i}"],
                                                                         *self.pos_tags)
-            self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=1, sticky='w')
+            self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=2, sticky='ne')
 
-            self.current_rendered_window[f"head_word1.{i}"] = Text(self.current_rendered_window["toks1_frame"],
-                                                                   height=1, width=12, font=("Helvetica", 12))
-            self.current_rendered_window[f"head_word1.{i}"].insert(1.0, head)
-            self.current_rendered_window[f"head_word1.{i}"].grid(row=i + 1, column=2, sticky='w')
+            if tag == "ADP":
+                possible_feats = self.adp_feats
+            else:
+                possible_feats = dict()
+
+            self.current_rendered_window[f"feats1_frame_{i}"] = Frame(self.current_rendered_window["toks1_frame"])
+            self.current_rendered_window[f"feats1_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
+            self.current_rendered_window[f"feats1_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
+
+            for j, feat_type in enumerate(possible_feats):
+                feat_vals = possible_feats.get(feat_type)
+                if feats:
+                    if feats.get(feat_type):
+                        set_val = feats.get(feat_type)
+                    else:
+                        set_val = "N/A"
+                else:
+                    set_val = "N/A"
+                if set_val != "N/A" and set_val not in feat_vals:
+                    raise RuntimeError(f"Unexpected feature value pre-set: "
+                                       f"{feat_type}={set_val} for {tag} in {feat_vals}")
+
+                self.current_rendered_window[f"feats1.{i}_label{j}"] = Label(
+                    self.current_rendered_window[f"feats1_frame_{i}"], text=feat_type, font=("Helvetica", 10)
+                )
+                self.current_rendered_window[f"feats1.{i}_label{j}"].grid(row=j, column=0, sticky='w')
+
+                self.current_rendered_window[f"type1_feats{i}.{j}"] = StringVar()
+                self.current_rendered_window[f"type1_feats{i}.{j}"].set(set_val)
+                self.current_rendered_window[f"feats_drop1.{i}.{j}"] = OptionMenu(
+                    self.current_rendered_window[f"feats1_frame_{i}"],
+                    self.current_rendered_window[f"type1_feats{i}.{j}"],
+                    *feat_vals
+                )
+                self.current_rendered_window[f"feats_drop1.{i}.{j}"].grid(row=j, column=1, sticky='w')
 
             self.current_rendered_window[f"suggest_head1.{i}"] = Button(self.current_rendered_window["toks1_frame"],
                                                                         text=" ? ",
                                                                         command=lambda but=i: self.suggest_head_1(but))
-            self.current_rendered_window[f"suggest_head1.{i}"].grid(row=i + 1, column=3, padx=5, pady=5)
+            self.current_rendered_window[f"suggest_head1.{i}"].grid(row=i + 1, column=4, padx=5, pady=5, sticky='n')
 
         # Create lables for the tokens, POS tags and headwords (style 2)
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Tokens (2)", font=("Helvetica", 16))
         self.current_rendered_window["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
 
-        self.current_rendered_window["pos2_label"] = Label(self.current_rendered_window["toks2_frame"],
-                                                           text="POS", font=("Helvetica", 16))
-        self.current_rendered_window["pos2_label"].grid(row=0, column=1, padx=5, pady=5)
-
         self.current_rendered_window["head2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Headword", font=("Helvetica", 16))
-        self.current_rendered_window["head2_label"].grid(row=0, column=2, padx=5, pady=5)
+        self.current_rendered_window["head2_label"].grid(row=0, column=1, padx=5, pady=5)
+
+        self.current_rendered_window["pos2_label"] = Label(self.current_rendered_window["toks2_frame"],
+                                                           text="POS", font=("Helvetica", 16))
+        self.current_rendered_window["pos2_label"].grid(row=0, column=2, padx=5, pady=5)
+
+        self.current_rendered_window["feats2_label"] = Label(self.current_rendered_window["toks2_frame"],
+                                                            text="Features", font=("Helvetica", 16))
+        self.current_rendered_window["feats2_label"].grid(row=0, column=3, padx=5, pady=5)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 2)
         self.cur_toks2 = cur_toks2
@@ -528,6 +582,9 @@ class UI:
             token = pos_token[0]
             tag = pos_token[1]
             head = pos_token[2]
+            feats = pos_token[3]
+            if feats:
+                feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
             finds = " ".join(gloss_emphs)
             finds_list = " ".join(finds.split("\n")).split(" ")
             if token in finds_list and tag == "<unknown>":
@@ -573,24 +630,60 @@ class UI:
                     head = f"{head_candidate[1]} *"
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
-            self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='e')
+            self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='ne')
+
+            self.current_rendered_window[f"head_word2.{i}"] = Text(self.current_rendered_window["toks2_frame"],
+                                                                   height=1, width=12, font=("Helvetica", 12))
+            self.current_rendered_window[f"head_word2.{i}"].insert(1.0, head)
+            self.current_rendered_window[f"head_word2.{i}"].grid(row=i + 1, column=1, padx=5, pady=5, sticky='nw')
 
             self.current_rendered_window[f"type2_pos{i}"] = StringVar()
             self.current_rendered_window[f"type2_pos{i}"].set(tag)
             self.current_rendered_window[f"pos_drop2.{i}"] = OptionMenu(self.current_rendered_window["toks2_frame"],
                                                                         self.current_rendered_window[f"type2_pos{i}"],
                                                                         *self.pos_tags)
-            self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=1, sticky='w')
+            self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=2, sticky='ne')
 
-            self.current_rendered_window[f"head_word2.{i}"] = Text(self.current_rendered_window["toks2_frame"],
-                                                                   height=1, width=12, font=("Helvetica", 12))
-            self.current_rendered_window[f"head_word2.{i}"].insert(1.0, head)
-            self.current_rendered_window[f"head_word2.{i}"].grid(row=i + 1, column=2, sticky='w')
+            if tag == "ADP":
+                possible_feats = self.adp_feats
+            else:
+                possible_feats = dict()
+
+            self.current_rendered_window[f"feats2_frame_{i}"] = Frame(self.current_rendered_window["toks2_frame"])
+            self.current_rendered_window[f"feats2_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
+            self.current_rendered_window[f"feats2_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
+
+            for j, feat_type in enumerate(possible_feats):
+                feat_vals = possible_feats.get(feat_type)
+                if feats:
+                    if feats.get(feat_type):
+                        set_val = feats.get(feat_type)
+                    else:
+                        set_val = "N/A"
+                else:
+                    set_val = "N/A"
+                if set_val != "N/A" and set_val not in feat_vals:
+                    raise RuntimeError(f"Unexpected feature value pre-set: "
+                                       f"{feat_type}={set_val} for {tag} in {feat_vals}")
+
+                self.current_rendered_window[f"feats2.{i}_label{j}"] = Label(
+                    self.current_rendered_window[f"feats2_frame_{i}"], text=feat_type, font=("Helvetica", 10)
+                )
+                self.current_rendered_window[f"feats2.{i}_label{j}"].grid(row=j, column=0, sticky='w')
+
+                self.current_rendered_window[f"type2_feats{i}.{j}"] = StringVar()
+                self.current_rendered_window[f"type2_feats{i}.{j}"].set(set_val)
+                self.current_rendered_window[f"feats_drop2.{i}.{j}"] = OptionMenu(
+                    self.current_rendered_window[f"feats2_frame_{i}"],
+                    self.current_rendered_window[f"type2_feats{i}.{j}"],
+                    *feat_vals
+                )
+                self.current_rendered_window[f"feats_drop2.{i}.{j}"].grid(row=j, column=1, sticky='w')
 
             self.current_rendered_window[f"suggest_head2.{i}"] = Button(self.current_rendered_window["toks2_frame"],
                                                                         text=" ? ",
                                                                         command=lambda but=i: self.suggest_head_2(but))
-            self.current_rendered_window[f"suggest_head2.{i}"].grid(row=i + 1, column=3, padx=5, pady=5)
+            self.current_rendered_window[f"suggest_head2.{i}"].grid(row=i + 1, column=4, padx=5, pady=5, sticky='n')
 
         # Display possibly matching headwords' list if one of the headword-search buttons has been pressed (lexicon 1)
         if self.lex1_toks:
@@ -868,32 +961,70 @@ class UI:
         string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
         tokens_1 = self.cur_toks1
         updated_pos1 = [self.current_rendered_window[f"type1_pos{i}"].get() for i in range(len(tokens_1))]
+        updated_feats1 = list()
+        for i, pos_check in enumerate(updated_pos1):
+            if pos_check[:3] == "ADP":
+                found_feats = list()
+                for j, feat_key in enumerate(self.adp_feats):
+                    feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                    if feat_val != "N/A":
+                        found_feats.append(f"{feat_key}={feat_val}")
+                if found_feats:
+                    found_feats = "|".join(found_feats)
+                    updated_feats1.append(found_feats)
+                else:
+                    updated_feats1.append(None)
+            else:
+                updated_feats1.append(None)
         updated_head1 = [self.current_rendered_window[f"head_word1.{i}"].get(1.0, END) for i in range(len(tokens_1))]
-        if len(tokens_1) != len(updated_pos1):
+        if len(tokens_1) != len(updated_pos1)\
+                or len(tokens_1) != len(updated_feats1)\
+                or len(tokens_1) != len(updated_feats1):
             raise RuntimeError("Different counts found for tokens before and after POS-tagging")
         if [i[1] for i in tokens_1] != updated_pos1:
-            tokens_1 = [[i[0], j, i[2]] for i, j in zip(tokens_1, updated_pos1)]
+            tokens_1 = [[i[0], j, i[2], i[3]] for i, j in zip(tokens_1, updated_pos1)]
         if [i[2] for i in tokens_1] != updated_head1:
-            tokens_1 = [[i[0], i[1], j.strip()] for i, j in zip(tokens_1, updated_head1)]
+            tokens_1 = [[i[0], i[1], j.strip(), i[3]] for i, j in zip(tokens_1, updated_head1)]
+        if [i[3] for i in tokens_1] != updated_feats1:
+            tokens_1 = [[i[0], i[1], i[2], j] for i, j in zip(tokens_1, updated_feats1)]
 
         string_2 = self.current_rendered_window["tokenise_text_2"].get(1.0, END)
         tokens_2 = self.cur_toks2
         updated_pos2 = [self.current_rendered_window[f"type2_pos{i}"].get() for i in range(len(tokens_2))]
+        updated_feats2 = list()
+        for i, pos_check in enumerate(updated_pos2):
+            if pos_check[:3] == "ADP":
+                found_feats = list()
+                for j, feat_key in enumerate(self.adp_feats):
+                    feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                    if feat_val != "N/A":
+                        found_feats.append(f"{feat_key}={feat_val}")
+                if found_feats:
+                    found_feats = "|".join(found_feats)
+                    updated_feats2.append(found_feats)
+                else:
+                    updated_feats2.append(None)
+            else:
+                updated_feats2.append(None)
         updated_head2 = [self.current_rendered_window[f"head_word2.{i}"].get(1.0, END) for i in range(len(tokens_2))]
-        if len(tokens_2) != len(updated_pos2):
+        if len(tokens_2) != len(updated_pos2)\
+                or len(tokens_2) != len(updated_feats2)\
+                or len(tokens_2) != len(updated_feats2):
             raise RuntimeError("Different counts found for tokens before and after POS-tagging")
         if [i[1] for i in tokens_2] != updated_pos2:
-            tokens_2 = [[i[0], j, i[2]] for i, j in zip(tokens_2, updated_pos2)]
+            tokens_2 = [[i[0], j, i[2], i[3]] for i, j in zip(tokens_2, updated_pos2)]
         if [i[2] for i in tokens_2] != updated_head2:
-            tokens_2 = [[i[0], i[1], j.strip()] for i, j in zip(tokens_2, updated_head2)]
+            tokens_2 = [[i[0], i[1], j.strip(), i[3]] for i, j in zip(tokens_2, updated_head2)]
+        if [i[3] for i in tokens_2] != updated_feats2:
+            tokens_2 = [[i[0], i[1], i[2], j] for i, j in zip(tokens_2, updated_feats2)]
 
-        tokens_1 = [i if i[1:] not in [
+        tokens_1 = [i if i[1:3] not in [
             ['<Greek>', 'Latin *'], ['<Greek>', '<unknown>']
-        ] else [i[0], i[1], 'Greek *'] for i in tokens_1]
+        ] else [i[0], i[1], 'Greek *', i[3]] for i in tokens_1]
 
-        tokens_2 = [i if i[1:] not in [
+        tokens_2 = [i if i[1:3] not in [
             ['<Greek>', 'Latin *'], ['<Greek>', '<unknown>']
-        ] else [i[0], i[1], 'Greek *'] for i in tokens_2]
+        ] else [i[0], i[1], 'Greek *', i[3]] for i in tokens_2]
 
         self.selected_gloss_info = self.create_gloss_info(
             selected_epistle=self.current_rendered_window["current_selected_epistle"].get(),
@@ -931,14 +1062,14 @@ class UI:
                 ['<unknown>', '<unknown>']
             ]
             # if none of the headwords or POS tags have been assigned to tokens in token-list 2
-            if [i[1:] for i in tokens_2] == [i[1:] if i[1:] in neutral_posheads else ["?", "?"] for i in tokens_2]:
+            if [i[1:3] for i in tokens_2] == [i[1:3] if i[1:3] in neutral_posheads else ["?", "?"] for i in tokens_2]:
                 string_2 = "".join([i for i in string_1])
                 tokens_2 = [i for i in tokens_1]
 
         if len(tokens_1) == len(tokens_2) and [x[0] for x in tokens_1] == [y[0] for y in tokens_2]:
-            tokens_2 = [i if (i[1:] != ['<unknown>', '<unknown>'] and j[1:] == ['<unknown>', '<unknown>'])
+            tokens_2 = [i if (i[1:3] != ['<unknown>', '<unknown>'] and j[1:3] == ['<unknown>', '<unknown>'])
                         else j for i, j in zip(tokens_1, tokens_2)]
-            tokens_1 = [i if (i[1:] != ['<unknown>', '<unknown>'] and j[1:] == ['<unknown>', '<unknown>'])
+            tokens_1 = [i if (i[1:3] != ['<unknown>', '<unknown>'] and j[1:3] == ['<unknown>', '<unknown>'])
                         else j for i, j in zip(tokens_2, tokens_1)]
         else:
             used_y_index = list()
@@ -946,15 +1077,15 @@ class UI:
             for x, x_tok in enumerate(tokens_1):
                 for y, y_tok in enumerate(tokens_2):
                     if x_tok != y_tok and x_tok[0] == y_tok[0] and (
-                            x_tok[1:] == ['<unknown>', '<unknown>'] or y_tok[1:] == ['<unknown>', '<unknown>']
+                            x_tok[1:3] == ['<unknown>', '<unknown>'] or y_tok[1:3] == ['<unknown>', '<unknown>']
                     ):
                         if y not in used_y_index and (len(match_index) == 0 or y > match_index[-1][1]):
                             used_y_index.append(y)
-                            if x_tok[1:] == ['<unknown>', '<unknown>'] or y_tok[1:] == ['<unknown>', '<unknown>']:
+                            if x_tok[1:3] == ['<unknown>', '<unknown>'] or y_tok[1:3] == ['<unknown>', '<unknown>']:
                                 match_index.append([x, y])
                                 break
             if match_index:
-                match_index = [[i, tokens_2[j]] if tokens_2[j][1:] != ['<unknown>', '<unknown>'] else [tokens_1[i], j]
+                match_index = [[i, tokens_2[j]] if tokens_2[j][1:3] != ['<unknown>', '<unknown>'] else [tokens_1[i], j]
                                for i, j in match_index]
                 for match in match_index:
                     if isinstance(match[0], int):
@@ -986,10 +1117,10 @@ class UI:
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         current_folio = self.current_rendered_window["current_selected_folio"].get()
         current_epistle = self.current_rendered_window["current_selected_epistle"].get()
-        tokens_1 = [[i, j, ""] if k in ["Latin *", "Greek *"] else [i, j, k] for i, j, k in self.cur_toks1]
-        tokens_1 = [[i, j, "".join(k.split(" *"))] if " *" in k else [i, j, k] for i, j, k in tokens_1]
-        tokens_2 = [[i, j, ""] if k in ["Latin *", "Greek *"] else [i, j, k] for i, j, k in self.cur_toks2]
-        tokens_2 = [[i, j, "".join(k.split(" *"))] if " *" in k else [i, j, k] for i, j, k in tokens_2]
+        tokens_1 = [[i, j, "", l] if k in ["Latin *", "Greek *"] else [i, j, k, l] for i, j, k, l in self.cur_toks1]
+        tokens_1 = [[i, j, "".join(k.split(" *")), l] if " *" in k else [i, j, k, l] for i, j, k, l in tokens_1]
+        tokens_2 = [[i, j, "", l] if k in ["Latin *", "Greek *"] else [i, j, k, l] for i, j, k, l in self.cur_toks2]
+        tokens_2 = [[i, j, "".join(k.split(" *")), l] if " *" in k else [i, j, k, l] for i, j, k, l in tokens_2]
 
         for epistle in main_file:
             ep_name = epistle['epistle']
@@ -1013,6 +1144,9 @@ class UI:
             tok1_head = tok1[2]
             if tok1_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok1_head[-2:] != " *":
                 tok1_form = tok1[0]
+                tok1_feats = tok1[3]
+                if tok1_feats:
+                    tok1_feats = [{i[0]: i[1] for i in [j.split("=") for j in tok1_feats.split("|")]}]
                 if tok1_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file1]
                     if tok1_pos in all_filepos:
@@ -1021,12 +1155,35 @@ class UI:
                         if tok1_head in all_filelemmata:
                             file_tok_data = file_pos_data[all_filelemmata.index(tok1_head)].get("tokens")
                             all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
-                            if tok1_form not in all_filetoks:
+                            if tok1_form in all_filetoks:
+                                file_featsets_data = file_tok_data[all_filetoks.index(tok1_form)].get("feature_sets")
+                                all_feats = [level_4.get("features") for level_4 in file_featsets_data]
+                                if tok1_feats not in all_feats:
+                                    if tok1_feats:
+                                        insert = {'feature_set': len(all_feats) + 1, 'features': tok1_feats}
+                                        file_featsets_data = file_featsets_data + [insert]
+                                    else:
+                                        insert = {'feature_set': 1, 'features': tok1_feats}
+                                        for i in file_featsets_data:
+                                            i['feature_set'] = i.get('feature_set') + 1
+                                        file_featsets_data = [insert] + file_featsets_data
+                                    file_tok_data[all_filetoks.index(tok1_form)] = {
+                                        'token': tok1_form, 'feature_sets': file_featsets_data
+                                    }
+                                    file_pos_data[all_filelemmata.index(tok1_head)] = {
+                                        'lemma': tok1_head, 'tokens': file_tok_data
+                                    }
+                                    working_file1[all_filepos.index(tok1_pos)] = {
+                                        'part_of_speech': tok1_pos, 'lemmata': file_pos_data
+                                    }
+                            else:
                                 filetoks_plus = sorted(list(set(
                                     [level_3.get("token") for level_3 in file_tok_data] + [tok1_form]
                                 )))
                                 correct_position = filetoks_plus.index(tok1_form)
-                                insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                                insert = {'token': tok1_form, 'feature_sets': [
+                                    {'feature_set': 1, 'features': tok1_feats}
+                                ]}
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
@@ -1041,7 +1198,7 @@ class UI:
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok1_head]
                             )))
                             correct_position = filelemmata_plus.index(tok1_head)
-                            insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                            insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': tok1_feats}]}
                             insert = {'lemma': tok1_head, 'tokens': [insert]}
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
@@ -1054,7 +1211,7 @@ class UI:
                             [level_1.get("part_of_speech") for level_1 in working_file1] + [tok1_pos]
                         )))
                         correct_position = filepos_plus.index(tok1_pos)
-                        insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                        insert = {'token': tok1_form, 'feature_sets': [{'feature_set': 1, 'features': tok1_feats}]}
                         insert = {'lemma': tok1_head, 'tokens': [insert]}
                         insert = {'part_of_speech': tok1_pos, 'lemmata': [insert]}
                         working_file1 = working_file1[:correct_position] + [insert] + working_file1[correct_position:]
@@ -1067,6 +1224,9 @@ class UI:
             tok2_head = tok2[2]
             if tok2_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok2_head[-2:] != " *":
                 tok2_form = tok2[0]
+                tok2_feats = tok2[3]
+                if tok2_feats:
+                    tok2_feats = [{i[0]: i[1] for i in [j.split("=") for j in tok2_feats.split("|")]}]
                 if tok2_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file2]
                     if tok2_pos in all_filepos:
@@ -1075,12 +1235,35 @@ class UI:
                         if tok2_head in all_filelemmata:
                             file_tok_data = file_pos_data[all_filelemmata.index(tok2_head)].get("tokens")
                             all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
-                            if tok2_form not in all_filetoks:
+                            if tok2_form in all_filetoks:
+                                file_featsets_data = file_tok_data[all_filetoks.index(tok2_form)].get("feature_sets")
+                                all_feats = [level_4.get("features") for level_4 in file_featsets_data]
+                                if tok2_feats not in all_feats:
+                                    if tok2_feats:
+                                        insert = {'feature_set': len(all_feats) + 1, 'features': tok2_feats}
+                                        file_featsets_data = file_featsets_data + [insert]
+                                    else:
+                                        insert = {'feature_set': 1, 'features': tok2_feats}
+                                        for i in file_featsets_data:
+                                            i['feature_set'] = i.get('feature_set') + 1
+                                        file_featsets_data = [insert] + file_featsets_data
+                                    file_tok_data[all_filetoks.index(tok2_form)] = {
+                                        'token': tok2_form, 'feature_sets': file_featsets_data
+                                    }
+                                    file_pos_data[all_filelemmata.index(tok2_head)] = {
+                                        'lemma': tok2_head, 'tokens': file_tok_data
+                                    }
+                                    working_file1[all_filepos.index(tok2_pos)] = {
+                                        'part_of_speech': tok2_pos, 'lemmata': file_pos_data
+                                    }
+                            else:
                                 filetoks_plus = sorted(list(set(
                                     [level_3.get("token") for level_3 in file_tok_data] + [tok2_form]
                                 )))
                                 correct_position = filetoks_plus.index(tok2_form)
-                                insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                                insert = {'token': tok2_form, 'feature_sets': [
+                                    {'feature_set': 1, 'features': tok2_feats}
+                                ]}
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
@@ -1095,7 +1278,7 @@ class UI:
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok2_head]
                             )))
                             correct_position = filelemmata_plus.index(tok2_head)
-                            insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                            insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': tok2_feats}]}
                             insert = {'lemma': tok2_head, 'tokens': [insert]}
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
@@ -1108,7 +1291,7 @@ class UI:
                             [level_1.get("part_of_speech") for level_1 in working_file2] + [tok2_pos]
                         )))
                         correct_position = filepos_plus.index(tok2_pos)
-                        insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                        insert = {'token': tok2_form, 'feature_sets': [{'feature_set': 1, 'features': tok2_feats}]}
                         insert = {'lemma': tok2_head, 'tokens': [insert]}
                         insert = {'part_of_speech': tok2_pos, 'lemmata': [insert]}
                         working_file2 = working_file2[:correct_position] + [insert] + working_file2[correct_position:]
@@ -1537,14 +1720,14 @@ def refresh_tokens(string, tokens):
         string = "peccat :".join(string.split("peccat:")).strip()
     if "non:" in string:
         string = "non :".join(string.split("non:")).strip()
-    test_against = [[i, "<unknown>", "<unknown>"] for i in string.split(" ")]
+    test_against = [[i, "<unknown>", "<unknown>", None] for i in string.split(" ")]
     if tokens == test_against:
         return tokens
     else:
         for i, tok_pos in enumerate(tokens):
             token = tok_pos[0]
-            if [token, "<unknown>", "<unknown>"] in test_against:
-                match_place = test_against.index([token, "<unknown>", "<unknown>"])
+            if [token, "<unknown>", "<unknown>", None] in test_against:
+                match_place = test_against.index([token, "<unknown>", "<unknown>", None])
                 removal = test_against[:match_place + 1]
                 if len(removal) > 1:
                     return_tokens = return_tokens + removal[:-1]
@@ -1573,12 +1756,16 @@ def update_empty_toks(file_name, json_doc):
                 gloss = gloss_data['glossFullTags']
                 tok_1 = gloss_data['glossTokens1']
                 tok_2 = gloss_data['glossTokens2']
-                token_list = [[i, "<unknown>", "<unknown>"] if i != ".i."
-                              else [i, "ADV", ".i."] for i in clear_tags(gloss).split(" ")]
-                token_list = [[i, "ADV", "⁊rl."] if i in ["rl.", "⁊rl."] else [i, j, k] for i, j, k in token_list]
-                token_list = [[i, "<Latin CCONJ>", "et"] if i in ["et"] else [i, j, k] for i, j, k in token_list]
-                token_list = [[i, "CCONJ", "ocus"] if i in ["⁊"] else [i, j, k] for i, j, k in token_list]
-                token_list = [[i, "CCONJ", "nó"] if i in ["ɫ", "ɫ."] else [i, j, k] for i, j, k in token_list]
+                token_list = [[i, "<unknown>", "<unknown>", None] if i != ".i."
+                              else [i, "ADV", ".i.", "Abbr=Yes"] for i in clear_tags(gloss).split(" ")]
+                token_list = [[i, "ADV", "⁊rl.", "Abbr=Yes"] if i in ["rl.", "⁊rl."]
+                              else [i, j, k, l] for i, j, k, l in token_list]
+                token_list = [[i, "<Latin CCONJ>", "et", "Foreign=Yes"] if i in ["et"]
+                              else [i, j, k, l] for i, j, k, l in token_list]
+                token_list = [[i, "CCONJ", "ocus", None] if i in ["⁊"]
+                              else [i, j, k, l] for i, j, k, l in token_list]
+                token_list = [[i, "CCONJ", "nó", None] if i in ["ɫ", "ɫ."]
+                              else [i, j, k, l] for i, j, k, l in token_list]
                 if not tok_1 and not tok_2:
                     tok_1 = token_list
                     tok_2 = token_list
@@ -1664,19 +1851,28 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
         for folio_data in folios:
             glosses = folio_data['glosses']
             for gloss_data in glosses:
-
                 tokens = gloss_data[f"glossTokens{tok_style}"]
-                tokens = [(i[1], i[2], i[0]) if [i[1], i[2]] not in [
-                    ['<unknown>', '<unknown>'],
-                    ['<Latin>', ''],
-                    ['<Latin CCONJ>', 'et'],
-                    ['<Greek>', '']
-                ] else () for i in tokens]
+                try:
+                    tokens = [(i[1], i[2], i[0], i[3]) if [i[1], i[2]] not in [
+                        ['<unknown>', '<unknown>'],
+                        ['<Latin>', ''],
+                        ['<Latin CCONJ>', 'et'],
+                        ['<Greek>', '']
+                    ] else () for i in tokens]
+                except IndexError:
+                    tokens = [(i[1], i[2], i[0], None) if [i[1], i[2]] not in [
+                        ['<unknown>', '<unknown>'],
+                        ['<Latin>', ''],
+                        ['<Latin CCONJ>', 'et'],
+                        ['<Greek>', '']
+                    ] else () for i in tokens]
                 tokens = [i for i in tokens if i]
                 if tokens:
                     add_toks = add_toks + tokens
+    add_toks = [i if i[3] else (i[0], i[1], i[2], '') for i in add_toks]
     add_toks = sorted(list(set(add_toks)))
-    add_toks = [[i[0], i[1], i[2]] for i in add_toks]
+    add_toks = [i if i[3] != '' else (i[0], i[1], i[2], None) for i in add_toks]
+    add_toks = [[i[0], i[1], i[2], i[3]] for i in add_toks]
 
     json_file = json.loads(add_to_file)
     for tok in add_toks:
@@ -1684,6 +1880,9 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
         tok_head = tok[1]
         if tok_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok_head[-2:] != " *":
             tok_form = tok[2]
+            tok_feats = tok[3]
+            if tok_feats:
+                tok_feats = [{i[0]: i[1] for i in [j.split("=") for j in tok_feats.split("|")]}]
             all_filepos = [level_1.get("part_of_speech") for level_1 in json_file]
             if tok_pos in all_filepos:
                 file_pos_data = json_file[all_filepos.index(tok_pos)].get("lemmata")
@@ -1691,12 +1890,33 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
                 if tok_head in all_filelemmata:
                     file_tok_data = file_pos_data[all_filelemmata.index(tok_head)].get("tokens")
                     all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
-                    if tok_form not in all_filetoks:
+                    if tok_form in all_filetoks:
+                        file_featsets_data = file_tok_data[all_filetoks.index(tok_form)].get("feature_sets")
+                        all_feats = [level_4.get("features") for level_4 in file_featsets_data]
+                        if tok_feats not in all_feats:
+                            if tok_feats:
+                                insert = {'feature_set': len(all_feats) + 1, 'features': tok_feats}
+                                file_featsets_data = file_featsets_data + [insert]
+                            else:
+                                insert = {'feature_set': 1, 'features': tok_feats}
+                                for i in file_featsets_data:
+                                    i['feature_set'] = i.get('feature_set') + 1
+                                file_featsets_data = [insert] + file_featsets_data
+                            file_tok_data[all_filetoks.index(tok_form)] = {
+                                'token': tok_form, 'feature_sets': file_featsets_data
+                            }
+                            file_pos_data[all_filelemmata.index(tok_head)] = {
+                                'lemma': tok_head, 'tokens': file_tok_data
+                            }
+                            json_file[all_filepos.index(tok_pos)] = {
+                                'part_of_speech': tok_pos, 'lemmata': file_pos_data
+                            }
+                    else:
                         filetoks_plus = sorted(list(set(
                             [level_3.get("token") for level_3 in file_tok_data] + [tok_form]
                         )))
                         correct_position = filetoks_plus.index(tok_form)
-                        insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                        insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
                         file_tok_data = file_tok_data[:correct_position] + [
                             insert
                         ] + file_tok_data[correct_position:]
@@ -1711,7 +1931,7 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
                         [level_2.get("lemma") for level_2 in file_pos_data] + [tok_head]
                     )))
                     correct_position = filelemmata_plus.index(tok_head)
-                    insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                    insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
                     insert = {'lemma': tok_head, 'tokens': [insert]}
                     file_pos_data = file_pos_data[:correct_position] + [
                         insert
@@ -1724,7 +1944,7 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
                     [level_1.get("part_of_speech") for level_1 in json_file] + [tok_pos]
                 )))
                 correct_position = filepos_plus.index(tok_pos)
-                insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': None}]}
+                insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
                 insert = {'lemma': tok_head, 'tokens': [insert]}
                 insert = {'part_of_speech': tok_pos, 'lemmata': [insert]}
                 json_file = json_file[:correct_position] + [insert] + json_file[correct_position:]
@@ -1733,7 +1953,8 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
 
 
 def update_base_file(base_file, file_dir):
-    """update any newNotes in the working manual tokenisation file that have been changed in the main text file"""
+    """update any data in the working manual tokenisation file that have been changed in the main text file
+       (currently newNotes and glossHand can be updated, and any newly included glosses can be added) """
     cur_dir = os.getcwd()
     os.chdir(file_dir)
     updated_text_file = combine_infolists("Wurzburg Glosses", 499, 712)
@@ -1767,6 +1988,35 @@ def update_base_file(base_file, file_dir):
                             glosshand = glosses[k].get('glossHand')
                             if upd_glosshand != glosshand:
                                 glosses[k]['glossHand'] = upd_glosshand
+
+                            type1_toks = glosses[k].get('glossTokens1')
+                            type1_toks = [tagged_tok + [None] if len(tagged_tok) == 3
+                                          else tagged_tok for tagged_tok in type1_toks]
+                            type1_toks = [[".i.", "ADV", ".i.", "Abbr=Yes"]
+                                          if [i, j, k, l] == [".i.", "ADV", ".i.", None]
+                                          else [i, j, k, l] for i, j, k, l in type1_toks]
+                            type1_toks = [[i, "ADV", "⁊rl.", "Abbr=Yes"]
+                                          if [j, k, l] == ["ADV", "⁊rl.", None]
+                                          else [i, j, k, l] for i, j, k, l in type1_toks]
+                            type1_toks = [["et", "<Latin CCONJ>", "et", "Foreign=Yes"]
+                                          if [i, j, k, l] == ["et", "<Latin CCONJ>", "et", None]
+                                          else [i, j, k, l] for i, j, k, l in type1_toks]
+                            glosses[k]['glossTokens1'] = type1_toks
+
+                            type2_toks = glosses[k].get('glossTokens2')
+                            type2_toks = [tagged_tok + [None] if len(tagged_tok) == 3
+                                          else tagged_tok for tagged_tok in type2_toks]
+                            type2_toks = [[".i.", "ADV", ".i.", "Abbr=Yes"]
+                                          if [i, j, k, l] == [".i.", "ADV", ".i.", None]
+                                          else [i, j, k, l] for i, j, k, l in type2_toks]
+                            type2_toks = [[i, "ADV", "⁊rl.", "Abbr=Yes"]
+                                          if [j, k, l] == ["ADV", "⁊rl.", None]
+                                          else [i, j, k, l] for i, j, k, l in type2_toks]
+                            type2_toks = [["et", "<Latin CCONJ>", "et", "Foreign=Yes"]
+                                          if [i, j, k, l] == ["et", "<Latin CCONJ>", "et", None]
+                                          else [i, j, k, l] for i, j, k, l in type2_toks]
+                            glosses[k]['glossTokens2'] = type2_toks
+
     update_json("Wb. Manual Tokenisation.json", base_file)
     return base_file
 
@@ -1822,7 +2072,7 @@ if __name__ == "__main__":
 
 
     # Create 2 JSON documents of OI Lexica in the Manual Tokenisation folder from the two Sg. CoNNL_U files,
-    # one for each tokenisation type, if they doesn't exist already, otherwise, update them if necessary
+    # one for each tokenisation type, if they don't exist already, otherwise, update them if necessary
 
     # Lexicon 1 = combined-tokens style
     dir_contents = os.listdir()
@@ -1875,7 +2125,7 @@ if __name__ == "__main__":
 
     original_lexica = [original_lexicon_1, original_lexicon_2]
 
-    # Create a working copy of each of the OI Lexica created above for use in the GUI, if they doesn't exist already
+    # Create a working copy of each of the OI Lexica created above for use in the GUI if they don't exist already exist
     # These will be updated with new tokens and POS from Wb. which will not be saved to in the originals above
 
     # Working Lexicon 1 = combined-tokens style
