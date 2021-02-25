@@ -34,7 +34,7 @@ class UI:
         self.adp_feats = {"AdpType": ["N/A", "Prep"],
                           "Case": ["N/A", "Acc", "Dat"],
                           "Definite": ["N/A", "Def", "Ind"],
-                          "Gender": ["N/A", "Masc", "Neut", "Masc,Neut", "Fem"],
+                          "Gender": ["N/A", "Masc,Neut", "Fem"],
                           "Number": ["N/A", "Sing",  "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
                           "PronType": ["N/A", "Art", "Prs"]}
@@ -48,7 +48,6 @@ class UI:
         self.open_glossid = self.open_folio + self.open_glossnum
         self.open_glossdata = select_glossnum(select_folcol(select_epistle(self.open_ep), self.open_folio),
                                               self.open_glossnum)
-        print(self.open_glossdata)
         self.open_hand = self.open_glossdata[0]
         self.open_gloss = self.open_glossdata[1]
         self.open_trans = self.open_glossdata[2]
