@@ -48,6 +48,7 @@ class UI:
         self.open_glossid = self.open_folio + self.open_glossnum
         self.open_glossdata = select_glossnum(select_folcol(select_epistle(self.open_ep), self.open_folio),
                                               self.open_glossnum)
+        print(self.open_glossdata)
         self.open_hand = self.open_glossdata[0]
         self.open_gloss = self.open_glossdata[1]
         self.open_trans = self.open_glossdata[2]
@@ -60,7 +61,7 @@ class UI:
         # Create the GUI
         self.root = Tk()
         self.root.title("Manual Tokenisation Window")
-        self.root.geometry("1200x850")
+        self.root.geometry("1400x850")
 
         self.render_gloss(
             self.root,
@@ -83,8 +84,11 @@ class UI:
         self.clear_lexica()
 
     def create_gloss_info(self, selected_epistle, selected_folio, selected_glossnum):
-        selected_glossdata = select_glossnum(select_folcol(select_epistle(selected_epistle),
-                                                           selected_folio), selected_glossnum)
+        selected_glossdata = select_glossnum(
+            select_folcol(
+                select_epistle(selected_epistle), selected_folio),
+            selected_glossnum
+        )
         return {
             "selected_epistle": selected_epistle,
             "selected_fols": show_folcols(select_epistle(selected_epistle)),
@@ -211,8 +215,12 @@ class UI:
             self.current_rendered_window["text_frame"].destroy()
             self.current_rendered_window["toks_frames"].destroy()
             self.current_rendered_window["toks1_frame"].destroy()
+            for i in range(self.featureframe1_count):
+                self.current_rendered_window[f"feats1_frame_{i}"].destroy()
             self.current_rendered_window["head_opts1_frame"].destroy()
             self.current_rendered_window["toks2_frame"].destroy()
+            for i in range(self.featureframe2_count):
+                self.current_rendered_window[f"feats2_frame_{i}"].destroy()
             self.current_rendered_window["head_opts2_frame"].destroy()
             self.current_rendered_window["buttons_frame"].destroy()
 
@@ -323,8 +331,13 @@ class UI:
         self.current_rendered_window["toks1_frame"].grid(row=0, column=0, padx=5, pady=5, sticky="NW")
         self.current_rendered_window["toks1_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
+        for i, _ in enumerate(cur_toks1):
+            self.current_rendered_window[f"feats1_frame_{i}"] = Frame(self.current_rendered_window["toks1_frame"])
+            self.current_rendered_window[f"feats1_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
+            self.current_rendered_window[f"feats1_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
+
         self.current_rendered_window["head_opts1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
-                                                                       padx=5, pady=5)
+                                                                      padx=5, pady=5)
         self.current_rendered_window["head_opts1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
         self.current_rendered_window["head_opts1_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
@@ -333,8 +346,13 @@ class UI:
         self.current_rendered_window["toks2_frame"].grid(row=0, column=2, padx=5, pady=5, sticky="NW")
         self.current_rendered_window["toks2_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
+        for i, _ in enumerate(cur_toks2):
+            self.current_rendered_window[f"feats2_frame_{i}"] = Frame(self.current_rendered_window["toks2_frame"])
+            self.current_rendered_window[f"feats2_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
+            self.current_rendered_window[f"feats2_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
+
         self.current_rendered_window["head_opts2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
-                                                                       padx=5, pady=5)
+                                                                      padx=5, pady=5)
         self.current_rendered_window["head_opts2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
         self.current_rendered_window["head_opts2_frame"].bind("<MouseWheel>", self.mouse_wheel)
 
@@ -348,33 +366,40 @@ class UI:
                                                              self.current_rendered_window["current_selected_epistle"],
                                                              *epistles, command=self.change_epistle)
         self.current_rendered_window["ep_drop"].grid(row=0, column=0)
+        self.current_rendered_window["ep_drop"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["fol_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
                                                               self.current_rendered_window["current_selected_folio"],
                                                               *cur_fols, command=self.change_folio)
         self.current_rendered_window["fol_drop"].grid(row=0, column=1)
+        self.current_rendered_window["fol_drop"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["gloss_drop"] = OptionMenu(self.current_rendered_window["options_frame"],
                                                                 self.current_rendered_window["current_selected_gloss"],
                                                                 *cur_glossnums, command=self.change_gloss)
         self.current_rendered_window["gloss_drop"].grid(row=0, column=2)
+        self.current_rendered_window["gloss_drop"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create GUI buttons
         self.current_rendered_window["back_button"] = Button(self.current_rendered_window["nav_buttons_frame"],
                                                              text="Back", command=self.last_gloss)
         self.current_rendered_window["back_button"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["back_button"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["next_button"] = Button(self.current_rendered_window["nav_buttons_frame"],
                                                              text="Next", command=self.next_gloss)
         self.current_rendered_window["next_button"].grid(row=0, column=1, padx=5, pady=5)
+        self.current_rendered_window["next_button"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["update_button"] = Button(self.current_rendered_window["buttons_frame"],
                                                                text="Update Tokens", command=self.update_tokens)
         self.current_rendered_window["update_button"].grid(row=0, column=0, padx=5, pady=5, sticky="w")
+        self.current_rendered_window["update_button"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["save_button"] = Button(self.current_rendered_window["buttons_frame"],
                                                              text="Save", command=self.save_tokens)
         self.current_rendered_window["save_button"].grid(row=1, column=0, padx=5, pady=5, sticky="w")
+        self.current_rendered_window["save_button"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create GUI text display boxes
         self.current_rendered_window["gloss_label"] = Label(self.current_rendered_window["text_frame"],
@@ -403,8 +428,10 @@ class UI:
         self.current_rendered_window["trans_text"].config(state=DISABLED)
 
         self.current_rendered_window["gloss_label"].pack(anchor='w')
+        self.current_rendered_window["gloss_label"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["gloss_text"].pack(pady=5, anchor='w')
         self.current_rendered_window["trans_label"].pack(anchor='w')
+        self.current_rendered_window["trans_label"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["trans_text"].pack(pady=5, anchor='w')
 
         # Create GUI text labels and editing boxes
@@ -427,29 +454,36 @@ class UI:
                                                                self.set_spacing(" ".join([i[0] for i in cur_toks2])))
 
         self.current_rendered_window["tokenise_label_1"].pack(anchor='w')
+        self.current_rendered_window["tokenise_label_1"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["tokenise_text_1"].pack(pady=5, anchor='w')
         self.current_rendered_window["tokenise_label_2"].pack(anchor='w')
+        self.current_rendered_window["tokenise_label_2"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["tokenise_text_2"].pack(pady=5, anchor='w')
 
         # Create lables for the tokens, POS tags and headwords (style 1)
         self.current_rendered_window["toks1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                             text="Tokens (1)", font=("Helvetica", 16))
         self.current_rendered_window["toks1_label"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["toks1_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["head1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                             text="Headword", font=("Helvetica", 16))
         self.current_rendered_window["head1_label"].grid(row=0, column=1, padx=5, pady=5)
+        self.current_rendered_window["head1_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["pos1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                            text="POS", font=("Helvetica", 16))
         self.current_rendered_window["pos1_label"].grid(row=0, column=2, padx=5, pady=5)
+        self.current_rendered_window["pos1_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["feats1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                              text="Features", font=("Helvetica", 16))
         self.current_rendered_window["feats1_label"].grid(row=0, column=3, padx=5, pady=5)
+        self.current_rendered_window["feats1_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 1)
         self.cur_toks1 = cur_toks1
+        self.featureframe1_count = 0
         for i, pos_token in enumerate(cur_toks1):
             lexicon1 = self.lexicon_1
             token = pos_token[0]
@@ -504,11 +538,13 @@ class UI:
             self.current_rendered_window[f"toks1_tok_{i}"] = Label(self.current_rendered_window["toks1_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks1_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='ne')
+            self.current_rendered_window[f"toks1_tok_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"head_word1.{i}"] = Text(self.current_rendered_window["toks1_frame"],
                                                                    height=1, width=12, font=("Helvetica", 12))
             self.current_rendered_window[f"head_word1.{i}"].insert(1.0, head)
             self.current_rendered_window[f"head_word1.{i}"].grid(row=i + 1, column=1, padx=5, pady=5, sticky='nw')
+            self.current_rendered_window[f"head_word1.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"type1_pos{i}"] = StringVar()
             self.current_rendered_window[f"type1_pos{i}"].set(tag)
@@ -516,15 +552,12 @@ class UI:
                                                                         self.current_rendered_window[f"type1_pos{i}"],
                                                                         *self.pos_tags)
             self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=2, sticky='ne')
+            self.current_rendered_window[f"pos_drop1.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             if tag == "ADP":
                 possible_feats = self.adp_feats
             else:
                 possible_feats = dict()
-
-            self.current_rendered_window[f"feats1_frame_{i}"] = Frame(self.current_rendered_window["toks1_frame"])
-            self.current_rendered_window[f"feats1_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
-            self.current_rendered_window[f"feats1_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             for j, feat_type in enumerate(possible_feats):
                 feat_vals = possible_feats.get(feat_type)
@@ -543,6 +576,7 @@ class UI:
                     self.current_rendered_window[f"feats1_frame_{i}"], text=feat_type, font=("Helvetica", 10)
                 )
                 self.current_rendered_window[f"feats1.{i}_label{j}"].grid(row=j, column=0, sticky='w')
+                self.current_rendered_window[f"feats1.{i}_label{j}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"type1_feats{i}.{j}"] = StringVar()
                 self.current_rendered_window[f"type1_feats{i}.{j}"].set(set_val)
@@ -552,31 +586,40 @@ class UI:
                     *feat_vals
                 )
                 self.current_rendered_window[f"feats_drop1.{i}.{j}"].grid(row=j, column=1, sticky='w')
+                self.current_rendered_window[f"feats_drop1.{i}.{j}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"suggest_head1.{i}"] = Button(self.current_rendered_window["toks1_frame"],
                                                                         text=" ? ",
                                                                         command=lambda but=i: self.suggest_head_1(but))
             self.current_rendered_window[f"suggest_head1.{i}"].grid(row=i + 1, column=4, padx=5, pady=5, sticky='n')
+            self.current_rendered_window[f"suggest_head1.{i}"].bind("<MouseWheel>", self.mouse_wheel)
+
+            self.featureframe1_count = i
 
         # Create lables for the tokens, POS tags and headwords (style 2)
         self.current_rendered_window["toks2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Tokens (2)", font=("Helvetica", 16))
         self.current_rendered_window["toks2_label"].grid(row=0, column=0, padx=5, pady=5)
+        self.current_rendered_window["toks2_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["head2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Headword", font=("Helvetica", 16))
         self.current_rendered_window["head2_label"].grid(row=0, column=1, padx=5, pady=5)
+        self.current_rendered_window["head2_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["pos2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                            text="POS", font=("Helvetica", 16))
         self.current_rendered_window["pos2_label"].grid(row=0, column=2, padx=5, pady=5)
+        self.current_rendered_window["pos2_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["feats2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Features", font=("Helvetica", 16))
         self.current_rendered_window["feats2_label"].grid(row=0, column=3, padx=5, pady=5)
+        self.current_rendered_window["feats2_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 2)
         self.cur_toks2 = cur_toks2
+        self.featureframe2_count = 0
         for i, pos_token in enumerate(cur_toks2):
             lexicon2 = self.lexicon_2
             token = pos_token[0]
@@ -631,11 +674,13 @@ class UI:
             self.current_rendered_window[f"toks2_tok_{i}"] = Label(self.current_rendered_window["toks2_frame"],
                                                                    text=token, font=("Helvetica", 12))
             self.current_rendered_window[f"toks2_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='ne')
+            self.current_rendered_window[f"toks2_tok_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"head_word2.{i}"] = Text(self.current_rendered_window["toks2_frame"],
                                                                    height=1, width=12, font=("Helvetica", 12))
             self.current_rendered_window[f"head_word2.{i}"].insert(1.0, head)
             self.current_rendered_window[f"head_word2.{i}"].grid(row=i + 1, column=1, padx=5, pady=5, sticky='nw')
+            self.current_rendered_window[f"head_word2.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"type2_pos{i}"] = StringVar()
             self.current_rendered_window[f"type2_pos{i}"].set(tag)
@@ -643,15 +688,12 @@ class UI:
                                                                         self.current_rendered_window[f"type2_pos{i}"],
                                                                         *self.pos_tags)
             self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=2, sticky='ne')
+            self.current_rendered_window[f"pos_drop2.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             if tag == "ADP":
                 possible_feats = self.adp_feats
             else:
                 possible_feats = dict()
-
-            self.current_rendered_window[f"feats2_frame_{i}"] = Frame(self.current_rendered_window["toks2_frame"])
-            self.current_rendered_window[f"feats2_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
-            self.current_rendered_window[f"feats2_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             for j, feat_type in enumerate(possible_feats):
                 feat_vals = possible_feats.get(feat_type)
@@ -670,6 +712,7 @@ class UI:
                     self.current_rendered_window[f"feats2_frame_{i}"], text=feat_type, font=("Helvetica", 10)
                 )
                 self.current_rendered_window[f"feats2.{i}_label{j}"].grid(row=j, column=0, sticky='w')
+                self.current_rendered_window[f"feats2.{i}_label{j}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"type2_feats{i}.{j}"] = StringVar()
                 self.current_rendered_window[f"type2_feats{i}.{j}"].set(set_val)
@@ -679,11 +722,15 @@ class UI:
                     *feat_vals
                 )
                 self.current_rendered_window[f"feats_drop2.{i}.{j}"].grid(row=j, column=1, sticky='w')
+                self.current_rendered_window[f"feats_drop2.{i}.{j}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"suggest_head2.{i}"] = Button(self.current_rendered_window["toks2_frame"],
                                                                         text=" ? ",
                                                                         command=lambda but=i: self.suggest_head_2(but))
             self.current_rendered_window[f"suggest_head2.{i}"].grid(row=i + 1, column=4, padx=5, pady=5, sticky='n')
+            self.current_rendered_window[f"suggest_head2.{i}"].bind("<MouseWheel>", self.mouse_wheel)
+
+            self.featureframe2_count = i
 
         # Display possibly matching headwords' list if one of the headword-search buttons has been pressed (lexicon 1)
         if self.lex1_toks:
@@ -728,41 +775,50 @@ class UI:
                     command=lambda head=option[1]: self.select_head_1(head, button_num)
                 )
                 self.current_rendered_window[f"tok_button{i}"].grid(row=2 + i, column=0, padx=5, pady=5, sticky="e")
+                self.current_rendered_window[f"tok_button{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"head{i}"] = Label(self.current_rendered_window["head_opts1_frame"],
                                                                  text=option[1], font=("Helvetica", 10))
                 self.current_rendered_window[f"head{i}"].grid(row=2 + i, column=1, padx=5, pady=5)
+                self.current_rendered_window[f"head{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"ed_dist{i}"] = Label(
                     self.current_rendered_window["head_opts1_frame"],
                     text=option[2], font=("Helvetica", 10))
                 self.current_rendered_window[f"ed_dist{i}"].grid(row=2 + i, column=2, padx=5, pady=5)
+                self.current_rendered_window[f"ed_dist{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"feat_str{i}"] = Label(
                     self.current_rendered_window["head_opts1_frame"],
                     text=features,
                     font=("Helvetica", 10), justify=LEFT)
                 self.current_rendered_window[f"feat_str{i}"].grid(row=2 + i, column=3, padx=5, pady=5, sticky="w")
+                self.current_rendered_window[f"feat_str{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["killme1"] = Button(self.current_rendered_window["head_opts1_frame"],
                                                              text=" X ", command=self.remove_head_options1)
             self.current_rendered_window["killme1"].grid(row=0, column=4, padx=5, pady=5, sticky="NE")
+            self.current_rendered_window["killme1"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["tok_label"] = Label(self.current_rendered_window["head_opts1_frame"],
                                                               text="Token", font=("Helvetica", 12))
             self.current_rendered_window["tok_label"].grid(row=1, column=0, padx=5, pady=5)
+            self.current_rendered_window["tok_label"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["head_label"] = Label(self.current_rendered_window["head_opts1_frame"],
                                                                text="Headword", font=("Helvetica", 12))
             self.current_rendered_window["head_label"].grid(row=1, column=1, padx=5, pady=5)
+            self.current_rendered_window["head_label"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["ed_label"] = Label(self.current_rendered_window["head_opts1_frame"],
                                                              text="Edit Dist.", font=("Helvetica", 12))
             self.current_rendered_window["ed_label"].grid(row=1, column=2, padx=5, pady=5)
+            self.current_rendered_window["ed_label"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["featsets_label"] = Label(self.current_rendered_window["head_opts1_frame"],
                                                                    text="Features", font=("Helvetica", 12))
             self.current_rendered_window["featsets_label"].grid(row=1, column=3, padx=5, pady=5)
+            self.current_rendered_window["featsets_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Display possibly matching headwords' list if one of the headword-search buttons has been pressed (lexicon 2)
         if self.lex2_toks:
@@ -807,52 +863,63 @@ class UI:
                     command=lambda head=option[1]: self.select_head_2(head, button_num)
                 )
                 self.current_rendered_window[f"tok_button{i}"].grid(row=2 + i, column=0, padx=5, pady=5, sticky="e")
+                self.current_rendered_window[f"tok_button{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"head{i}"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                                  text=option[1], font=("Helvetica", 10))
                 self.current_rendered_window[f"head{i}"].grid(row=2 + i, column=1, padx=5, pady=5)
+                self.current_rendered_window[f"head{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"ed_dist{i}"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                                     text=option[2], font=("Helvetica", 10))
                 self.current_rendered_window[f"ed_dist{i}"].grid(row=2 + i, column=2, padx=5, pady=5)
+                self.current_rendered_window[f"ed_dist{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
                 self.current_rendered_window[f"feat_str{i}"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                                      text=features,
                                                                      font=("Helvetica", 10), justify=LEFT)
                 self.current_rendered_window[f"feat_str{i}"].grid(row=2 + i, column=3, padx=5, pady=5, sticky="w")
+                self.current_rendered_window[f"feat_str{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["killme2"] = Button(self.current_rendered_window["head_opts2_frame"],
                                                              text=" X ", command=self.remove_head_options2)
             self.current_rendered_window["killme2"].grid(row=0, column=4, padx=5, pady=5, sticky="NE")
+            self.current_rendered_window["killme2"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["tok_label"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                               text="Similar Token", font=("Helvetica", 12))
             self.current_rendered_window["tok_label"].grid(row=1, column=0, padx=5, pady=5)
+            self.current_rendered_window["tok_label"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["head_label"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                                text="Headword", font=("Helvetica", 12))
             self.current_rendered_window["head_label"].grid(row=1, column=1, padx=5, pady=5)
+            self.current_rendered_window["head_label"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["ed_label"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                              text="Edit Dist.", font=("Helvetica", 12))
             self.current_rendered_window["ed_label"].grid(row=1, column=2, padx=5, pady=5)
+            self.current_rendered_window["ed_label"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window["featsets_label"] = Label(self.current_rendered_window["head_opts2_frame"],
                                                                    text="Features", font=("Helvetica", 12))
             self.current_rendered_window["featsets_label"].grid(row=1, column=3, padx=5, pady=5)
+            self.current_rendered_window["featsets_label"].bind("<MouseWheel>", self.mouse_wheel)
 
     def remove_head_options1(self):
         self.current_rendered_window["head_opts1_frame"].destroy()
         self.current_rendered_window["head_opts1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
-                                                                       padx=5, pady=5)
+                                                                      padx=5, pady=5)
         self.current_rendered_window["head_opts1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["head_opts1_frame"].bind("<MouseWheel>", self.mouse_wheel)
         self.lex1_toks = list()
 
     def remove_head_options2(self):
         self.current_rendered_window["head_opts2_frame"].destroy()
         self.current_rendered_window["head_opts2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
-                                                                       padx=5, pady=5)
+                                                                      padx=5, pady=5)
         self.current_rendered_window["head_opts2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["head_opts2_frame"].bind("<MouseWheel>", self.mouse_wheel)
         self.lex2_toks = list()
 
     def select_head_1(self, head, button_num):
@@ -870,6 +937,7 @@ class UI:
         self.current_rendered_window["head_opts1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                        padx=5, pady=5)
         self.current_rendered_window["head_opts1_frame"].grid(row=0, column=1, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["head_opts1_frame"].bind("<MouseWheel>", self.mouse_wheel)
         self.update_tokens()
 
         all_tokens = self.cur_toks1
@@ -916,6 +984,7 @@ class UI:
         self.current_rendered_window["head_opts2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
                                                                        padx=5, pady=5)
         self.current_rendered_window["head_opts2_frame"].grid(row=0, column=3, padx=5, pady=5, sticky="NW")
+        self.current_rendered_window["head_opts2_frame"].bind("<MouseWheel>", self.mouse_wheel)
         self.update_tokens()
 
         all_tokens = self.cur_toks2
