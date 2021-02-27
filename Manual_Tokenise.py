@@ -38,6 +38,13 @@ class UI:
                           "Number": ["N/A", "Sing",  "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
                           "PronType": ["N/A", "Art", "Prs"]}
+        self.pron_feats = {"Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
+                           "Number": ["N/A", "Sing", "Plur"],
+                           "Person": ["N/A", "1",  "2", "3"],
+                           "Polarity": ["N/A", "Neg"],
+                           "Poss": ["N/A", "Yes"],
+                           "PronType": ["N/A", "Ana", "Emp", "Ind", "Int", "Prs"],
+                           "Reflex": ["N/A", "Yes"]}
         self.max_linelen = 110
 
         self.open_ep = self.epistles[0]
@@ -555,6 +562,8 @@ class UI:
 
             if tag == "ADP":
                 possible_feats = self.adp_feats
+            elif tag == "PRON":
+                possible_feats = self.pron_feats
             else:
                 possible_feats = dict()
 
@@ -691,6 +700,8 @@ class UI:
 
             if tag == "ADP":
                 possible_feats = self.adp_feats
+            elif tag == "PRON":
+                possible_feats = self.pron_feats
             else:
                 possible_feats = dict()
 
@@ -1031,12 +1042,18 @@ class UI:
         updated_pos1 = [self.current_rendered_window[f"type1_pos{i}"].get() for i in range(len(tokens_1))]
         updated_feats1 = list()
         for i, pos_check in enumerate(updated_pos1):
-            if pos_check[:3] == "ADP":
+            if pos_check in ["ADP", "PRON"]:
                 found_feats = list()
-                for j, feat_key in enumerate(self.adp_feats):
-                    feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
-                    if feat_val != "N/A":
-                        found_feats.append(f"{feat_key}={feat_val}")
+                if pos_check == "ADP":
+                    for j, feat_key in enumerate(self.adp_feats):
+                        feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                        if feat_val != "N/A":
+                            found_feats.append(f"{feat_key}={feat_val}")
+                elif pos_check == "PRON":
+                    for j, feat_key in enumerate(self.pron_feats):
+                        feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                        if feat_val != "N/A":
+                            found_feats.append(f"{feat_key}={feat_val}")
                 if found_feats:
                     found_feats = "|".join(found_feats)
                     updated_feats1.append(found_feats)
@@ -1061,12 +1078,18 @@ class UI:
         updated_pos2 = [self.current_rendered_window[f"type2_pos{i}"].get() for i in range(len(tokens_2))]
         updated_feats2 = list()
         for i, pos_check in enumerate(updated_pos2):
-            if pos_check[:3] == "ADP":
+            if pos_check in ["ADP", "PRON"]:
                 found_feats = list()
-                for j, feat_key in enumerate(self.adp_feats):
-                    feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
-                    if feat_val != "N/A":
-                        found_feats.append(f"{feat_key}={feat_val}")
+                if pos_check == "ADP":
+                    for j, feat_key in enumerate(self.adp_feats):
+                        feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                        if feat_val != "N/A":
+                            found_feats.append(f"{feat_key}={feat_val}")
+                elif pos_check == "PRON":
+                    for j, feat_key in enumerate(self.pron_feats):
+                        feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                        if feat_val != "N/A":
+                            found_feats.append(f"{feat_key}={feat_val}")
                 if found_feats:
                     found_feats = "|".join(found_feats)
                     updated_feats2.append(found_feats)
