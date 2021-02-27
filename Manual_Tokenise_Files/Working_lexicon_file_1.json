@@ -18833,10 +18833,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -19282,6 +19278,18 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -20178,6 +20186,18 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -21899,10 +21919,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21991,7 +22007,12 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -24998,6 +25019,24 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "⁊rl.",
+                "tokens": [
+                    {
+                        "token": "rl.",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Abbr": "Yes"
+                                    }
+                                ]
                             }
                         ]
                     }

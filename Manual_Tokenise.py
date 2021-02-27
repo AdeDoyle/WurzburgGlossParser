@@ -1597,6 +1597,9 @@ class UI:
         return text
 
     def check_lex_origin(self, check_list, orig_lex):
+        """Look for a token (and its POS data) in an original (Sg. only) lexicon and return true if found"""
+
+        # check if the check-list for a token has features or none
         if len(check_list) == 4:
             check_pos_tag, check_lemma, check_token, check_feat_vals = check_list[0], check_list[1], \
                                                                        check_list[2], check_list[3]
@@ -1605,6 +1608,8 @@ class UI:
                                                                        check_list[2], False
         else:
             raise RuntimeError("Unexpected check-list length")
+
+        # look for the token in the original (Sg. only) lexicon for the token and return a true or false value
         check_found = False
         for pos_level in orig_lex:
             pos_tag = pos_level.get("part_of_speech")
@@ -1635,31 +1640,37 @@ class UI:
         return check_found
 
     def check_tokenised_file(self, checklist):
+        """Look for a token (and its POS data) the tokenised Wb. glosses file"""
         main_file = self.wb_data
         checknum = checklist[0]
         checklist = checklist[1:]
         all_toks = list()
         for epistle in main_file:
-            folios = epistle['folios']
+            folios = epistle.get('folios')
             for folio_data in folios:
-                glosses = folio_data['glosses']
+                glosses = folio_data.get('glosses')
                 for gloss_data in glosses:
-                    tokens = gloss_data[f"glossTokens{checknum}"]
-                    tokens = [(i[1], i[2], i[0]) if [i[1], i[2]] not in [
+                    tokens = gloss_data.get(f"glossTokens{checknum}")
+                    tokens = [(i[1], i[2], i[0], i[3]) if [i[1], i[2]] not in [
                         ['<unknown>', '<unknown>'],
                         ['<Latin>', ''],
                         ['<Latin CCONJ>', 'et'],
                         ['<Greek>', '']
-                    ] else [] for i in tokens]
+                    ] else () for i in tokens]
                     tokens = [i for i in tokens if i]
                     if tokens:
                         all_toks = all_toks + tokens
+        all_toks = [i if i[3] else (i[0], i[1], i[2], '') for i in all_toks]
         all_toks = sorted(list(set(all_toks)))
-        all_toks = [[i[0], i[1], i[2]] for i in all_toks]
+        all_toks = [i if i[3] != '' else (i[0], i[1], i[2], None) for i in all_toks]
+        all_toks = [[i[0], i[1], i[2], i[3]] for i in all_toks]
         results = [[i, True] if i in all_toks else [i, False] for i in checklist]
         return results
 
     def clear_lexica(self):
+        """Check each lexicon for entries which do not occur in either Wb. or Sg. and removes them from the lexicon"""
+
+        # create a list of tokens (and data) from a working lexicon which are not present in the original lexicon
         check_lex1 = list()
         for pos_level in self.lexicon_1:
             pos_tag = pos_level.get("part_of_speech")
@@ -1681,7 +1692,7 @@ class UI:
                             if not self.check_lex_origin(check, self.primary_lexicon_1):
                                 check_lex1.append(check)
                         else:
-                            check = [pos_tag, lemma, token]
+                            check = [pos_tag, lemma, token, None]
                             if not self.check_lex_origin(check, self.primary_lexicon_1):
                                 check_lex1.append(check)
 
@@ -1706,10 +1717,14 @@ class UI:
                             if not self.check_lex_origin(check, self.primary_lexicon_2):
                                 check_lex2.append(check)
                         else:
-                            check = [pos_tag, lemma, token]
+                            check = [pos_tag, lemma, token, None]
                             if not self.check_lex_origin(check, self.primary_lexicon_2):
                                 check_lex2.append(check)
 
+        # check that all tokens found in the working lexicon which are not present in the original lexicon occur in
+        # the manual tokenisation file for Wb.
+        # if they do not occur, delete the entry from the working lexicon
+        # reorder numbers for feature sets
         if check_lex1:
             check_lex1 = [1] + check_lex1
             checked_lex1 = self.check_tokenised_file(check_lex1)
@@ -1718,6 +1733,7 @@ class UI:
                 failed_pos = failed_input[0]
                 failed_head = failed_input[1]
                 failed_token = failed_input[2]
+                failed_feats = failed_input[3]
                 for pl, pos_level in enumerate(self.lexicon_1):
                     pos_tag = pos_level.get("part_of_speech")
                     if pos_tag == failed_pos:
@@ -1729,12 +1745,35 @@ class UI:
                                 for tl, tokens_level in enumerate(tokens_list):
                                     token = tokens_level.get("token")
                                     if token == failed_token:
-                                        del tokens_list[tl]
-                                        if not tokens_list:
-                                            del lemmata_list[ll]
-                                        if not lemmata_list:
-                                            del self.lexicon_1[pl]
-                                        break
+                                        feat_set_list = tokens_level.get("feature_sets")
+                                        for fl, feat_set_level in enumerate(feat_set_list):
+                                            features = feat_set_level.get("features")
+                                            if features:
+                                                features = "|".join(f"{i}={j}" for i, j in zip(
+                                                    [i for i in features[0]], [features[0].get(i) for i in features[0]]
+                                                ))
+                                            if features == failed_feats:
+                                                del feat_set_list[fl]
+                                                if not feat_set_list:
+                                                    del tokens_list[tl]
+                                                if not tokens_list:
+                                                    del lemmata_list[ll]
+                                                if not lemmata_list:
+                                                    del self.lexicon_1[pl]
+                                                break
+
+            # renumber all feature sets to ensure no numbers occur out of order
+            for pl, pos_level in enumerate(self.lexicon_1):
+                lemmata_list = pos_level.get("lemmata")
+                for ll, lemmata_level in enumerate(lemmata_list):
+                    tokens_list = lemmata_level.get("tokens")
+                    for tl, tokens_level in enumerate(tokens_list):
+                        feat_set_list = tokens_level.get("feature_sets")
+                        set_count = 1
+                        for fl, feat_set_level in enumerate(feat_set_list):
+                            feat_set_level["feature_set"] = set_count
+                            set_count += 1
+
             with open("Working_lexicon_file_1.json", 'w', encoding="utf-8") as workfile1:
                 json.dump(self.lexicon_1, workfile1, indent=4, ensure_ascii=False)
 
@@ -1746,6 +1785,7 @@ class UI:
                 failed_pos = failed_input[0]
                 failed_head = failed_input[1]
                 failed_token = failed_input[2]
+                failed_feats = failed_input[3]
                 for pl, pos_level in enumerate(self.lexicon_2):
                     pos_tag = pos_level.get("part_of_speech")
                     if pos_tag == failed_pos:
@@ -1757,12 +1797,34 @@ class UI:
                                 for tl, tokens_level in enumerate(tokens_list):
                                     token = tokens_level.get("token")
                                     if token == failed_token:
-                                        del tokens_list[tl]
-                                        if not tokens_list:
-                                            del lemmata_list[ll]
-                                        if not lemmata_list:
-                                            del self.lexicon_2[pl]
-                                        break
+                                        feat_set_list = tokens_level.get("feature_sets")
+                                        for fl, feat_set_level in enumerate(feat_set_list):
+                                            features = feat_set_level.get("features")
+                                            if features:
+                                                features = "|".join(f"{i}={j}" for i, j in zip(
+                                                    [i for i in features[0]], [features[0].get(i) for i in features[0]]
+                                                ))
+                                            if features == failed_feats:
+                                                del feat_set_list[fl]
+                                                if not feat_set_list:
+                                                    del tokens_list[tl]
+                                                if not tokens_list:
+                                                    del lemmata_list[ll]
+                                                if not lemmata_list:
+                                                    del self.lexicon_2[pl]
+                                                break
+
+            for pl, pos_level in enumerate(self.lexicon_2):
+                lemmata_list = pos_level.get("lemmata")
+                for ll, lemmata_level in enumerate(lemmata_list):
+                    tokens_list = lemmata_level.get("tokens")
+                    for tl, tokens_level in enumerate(tokens_list):
+                        feat_set_list = tokens_level.get("feature_sets")
+                        set_count = 1
+                        for fl, feat_set_level in enumerate(feat_set_list):
+                            feat_set_level["feature_set"] = set_count
+                            set_count += 1
+
             with open("Working_lexicon_file_2.json", 'w', encoding="utf-8") as workfile2:
                 json.dump(self.lexicon_2, workfile2, indent=4, ensure_ascii=False)
 
@@ -1913,6 +1975,10 @@ def select_glossnum(glosses, glossnum):
 
 def transfer_wb_toks(add_to_file, add_from_file, tok_style):
     """add tokens to a lexicon from a manually tokenised .json document if they are not already in it"""
+
+    # Collect a list of token-data from a .json document from which tokens are to be added to lexica (Wb.)
+    # If the token is Irish, add it to a list of Irish tokens
+    # Remove duplicates from that list and sort its contents
     add_toks = list()
     for epistle in add_from_file:
         folios = epistle['folios']
@@ -1920,20 +1986,12 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
             glosses = folio_data['glosses']
             for gloss_data in glosses:
                 tokens = gloss_data[f"glossTokens{tok_style}"]
-                try:
-                    tokens = [(i[1], i[2], i[0], i[3]) if [i[1], i[2]] not in [
-                        ['<unknown>', '<unknown>'],
-                        ['<Latin>', ''],
-                        ['<Latin CCONJ>', 'et'],
-                        ['<Greek>', '']
-                    ] else () for i in tokens]
-                except IndexError:
-                    tokens = [(i[1], i[2], i[0], None) if [i[1], i[2]] not in [
-                        ['<unknown>', '<unknown>'],
-                        ['<Latin>', ''],
-                        ['<Latin CCONJ>', 'et'],
-                        ['<Greek>', '']
-                    ] else () for i in tokens]
+                tokens = [(i[1], i[2], i[0], i[3]) if [i[1], i[2]] not in [
+                    ['<unknown>', '<unknown>'],
+                    ['<Latin>', ''],
+                    ['<Latin CCONJ>', 'et'],
+                    ['<Greek>', '']
+                ] else () for i in tokens]
                 tokens = [i for i in tokens if i]
                 if tokens:
                     add_toks = add_toks + tokens
@@ -1942,6 +2000,7 @@ def transfer_wb_toks(add_to_file, add_from_file, tok_style):
     add_toks = [i if i[3] != '' else (i[0], i[1], i[2], None) for i in add_toks]
     add_toks = [[i[0], i[1], i[2], i[3]] for i in add_toks]
 
+    # For each unique Irish token found in the add-from_file (Wb.) if it isn't already in the lexicon file, add it
     json_file = json.loads(add_to_file)
     for tok in add_toks:
         tok_pos = tok[0]
