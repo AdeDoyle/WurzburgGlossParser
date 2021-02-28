@@ -1071,7 +1071,9 @@ class UI:
         if [i[2] for i in tokens_1] != updated_head1:
             tokens_1 = [[i[0], i[1], j.strip(), i[3]] for i, j in zip(tokens_1, updated_head1)]
         if [i[3] for i in tokens_1] != updated_feats1:
-            tokens_1 = [[i[0], i[1], i[2], j] for i, j in zip(tokens_1, updated_feats1)]
+            tokens_1 = [[i[0], i[1], i[2], j] if (i[2] not in [".i.", "⁊rl."]
+                                                  and i[1] not in ["<Latin>", "<Greek>", "<Latin CCONJ>", "<unknown>"])
+                        else i for i, j in zip(tokens_1, updated_feats1)]
 
         string_2 = self.current_rendered_window["tokenise_text_2"].get(1.0, END)
         tokens_2 = self.cur_toks2
@@ -1107,7 +1109,9 @@ class UI:
         if [i[2] for i in tokens_2] != updated_head2:
             tokens_2 = [[i[0], i[1], j.strip(), i[3]] for i, j in zip(tokens_2, updated_head2)]
         if [i[3] for i in tokens_2] != updated_feats2:
-            tokens_2 = [[i[0], i[1], i[2], j] for i, j in zip(tokens_2, updated_feats2)]
+            tokens_2 = [[i[0], i[1], i[2], j] if (i[2] not in [".i.", "⁊rl."]
+                                                  and i[1] not in ["<Latin>", "<Greek>", "<Latin CCONJ>", "<unknown>"])
+                        else i for i, j in zip(tokens_2, updated_feats2)]
 
         tokens_1 = [i if i[1:3] not in [
             ['<Greek>', 'Latin *'], ['<Greek>', '<unknown>']
