@@ -38,7 +38,8 @@ class UI:
                           "Number": ["N/A", "Sing",  "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
                           "PronType": ["N/A", "Art", "Prs"]}
-        self.pron_feats = {"Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
+        self.pron_feats = {"Case": ["N/A", "Nom", "Acc", "Gen", "Dat"],
+                           "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
                            "Number": ["N/A", "Sing", "Plur"],
                            "Person": ["N/A", "1",  "2", "3"],
                            "Polarity": ["N/A", "Neg"],
@@ -1348,7 +1349,7 @@ class UI:
                                     file_pos_data[all_filelemmata.index(tok2_head)] = {
                                         'lemma': tok2_head, 'tokens': file_tok_data
                                     }
-                                    working_file1[all_filepos.index(tok2_pos)] = {
+                                    working_file2[all_filepos.index(tok2_pos)] = {
                                         'part_of_speech': tok2_pos, 'lemmata': file_pos_data
                                     }
                             else:

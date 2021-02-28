@@ -74371,6 +74371,17 @@
                                         "PronType": "Prs"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -74989,6 +75000,24 @@
                 ]
             },
             {
+                "lemma": "de",
+                "tokens": [
+                    {
+                        "token": "de",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "do",
                 "tokens": [
                     {
@@ -75414,6 +75443,17 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -75545,7 +75585,14 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Gender": "Fem",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75744,7 +75791,13 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronType": "Emp"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75982,10 +76035,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "PronType": "Ana"
