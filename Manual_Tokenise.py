@@ -1047,12 +1047,18 @@ class UI:
                 found_feats = list()
                 if pos_check == "ADP":
                     for j, feat_key in enumerate(self.adp_feats):
-                        feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                        try:
+                            feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                        except KeyError:
+                            feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 elif pos_check == "PRON":
                     for j, feat_key in enumerate(self.pron_feats):
-                        feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                        try:
+                            feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                        except KeyError:
+                            feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 if found_feats:
@@ -1085,12 +1091,18 @@ class UI:
                 found_feats = list()
                 if pos_check == "ADP":
                     for j, feat_key in enumerate(self.adp_feats):
-                        feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                        try:
+                            feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                        except KeyError:
+                            feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 elif pos_check == "PRON":
                     for j, feat_key in enumerate(self.pron_feats):
-                        feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                        try:
+                            feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                        except KeyError:
+                            feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 if found_feats:
@@ -1131,7 +1143,7 @@ class UI:
         # if string 1 is updated from the last save, but string 2 is the same as the last save
         # OR
         # if string 1 is updated but tokens 1, tokens 2 and string 2 match each other
-        # it means that  spaces have probably been introduced into string 1
+        # it means that spaces have probably been introduced into string 1
         # copy string 2 from string 1, and tokens 2 from tokens 1
         if (
             " ".join(string_2.split("\n")).strip().split(" ") == [
@@ -1158,32 +1170,58 @@ class UI:
                 ['<unknown>', '<unknown>']
             ]
             # if none of the headwords or POS tags have been assigned to tokens in token-list 2
+            # copy tokens 2 and string 2 from tokens 1 and string 1
             if [i[1:3] for i in tokens_2] == [i[1:3] if i[1:3] in neutral_posheads else ["?", "?"] for i in tokens_2]:
                 string_2 = "".join([i for i in string_1])
                 tokens_2 = [i for i in tokens_1]
 
+        # If tokens 1 and 2 are the same length, but one has a headword or POS which the other is missing, copy it
+        # alternatively, if the token, POS and headword are the same, but one has features, copy them
         if len(tokens_1) == len(tokens_2) and [x[0] for x in tokens_1] == [y[0] for y in tokens_2]:
             tokens_2 = [i if (i[1:3] != ['<unknown>', '<unknown>'] and j[1:3] == ['<unknown>', '<unknown>'])
                         else j for i, j in zip(tokens_1, tokens_2)]
             tokens_1 = [i if (i[1:3] != ['<unknown>', '<unknown>'] and j[1:3] == ['<unknown>', '<unknown>'])
                         else j for i, j in zip(tokens_2, tokens_1)]
+            tokens_2 = [i if (i != j and i[:3] == j[:3] and i[3] and not j[3])
+                        else j for i, j in zip(tokens_1, tokens_2)]
+            tokens_1 = [i if (i != j and i[:3] == j[:3] and i[3] and not j[3])
+                        else j for i, j in zip(tokens_2, tokens_1)]
+
+        # If tokens 1 and 2 are different lengths, match tokens from tokens 1 with their most likely match in tokens 2
+        # create an index of matches between tokens 1 and 2 where the headword or POS has been updated in only one set
+        # copy the POS, headword and feature data from one set to the other between matches where it is missing
         else:
             used_y_index = list()
             match_index = list()
+            feats_index = list()
             for x, x_tok in enumerate(tokens_1):
                 for y, y_tok in enumerate(tokens_2):
-                    if x_tok != y_tok and x_tok[0] == y_tok[0] and (
-                            x_tok[1:3] == ['<unknown>', '<unknown>'] or y_tok[1:3] == ['<unknown>', '<unknown>']
-                    ):
-                        if y not in used_y_index and (len(match_index) == 0 or y > match_index[-1][1]):
-                            used_y_index.append(y)
-                            if x_tok[1:3] == ['<unknown>', '<unknown>'] or y_tok[1:3] == ['<unknown>', '<unknown>']:
+                    if x_tok != y_tok and x_tok[0] == y_tok[0]:
+                        if x_tok[1:3] == ['<unknown>', '<unknown>'] or y_tok[1:3] == ['<unknown>', '<unknown>']:
+                            if y not in used_y_index and (len(match_index) == 0 or y > match_index[-1][1]):
+                                used_y_index.append(y)
                                 match_index.append([x, y])
                                 break
+                        elif x_tok[:3] == y_tok[:3]:
+                            if y not in used_y_index and (len(match_index) == 0 or y > match_index[-1][1]):
+                                used_y_index.append(y)
+                                feats_index.append([x, y])
+                                break
+                    elif x_tok == y_tok:
+                        if y not in used_y_index and (len(match_index) == 0 or y > match_index[-1][1]):
+                            used_y_index.append(y)
+                            break
             if match_index:
                 match_index = [[i, tokens_2[j]] if tokens_2[j][1:3] != ['<unknown>', '<unknown>'] else [tokens_1[i], j]
                                for i, j in match_index]
                 for match in match_index:
+                    if isinstance(match[0], int):
+                        tokens_1[match[0]] = match[1]
+                    elif isinstance(match[1], int):
+                        tokens_2[match[1]] = match[0]
+            if feats_index:
+                feats_index = [[i, tokens_2[j]] if tokens_2[j][3] else [tokens_1[i], j] for i, j in feats_index]
+                for match in feats_index:
                     if isinstance(match[0], int):
                         tokens_1[match[0]] = match[1]
                     elif isinstance(match[1], int):

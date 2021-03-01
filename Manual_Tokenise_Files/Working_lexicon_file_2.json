@@ -75977,11 +75977,18 @@
                         ]
                     },
                     {
-                        "token": "muisse",
+                        "token": "muis",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -76319,6 +76326,16 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronType": "Emp"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -77196,7 +77213,14 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
