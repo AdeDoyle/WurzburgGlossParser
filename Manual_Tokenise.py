@@ -68,7 +68,7 @@ class UI:
         # Create the GUI
         self.root = Tk()
         self.root.title("Manual Tokenisation Window")
-        self.root.geometry("1400x850")
+        self.root.geometry("1600x900")
 
         self.render_gloss(
             self.root,
@@ -340,7 +340,7 @@ class UI:
 
         for i, _ in enumerate(cur_toks1):
             self.current_rendered_window[f"feats1_frame_{i}"] = Frame(self.current_rendered_window["toks1_frame"])
-            self.current_rendered_window[f"feats1_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
+            self.current_rendered_window[f"feats1_frame_{i}"].grid(row=i + 1, column=4, padx=15, sticky='w')
             self.current_rendered_window[f"feats1_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["head_opts1_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
@@ -355,7 +355,7 @@ class UI:
 
         for i, _ in enumerate(cur_toks2):
             self.current_rendered_window[f"feats2_frame_{i}"] = Frame(self.current_rendered_window["toks2_frame"])
-            self.current_rendered_window[f"feats2_frame_{i}"].grid(row=i + 1, column=3, padx=15, sticky='w')
+            self.current_rendered_window[f"feats2_frame_{i}"].grid(row=i + 1, column=4, padx=15, sticky='w')
             self.current_rendered_window[f"feats2_frame_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
         self.current_rendered_window["head_opts2_frame"] = LabelFrame(self.current_rendered_window["toks_frames"],
@@ -437,9 +437,11 @@ class UI:
         self.current_rendered_window["gloss_label"].pack(anchor='w')
         self.current_rendered_window["gloss_label"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["gloss_text"].pack(pady=5, anchor='w')
+        self.current_rendered_window["gloss_text"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["trans_label"].pack(anchor='w')
         self.current_rendered_window["trans_label"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["trans_text"].pack(pady=5, anchor='w')
+        self.current_rendered_window["trans_text"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create GUI text labels and editing boxes
         self.current_rendered_window["tokenise_label_1"] = Label(self.current_rendered_window["text_frame"],
@@ -463,9 +465,11 @@ class UI:
         self.current_rendered_window["tokenise_label_1"].pack(anchor='w')
         self.current_rendered_window["tokenise_label_1"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["tokenise_text_1"].pack(pady=5, anchor='w')
+        self.current_rendered_window["tokenise_text_1"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["tokenise_label_2"].pack(anchor='w')
         self.current_rendered_window["tokenise_label_2"].bind("<MouseWheel>", self.mouse_wheel)
         self.current_rendered_window["tokenise_text_2"].pack(pady=5, anchor='w')
+        self.current_rendered_window["tokenise_text_2"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create lables for the tokens, POS tags and headwords (style 1)
         self.current_rendered_window["toks1_label"] = Label(self.current_rendered_window["toks1_frame"],
@@ -485,7 +489,7 @@ class UI:
 
         self.current_rendered_window["feats1_label"] = Label(self.current_rendered_window["toks1_frame"],
                                                              text="Features", font=("Helvetica", 16))
-        self.current_rendered_window["feats1_label"].grid(row=0, column=3, padx=5, pady=5)
+        self.current_rendered_window["feats1_label"].grid(row=0, column=4, padx=5, pady=5)
         self.current_rendered_window["feats1_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 1)
@@ -561,6 +565,7 @@ class UI:
             self.current_rendered_window[f"pos_drop1.{i}"].grid(row=i + 1, column=2, sticky='ne')
             self.current_rendered_window[f"pos_drop1.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
+            # Create feature dropdown menus for the tokens which can take them (style 1)
             if tag == "ADP":
                 possible_feats = self.adp_feats
             elif tag == "PRON":
@@ -568,39 +573,35 @@ class UI:
             else:
                 possible_feats = dict()
 
-            for j, feat_type in enumerate(possible_feats):
-                feat_vals = possible_feats.get(feat_type)
-                if feats:
-                    if feats.get(feat_type):
-                        set_val = feats.get(feat_type)
-                    else:
-                        set_val = "N/A"
-                else:
-                    set_val = "N/A"
-                if set_val != "N/A" and set_val not in feat_vals:
-                    raise RuntimeError(f"Unexpected feature value pre-set: "
-                                       f"{feat_type}={set_val} for {tag} in {feat_vals}")
+            if possible_feats:
+                self.current_rendered_window[f"feats_check1.{i}_var"] = IntVar()
+                feats_list = list()
+                for num, pos_feat in enumerate(possible_feats):
+                    for key in feats:
+                        if pos_feat == key:
+                            feats_list.append(f"{num + 1}.{feats.get(key)}")
+                            break
+                feat_str = "; ".join(feats_list)
 
-                self.current_rendered_window[f"feats1.{i}_label{j}"] = Label(
-                    self.current_rendered_window[f"feats1_frame_{i}"], text=feat_type, font=("Helvetica", 10)
+                self.current_rendered_window[f"feats1.{i}_label"] = Label(
+                    self.current_rendered_window[f"feats1_frame_{i}"], text=feat_str, font=("Helvetica", 10)
                 )
-                self.current_rendered_window[f"feats1.{i}_label{j}"].grid(row=j, column=0, sticky='w')
-                self.current_rendered_window[f"feats1.{i}_label{j}"].bind("<MouseWheel>", self.mouse_wheel)
+                self.current_rendered_window[f"feats1.{i}_label"].grid(row=0, column=0, sticky='w')
+                self.current_rendered_window[f"feats1.{i}_label"].bind("<MouseWheel>", self.mouse_wheel)
 
-                self.current_rendered_window[f"type1_feats{i}.{j}"] = StringVar()
-                self.current_rendered_window[f"type1_feats{i}.{j}"].set(set_val)
-                self.current_rendered_window[f"feats_drop1.{i}.{j}"] = OptionMenu(
-                    self.current_rendered_window[f"feats1_frame_{i}"],
-                    self.current_rendered_window[f"type1_feats{i}.{j}"],
-                    *feat_vals
+                self.current_rendered_window[f"feats_check1.{i}"] = Checkbutton(
+                    self.current_rendered_window["toks1_frame"],
+                    text="Show:", font=("Helvetica", 10),
+                    variable=self.current_rendered_window[f"feats_check1.{i}_var"],
+                    command=lambda chk=i: self.display_features_1(chk)
                 )
-                self.current_rendered_window[f"feats_drop1.{i}.{j}"].grid(row=j, column=1, sticky='w')
-                self.current_rendered_window[f"feats_drop1.{i}.{j}"].bind("<MouseWheel>", self.mouse_wheel)
+                self.current_rendered_window[f"feats_check1.{i}"].grid(row=i + 1, column=3, padx=5, pady=5, sticky='nw')
+                self.current_rendered_window[f"feats_check1.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"suggest_head1.{i}"] = Button(self.current_rendered_window["toks1_frame"],
                                                                         text=" ? ",
                                                                         command=lambda but=i: self.suggest_head_1(but))
-            self.current_rendered_window[f"suggest_head1.{i}"].grid(row=i + 1, column=4, padx=5, pady=5, sticky='n')
+            self.current_rendered_window[f"suggest_head1.{i}"].grid(row=i + 1, column=5, padx=5, pady=5, sticky='n')
             self.current_rendered_window[f"suggest_head1.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.featureframe1_count = i
@@ -623,7 +624,7 @@ class UI:
 
         self.current_rendered_window["feats2_label"] = Label(self.current_rendered_window["toks2_frame"],
                                                             text="Features", font=("Helvetica", 16))
-        self.current_rendered_window["feats2_label"].grid(row=0, column=3, padx=5, pady=5)
+        self.current_rendered_window["feats2_label"].grid(row=0, column=4, padx=5, pady=5)
         self.current_rendered_window["feats2_label"].bind("<MouseWheel>", self.mouse_wheel)
 
         # Create tokens, POS menus and headword entry boxes for the tokens and POS tags (style 2)
@@ -699,6 +700,7 @@ class UI:
             self.current_rendered_window[f"pos_drop2.{i}"].grid(row=i + 1, column=2, sticky='ne')
             self.current_rendered_window[f"pos_drop2.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
+            # Create feature dropdown menus for the tokens which can take them (style 2)
             if tag == "ADP":
                 possible_feats = self.adp_feats
             elif tag == "PRON":
@@ -706,39 +708,35 @@ class UI:
             else:
                 possible_feats = dict()
 
-            for j, feat_type in enumerate(possible_feats):
-                feat_vals = possible_feats.get(feat_type)
-                if feats:
-                    if feats.get(feat_type):
-                        set_val = feats.get(feat_type)
-                    else:
-                        set_val = "N/A"
-                else:
-                    set_val = "N/A"
-                if set_val != "N/A" and set_val not in feat_vals:
-                    raise RuntimeError(f"Unexpected feature value pre-set: "
-                                       f"{feat_type}={set_val} for {tag} in {feat_vals}")
+            if possible_feats:
+                self.current_rendered_window[f"feats_check2.{i}_var"] = IntVar()
+                feats_list = list()
+                for num, pos_feat in enumerate(possible_feats):
+                    for key in feats:
+                        if pos_feat == key:
+                            feats_list.append(f"{num + 1}.{feats.get(key)}")
+                            break
+                feat_str = "; ".join(feats_list)
 
-                self.current_rendered_window[f"feats2.{i}_label{j}"] = Label(
-                    self.current_rendered_window[f"feats2_frame_{i}"], text=feat_type, font=("Helvetica", 10)
+                self.current_rendered_window[f"feats2.{i}_label"] = Label(
+                    self.current_rendered_window[f"feats2_frame_{i}"], text=feat_str, font=("Helvetica", 10)
                 )
-                self.current_rendered_window[f"feats2.{i}_label{j}"].grid(row=j, column=0, sticky='w')
-                self.current_rendered_window[f"feats2.{i}_label{j}"].bind("<MouseWheel>", self.mouse_wheel)
+                self.current_rendered_window[f"feats2.{i}_label"].grid(row=0, column=0, sticky='w')
+                self.current_rendered_window[f"feats2.{i}_label"].bind("<MouseWheel>", self.mouse_wheel)
 
-                self.current_rendered_window[f"type2_feats{i}.{j}"] = StringVar()
-                self.current_rendered_window[f"type2_feats{i}.{j}"].set(set_val)
-                self.current_rendered_window[f"feats_drop2.{i}.{j}"] = OptionMenu(
-                    self.current_rendered_window[f"feats2_frame_{i}"],
-                    self.current_rendered_window[f"type2_feats{i}.{j}"],
-                    *feat_vals
+                self.current_rendered_window[f"feats_check2.{i}"] = Checkbutton(
+                    self.current_rendered_window["toks2_frame"],
+                    text="Show:", font=("Helvetica", 10),
+                    variable=self.current_rendered_window[f"feats_check2.{i}_var"],
+                    command=lambda chk=i: self.display_features_2(chk)
                 )
-                self.current_rendered_window[f"feats_drop2.{i}.{j}"].grid(row=j, column=1, sticky='w')
-                self.current_rendered_window[f"feats_drop2.{i}.{j}"].bind("<MouseWheel>", self.mouse_wheel)
+                self.current_rendered_window[f"feats_check2.{i}"].grid(row=i + 1, column=3, padx=5, pady=5, sticky='nw')
+                self.current_rendered_window[f"feats_check2.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.current_rendered_window[f"suggest_head2.{i}"] = Button(self.current_rendered_window["toks2_frame"],
                                                                         text=" ? ",
                                                                         command=lambda but=i: self.suggest_head_2(but))
-            self.current_rendered_window[f"suggest_head2.{i}"].grid(row=i + 1, column=4, padx=5, pady=5, sticky='n')
+            self.current_rendered_window[f"suggest_head2.{i}"].grid(row=i + 1, column=5, padx=5, pady=5, sticky='n')
             self.current_rendered_window[f"suggest_head2.{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
             self.featureframe2_count = i
@@ -1037,6 +1035,166 @@ class UI:
             cur_toks2=self.cur_toks2
         )
 
+    def display_features_1(self, tok_num):
+
+        on_off = self.current_rendered_window[f"feats_check1.{tok_num}_var"].get()
+        feats = self.cur_toks1[tok_num][3]
+        feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
+        tag = self.cur_toks1[tok_num][1]
+        if tag == "ADP":
+            possible_feats = self.adp_feats
+        elif tag == "PRON":
+            possible_feats = self.pron_feats
+        else:
+            possible_feats = dict()
+
+        if on_off == 0:
+            feats = {
+                self.current_rendered_window[
+                    f"feats1.{tok_num}_label{j}"
+                ].cget('text'): self.current_rendered_window[
+                    f"type1_feats{tok_num}.{j}"
+                ].get() for j, _ in enumerate(possible_feats)
+                if self.current_rendered_window[f"type1_feats{tok_num}.{j}"].get() != "N/A"
+            }
+
+            for j, _ in enumerate(possible_feats):
+                self.current_rendered_window[f"feats1.{tok_num}_label{j}"].destroy()
+                self.current_rendered_window[f"feats_drop1.{tok_num}.{j}"].destroy()
+
+            feats_list = list()
+            fullfeats_list = list()
+            for j, pos_feat in enumerate(possible_feats):
+                for key in feats:
+                    if pos_feat == key:
+                        feats_list.append(f"{j + 1}.{feats.get(key)}")
+                        fullfeats_list.append(f"{key}={feats.get(key)}")
+                        break
+            feat_str = "; ".join(feats_list)
+            fullfeat_str = "|".join(fullfeats_list)
+            self.cur_toks1[tok_num][3] = fullfeat_str
+            self.current_rendered_window[f"feats1.{tok_num}_label"] = Label(
+                self.current_rendered_window[f"feats1_frame_{tok_num}"], text=feat_str, font=("Helvetica", 10)
+            )
+            self.current_rendered_window[f"feats1.{tok_num}_label"].grid(row=0, column=0, sticky='w')
+            self.current_rendered_window[f"feats1.{tok_num}_label"].bind("<MouseWheel>", self.mouse_wheel)
+
+        elif on_off == 1:
+            self.current_rendered_window[f"feats1.{tok_num}_label"].destroy()
+
+            fullfeats_list = list()
+            for j, feat_type in enumerate(possible_feats):
+                feat_vals = possible_feats.get(feat_type)
+                if feats:
+                    if feats.get(feat_type):
+                        set_val = feats.get(feat_type)
+                        fullfeats_list.append(f"{feat_type}={set_val}")
+                    else:
+                        set_val = "N/A"
+                else:
+                    set_val = "N/A"
+                if set_val != "N/A" and set_val not in feat_vals:
+                    raise RuntimeError(f"Unexpected feature value pre-set: "
+                                       f"{feat_type}={set_val} for {tag} in {feat_vals}")
+
+                self.current_rendered_window[f"feats1.{tok_num}_label{j}"] = Label(
+                    self.current_rendered_window[f"feats1_frame_{tok_num}"], text=feat_type, font=("Helvetica", 10)
+                )
+                self.current_rendered_window[f"feats1.{tok_num}_label{j}"].grid(row=j, column=0, sticky='w')
+                self.current_rendered_window[f"feats1.{tok_num}_label{j}"].bind("<MouseWheel>", self.mouse_wheel)
+
+                self.current_rendered_window[f"type1_feats{tok_num}.{j}"] = StringVar()
+                self.current_rendered_window[f"type1_feats{tok_num}.{j}"].set(set_val)
+                self.current_rendered_window[f"feats_drop1.{tok_num}.{j}"] = OptionMenu(
+                    self.current_rendered_window[f"feats1_frame_{tok_num}"],
+                    self.current_rendered_window[f"type1_feats{tok_num}.{j}"],
+                    *feat_vals
+                )
+                self.current_rendered_window[f"feats_drop1.{tok_num}.{j}"].grid(row=j, column=1, sticky='w')
+                self.current_rendered_window[f"feats_drop1.{tok_num}.{j}"].bind("<MouseWheel>", self.mouse_wheel)
+            fullfeat_str = "|".join(fullfeats_list)
+            self.cur_toks1[tok_num][3] = fullfeat_str
+
+    def display_features_2(self, tok_num):
+
+        on_off = self.current_rendered_window[f"feats_check2.{tok_num}_var"].get()
+        feats = self.cur_toks2[tok_num][3]
+        feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
+        tag = self.cur_toks2[tok_num][1]
+        if tag == "ADP":
+            possible_feats = self.adp_feats
+        elif tag == "PRON":
+            possible_feats = self.pron_feats
+        else:
+            possible_feats = dict()
+
+        if on_off == 0:
+            feats = {
+                self.current_rendered_window[
+                    f"feats2.{tok_num}_label{j}"
+                ].cget('text'): self.current_rendered_window[
+                    f"type2_feats{tok_num}.{j}"
+                ].get() for j, _ in enumerate(possible_feats)
+                if self.current_rendered_window[f"type2_feats{tok_num}.{j}"].get() != "N/A"
+            }
+
+            for j, _ in enumerate(possible_feats):
+                self.current_rendered_window[f"feats2.{tok_num}_label{j}"].destroy()
+                self.current_rendered_window[f"feats_drop2.{tok_num}.{j}"].destroy()
+
+            feats_list = list()
+            fullfeats_list = list()
+            for j, pos_feat in enumerate(possible_feats):
+                for key in feats:
+                    if pos_feat == key:
+                        feats_list.append(f"{j + 1}.{feats.get(key)}")
+                        fullfeats_list.append(f"{key}={feats.get(key)}")
+                        break
+            feat_str = "; ".join(feats_list)
+            fullfeat_str = "|".join(fullfeats_list)
+            self.cur_toks2[tok_num][3] = fullfeat_str
+            self.current_rendered_window[f"feats2.{tok_num}_label"] = Label(
+                self.current_rendered_window[f"feats2_frame_{tok_num}"], text=feat_str, font=("Helvetica", 10)
+            )
+            self.current_rendered_window[f"feats2.{tok_num}_label"].grid(row=0, column=0, sticky='w')
+            self.current_rendered_window[f"feats2.{tok_num}_label"].bind("<MouseWheel>", self.mouse_wheel)
+
+        elif on_off == 1:
+            self.current_rendered_window[f"feats2.{tok_num}_label"].destroy()
+
+            fullfeats_list = list()
+            for j, feat_type in enumerate(possible_feats):
+                feat_vals = possible_feats.get(feat_type)
+                if feats:
+                    if feats.get(feat_type):
+                        set_val = feats.get(feat_type)
+                        fullfeats_list.append(f"{feat_type}={set_val}")
+                    else:
+                        set_val = "N/A"
+                else:
+                    set_val = "N/A"
+                if set_val != "N/A" and set_val not in feat_vals:
+                    raise RuntimeError(f"Unexpected feature value pre-set: "
+                                       f"{feat_type}={set_val} for {tag} in {feat_vals}")
+
+                self.current_rendered_window[f"feats2.{tok_num}_label{j}"] = Label(
+                    self.current_rendered_window[f"feats2_frame_{tok_num}"], text=feat_type, font=("Helvetica", 10)
+                )
+                self.current_rendered_window[f"feats2.{tok_num}_label{j}"].grid(row=j, column=0, sticky='w')
+                self.current_rendered_window[f"feats2.{tok_num}_label{j}"].bind("<MouseWheel>", self.mouse_wheel)
+
+                self.current_rendered_window[f"type2_feats{tok_num}.{j}"] = StringVar()
+                self.current_rendered_window[f"type2_feats{tok_num}.{j}"].set(set_val)
+                self.current_rendered_window[f"feats_drop2.{tok_num}.{j}"] = OptionMenu(
+                    self.current_rendered_window[f"feats2_frame_{tok_num}"],
+                    self.current_rendered_window[f"type2_feats{tok_num}.{j}"],
+                    *feat_vals
+                )
+                self.current_rendered_window[f"feats_drop2.{tok_num}.{j}"].grid(row=j, column=1, sticky='w')
+                self.current_rendered_window[f"feats_drop2.{tok_num}.{j}"].bind("<MouseWheel>", self.mouse_wheel)
+            fullfeat_str = "|".join(fullfeats_list)
+            self.cur_toks2[tok_num][3] = fullfeat_str
+
     def update_tokens(self):
         string_1 = self.current_rendered_window["tokenise_text_1"].get(1.0, END)
         tokens_1 = self.cur_toks1
@@ -1045,20 +1203,43 @@ class UI:
         for i, pos_check in enumerate(updated_pos1):
             if pos_check in ["ADP", "PRON"]:
                 found_feats = list()
+                on_off_1 = self.current_rendered_window[f"feats_check1.{i}_var"].get()
                 if pos_check == "ADP":
                     for j, feat_key in enumerate(self.adp_feats):
-                        try:
-                            feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
-                        except KeyError:
-                            feat_val = "N/A"
+                        feat_val = "N/A"
+                        if on_off_1 == 0:
+                            feat_str = self.current_rendered_window[f"feats1.{i}_label"].cget("text")
+                            feat_list = feat_str.split("; ")
+                            for numbered_feat in feat_list:
+                                feat_numstring_split = numbered_feat.split(".")
+                                feat_num = feat_numstring_split[0]
+                                if int(feat_num) == j + 1:
+                                    feat_val = feat_numstring_split[1]
+                                    break
+                        elif on_off_1 == 1:
+                            try:
+                                feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                            except KeyError:
+                                feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 elif pos_check == "PRON":
                     for j, feat_key in enumerate(self.pron_feats):
-                        try:
-                            feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
-                        except KeyError:
-                            feat_val = "N/A"
+                        feat_val = "N/A"
+                        if on_off_1 == 0:
+                            feat_str = self.current_rendered_window[f"feats1.{i}_label"].cget("text")
+                            feat_list = feat_str.split("; ")
+                            for numbered_feat in feat_list:
+                                feat_numstring_split = numbered_feat.split(".")
+                                feat_num = feat_numstring_split[0]
+                                if int(feat_num) == j + 1:
+                                    feat_val = feat_numstring_split[1]
+                                    break
+                        elif on_off_1 == 1:
+                            try:
+                                feat_val = self.current_rendered_window[f"type1_feats{i}.{j}"].get()
+                            except KeyError:
+                                feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 if found_feats:
@@ -1089,20 +1270,43 @@ class UI:
         for i, pos_check in enumerate(updated_pos2):
             if pos_check in ["ADP", "PRON"]:
                 found_feats = list()
+                on_off_2 = self.current_rendered_window[f"feats_check2.{i}_var"].get()
                 if pos_check == "ADP":
                     for j, feat_key in enumerate(self.adp_feats):
-                        try:
-                            feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
-                        except KeyError:
-                            feat_val = "N/A"
+                        feat_val = "N/A"
+                        if on_off_2 == 0:
+                            feat_str = self.current_rendered_window[f"feats2.{i}_label"].cget("text")
+                            feat_list = feat_str.split("; ")
+                            for numbered_feat in feat_list:
+                                feat_numstring_split = numbered_feat.split(".")
+                                feat_num = feat_numstring_split[0]
+                                if int(feat_num) == j + 1:
+                                    feat_val = feat_numstring_split[1]
+                                    break
+                        elif on_off_2 == 1:
+                            try:
+                                feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                            except KeyError:
+                                feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 elif pos_check == "PRON":
                     for j, feat_key in enumerate(self.pron_feats):
-                        try:
-                            feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
-                        except KeyError:
-                            feat_val = "N/A"
+                        feat_val = "N/A"
+                        if on_off_2 == 0:
+                            feat_str = self.current_rendered_window[f"feats2.{i}_label"].cget("text")
+                            feat_list = feat_str.split("; ")
+                            for numbered_feat in feat_list:
+                                feat_numstring_split = numbered_feat.split(".")
+                                feat_num = feat_numstring_split[0]
+                                if int(feat_num) == j + 1:
+                                    feat_val = feat_numstring_split[1]
+                                    break
+                        elif on_off_2 == 1:
+                            try:
+                                feat_val = self.current_rendered_window[f"type2_feats{i}.{j}"].get()
+                            except KeyError:
+                                feat_val = "N/A"
                         if feat_val != "N/A":
                             found_feats.append(f"{feat_key}={feat_val}")
                 if found_feats:
