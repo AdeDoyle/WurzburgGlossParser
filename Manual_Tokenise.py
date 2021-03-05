@@ -1039,7 +1039,10 @@ class UI:
 
         on_off = self.current_rendered_window[f"feats_check1.{tok_num}_var"].get()
         feats = self.cur_toks1[tok_num][3]
-        feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
+        if feats:
+            feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
+        else:
+            feats = dict()
         tag = self.cur_toks1[tok_num][1]
         if tag == "ADP":
             possible_feats = self.adp_feats
@@ -1119,7 +1122,10 @@ class UI:
 
         on_off = self.current_rendered_window[f"feats_check2.{tok_num}_var"].get()
         feats = self.cur_toks2[tok_num][3]
-        feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
+        if feats:
+            feats = {f.split("=")[0]: f.split("=")[1] for f in feats.split("|")}
+        else:
+            feats = dict()
         tag = self.cur_toks2[tok_num][1]
         if tag == "ADP":
             possible_feats = self.adp_feats
@@ -1201,10 +1207,17 @@ class UI:
         updated_pos1 = [self.current_rendered_window[f"type1_pos{i}"].get() for i in range(len(tokens_1))]
         updated_feats1 = list()
         for i, pos_check in enumerate(updated_pos1):
+            new_pos = False
             if pos_check in ["ADP", "PRON"]:
                 found_feats = list()
-                on_off_1 = self.current_rendered_window[f"feats_check1.{i}_var"].get()
-                if pos_check == "ADP":
+                try:
+                    on_off_1 = self.current_rendered_window[f"feats_check1.{i}_var"].get()
+                except KeyError:
+                    on_off_1 = 0
+                    new_pos = True
+                if new_pos:
+                    found_feats = ['']
+                elif pos_check == "ADP":
                     for j, feat_key in enumerate(self.adp_feats):
                         feat_val = "N/A"
                         if on_off_1 == 0:
@@ -1268,10 +1281,17 @@ class UI:
         updated_pos2 = [self.current_rendered_window[f"type2_pos{i}"].get() for i in range(len(tokens_2))]
         updated_feats2 = list()
         for i, pos_check in enumerate(updated_pos2):
+            new_pos = False
             if pos_check in ["ADP", "PRON"]:
                 found_feats = list()
-                on_off_2 = self.current_rendered_window[f"feats_check2.{i}_var"].get()
-                if pos_check == "ADP":
+                try:
+                    on_off_2 = self.current_rendered_window[f"feats_check2.{i}_var"].get()
+                except KeyError:
+                    on_off_2 = 0
+                    new_pos = True
+                if new_pos:
+                    found_feats = ['']
+                elif pos_check == "ADP":
                     for j, feat_key in enumerate(self.adp_feats):
                         feat_val = "N/A"
                         if on_off_2 == 0:
