@@ -34,7 +34,7 @@ class UI:
         self.adp_feats = {"AdpType": ["N/A", "Prep"],
                           "Case": ["N/A", "Acc", "Dat"],
                           "Definite": ["N/A", "Def", "Ind"],
-                          "Gender": ["N/A", "Masc,Neut", "Fem"],
+                          "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
                           "Number": ["N/A", "Sing",  "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
                           "PronType": ["N/A", "Art", "Prs"]}
@@ -575,13 +575,16 @@ class UI:
 
             if possible_feats:
                 self.current_rendered_window[f"feats_check1.{i}_var"] = IntVar()
-                feats_list = list()
-                for num, pos_feat in enumerate(possible_feats):
-                    for key in feats:
-                        if pos_feat == key:
-                            feats_list.append(f"{num + 1}.{feats.get(key)}")
-                            break
-                feat_str = "; ".join(feats_list)
+                if feats:
+                    feats_list = list()
+                    for num, pos_feat in enumerate(possible_feats):
+                        for key in feats:
+                            if pos_feat == key:
+                                feats_list.append(f"{num + 1}.{feats.get(key)}")
+                                break
+                    feat_str = "; ".join(feats_list)
+                else:
+                    feat_str = ''
 
                 self.current_rendered_window[f"feats1.{i}_label"] = Label(
                     self.current_rendered_window[f"feats1_frame_{i}"], text=feat_str, font=("Helvetica", 10)
@@ -710,13 +713,16 @@ class UI:
 
             if possible_feats:
                 self.current_rendered_window[f"feats_check2.{i}_var"] = IntVar()
-                feats_list = list()
-                for num, pos_feat in enumerate(possible_feats):
-                    for key in feats:
-                        if pos_feat == key:
-                            feats_list.append(f"{num + 1}.{feats.get(key)}")
-                            break
-                feat_str = "; ".join(feats_list)
+                if feats:
+                    feats_list = list()
+                    for num, pos_feat in enumerate(possible_feats):
+                        for key in feats:
+                            if pos_feat == key:
+                                feats_list.append(f"{num + 1}.{feats.get(key)}")
+                                break
+                    feat_str = "; ".join(feats_list)
+                else:
+                    feat_str = ''
 
                 self.current_rendered_window[f"feats2.{i}_label"] = Label(
                     self.current_rendered_window[f"feats2_frame_{i}"], text=feat_str, font=("Helvetica", 10)
@@ -1222,6 +1228,9 @@ class UI:
                         feat_val = "N/A"
                         if on_off_1 == 0:
                             feat_str = self.current_rendered_window[f"feats1.{i}_label"].cget("text")
+                            if not feat_str:
+                                found_feats = ['']
+                                break
                             feat_list = feat_str.split("; ")
                             for numbered_feat in feat_list:
                                 feat_numstring_split = numbered_feat.split(".")
@@ -1241,6 +1250,9 @@ class UI:
                         feat_val = "N/A"
                         if on_off_1 == 0:
                             feat_str = self.current_rendered_window[f"feats1.{i}_label"].cget("text")
+                            if not feat_str:
+                                found_feats = ['']
+                                break
                             feat_list = feat_str.split("; ")
                             for numbered_feat in feat_list:
                                 feat_numstring_split = numbered_feat.split(".")
@@ -1296,6 +1308,9 @@ class UI:
                         feat_val = "N/A"
                         if on_off_2 == 0:
                             feat_str = self.current_rendered_window[f"feats2.{i}_label"].cget("text")
+                            if not feat_str:
+                                found_feats = ['']
+                                break
                             feat_list = feat_str.split("; ")
                             for numbered_feat in feat_list:
                                 feat_numstring_split = numbered_feat.split(".")
@@ -1315,6 +1330,9 @@ class UI:
                         feat_val = "N/A"
                         if on_off_2 == 0:
                             feat_str = self.current_rendered_window[f"feats2.{i}_label"].cget("text")
+                            if not feat_str:
+                                found_feats = ['']
+                                break
                             feat_list = feat_str.split("; ")
                             for numbered_feat in feat_list:
                                 feat_numstring_split = numbered_feat.split(".")

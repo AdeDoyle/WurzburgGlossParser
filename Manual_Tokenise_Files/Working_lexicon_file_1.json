@@ -11168,15 +11168,6 @@
                 "lemma": "iressach",
                 "tokens": [
                     {
-                        "token": "hireschu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
                         "token": "hiressach",
                         "feature_sets": [
                             {
@@ -21247,6 +21238,19 @@
                                         "Case": "Acc",
                                         "Definite": "Def",
                                         "Gender": "Neut",
+                                        "Number": "Plur",
+                                        "PronType": "Art"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 5,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Case": "Acc",
+                                        "Definite": "Def",
+                                        "Gender": "Masc,Neut",
                                         "Number": "Plur",
                                         "PronType": "Art"
                                     }
@@ -56175,6 +56179,15 @@
                 "lemma": "iress",
                 "tokens": [
                     {
+                        "token": "hiress",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "hiris",
                         "feature_sets": [
                             {
@@ -56226,6 +56239,20 @@
                     },
                     {
                         "token": "nirisse",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "iressach",
+                "tokens": [
+                    {
+                        "token": "hireschu",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -94802,6 +94829,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "fírianigidir",
+                "tokens": [
+                    {
+                        "token": "firianichthi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }

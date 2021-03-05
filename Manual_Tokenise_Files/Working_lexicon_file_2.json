@@ -11255,15 +11255,6 @@
                 "lemma": "iressach",
                 "tokens": [
                     {
-                        "token": "hireschu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
                         "token": "hiressach",
                         "feature_sets": [
                             {
@@ -55381,6 +55372,15 @@
                 "lemma": "iress",
                 "tokens": [
                     {
+                        "token": "hiress",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "hiris",
                         "feature_sets": [
                             {
@@ -55432,6 +55432,20 @@
                     },
                     {
                         "token": "nirisse",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "iressach",
+                "tokens": [
+                    {
+                        "token": "hireschu",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -94126,6 +94140,20 @@
                 ]
             },
             {
+                "lemma": "fírianigidir",
+                "tokens": [
+                    {
+                        "token": "firianichth",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "gaibid",
                 "tokens": [
                     {
@@ -95982,7 +96010,7 @@
                 "lemma": "oenaigidir",
                 "tokens": [
                     {
-                        "token": "oenichthi",
+                        "token": "oenichth",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
