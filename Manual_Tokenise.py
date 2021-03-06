@@ -40,12 +40,15 @@ class UI:
                           "PronType": ["N/A", "Art", "Prs"]}
         self.pron_feats = {"Case": ["N/A", "Nom", "Acc", "Gen", "Dat"],
                            "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
+                           "Mood": ["N/A", "Sub"],
                            "Number": ["N/A", "Sing", "Plur"],
                            "Person": ["N/A", "1",  "2", "3"],
-                           "Polarity": ["N/A", "Neg"],
+                           "Polarity": ["N/A", "Neg", "Pos"],
                            "Poss": ["N/A", "Yes"],
                            "PronType": ["N/A", "Ana", "Emp", "Ind", "Int", "Prs"],
-                           "Reflex": ["N/A", "Yes"]}
+                           "Reflex": ["N/A", "Yes"],
+                           "Tense": ["N/A", "Pres"],
+                           "VerbType": ["N/A", "Cop"]}
         self.max_linelen = 110
 
         self.open_ep = self.epistles[0]
