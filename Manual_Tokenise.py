@@ -35,7 +35,7 @@ class UI:
                           "Case": ["N/A", "Acc", "Dat"],
                           "Definite": ["N/A", "Def", "Ind"],
                           "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
-                          "Number": ["N/A", "Sing",  "Plur"],
+                          "Number": ["N/A", "Dual", "Sing", "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
                           "PronType": ["N/A", "Art", "Prs"]}
         self.pron_feats = {"Case": ["N/A", "Nom", "Acc", "Gen", "Dat"],

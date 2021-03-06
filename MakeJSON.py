@@ -73,7 +73,7 @@ def make_json(glosslist, headers=False):
                 if "prima" in i:
                     h = "Hand One (Prima Manus)"
                     # print(i)
-        mixed_hand_list = ["8d3", "8d13", "11b3", "17b4", "17d15", "21d6", "24b8"]
+        mixed_hand_list = ["8d3", "8d13", "11b3", "17b4", "17d15", "21c21", "21d6", "24b8"]
         if an:
             if "a prima manu" in an or "prima manus" in an:
                 if f[3:] + gn in mixed_hand_list:

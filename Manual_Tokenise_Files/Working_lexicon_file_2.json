@@ -19609,10 +19609,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -19630,7 +19626,15 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -74674,6 +74678,16 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -75081,6 +75095,22 @@
                     },
                     {
                         "token": "nd",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ndid",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -76033,10 +76063,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -76226,7 +76252,13 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "PronType": "Emp"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -76240,7 +76272,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "PronType": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -76372,6 +76408,14 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "PronType": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -77157,7 +77201,13 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -77239,6 +77289,17 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -87991,6 +88052,15 @@
                     },
                     {
                         "token": "tucid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tuctis",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
