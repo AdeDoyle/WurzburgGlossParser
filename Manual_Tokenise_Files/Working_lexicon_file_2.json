@@ -18779,7 +18779,16 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -18972,7 +18981,12 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -19500,7 +19514,12 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -19509,10 +19528,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -19551,7 +19566,15 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -19909,7 +19932,15 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -20106,10 +20137,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20129,10 +20156,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20355,7 +20378,15 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -21001,10 +21032,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21150,6 +21177,18 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -21276,7 +21315,16 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -21548,10 +21596,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21560,7 +21604,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21575,7 +21619,16 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -21650,10 +21703,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21662,7 +21711,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -22108,10 +22157,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -74483,10 +74528,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -74849,7 +74890,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "PronType": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75011,6 +75056,22 @@
                         ]
                     },
                     {
+                        "token": "da",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "did",
                         "feature_sets": [
                             {
@@ -75143,10 +75204,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Fem",
@@ -75157,7 +75214,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -75236,7 +75293,13 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -75359,10 +75422,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Sing",
@@ -75403,10 +75462,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Neut",
@@ -75423,10 +75478,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Neut",
@@ -75544,7 +75595,12 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "PronType": "Prs",
+                                        "Reflex": "Yes"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75655,7 +75711,12 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "PronType": "Prs",
+                                        "Reflex": "Yes"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75664,10 +75725,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "PronType": "Prs",
@@ -75771,6 +75828,17 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75857,10 +75925,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Neut",
@@ -75961,7 +76025,14 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75986,7 +76057,14 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -76278,6 +76356,14 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "PronType": "Ind"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -76291,10 +76377,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Fem",
@@ -76305,7 +76387,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -76555,7 +76637,13 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -76707,7 +76795,14 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Emp"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -77059,10 +77154,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Fem",
@@ -77084,10 +77175,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "PronType": "Ana"
@@ -77292,10 +77379,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Masc",
@@ -77306,7 +77389,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
