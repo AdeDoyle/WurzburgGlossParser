@@ -18249,18 +18249,6 @@
                                         "PronType": "Prs"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Ind",
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -18269,15 +18257,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Ind"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -68275,86 +68254,6 @@
                 ]
             },
             {
-                "lemma": "ai",
-                "tokens": [
-                    {
-                        "token": "ae",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ai",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "nai",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ái",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "ar",
                 "tokens": [
                     {
@@ -68402,6 +68301,22 @@
                                 "features": [
                                     {
                                         "Number": "Plur",
+                                        "Person": "3",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ai",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
                                         "Person": "3",
                                         "Poss": "Yes",
                                         "PronType": "Prs"
@@ -68492,6 +68407,7 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
+                                        "Number": "Sing",
                                         "Person": "3",
                                         "Poss": "Yes",
                                         "PronType": "Prs"
@@ -68507,7 +68423,7 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Number": "Sing",
+                                        "Number": "Plur",
                                         "Person": "3",
                                         "Poss": "Yes",
                                         "PronType": "Prs"
@@ -68518,6 +68434,7 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
+                                        "Number": "Sing",
                                         "Person": "3",
                                         "Poss": "Yes",
                                         "PronType": "Prs"
