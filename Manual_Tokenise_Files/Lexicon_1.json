@@ -21382,15 +21382,6 @@
                                 "features": [
                                     {
                                         "AdpType": "Prep",
-                                        "Definite": "Ind"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
                                         "Definite": "Ind",
                                         "Gender": "Fem",
                                         "Number": "Sing",
@@ -21428,18 +21419,6 @@
                                         "AdpType": "Prep",
                                         "Definite": "Ind",
                                         "Gender": "Masc,Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Ind",
                                         "Number": "Sing",
                                         "Person": "3",
                                         "PronType": "Prs"
