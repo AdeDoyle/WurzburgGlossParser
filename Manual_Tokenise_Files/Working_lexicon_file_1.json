@@ -29251,6 +29251,20 @@
                 ]
             },
             {
+                "lemma": "aile",
+                "tokens": [
+                    {
+                        "token": "nnaláil",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "ailidetu",
                 "tokens": [
                     {
@@ -34973,6 +34987,15 @@
                 "lemma": "bélrae",
                 "tokens": [
                     {
+                        "token": "bélri",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "bélru",
                         "feature_sets": [
                             {
@@ -35144,6 +35167,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Prefix": "Yes"
@@ -38129,6 +38156,15 @@
             {
                 "lemma": "comalnad",
                 "tokens": [
+                    {
+                        "token": "chomalnad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "comalnad",
                         "feature_sets": [
@@ -66049,6 +66085,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -94807,6 +94847,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -96978,6 +97022,20 @@
                 ]
             },
             {
+                "lemma": "rethid",
+                "tokens": [
+                    {
+                        "token": "rethit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "rofinnadar",
                 "tokens": [
                     {
@@ -98812,6 +98870,20 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tintuúth",
+                "tokens": [
+                    {
+                        "token": "tintuúth",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
