@@ -22625,20 +22625,29 @@
                                 "features": [
                                     {
                                         "AdpType": "Prep",
-                                        "Definite": "Ind"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
                                         "Definite": "Ind",
                                         "Gender": "Masc,Neut",
                                         "Number": "Sing",
                                         "Person": "3",
                                         "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ocon",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Case": "Dat",
+                                        "Definite": "Def",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "PronType": "Art"
                                     }
                                 ]
                             }
@@ -44745,7 +44754,7 @@
                 "lemma": "dál",
                 "tokens": [
                     {
-                        "token": "dál",
+                        "token": "dal",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -44758,14 +44767,13 @@
                         ]
                     },
                     {
-                        "token": "ndal",
+                        "token": "dál",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
+                                        "Prefix": "Yes"
                                     }
                                 ]
                             }
@@ -66459,6 +66467,20 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "ṡuidiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -66989,25 +67011,6 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "són",
-                "tokens": [
-                    {
-                        "token": "suin",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -72731,20 +72734,6 @@
                 ]
             },
             {
-                "lemma": "noi",
-                "tokens": [
-                    {
-                        "token": "noi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "noí",
                 "tokens": [
                     {
@@ -72772,47 +72761,6 @@
                 "tokens": [
                     {
                         "token": "oct",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "oin",
-                "tokens": [
-                    {
-                        "token": "nóin",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "oen",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "oin",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "óen",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -72973,29 +72921,6 @@
                 ]
             },
             {
-                "lemma": "tri",
-                "tokens": [
-                    {
-                        "token": "tri",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "trí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "trí",
                 "tokens": [
                     {
@@ -73042,21 +72967,21 @@
                                 "features": null
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "lemma": "óin",
-                "tokens": [
+                    },
                     {
-                        "token": "nóen",
+                        "token": "trí",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
                                 "features": null
                             }
                         ]
-                    },
+                    }
+                ]
+            },
+            {
+                "lemma": "óin",
+                "tokens": [
                     {
                         "token": "óin",
                         "feature_sets": [
@@ -76033,6 +75958,32 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "son",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "són",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -76236,6 +76187,7 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
+                                        "Gender": "Neut",
                                         "Number": "Sing",
                                         "PronType": "Ana"
                                     }
@@ -76267,17 +76219,7 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
+                                        "Gender": "Fem",
                                         "Number": "Sing",
                                         "PronType": "Ana"
                                     }
@@ -76294,38 +76236,6 @@
                             },
                             {
                                 "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Gender": "Masc",
-                                        "Number": "Plur",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Number": "Plur",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 4,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Gender": "Neut",
-                                        "Number": "Plur",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 5,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -76360,24 +76270,6 @@
                                         "PronType": "Ana"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 4,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -76386,6 +76278,17 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "PronType": "Ana"
@@ -76415,16 +76318,7 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Sing",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
+                                        "Gender": "Masc",
                                         "Number": "Sing",
                                         "PronType": "Ana"
                                     }
@@ -76440,6 +76334,7 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
+                                        "Gender": "Fem",
                                         "Number": "Sing",
                                         "PronType": "Ana"
                                     }
@@ -76470,28 +76365,7 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
-                                        "Gender": "Fem",
-                                        "Number": "Sing",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
                                         "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
                                         "Number": "Sing",
                                         "PronType": "Ana"
                                     }
