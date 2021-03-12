@@ -69711,6 +69711,9 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "Case": "Acc",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
                                         "PronType": "Ana"
                                     }
                                 ]
@@ -69724,6 +69727,9 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "Case": "Acc",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
                                         "PronType": "Ana"
                                     }
                                 ]
@@ -69865,6 +69871,9 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "Case": "Acc",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
                                         "PronType": "Ana"
                                     }
                                 ]
@@ -69878,6 +69887,9 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "Case": "Acc",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
                                         "PronType": "Ana"
                                     }
                                 ]
@@ -69981,17 +69993,9 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Case": "Dat",
+                                        "Case": "Acc",
                                         "Gender": "Neut",
                                         "Number": "Sing",
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
                                         "PronType": "Ana"
                                     }
                                 ]
@@ -70005,6 +70009,20 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "Case": "Acc",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
                                         "PronType": "Ana"
                                     }
                                 ]
