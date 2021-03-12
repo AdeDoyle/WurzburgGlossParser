@@ -74878,24 +74878,6 @@
                 ]
             },
             {
-                "lemma": "de",
-                "tokens": [
-                    {
-                        "token": "de",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "do",
                 "tokens": [
                     {
@@ -75909,6 +75891,19 @@
                     },
                     {
                         "token": "adi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "de",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
