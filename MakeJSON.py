@@ -3,7 +3,7 @@
 import re
 from CombineInfoLists import combine_infolists
 from ClearTags import clear_tags
-from conllu import parse, TokenList
+from conllu import parse
 import json
 
 
