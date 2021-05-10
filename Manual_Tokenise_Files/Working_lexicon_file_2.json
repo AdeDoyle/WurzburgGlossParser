@@ -18930,6 +18930,15 @@
                                         "Definite": "Ind"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Def"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -19202,6 +19211,18 @@
                                         "Definite": "Ind",
                                         "Number": "Plur",
                                         "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -19641,10 +19662,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
