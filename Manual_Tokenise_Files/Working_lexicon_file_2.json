@@ -19201,10 +19201,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -19216,7 +19212,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -19476,10 +19472,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -19679,10 +19671,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20182,10 +20170,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20194,7 +20178,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20243,10 +20227,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20506,10 +20486,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20893,10 +20869,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -20905,7 +20877,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21026,10 +20998,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21082,10 +21050,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -21806,10 +21770,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -75938,10 +75898,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Acc",
@@ -75952,7 +75908,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -76064,10 +76020,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -76276,10 +76228,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Fem",
@@ -76290,7 +76238,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -76554,10 +76502,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Masc,Neut",
@@ -76568,7 +76512,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -76685,10 +76629,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Dat",
