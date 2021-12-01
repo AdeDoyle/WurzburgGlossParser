@@ -103,7 +103,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     glosstext = "</em>".join(glosstextlist)
                 # Creates 2 copies of display gloss text, one primary, one retaining footnotes in superscript tags.
                 basegloss = clear_tags(glosstext)
-                footnotesgloss = clear_tags(glosstext, "let")
+                footnotesgloss = glosstext[:]
                 footnotepat = re.compile(r'\[/?[a-z]\]')
                 fnpatitir = footnotepat.finditer(footnotesgloss)
                 fnlist = []
@@ -134,6 +134,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                                 glossfnlist.append(clear_tags(fnote[:1] + ":" + fnote[1:]))
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
+                        footnotesgloss = clear_tags(footnotesgloss)
                     thisglosslist.extend([glossfulltags, basegloss, footnotesgloss, glossfnlist])
                 if newnotelist:
                     for note in newnotelist:
@@ -257,9 +258,12 @@ def get_glinfo(file, startpage=499, stoppage=712):
     return infolist
 
 
-# for glossinfolist in get_glinfo("Wurzburg Glosses", 499, 509):
-#     print(glossinfolist[7])
-# print(get_glinfo("Wurzburg Glosses", 499, 499))
+# if __name__ == "__main__":
+#
+#     for glossinfolist in get_glinfo("Wurzburg Glosses", 499, 509):
+#         print(glossinfolist[7])
+#     print(get_glinfo("Wurzburg Glosses", 499, 499))
+#
+#     for i in get_glinfo("Wurzburg Glosses", 624, 625):
+#         print(i[:4] + i[8:])
 
-# for i in get_glinfo("Wurzburg Glosses", 624, 625):
-#     print(i[:4] + i[8:])

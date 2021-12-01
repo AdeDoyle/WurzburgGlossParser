@@ -18,12 +18,12 @@ def combine_infolists(file, startpage=499, stoppage=712):
     if len(glossinfo) == len(latinfo):
         for i, gloss in enumerate(glossinfo):
             lat = latinfo[i]
-            glist = gloss[:3]
+            glist = gloss[:3]  # ["Epistle", "Page", "Folio"]
             if clear_tags(gloss[4]) == lat[3]:
                 # Ensures the gloss from one list matches the same gloss in the other list before combining contents.
-                glist.extend(lat[6:8])
-                glist.extend(lat[4:6])
-                glist.extend(gloss[3:7])
+                glist.extend(lat[6:8])  # ["Verse", "Latin"]
+                glist.extend(lat[4:6])  # ["Lemma", "Lemma Position"]
+                glist.extend(gloss[3:7])  # ["Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes"]
                 if gloss[7]:
                     if lat[8]:
                         fnlist = [lat[8] + gloss[7]]
@@ -33,8 +33,8 @@ def combine_infolists(file, startpage=499, stoppage=712):
                     fnlist = [lat[8]]
                 else:
                     fnlist = [gloss[7]]
-                glist.extend(fnlist)
-                glist.extend(gloss[8:])
+                glist.extend(fnlist)  # ["Relevant Footnotes"]
+                glist.extend(gloss[8:])  # ["Adrian's Notes", "Gloss Translation"]
                 combolist.append(glist)
             else:
                 print("Error 2.\n%s\n%s" % (clear_tags(gloss[4]), remove_glossnums(lat[0])))
@@ -43,7 +43,10 @@ def combine_infolists(file, startpage=499, stoppage=712):
     return combolist
 
 
-# for combo in combine_infolists("Wurzburg Glosses", 499, 500):
-#     print(combo)
-# for combo in combine_infolists("Wurzburg Glosses", 704, 705):
-#     print(combo[:3] + [combo[7]] + combo[-3:])
+# if __name__ == "__main__":
+#
+#     for combo in combine_infolists("Wurzburg Glosses", 499, 500):
+#         print(combo)
+#     for combo in combine_infolists("Wurzburg Glosses", 704, 705):
+#         print(combo[:3] + [combo[7]] + combo[-3:])
+

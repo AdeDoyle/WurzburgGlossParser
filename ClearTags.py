@@ -11,7 +11,7 @@ def clear_tags(file, exceptions=[]):
     taglist = ["H1", "H2", "Lat", "SG", "Eng", "FN", "GLat", "fol", "NV", "num", "let", "Rep", "ie", "vel", "etc",
                "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-                          "t", "u", "v", "w", "x", "y", "z"]
+                "t", "u", "v", "w", "x", "y", "z"]
     for tag in taglist:
         # Ensures tag to be removed isn't to be excepted
         if tag not in exceptions:
