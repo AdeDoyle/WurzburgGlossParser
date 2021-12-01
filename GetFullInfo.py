@@ -111,7 +111,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     fnlist.append(j.group())
                 if not fnlist:
                     fnstring = ""
-                    thisglosslist.extend([glossfulltags, basegloss, footnotesgloss, fnstring])
+                    thisglosslist.extend([glossfulltags, basegloss, clear_tags(footnotesgloss), fnstring])
                 if fnlist:
                     for fntag in fnlist:
                         if "[/" in fntag:
@@ -134,8 +134,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                                 glossfnlist.append(clear_tags(fnote[:1] + ":" + fnote[1:]))
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
-                        footnotesgloss = clear_tags(footnotesgloss)
-                    thisglosslist.extend([glossfulltags, basegloss, footnotesgloss, glossfnlist])
+                    thisglosslist.extend([glossfulltags, basegloss, clear_tags(footnotesgloss), glossfnlist])
                 if newnotelist:
                     for note in newnotelist:
                         folinfo = note[0]
@@ -155,37 +154,53 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     anstring = ""
                     thisglosslist.extend([anstring])
             infolist.append(thisglosslist)
-    # add translations to the end of the infolists where they are available
-    for infoset in infolist:
-        # exclude the first infoset containing the titles
-        if infoset != infolist[0]:
-            glossid = infoset[3]
-            curpagetrans = pagestrans[0]
-            curtransid = curpagetrans[0]
-            curtrans = curpagetrans[1]
-            # deal with the conjoined gloss on TPH p. 500 (1b10 + 1b11)
-            # split the gloss id into the two numbers, use these to identify the two translations
-            # conjoin the two translations and append them to the infoset for the conjoined gloss ids
-            if ", " in glossid:
-                glossidlist = glossid.split(", ")
-                splittranslations = []
-                for newid in glossidlist:
-                    if newid == curtransid:
-                        splittranslations.append(curtrans)
-                        del pagestrans[0]
-                        curpagetrans = pagestrans[0]
-                        curtransid = curpagetrans[0]
-                        curtrans = curpagetrans[1]
-                joinedtrans = " i.e. ".join(splittranslations)
-                if "[GLat]" in joinedtrans:
-                    transtextlist = joinedtrans.split("[GLat]")
-                    joinedtrans = "<em>".join(transtextlist)
-                if "[/GLat]" in joinedtrans:
-                    transtextlist = joinedtrans.split("[/GLat]")
-                    joinedtrans = "</em>".join(transtextlist)
-                infoset.append(joinedtrans)
-            else:
-                if glossid == curtransid:
+    # add translations to the end of the info-lists where they are available
+    for infoset in infolist[1:]:  # exclude the first info-set containing the titles
+        glossid = infoset[3]
+        curpagetrans = pagestrans[0]
+        curtransid = curpagetrans[0]
+        curtrans = curpagetrans[1]
+        # deal with the conjoined gloss on TPH p. 500 (1b10 + 1b11)
+        # split the gloss id into the two numbers, use these to identify the two translations
+        # conjoin the two translations and append them to the info-set for the conjoined gloss ids
+        if ", " in glossid:
+            glossidlist = glossid.split(", ")
+            splittranslations = []
+            for newid in glossidlist:
+                if newid == curtransid:
+                    splittranslations.append(curtrans)
+                    del pagestrans[0]
+                    curpagetrans = pagestrans[0]
+                    curtransid = curpagetrans[0]
+                    curtrans = curpagetrans[1]
+            joinedtrans = " i.e. ".join(splittranslations)
+            if "[GLat]" in joinedtrans:
+                transtextlist = joinedtrans.split("[GLat]")
+                joinedtrans = "<em>".join(transtextlist)
+            if "[/GLat]" in joinedtrans:
+                transtextlist = joinedtrans.split("[/GLat]")
+                joinedtrans = "</em>".join(transtextlist)
+            infoset.append(joinedtrans)
+        else:
+            if glossid == curtransid:
+                if "[GLat]" in curtrans:
+                    transtextlist = curtrans.split("[GLat]")
+                    curtrans = "<em>".join(transtextlist)
+                if "[/GLat]" in curtrans:
+                    transtextlist = curtrans.split("[/GLat]")
+                    curtrans = "</em>".join(transtextlist)
+                infoset.append(curtrans)
+                del pagestrans[0]
+            # deal with page 587 where glosses 27, 28, and 29 share the one translation, numbered '27 – 29.'.
+            elif " – " in curtransid:
+                curtransidlist = curtransid.split(" – ")
+                curtransidrange = [int(curtransidlist[0]), int(curtransidlist[1])]
+                idstart = curtransidrange[0]
+                idstop = curtransidrange[1]
+                curtransidlist = []
+                for i in range(idstart, idstop + 1):
+                    curtransidlist.append(str(i))
+                if glossid in curtransidlist:
                     if "[GLat]" in curtrans:
                         transtextlist = curtrans.split("[GLat]")
                         curtrans = "<em>".join(transtextlist)
@@ -193,68 +208,48 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         transtextlist = curtrans.split("[/GLat]")
                         curtrans = "</em>".join(transtextlist)
                     infoset.append(curtrans)
+                if glossid == curtransidlist[-1]:
                     del pagestrans[0]
-                # deal with page 587 where glosses 27, 28, and 29 share the one translation, numbered '27 – 29.'.
-                elif " – " in curtransid:
-                    curtransidlist = curtransid.split(" – ")
-                    curtransidrange = [int(curtransidlist[0]), int(curtransidlist[1])]
-                    idstart = curtransidrange[0]
-                    idstop = curtransidrange[1]
-                    curtransidlist = []
-                    for i in range(idstart, idstop + 1):
-                        curtransidlist.append(str(i))
-                    if glossid in curtransidlist:
-                        if "[GLat]" in curtrans:
-                            transtextlist = curtrans.split("[GLat]")
-                            curtrans = "<em>".join(transtextlist)
-                        if "[/GLat]" in curtrans:
-                            transtextlist = curtrans.split("[/GLat]")
-                            curtrans = "</em>".join(transtextlist)
-                        infoset.append(curtrans)
-                    if glossid == curtransidlist[-1]:
-                        del pagestrans[0]
-                # if no translation is given in TPH
-                else:
-                    infoset.append("No translation available.")
+            # if no translation is given in TPH
+            else:
+                infoset.append("No translation available.")
     # Gets all page Footnotes for the second time (for the translation)
     curpage = None
-    for infoset in infolist:
-        # exclude the first infoset containing the titles
-        if infoset != infolist[0]:
-            thistransfns = []
-            # ensures page footnotes are only generated once per page, and not for every gloss
-            if curpage:
-                if curpage != infoset[1]:
-                    curpage = infoset[1]
-                    footnotelist = order_footlist(file, curpage)
-            elif not curpage:
+    for infoset in infolist[1:]:  # exclude the first info-set containing the titles
+        thistransfns = []
+        # ensures page footnotes are only generated once per page, and not for every gloss
+        if curpage:
+            if curpage != infoset[1]:
                 curpage = infoset[1]
                 footnotelist = order_footlist(file, curpage)
-            trans = infoset[9]
-            # finds which translations have footnotes, looks for the associated footnote i the list generated above
-            if "<sup>" in trans:
-                superscriptpat = re.compile(r'<sup>\w</sup>')
-                superscriptpatitir = superscriptpat.finditer(trans)
-                for i in superscriptpatitir:
-                    fnid = i.group()[5]
-                    for footnote in footnotelist:
-                        if footnote[0] == fnid:
-                            # if the footnote is found and not already in the footnote list for the gloss it is added
-                            if infoset[7]:
-                                if clear_tags(footnote[:1] + ":" + footnote[1:]) not in infoset[7]:
-                                    thistransfns.append(clear_tags(footnote[:1] + ":" + footnote[1:]))
-                            else:
+        elif not curpage:
+            curpage = infoset[1]
+            footnotelist = order_footlist(file, curpage)
+        trans = infoset[9]
+        # finds which translations have footnotes, looks for the associated footnote i the list generated above
+        if "<sup>" in trans:
+            superscriptpat = re.compile(r'<sup>\w</sup>')
+            superscriptpatitir = superscriptpat.finditer(trans)
+            for i in superscriptpatitir:
+                fnid = i.group()[5]
+                for footnote in footnotelist:
+                    if footnote[0] == fnid:
+                        # if the footnote is found and not already in the footnote list for the gloss it is added
+                        if infoset[7]:
+                            if clear_tags(footnote[:1] + ":" + footnote[1:]) not in infoset[7]:
                                 thistransfns.append(clear_tags(footnote[:1] + ":" + footnote[1:]))
-            # all footnotes found for the gloss are combined
-            # if there are translation footnotes
-            if thistransfns:
-                # if there are no gloss footnotes to add them to
-                if not infoset[7]:
-                    infoset[7] = thistransfns
-                # if there are gloss footnotes to add them to
-                elif infoset[7]:
-                    for i in thistransfns:
-                        infoset[7].append(i)
+                        else:
+                            thistransfns.append(clear_tags(footnote[:1] + ":" + footnote[1:]))
+        # all footnotes found for the gloss are combined
+        # if there are translation footnotes
+        if thistransfns:
+            # if there are no gloss footnotes to add them to
+            if not infoset[7]:
+                infoset[7] = thistransfns
+            # if there are gloss footnotes to add them to
+            elif infoset[7]:
+                for i in thistransfns:
+                    infoset[7].append(i)
     return infolist
 
 

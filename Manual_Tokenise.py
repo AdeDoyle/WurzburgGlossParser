@@ -2398,34 +2398,88 @@ def update_base_file(base_file, file_dir):
     updated_text_file = combine_infolists("Wurzburg Glosses", 499, 712)
     os.chdir(cur_dir)
     updated_text_file = json.loads(make_json(updated_text_file, True))
+    # Check if there is any difference at all between the newly generated file and the file currently in use
+    # Note: the newly generated file will have no tokenisation, hence, glossTokens1 and glossTokens2 will be empty
+    # therefore, if the file currently in use has any tokens already added, there will be a difference here
     if updated_text_file != base_file:
         for i, level_0 in enumerate(updated_text_file):
             upd_folios = level_0.get('folios')
             folios = base_file[i].get('folios')
+            # Check if there is any difference between the collected content of each epistle
             if upd_folios != folios:
                 for j, level_1 in enumerate(upd_folios):
                     upd_glosses = level_1.get('glosses')
                     glosses = folios[j].get('glosses')
+                    # Checks if there is any difference between the collected content of each column on each folio
                     if upd_glosses != glosses:
+                        # If the length of the newly generated content is longer than that of the in-use file,
+                        # which is unlikely given that it will not have any tokens or POS tag information,
+                        # the gloss numbers are collected for each version and compared against each other
                         if len(upd_glosses) > len(glosses):
                             while len(upd_glosses) > len(glosses):
                                 upd_glossnums = [upd_gloss_data.get("glossNo") for upd_gloss_data in upd_glosses]
                                 glossnums = [gloss_data.get("glossNo") for gloss_data in glosses]
+                                # For each gloss number which appears in the newly generated file but not in the file
+                                # which is currently in use, it is assumed that a new gloss has been added
                                 for k, upd_glossnumber in enumerate(upd_glossnums):
                                     if upd_glossnumber not in glossnums:
+                                        # The list of glosses for the current column is split at the point of the
+                                        # omission and the missing gloss's data is added in at the point of the split
                                         for upd_gloss_data in upd_glosses:
                                             if upd_gloss_data.get("glossNo") == upd_glossnumber:
                                                 glosses = glosses[:k] + [upd_gloss_data] + glosses[k:]
                             folios[j]['glosses'] = glosses
                         for k, level_2 in enumerate(upd_glosses):
-                            upd_newnote = level_2.get('newNotes')
-                            newnote = glosses[k].get('newNotes')
-                            if upd_newnote != newnote:
-                                glosses[k]['newNotes'] = upd_newnote
+                            upd_latin = level_2.get('latin')
+                            latin = glosses[k].get('latin')
+                            # Update the glossed Latin text if changes have been made
+                            if upd_latin != latin:
+                                glosses[k]['latin'] = upd_latin
+                            upd_lemma = level_2.get('lemma')
+                            lemma = glosses[k].get('lemma')
+                            # Update the Latin lemma to which the gloss is attached if changes have been made
+                            if upd_lemma != lemma:
+                                glosses[k]['lemma'] = upd_lemma
+                            upd_lemPos = level_2.get('lemPos')
+                            lemPos = glosses[k].get('lemPos')
+                            # Update the position of the Latin lemma if changes have been made
+                            if upd_lemPos != lemPos:
+                                glosses[k]['lemPos'] = upd_lemPos
                             upd_glosshand = level_2.get('glossHand')
                             glosshand = glosses[k].get('glossHand')
+                            # Update the scribal hand if changes have been made
                             if upd_glosshand != glosshand:
                                 glosses[k]['glossHand'] = upd_glosshand
+                            upd_glossFullTags = level_2.get('glossFullTags')
+                            glossFullTags = glosses[k].get('glossFullTags')
+                            # Update the fully tagged gloss text if changes have been made
+                            if upd_glossFullTags != glossFullTags:
+                                glosses[k]['glossFullTags'] = upd_glossFullTags
+                            upd_glossText = level_2.get('glossText')
+                            glossText = glosses[k].get('glossText')
+                            # Update the gloss text with all tags removed if changes have been made
+                            if upd_glossText != glossText:
+                                glosses[k]['glossText'] = upd_glossText
+                            upd_glossFNs = level_2.get('glossFNs')
+                            glossFNs = glosses[k].get('glossFNs')
+                            # Update the gloss text with superscript footnote tags if changes have been made
+                            if upd_glossFNs != glossFNs:
+                                glosses[k]['glossFNs'] = upd_glossFNs
+                            upd_glossTrans = level_2.get('glossTrans')
+                            glossTrans = glosses[k].get('glossTrans')
+                            # Update the English translation of the gloss if changes have been made
+                            if upd_glossTrans != glossTrans:
+                                glosses[k]['glossTrans'] = upd_glossTrans
+                            upd_footnotes = level_2.get('footnotes')
+                            footnotes = glosses[k].get('footnotes')
+                            # Update the footnotes if changes have been made
+                            if upd_footnotes != footnotes:
+                                glosses[k]['footnotes'] = upd_footnotes
+                            upd_newnote = level_2.get('newNotes')
+                            newnote = glosses[k].get('newNotes')
+                            # Update the site notes (new notes) if changes have been made
+                            if upd_newnote != newnote:
+                                glosses[k]['newNotes'] = upd_newnote
 
                             type1_toks = glosses[k].get('glossTokens1')
                             type1_toks = [tagged_tok + [None] if len(tagged_tok) == 3
