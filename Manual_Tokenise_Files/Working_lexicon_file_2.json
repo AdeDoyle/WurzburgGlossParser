@@ -60964,6 +60964,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Acc",
@@ -60972,7 +60976,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -60981,7 +60985,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 4,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -60990,7 +60994,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 4,
+                                "feature_set": 5,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -89824,6 +89828,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "gníu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
