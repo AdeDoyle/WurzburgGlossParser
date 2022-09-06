@@ -25163,22 +25163,6 @@
                         ]
                     },
                     {
-                        "token": "aṅ",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "PronType": "Art"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "in",
                         "feature_sets": [
                             {
@@ -68534,13 +68518,7 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Polarity": "Pos",
-                                        "PronType": "Int",
-                                        "Tense": "Pres",
-                                        "VerbType": "Cop"
+                                        "PronType": "Int"
                                     }
                                 ]
                             }
@@ -71472,6 +71450,24 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cia so",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Pos",
+                                        "Tense": "Pres",
+                                        "VerbType": "Cop"
+                                    }
+                                ]
                             }
                         ]
                     },

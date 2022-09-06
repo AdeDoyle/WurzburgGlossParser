@@ -25740,22 +25740,6 @@
                         ]
                     },
                     {
-                        "token": "aṅ",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "PronType": "Art"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "in",
                         "feature_sets": [
                             {
@@ -74725,6 +74709,19 @@
                     },
                     {
                         "token": "ce",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Int"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ced",
                         "feature_sets": [
                             {
                                 "feature_set": 1,

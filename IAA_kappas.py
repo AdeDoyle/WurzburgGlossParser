@@ -98,8 +98,8 @@ def compare_agreement(binary_agreements_list):
 # e2 = get_text(op.join(direct, "IAA_expert_EL"))
 # original = get_text(op.join(direct_mod, "Mod. Ir. Originals"))
 # o0 = get_text(op.join(direct_mod, "IAA_CS"))
-# o1 = get_text(op.join(direct_mod, "IAA_IG"))
-# o2 = get_text(op.join(direct_mod, "IAA_KD"))
+# o1 = get_text(op.join(direct_mod, "IAA_KD"))
+# o2 = get_text(op.join(direct_mod, "IAA_IG"))
 # s0 = get_text(op.join(direct_mod, "IAA_TF"))
 # s1 = get_text(op.join(direct_mod, "IAA_JBC"))
 # s2 = get_text(op.join(direct_mod, "IAA_OD"))
@@ -119,24 +119,38 @@ def compare_agreement(binary_agreements_list):
 #     glosssplit = anno.split("\n")
 #     annoglosslist = list()
 #     for gl in glosssplit:
-#         # glpat = re.compile(r'\(\d{1,2}[a-d] \d{1,2}[a-d]?\) ')
-#         # glpatitir = glpat.finditer(gl)
-#         # for i in glpatitir:
-#         annoglosslist.append(gl)
+#         glpat = re.compile(r'\(\d{1,2}[a-d] \d{1,2}[a-d]?\) ')
+#         glpatitir = glpat.finditer(gl)
+#         glossid = ""
+#         for i in glpatitir:
+#             glossid = i.group().strip()
+#         if glossid != "":
+#             annoglosslist.append([glossid, gl[len(glossid) + 1:]])
+#         else:
+#             annoglosslist.append([glossid, gl[len(glossid):]])
 #     allannoslist.append(annoglosslist)
 # annocombo = list()
-# for i in range(len(allannoslist[0])):
+# for glossnum in range(len(allannoslist[0])):
 #     thiscombo = list()
-#     for j in allannoslist:
-#         thiscombo.append(j[i])
+#     for annotator in allannoslist:
+#         thiscombo.append(annotator[glossnum])
 #     annocombo.append(thiscombo)
 # outstring = ""
 # for combo in annocombo:
-#     count = 0
-#     for var in combo:
-#         count += 1
-#         outstring = outstring + "{}: {}\n".format(str(count), var)
+#     glossid = combo[0][0]
+#     outstring = outstring + f"{glossid}\n"
+#     annotator_number = 0
+#     for var_list in combo:
+#         var = "".join(var_list[1].split("*"))
+#         var = "".join(var.split("-"))
+#
+#         annotator_number += 1
+#         outstring = outstring + f"A{annotator_number}: {var}\n"
 #     outstring = outstring + "\n"
+# while "  " in outstring:
+#     outstring = " ".join(outstring.split("  "))
+# while "\n\n\n" in outstring:
+#     outstring = "\n\n".join(outstring.split("\n\n\n"))
 # print(outstring)
 # # save_docx(outstring, "Compare Annotators")
 
