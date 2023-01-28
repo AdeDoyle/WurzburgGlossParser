@@ -91345,6 +91345,15 @@
                 "lemma": "dosluindi",
                 "tokens": [
                     {
+                        "token": "derlind",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "díltai",
                         "feature_sets": [
                             {
@@ -95420,6 +95429,15 @@
                                         "Voice": "Pass"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rimfolṅgar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }

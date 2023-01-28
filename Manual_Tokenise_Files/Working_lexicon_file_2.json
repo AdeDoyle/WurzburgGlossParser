@@ -90793,6 +90793,15 @@
                 "lemma": "dosluindi",
                 "tokens": [
                     {
+                        "token": "derlind",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "díltai",
                         "feature_sets": [
                             {
@@ -94614,6 +94623,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "folṅgar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
