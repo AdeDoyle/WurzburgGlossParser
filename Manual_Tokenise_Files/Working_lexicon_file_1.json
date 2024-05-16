@@ -21330,6 +21330,25 @@
                 ]
             },
             {
+                "lemma": "fíad",
+                "tokens": [
+                    {
+                        "token": "fiad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "i",
                 "tokens": [
                     {
@@ -24785,20 +24804,6 @@
                 "tokens": [
                     {
                         "token": "thall",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "tra",
-                "tokens": [
-                    {
-                        "token": "tra",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -54475,6 +54480,33 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "nimdibe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nimdibi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nimdibiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -77669,6 +77701,20 @@
                 ]
             },
             {
+                "lemma": ".,",
+                "tokens": [
+                    {
+                        "token": ".,",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": ":",
                 "tokens": [
                     {
@@ -78786,6 +78832,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "másu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -79680,6 +79735,15 @@
             {
                 "lemma": "adcí",
                 "tokens": [
+                    {
+                        "token": "adchi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "adciam",
                         "feature_sets": [
@@ -91629,6 +91693,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "dotéit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },

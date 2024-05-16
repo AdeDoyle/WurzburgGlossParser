@@ -21683,20 +21683,6 @@
                 ]
             },
             {
-                "lemma": "tra",
-                "tokens": [
-                    {
-                        "token": "tra",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "trá",
                 "tokens": [
                     {
