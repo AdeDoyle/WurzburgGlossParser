@@ -12180,7 +12180,7 @@
 # sent_id = 992
 # reference = 40a15
 # scribe = Glossator A
-# text = c indas ṁbias iar na cétbuid sem co nid gau dóib sem in chruth sin a nas berat nadṁbed ad plures
+# text = c indas ṁbias iar na cétbuid sem co nid gau dóib sem in chruth sin a nas berat nad ṁbed ad plures
 # translation = how then will it be according to their opinion? so that they are wrong then when they say that there is no (comparison) ad plures
 1	c	cía	PRON	_	PronType=Int	_	_	_	_
 2	indas	indas	NOUN	_	Case=Nom|Number=Sing	_	_	_	_
@@ -12200,9 +12200,10 @@
 16	a	a	SCONJ	_	_	_	_	_	_
 17	nas	as	PART	_	PartType=Vb	_	_	_	_
 18	berat	asbeir	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Pres|Voice=Act	_	_	_	_
-19	nadṁbed	is	AUX	_	Mood=Sub|Number=Sing|Person=3|Polarity=Neg|PronType=Rel|Tense=Past|VerbType=Cop	_	_	_	_
-20	ad	_	X	_	Foreign=Yes	_	_	_	_
-21	plures	_	X	_	Foreign=Yes	_	_	_	_
+19	nad	is	AUX	_	Mood=Ind|Number=Sing|Person=3|Polarity=Neg|PronType=Rel|Tense=Pres|VerbType=Cop	_	_	_	_
+20	ṁbed	attá	VERB	_	Mood=Sub|Number=Sing|Person=3|Tense=Past|Voice=Act	_	_	_	_
+21	ad	_	X	_	Foreign=Yes	_	_	_	_
+22	plures	_	X	_	Foreign=Yes	_	_	_	_
 
 # sent_id = 993
 # reference = 40a16
