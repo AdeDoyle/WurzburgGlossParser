@@ -915,6 +915,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -925,7 +929,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -936,7 +940,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 4,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -20260,6 +20264,23 @@
                         ]
                     },
                     {
+                        "token": "fornn",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "forru",
                         "feature_sets": [
                             {
@@ -23862,6 +23883,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -24364,25 +24389,6 @@
                                         "Polarity": "Neg",
                                         "PronType": "Rel",
                                         "Tense": "Pres",
-                                        "VerbType": "Cop"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "nadṁbed",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel",
-                                        "Tense": "Past",
                                         "VerbType": "Cop"
                                     }
                                 ]
@@ -26907,6 +26913,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -32901,6 +32911,15 @@
             {
                 "lemma": "bibdu",
                 "tokens": [
+                    {
+                        "token": "bibdid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "bibdu",
                         "feature_sets": [
@@ -41134,6 +41153,15 @@
                         ]
                     },
                     {
+                        "token": "cois",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "cóis",
                         "feature_sets": [
                             {
@@ -46448,6 +46476,15 @@
                                         "Number": "Plur"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "épirt",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -74794,6 +74831,21 @@
                         ]
                     },
                     {
+                        "token": "caích",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "chach",
                         "feature_sets": [
                             {
@@ -82197,6 +82249,15 @@
                         ]
                     },
                     {
+                        "token": "mberam",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "mberar",
                         "feature_sets": [
                             {
@@ -83975,6 +84036,15 @@
                         ]
                     },
                     {
+                        "token": "líit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "mbe",
                         "feature_sets": [
                             {
@@ -84720,6 +84790,23 @@
                                         "Number": "Sing",
                                         "Person": "3",
                                         "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ṁbed",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -87123,6 +87210,20 @@
                     },
                     {
                         "token": "dligim",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "doaccair",
+                "tokens": [
+                    {
+                        "token": "racartmar",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -90858,6 +90959,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "derscigem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },

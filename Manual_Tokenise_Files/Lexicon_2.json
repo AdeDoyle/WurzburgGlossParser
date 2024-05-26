@@ -22766,25 +22766,6 @@
                         ]
                     },
                     {
-                        "token": "nadṁbed",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel",
-                                        "Tense": "Past",
-                                        "VerbType": "Cop"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "namtar",
                         "feature_sets": [
                             {
@@ -76914,6 +76895,23 @@
                                         "Number": "Sing",
                                         "Person": "3",
                                         "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ṁbed",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
