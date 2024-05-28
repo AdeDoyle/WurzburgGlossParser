@@ -31505,85 +31505,6 @@
                                 ]
                             }
                         ]
-                    },
-                    {
-                        "token": "buit",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "buith",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "buithe",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "mbuith",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ṁbuithe",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             },
@@ -32260,6 +32181,90 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "buith",
+                "tokens": [
+                    {
+                        "token": "buit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "buith",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "buithe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "mbuith",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ṁbuithe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
                                         "Number": "Sing"
                                     }
                                 ]
