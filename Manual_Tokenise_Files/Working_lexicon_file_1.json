@@ -19236,15 +19236,6 @@
                                         "Definite": "Ind"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Def"
-                                    }
-                                ]
                             }
                         ]
                     },
