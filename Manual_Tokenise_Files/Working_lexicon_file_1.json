@@ -19236,6 +19236,15 @@
                                         "Definite": "Ind"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Def"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -19254,6 +19263,24 @@
                         ]
                     },
                     {
+                        "token": "cosin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Case": "Acc",
+                                        "Definite": "Def",
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "PronType": "Art"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "cossa",
                         "feature_sets": [
                             {
@@ -19264,6 +19291,24 @@
                                         "Case": "Acc",
                                         "Definite": "Def",
                                         "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "PronType": "Art"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cossin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Case": "Acc",
+                                        "Definite": "Def",
+                                        "Gender": "Masc",
                                         "Number": "Sing",
                                         "PronType": "Art"
                                     }
@@ -35750,6 +35795,15 @@
                         ]
                     },
                     {
+                        "token": "chiun",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "chiunn",
                         "feature_sets": [
                             {
@@ -35997,6 +36051,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cenélu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -44184,6 +44247,20 @@
                 ]
             },
             {
+                "lemma": "domun",
+                "tokens": [
+                    {
+                        "token": "domun",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dor",
                 "tokens": [
                     {
@@ -47944,6 +48021,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "exceptid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -58957,6 +59043,20 @@
                 ]
             },
             {
+                "lemma": "maldact",
+                "tokens": [
+                    {
+                        "token": "maldactin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "marcach",
                 "tokens": [
                     {
@@ -65080,6 +65180,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "serbe",
+                "tokens": [
+                    {
+                        "token": "serbe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -76080,6 +76194,19 @@
                         ]
                     },
                     {
+                        "token": "sede",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Ana"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "side",
                         "feature_sets": [
                             {
@@ -76790,6 +76917,27 @@
                                         "Number": "Plur",
                                         "Person": "3",
                                         "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "óin",
+                "tokens": [
+                    {
+                        "token": "nóin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
                                     }
                                 ]
                             }
@@ -88159,6 +88307,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -94426,6 +94578,20 @@
                 ]
             },
             {
+                "lemma": "foricc",
+                "tokens": [
+                    {
+                        "token": "farnic",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "fortét",
                 "tokens": [
                     {
@@ -99621,6 +99787,15 @@
                     },
                     {
                         "token": "riarfact",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "riarfactatar",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
