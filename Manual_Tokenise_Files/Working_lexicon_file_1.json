@@ -13711,6 +13711,15 @@
                 "lemma": "rectide",
                 "tokens": [
                     {
+                        "token": "rechtidi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "rectide",
                         "feature_sets": [
                             {
@@ -15224,6 +15233,20 @@
                 ]
             },
             {
+                "lemma": "spirtálde",
+                "tokens": [
+                    {
+                        "token": "spirtálde",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "srebnaide",
                 "tokens": [
                     {
@@ -15260,6 +15283,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "storide",
+                "tokens": [
+                    {
+                        "token": "storide",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -26489,6 +26526,15 @@
                         ]
                     },
                     {
+                        "token": "nípa",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "nírbo",
                         "feature_sets": [
                             {
@@ -32840,6 +32886,15 @@
                                         "Number": "Plur"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nathir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -39330,6 +39385,20 @@
                 ]
             },
             {
+                "lemma": "coscrad",
+                "tokens": [
+                    {
+                        "token": "coscrad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cosecrad",
                 "tokens": [
                     {
@@ -43211,6 +43280,20 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "deoladacht",
+                "tokens": [
+                    {
+                        "token": "deoladacht",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -51805,6 +51888,29 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "fíach",
+                "tokens": [
+                    {
+                        "token": "fiach",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "fíach",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -63355,6 +63461,15 @@
                         ]
                     },
                     {
+                        "token": "recto",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "rectto",
                         "feature_sets": [
                             {
@@ -73603,19 +73718,6 @@
                         ]
                     },
                     {
-                        "token": "in",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Int"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "sa",
                         "feature_sets": [
                             {
@@ -74317,6 +74419,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Polarity": "Neg"
@@ -74886,6 +74992,17 @@
                                         "Number": "Plur",
                                         "Person": "1",
                                         "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "Polarity": "Pos",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -87217,6 +87334,29 @@
                 ]
             },
             {
+                "lemma": "conscara",
+                "tokens": [
+                    {
+                        "token": "choscram",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "coscram",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "consecha",
                 "tokens": [
                     {
@@ -87649,6 +87789,15 @@
                 "lemma": "cretid",
                 "tokens": [
                     {
+                        "token": "creites",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "creitid",
                         "feature_sets": [
                             {
@@ -87686,6 +87835,15 @@
                     },
                     {
                         "token": "cretim",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "crettes",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -95580,6 +95738,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "rofírianiged",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -97527,6 +97694,20 @@
                                         "Voice": "Pass"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "noíbaid",
+                "tokens": [
+                    {
+                        "token": "ronóibad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
