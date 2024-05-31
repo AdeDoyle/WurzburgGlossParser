@@ -37,7 +37,11 @@ class UI:
                           "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
                           "Number": ["N/A", "Dual", "Sing", "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
-                          "PronType": ["N/A", "Art", "Prs"]}
+                          "PronClass": ["N/A", "A", "B", "C"],
+                          "PronGend": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
+                          "PronNum": ["N/A", "Sing", "Plur"],
+                          "PronPers": ["N/A", "1",  "2", "3"],
+                          "PronType": ["N/A", "Art", "Prs", "Prs,Rel", "Rel"]}
         self.pron_feats = {"Case": ["N/A", "Nom", "Acc", "Gen", "Dat"],
                            "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
                            "Mood": ["N/A", "Ind", "Sub"],
