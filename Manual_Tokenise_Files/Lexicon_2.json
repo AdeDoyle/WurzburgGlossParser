@@ -20453,39 +20453,6 @@
                 ]
             },
             {
-                "lemma": "í",
-                "tokens": [
-                    {
-                        "token": "hi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Ind"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "hí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Ind"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "íar",
                 "tokens": [
                     {
