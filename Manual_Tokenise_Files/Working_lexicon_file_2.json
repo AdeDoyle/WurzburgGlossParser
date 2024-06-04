@@ -3741,26 +3741,6 @@
                 ]
             },
             {
-                "lemma": "cethramad",
-                "tokens": [
-                    {
-                        "token": "cethramad",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "ciclastae",
                 "tokens": [
                     {
@@ -5582,34 +5562,7 @@
                                     {
                                         "Case": "Nom",
                                         "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
                                         "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "cetnae",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -5626,100 +5579,6 @@
                                         "Case": "Nom",
                                         "Degree": "Pos",
                                         "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "cetni",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "chetna",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "chetne",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "chetni",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -5768,47 +5627,10 @@
                         ]
                     },
                     {
-                        "token": "chétni",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "cétna",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -5819,7 +5641,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 4,
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -5871,17 +5693,6 @@
                                         "Number": "Sing"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -5892,61 +5703,10 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
                                         "Case": "Nom",
                                         "Degree": "Pos",
                                         "Gender": "Fem",
                                         "Number": "Plur"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Degree": "Pos",
-                                        "Prefix": "Yes"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "cétnu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "cétnæ",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -7394,27 +7154,6 @@
                 ]
             },
             {
-                "lemma": "déde",
-                "tokens": [
-                    {
-                        "token": "ndéde",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "dédenach",
                 "tokens": [
                     {
@@ -8791,42 +8530,6 @@
                 ]
             },
             {
-                "lemma": "fir",
-                "tokens": [
-                    {
-                        "token": "fir",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ḟír",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "fliuch",
                 "tokens": [
                     {
@@ -9814,6 +9517,22 @@
                                         "Degree": "Pos",
                                         "Gender": "Neut",
                                         "Number": "Plur"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ḟír",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Degree": "Pos",
+                                        "Gender": "Neut",
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -12622,16 +12341,6 @@
                                 "feature_set": 4,
                                 "features": [
                                     {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 5,
-                                "features": [
-                                    {
                                         "Degree": "Pos",
                                         "Prefix": "Yes"
                                     }
@@ -13111,43 +12820,6 @@
                                         "Degree": "Pos",
                                         "Gender": "Fem",
                                         "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "ochtmad",
-                "tokens": [
-                    {
-                        "token": "ochtmad",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Plur"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ochtmath",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Plur"
                                     }
                                 ]
                             }
@@ -16462,52 +16134,6 @@
                 ]
             },
             {
-                "lemma": "tress",
-                "tokens": [
-                    {
-                        "token": "tres",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tris",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Degree": "Pos",
-                                        "Prefix": "Yes"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "troiándae",
                 "tokens": [
                     {
@@ -16775,203 +16401,6 @@
                                     {
                                         "Case": "Nom",
                                         "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "tánaise",
-                "tokens": [
-                    {
-                        "token": "tanaise",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Neut",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tanaisi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tanaisiu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tanise",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tanisi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tanisiu",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tánaise",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tánaisi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tánise",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tánáisi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Degree": "Pos",
-                                        "Gender": "Fem",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -18407,26 +17836,6 @@
                                         "Case": "Nom",
                                         "Degree": "Pos",
                                         "Gender": "Masc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "úar",
-                "tokens": [
-                    {
-                        "token": "uar",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -41058,25 +40467,6 @@
                 ]
             },
             {
-                "lemma": "cét",
-                "tokens": [
-                    {
-                        "token": "cét",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "cétbaid",
                 "tokens": [
                     {
@@ -41592,25 +40982,6 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "cóica",
-                "tokens": [
-                    {
-                        "token": "cóica",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -48360,25 +47731,6 @@
                 "tokens": [
                     {
                         "token": "fiach",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "fiche",
-                "tokens": [
-                    {
-                        "token": "fiche",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -60414,25 +59766,6 @@
                 ]
             },
             {
-                "lemma": "míle",
-                "tokens": [
-                    {
-                        "token": "míli",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "mír",
                 "tokens": [
                     {
@@ -72361,6 +71694,20 @@
                         ]
                     },
                     {
+                        "token": "uar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "uár",
                         "feature_sets": [
                             {
@@ -72719,6 +72066,24 @@
                 ]
             },
             {
+                "lemma": "cethramad",
+                "tokens": [
+                    {
+                        "token": "cethramad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "cét",
                 "tokens": [
                     {
@@ -72727,6 +72092,180 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cét",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "cétnae",
+                "tokens": [
+                    {
+                        "token": "cetna",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cetnae",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cetni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "chetna",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "chetne",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "chetni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "chétni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cétna",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cétne",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cétni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cétnu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cétnæ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -72741,6 +72280,24 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "cóica",
+                "tokens": [
+                    {
+                        "token": "cóica",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -72901,6 +72458,42 @@
                 ]
             },
             {
+                "lemma": "fiche",
+                "tokens": [
+                    {
+                        "token": "fiche",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "míle",
+                "tokens": [
+                    {
+                        "token": "míli",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "noí",
                 "tokens": [
                     {
@@ -72932,6 +72525,37 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "ochtmad",
+                "tokens": [
+                    {
+                        "token": "ochtmad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ochtmath",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73088,6 +72712,37 @@
                 ]
             },
             {
+                "lemma": "tress",
+                "tokens": [
+                    {
+                        "token": "tres",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tris",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "trí",
                 "tokens": [
                     {
@@ -73141,6 +72796,141 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tánaise",
+                "tokens": [
+                    {
+                        "token": "tanaise",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tanaisi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tanaisiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tanise",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tanisi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tanisiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tánaise",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tánaisi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tánise",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tánáisi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "NumType": "Ord"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73215,6 +73005,19 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "in",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Int"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -75930,19 +75733,6 @@
                         ]
                     },
                     {
-                        "token": "ced",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Int"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "ci",
                         "feature_sets": [
                             {
@@ -77018,6 +76808,21 @@
                         ]
                     },
                     {
+                        "token": "mei",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "mmé",
                         "feature_sets": [
                             {
@@ -77339,21 +77144,6 @@
                         ]
                     },
                     {
-                        "token": "isse",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "1",
-                                        "PronType": "Emp"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "sa",
                         "feature_sets": [
                             {
@@ -77370,6 +77160,21 @@
                     },
                     {
                         "token": "se",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronType": "Emp"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "sse",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
