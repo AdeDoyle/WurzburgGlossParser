@@ -22926,29 +22926,6 @@
         ]
     },
     {
-        "part_of_speech": "ANUM",
-        "lemmata": [
-            {
-                "lemma": "tánaise",
-                "tokens": [
-                    {
-                        "token": "tanaisi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "NumType": "Ord"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
         "part_of_speech": "AUX",
         "lemmata": [
             {

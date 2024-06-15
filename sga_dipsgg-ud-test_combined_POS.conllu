@@ -39028,7 +39028,7 @@
 12	persin	persan	NOUN	_	Case=Dat|Number=Sing	_	_	_	_
 13	do	do	ADP	_	AdpType=Prep|Definite=Ind	_	_	_	_
 14	persin	persan	NOUN	_	Case=Dat|Number=Sing	_	_	_	_
-15	tanaisi	tánaise	ANUM	_	NumType=Ord	_	_	_	_
+15	tanaisi	tánaise	NUM	_	NumType=Ord	_	_	_	_
 
 # sent_id = 3280
 # reference = 212b4
