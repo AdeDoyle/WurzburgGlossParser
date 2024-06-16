@@ -8532,10 +8532,8 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Case": "Acc",
                                         "Degree": "Pos",
-                                        "Gender": "Masc",
-                                        "Number": "Sing"
+                                        "Prefix": "Yes"
                                     }
                                 ]
                             }
@@ -12141,10 +12139,8 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Case": "Nom",
                                         "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
+                                        "Prefix": "Yes"
                                     }
                                 ]
                             }
@@ -12378,6 +12374,17 @@
                                 "feature_set": 4,
                                 "features": [
                                     {
+                                        "Case": "Nom",
+                                        "Degree": "Pos",
+                                        "Gender": "Neut",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 5,
+                                "features": [
+                                    {
                                         "Degree": "Pos",
                                         "Prefix": "Yes"
                                     }
@@ -12519,8 +12526,9 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Case": "Dat",
+                                        "Case": "Nom",
                                         "Degree": "Pos",
+                                        "Gender": "Fem",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -12531,7 +12539,7 @@
                                     {
                                         "Case": "Nom",
                                         "Degree": "Pos",
-                                        "Gender": "Fem",
+                                        "Gender": "Masc",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -12542,7 +12550,6 @@
                                     {
                                         "Case": "Nom",
                                         "Degree": "Pos",
-                                        "Gender": "Masc",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -12551,9 +12558,8 @@
                                 "feature_set": 5,
                                 "features": [
                                     {
-                                        "Case": "Nom",
                                         "Degree": "Pos",
-                                        "Number": "Sing"
+                                        "Prefix": "Yes"
                                     }
                                 ]
                             }
@@ -12820,10 +12826,8 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Case": "Voc",
                                         "Degree": "Pos",
-                                        "Gender": "Fem",
-                                        "Number": "Sing"
+                                        "Prefix": "Yes"
                                     }
                                 ]
                             }
@@ -19295,6 +19299,23 @@
                         ]
                     },
                     {
+                        "token": "dv́n",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "dí",
                         "feature_sets": [
                             {
@@ -22480,6 +22501,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "didiv",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -25473,6 +25503,24 @@
                 ]
             },
             {
+                "lemma": "ná",
+                "tokens": [
+                    {
+                        "token": "na",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Polarity": "Neg"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "nó",
                 "tokens": [
                     {
@@ -26616,6 +26664,23 @@
                         ]
                     },
                     {
+                        "token": "inḍt",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "PronType": "Art",
+                                        "Typo": "Yes"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "n",
                         "feature_sets": [
                             {
@@ -27117,8 +27182,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Plur",
-                                        "PronType": "Ind"
+                                        "Definite": "Def",
+                                        "Number": "Sing"
                                     }
                                 ]
                             },
@@ -27127,8 +27192,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Plur"
                                     }
                                 ]
                             },
@@ -27136,9 +27201,19 @@
                                 "feature_set": 3,
                                 "features": [
                                     {
+                                        "Case": "Acc",
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 4,
+                                "features": [
+                                    {
                                         "Case": "Nom",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -27156,8 +27231,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Plur",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Plur"
                                     }
                                 ]
                             },
@@ -27166,8 +27241,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             },
@@ -27176,8 +27251,8 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             },
@@ -27186,8 +27261,8 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             },
@@ -27196,8 +27271,8 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             },
@@ -27205,7 +27280,7 @@
                                 "feature_set": 7,
                                 "features": [
                                     {
-                                        "PronType": "Ind"
+                                        "Definite": "Ind"
                                     }
                                 ]
                             }
@@ -27219,8 +27294,8 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -27234,8 +27309,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             },
@@ -27244,8 +27319,8 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -27259,8 +27334,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -27274,8 +27349,8 @@
                                 "features": [
                                     {
                                         "Case": "Acc",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
+                                        "Definite": "Ind",
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
@@ -27293,6 +27368,20 @@
                 "tokens": [
                     {
                         "token": "ám",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "debrath",
+                "tokens": [
+                    {
+                        "token": "debrath",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -34978,6 +35067,25 @@
                 ]
             },
             {
+                "lemma": "caí",
+                "tokens": [
+                    {
+                        "token": "ᚉᚐᚔ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "ceirtle",
                 "tokens": [
                     {
@@ -36340,6 +36448,16 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing",
+                                        "Typo": "Yes"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -36351,7 +36469,8 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
-                                        "Number": "Sing"
+                                        "Number": "Sing",
+                                        "Typo": "Yes"
                                     }
                                 ]
                             }
@@ -41822,25 +41941,6 @@
                             {
                                 "feature_set": 1,
                                 "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "debrath",
-                "tokens": [
-                    {
-                        "token": "debrath",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
                             }
                         ]
                     }
@@ -47784,6 +47884,24 @@
                                     {
                                         "Case": "Nom",
                                         "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "feria",
+                "tokens": [
+                    {
+                        "token": "ᚃᚓᚏᚔᚐ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Foreign": "Yes"
                                     }
                                 ]
                             }
@@ -53883,6 +54001,24 @@
                                     {
                                         "Case": "Nom",
                                         "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "hodie",
+                "tokens": [
+                    {
+                        "token": "ᚆᚑᚇᚔᚓ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Foreign": "Yes"
                                     }
                                 ]
                             }
@@ -72557,7 +72693,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -72603,7 +72743,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72791,7 +72935,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -72823,7 +72971,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -72838,6 +72990,14 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72846,7 +73006,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72855,7 +73019,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72864,7 +73032,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72873,7 +73045,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72883,6 +73059,14 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72891,7 +73075,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72900,7 +73088,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72909,7 +73101,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72918,7 +73114,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72927,7 +73127,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72936,7 +73140,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72945,7 +73153,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72954,7 +73166,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -72963,7 +73179,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73013,7 +73233,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73022,7 +73246,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73036,7 +73264,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73081,7 +73313,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73090,7 +73326,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73099,7 +73339,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73108,7 +73352,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73117,7 +73365,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73126,7 +73378,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73135,7 +73391,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73144,7 +73404,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73153,7 +73417,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73162,7 +73430,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73172,6 +73444,14 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73180,7 +73460,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73189,7 +73473,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73203,7 +73491,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73217,7 +73509,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73262,7 +73558,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73271,7 +73571,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73280,7 +73584,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73289,7 +73597,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73298,7 +73610,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -73307,7 +73623,11 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
+                                "features": [
+                                    {
+                                        "NumType": "Card"
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -73481,7 +73801,7 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Case": "Voc"
+                                        "PartType": "Num"
                                     }
                                 ]
                             },
@@ -73489,7 +73809,7 @@
                                 "feature_set": 3,
                                 "features": [
                                     {
-                                        "PartType": "Num"
+                                        "PartType": "Rel"
                                     }
                                 ]
                             },
@@ -73497,7 +73817,8 @@
                                 "feature_set": 4,
                                 "features": [
                                     {
-                                        "PronType": "Dem,Rel"
+                                        "PartType": "Rel",
+                                        "PronType": "Dem"
                                     }
                                 ]
                             },
@@ -73505,7 +73826,7 @@
                                 "feature_set": 5,
                                 "features": [
                                     {
-                                        "PronType": "Rel"
+                                        "PartType": "Voc"
                                     }
                                 ]
                             }
@@ -73544,7 +73865,7 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "PronType": "Rel"
+                                        "PartType": "Rel"
                                     }
                                 ]
                             }
@@ -73561,7 +73882,7 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Case": "Voc"
+                                        "PartType": "Voc"
                                     }
                                 ]
                             }
@@ -74795,6 +75116,7 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
+                                        "PartType": "Rel",
                                         "Polarity": "Neg"
                                     }
                                 ]
@@ -74803,8 +75125,7 @@
                                 "feature_set": 3,
                                 "features": [
                                     {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
+                                        "Polarity": "Neg"
                                     }
                                 ]
                             }
@@ -74821,8 +75142,8 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
+                                        "PartType": "Rel",
+                                        "Polarity": "Neg"
                                     }
                                 ]
                             }
@@ -74835,8 +75156,8 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
+                                        "PartType": "Rel",
+                                        "Polarity": "Neg"
                                     }
                                 ]
                             }
@@ -74849,8 +75170,8 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
+                                        "PartType": "Rel",
+                                        "Polarity": "Neg"
                                     }
                                 ]
                             }
@@ -74867,8 +75188,8 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Polarity": "Neg",
-                                        "PronType": "Rel"
+                                        "PartType": "Rel",
+                                        "Polarity": "Neg"
                                     }
                                 ]
                             }
@@ -75358,7 +75679,7 @@
                 "lemma": "ér",
                 "tokens": [
                     {
-                        "token": "áer",
+                        "token": "ǽr",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -77197,6 +77518,17 @@
                                     {
                                         "Number": "Sing",
                                         "Person": "1",
+                                        "PronClass": "A",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -77208,6 +77540,17 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronClass": "A",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Sing",
@@ -77989,6 +78332,21 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "sv",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "2",
+                                        "PronType": "Emp"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -78437,6 +78795,17 @@
                                     {
                                         "Number": "Sing",
                                         "Person": "2",
+                                        "PronClass": "A",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "2",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -78582,7 +78951,7 @@
                         ]
                     },
                     {
-                        "token": "thu",
+                        "token": "thv",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -78949,20 +79318,6 @@
                                         "Number": "Sing"
                                     }
                                 ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "cai",
-                "tokens": [
-                    {
-                        "token": "ᚉᚐᚔ",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             }
                         ]
                     }
@@ -80006,6 +80361,29 @@
                 ]
             },
             {
+                "lemma": ".,.,.,",
+                "tokens": [
+                    {
+                        "token": ".,",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "··,",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": ":",
                 "tokens": [
                     {
@@ -80024,6 +80402,38 @@
                 "tokens": [
                     {
                         "token": ".",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "·",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "·–",
+                "tokens": [
+                    {
+                        "token": "··–",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "·–",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -80650,6 +81060,19 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Neg",
+                                        "PronClass": "Neg",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Polarity": "Neg",
@@ -97036,7 +97459,6 @@
                                         "Mood": "Ind",
                                         "Number": "Sing",
                                         "Person": "3",
-                                        "PronType": "Rel",
                                         "Tense": "Pres",
                                         "Voice": "Act"
                                     }
@@ -100224,9 +100646,9 @@
                                 "features": [
                                     {
                                         "Mood": "Sub",
-                                        "Number": "Plur",
+                                        "Number": "Sing",
                                         "Person": "3",
-                                        "Tense": "Pres",
+                                        "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]

@@ -198,6 +198,7 @@ def make_json(glosslist, headers=False):
 
 
 def make_lex_json(conllu_file):
+    """Makes a lexicon in JSON file format from the contents of a CoNLL-U file"""
     with open(conllu_file, "r", encoding="utf-8") as conllu_file_import:
         text_file = conllu_file_import.read()
     sentences = parse(text_file)

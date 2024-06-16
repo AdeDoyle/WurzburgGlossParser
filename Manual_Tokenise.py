@@ -1796,7 +1796,11 @@ if __name__ == "__main__":
     # if it doesn't exist already, otherwise, update it if necessary
     if "Lexicon.json" not in dir_contents:
         os.chdir(maindir)
-        sg_json = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        sg_conllu_file = "combined_sg_files.conllu"
+        sg_filepath = os.path.join(maindir, "conllu_files")
+        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
+        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         save_json(sg_json, "Lexicon")
         # Open the first Lexicon JSON file for use in the GUI
@@ -1808,7 +1812,11 @@ if __name__ == "__main__":
         with open("Lexicon.json", 'r', encoding="utf-8") as lex_json:
             original_lexicon = json.load(lex_json)
         os.chdir(maindir)
-        sg_json = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        sg_conllu_file = "combined_sg_files.conllu"
+        sg_filepath = os.path.join(maindir, "conllu_files")
+        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
+        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         if original_lexicon != json.loads(sg_json):
             os.remove("Lexicon.json")
@@ -1822,7 +1830,11 @@ if __name__ == "__main__":
 
     if "Working_lexicon.json" not in dir_contents:
         os.chdir(maindir)
-        sg_json = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        sg_conllu_file = "combined_sg_files.conllu"
+        sg_filepath = os.path.join(maindir, "conllu_files")
+        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
+        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         save_json(sg_json, "Working_lexicon")
         # Open the second Lexicon JSON file for use in the GUI
@@ -1834,7 +1846,11 @@ if __name__ == "__main__":
         with open("Working_lexicon.json", 'r', encoding="utf-8") as lex_working_json:
             working_lexicon = json.load(lex_working_json)
         os.chdir(maindir)
-        sg_json = make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
+        sg_conllu_file = "combined_sg_files.conllu"
+        sg_filepath = os.path.join(maindir, "conllu_files")
+        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
+        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         sg_json = transfer_wb_toks(sg_json, wb_data)
         if working_lexicon != json.loads(sg_json):
