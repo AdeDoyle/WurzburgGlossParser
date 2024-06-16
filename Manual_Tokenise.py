@@ -225,7 +225,7 @@ class UI:
             self.current_rendered_window["text_frame"].destroy()
             self.current_rendered_window["toks_frames"].destroy()
             self.current_rendered_window["toks_frame"].destroy()
-            for i in range(self.featuresframe_count):
+            for i in range(self.featureframe_count):
                 self.current_rendered_window[f"feats_frame_{i}"].destroy()
             self.current_rendered_window["head_opts_frame"].destroy()
             self.current_rendered_window["buttons_frame"].destroy()
@@ -1336,7 +1336,7 @@ class UI:
                                 check_lex.append(check)
                         else:
                             check = [pos_tag, lemma, token, None]
-                            if not self.check_lex_origin(check, self.primary_lexicon_1):
+                            if not self.check_lex_origin(check, self.primary_lexicon):
                                 check_lex.append(check)
 
         # check that all tokens found in the working lexicon which are not present in the original lexicon occur in
