@@ -1,5 +1,5 @@
 """Level 1"""
-
+import os
 import re
 from CombineInfoLists import combine_infolists
 from ClearTags import clear_tags
@@ -34,10 +34,12 @@ def make_json(glosslist, headers=False):
             "glossHand": "[h]",
             "glossText": "[gt]",
             "glossTokens": "",
+            "newGloss": "[ng]",
             "glossFNs": "[gfn]",
             "footnotes": "[fn]",
             "newNotes": "[nn]",
-            "glossTrans": "[tr]"
+            "glossTrans": "[tr]",
+            "newTrans": "[nt]"
         }"""
     if headers:
         glosslist = glosslist[1:]
@@ -98,6 +100,7 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
         jsonblank = jsonblank[:jsonblank.rfind("[h]")] + h + jsonblank[jsonblank.rfind("[h]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[gt]")] + gt + jsonblank[jsonblank.find("[gt]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[ng]") - 1] + "null" + jsonblank[jsonblank.find("[ng]") + 5:]
         jsonblank = jsonblank[:jsonblank.find("[gfn]")] + gfn + jsonblank[jsonblank.find("[gfn]") + 5:]
         if not fn:
             jsonblank = jsonblank[:jsonblank.find("[fn]") - 1] + "null" + jsonblank[jsonblank.find("[fn]") + 5:]
@@ -117,6 +120,7 @@ def make_json(glosslist, headers=False):
         elif an:
             jsonblank = jsonblank[:jsonblank.find("[nn]")] + an + jsonblank[jsonblank.find("[nn]") + 4:]
         jsonblank = jsonblank[:jsonblank.find("[tr]")] + gtr + jsonblank[jsonblank.find("[tr]") + 4:]
+        jsonblank = jsonblank[:jsonblank.find("[nt]") - 1] + "null" + jsonblank[jsonblank.find("[nt]") + 5:]
         jsonblanklist = [e, f, jsonblank]
         jsonglosslist1.append(jsonblanklist)
     # Identify all low-mid level data for each new folio from the combined information list of glosses
@@ -255,7 +259,5 @@ if __name__ == "__main__":
     # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
     # print(make_json(wbglosslist, True))
 
-    # make_lex_json("sga_dipsgg-ud-test_split_POS.conllu")
-    print(make_lex_json("sga_dipsgg-ud-test_split_POS.conllu"))
-    # # make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu")
-    # print(make_lex_json("sga_dipsgg-ud-test_combined_POS.conllu"))
+    # make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu"))
+    print(make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")))

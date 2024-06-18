@@ -34,6 +34,8 @@ def c_to_j(conllu_file, json_file, output_filename=None, save_folder=None):
                  [tok.get("feats") for tok in gloss]]
         tok_data = list(zip(tokens, pos, head, feats))
         tok_data = [[i[0], i[1], i[2], i[3]] for i in tok_data]
+        tok_data = [t if t != ['et', 'CCONJ', '_', 'Foreign=Yes']
+                    else ['et', 'Latin CCONJ', 'et', 'Foreign=Yes'] for t in tok_data]
 
         gloss_list = [folcol, gl_id, tok_data]
         glosses.append(gloss_list)

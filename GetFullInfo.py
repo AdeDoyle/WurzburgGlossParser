@@ -212,7 +212,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     del pagestrans[0]
             # if no translation is given in TPH
             else:
-                infoset.append("No translation available.")
+                infoset.append("No translation available in <em>Thesaurus Palaeohibernicus</em>.")
     # Gets all page Footnotes for the second time (for the translation)
     curpage = None
     for infoset in infolist[1:]:  # exclude the first info-set containing the titles
