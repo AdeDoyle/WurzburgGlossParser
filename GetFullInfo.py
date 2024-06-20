@@ -8,7 +8,7 @@ from OrderGlosses import order_glosses, order_glosslist
 from ClearTags import clear_tags, clear_spectags
 from GetFolio import get_fol
 from GetTrans import get_transpagesinfo
-from OrderFootnotes import order_footlist, order_newlist
+from OrderFootnotes import order_footlist, order_newlist, order_newglosslist, order_newtranslist
 import re
 
 
@@ -19,19 +19,20 @@ def get_glinfo(file, startpage=499, stoppage=712):
        (with [GLat][/GLat] tags converted to html italics tags) for every gloss in Wb."""
     curepist = "Unknown"
     infolist = [["Epistle", "Page", "Folio", "Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes",
-                 "Relevant Footnotes", "Adrian's Notes", "Gloss Translation"]]
+                 "New Gloss Text", "Relevant Footnotes", "Adrian's Notes", "Gloss Translation", "New Translation"]]
     pagestrans = get_transpagesinfo(file, startpage, stoppage)
     for page in range(startpage, stoppage + 1):
         thispage = page
         pagetext = get_pages(file, thispage, thispage)
         # Gets all page Footnotes for the first time (for the gloss)
         footnotelist = order_footlist(file, page)
-        # Gets all notes supplied by me (for the gloss)
+        # Gets all notes supplied by me
         notelist = order_newlist(file, page)
         newnotelist = list()
         notefol = False
         if notelist != ['']:
             for notenum, note in enumerate(notelist):
+                # Separate folio-column tags from the text of site notes
                 noteidpat = re.compile(r'\[/?f\. \d{1,2}[a-d]\]')
                 noteiditer = noteidpat.findall(note)
                 if noteiditer:
@@ -42,6 +43,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         notefol = folinfo
                     elif notefol != folinfo:
                         notefol = folinfo
+                # Separate gloss numbers from the text of site notes
                 notenumpat = re.compile(r'^\d{1,2}[a-z]?\. ')
                 notenumiter = notenumpat.findall(note)
                 if not notenumiter:
@@ -52,6 +54,74 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     glossnum = notenumiter[0][:-2]
                     note = note[len(notenumiter[0]):].strip()
                 newnotelist.append([notefol, glossnum, note])
+        # Gets all new gloss readings supplied by me
+        glosslist = order_newglosslist(file, page)
+        newglosslist = list()
+        glossfol = False
+        if glosslist != ['']:
+            for ng_num, newgloss in enumerate(glosslist):
+                # Separate folio-column tags from the text of new gloss readings
+                glossidpat = re.compile(r'\[/?f\. \d{1,2}[a-d]\]')
+                glossiditer = glossidpat.findall(newgloss)
+                if glossiditer:
+                    for folinfo in glossiditer:
+                        newgloss = "".join(newgloss.split(folinfo))
+                    folinfo = "".join(i for i in glossiditer[0] if i not in ["[", "]", "/"])
+                    if ng_num == 0:
+                        glossfol = folinfo
+                    elif glossfol != folinfo:
+                        glossfol = folinfo
+                # Separate gloss numbers from the text of new gloss readings
+                glossnumpat = re.compile(r'^\d{1,2}[a-z]?\. ')
+                glossnumiter = glossnumpat.findall(newgloss)
+                if not glossnumiter:
+                    raise RuntimeError(f"New gloss text found without link to gloss number.\nNote: {newgloss}")
+                elif len(glossnumiter) > 1 or glossnumiter[0] != newgloss[:len(glossnumiter[0])]:
+                    raise RuntimeError(f"Multiple possible gloss numbers found for new gloss text.\nNote: {newgloss}")
+                elif glossnumiter[0] == newgloss[:len(glossnumiter[0])]:
+                    glossnum = glossnumiter[0][:-2]
+                    newgloss = newgloss[len(glossnumiter[0]):].strip()
+                    # Remove or alter annotation tags that are likely to occur in the text of a new gloss reading
+                    newgloss = "".join(newgloss.split("[ie]"))
+                    newgloss = "".join(newgloss.split("[/ie]"))
+                    newgloss = "".join(newgloss.split("[Con]"))
+                    newgloss = "".join(newgloss.split("[/Con]"))
+                    newgloss = "".join(newgloss.split("[Sup]"))
+                    newgloss = "".join(newgloss.split("[/Sup]"))
+                    newgloss = "<em>".join(newgloss.split("[GLat]"))
+                    newgloss = "</em>".join(newgloss.split("[/GLat]"))
+                newglosslist.append([glossfol, glossnum, newgloss])
+        # Gets all new translations supplied by me
+        translist = order_newtranslist(file, page)
+        newtranslist = list()
+        transfol = False
+        if translist != ['']:
+            for ng_num, newtrans in enumerate(translist):
+                # Separate folio-column tags from the text of new gloss translation
+                transidpat = re.compile(r'\[/?f\. \d{1,2}[a-d]\]')
+                transiditer = transidpat.findall(newtrans)
+                if transiditer:
+                    for folinfo in transiditer:
+                        newtrans = "".join(newtrans.split(folinfo))
+                    folinfo = "".join(i for i in transiditer[0] if i not in ["[", "]", "/"])
+                    if ng_num == 0:
+                        transfol = folinfo
+                    elif transfol != folinfo:
+                        transfol = folinfo
+                # Separate gloss numbers from the text of new gloss translations
+                transnumpat = re.compile(r'^\d{1,2}[a-z]?\. ')
+                transnumiter = transnumpat.findall(newtrans)
+                if not transnumiter:
+                    raise RuntimeError(f"New translation found without link to gloss number.\nNote: {newtrans}")
+                elif len(transnumiter) > 1 or transnumiter[0] != newtrans[:len(transnumiter[0])]:
+                    raise RuntimeError(f"Multiple possible gloss numbers found for new translation.\nNote: {newtrans}")
+                elif transnumiter[0] == newtrans[:len(transnumiter[0])]:
+                    glossnum = transnumiter[0][:-2]
+                    newtrans = newtrans[len(transnumiter[0]):].strip()
+                    # Alter annotation tags that are likely to occur in the text of a new gloss translation
+                    newtrans = "<em>".join(newtrans.split("[GLat]"))
+                    newtrans = "</em>".join(newtrans.split("[/GLat]"))
+                newtranslist.append([transfol, glossnum, newtrans])
         # Checks for a new epistle on the current page.
         epfunc = get_tagtext(pagetext, "H2")
         if epfunc:
@@ -66,7 +136,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
             foliotext = folinfo[0]
             foliolist.append([folio, foliotext])
         # Creates a list with the current epistle name and page,
-        # Checks for each gloss on the current page which folio it is in,
+        # For each gloss on the current page, checks which folio it is in,
         # Adds folio information to the list.
         for gloss in glosslist:
             thisglosslist = [curepist, thispage]
@@ -93,6 +163,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 thisglosslist.append(i.group()[:-2])
                 # Identifies foundational gloss including all markup tags.
                 glossfulltags = gloss[gloss.find(i.group()) + len(i.group()):]
+
                 # Creates a display copy of the gloss text, replacing Latin tags with html emphasis tags.
                 glosstext = glossfulltags
                 if "[GLat]" in glosstext:
@@ -101,6 +172,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 if "[/GLat]" in glosstext:
                     glosstextlist = glosstext.split("[/GLat]")
                     glosstext = "</em>".join(glosstextlist)
+
                 # Creates 2 copies of display gloss text, one primary, one retaining footnotes in superscript tags.
                 basegloss = clear_tags(glosstext)
                 footnotesgloss = glosstext[:]
@@ -135,17 +207,23 @@ def get_glinfo(file, startpage=499, stoppage=712):
                         fnsuperscript = "<sup>" + fnletter + "</sup>"
                         footnotesgloss = fnsuperscript.join(footnotesgloss.split(footnote))
                     thisglosslist.extend([glossfulltags, basegloss, clear_tags(footnotesgloss), glossfnlist])
+
+                # Add new notes (site notes) to this gloss list
                 if newnotelist:
                     for note in newnotelist:
                         folinfo = note[0]
                         glossnum = note[1]
                         notetext = note[2]
+                        # if the current new note is for the current gloss
                         if folinfo == thisglosslist[2] and glossnum == thisglosslist[3]:
+                            # if no empty string has been added (see else statement below) add the note text
                             if len(thisglosslist) == 8:
                                 thisglosslist.extend([notetext])
+                            # if empty string has been added (see else statement below), swap it for note text
                             elif len(thisglosslist) == 9:
                                 if thisglosslist[8] == "":
                                     thisglosslist[8] = notetext
+                        # if the current new note is not for the current gloss, add an empty string to thisglosslist
                         else:
                             anstring = ""
                             if len(thisglosslist) == 8:
@@ -153,9 +231,59 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 elif not newnotelist:
                     anstring = ""
                     thisglosslist.extend([anstring])
+
+                # Add new gloss readings to this gloss list
+                if newglosslist:
+                    for ngl in newglosslist:
+                        folinfo = ngl[0]
+                        glossnum = ngl[1]
+                        ngltext = ngl[2]
+                        # if the current new gloss text is for the current gloss
+                        if folinfo == thisglosslist[2] and glossnum == thisglosslist[3]:
+                            # if no empty string has been added (see else statement below) add the new gloss text
+                            if len(thisglosslist) == 9:
+                                thisglosslist = thisglosslist[:7] + [ngltext] + thisglosslist[7:]
+                            # if empty string has been added (see else statement below), swap it for new gloss text
+                            elif len(thisglosslist) == 10:
+                                if thisglosslist[7] == "":
+                                    thisglosslist[7] = ngltext
+                        # if the current new gloss is not for the current gloss, add an empty string to thisglosslist
+                        else:
+                            ngstring = ""
+                            if len(thisglosslist) == 9:
+                                thisglosslist = thisglosslist[:7] + [ngstring] + thisglosslist[7:]
+                elif not newglosslist:
+                    ngstring = ""
+                    thisglosslist = thisglosslist[:7] + [ngstring] + thisglosslist[7:]
+
+                # Add new gloss translations to this gloss list
+                if newtranslist:
+                    for ntr in newtranslist:
+                        folinfo = ntr[0]
+                        glossnum = ntr[1]
+                        ntrtext = ntr[2]
+                        # if the current new translation text is for the current gloss
+                        if folinfo == thisglosslist[2] and glossnum == thisglosslist[3]:
+                            # if no empty string has been added (see else statement below) add the new translation text
+                            if len(thisglosslist) == 10:
+                                thisglosslist.extend([ntrtext])
+                            # if empty string has been added (see else statement below), swap it for new translation
+                            elif len(thisglosslist) == 11:
+                                if thisglosslist[10] == "":
+                                    thisglosslist[10] = ntrtext
+                        # if the current new translation is not for the current gloss, add empty string to thisglosslist
+                        else:
+                            ntstring = ""
+                            if len(thisglosslist) == 10:
+                                thisglosslist.extend([ntstring])
+                elif not newglosslist:
+                    ntstring = ""
+                    thisglosslist.extend([ntstring])
+
             infolist.append(thisglosslist)
-    # add translations to the end of the info-lists where they are available
-    for infoset in infolist[1:]:  # exclude the first info-set containing the titles
+
+    # add TPH translations to the info-lists where they are available
+    for info_num, infoset in enumerate(infolist[1:]):  # exclude the first info-set containing the titles
         glossid = infoset[3]
         curpagetrans = pagestrans[0]
         curtransid = curpagetrans[0]
@@ -180,7 +308,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
             if "[/GLat]" in joinedtrans:
                 transtextlist = joinedtrans.split("[/GLat]")
                 joinedtrans = "</em>".join(transtextlist)
-            infoset.append(joinedtrans)
+            infolist[info_num + 1] = infoset[:-1] + [joinedtrans] + infoset[-1:]
         else:
             if glossid == curtransid:
                 if "[GLat]" in curtrans:
@@ -189,7 +317,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 if "[/GLat]" in curtrans:
                     transtextlist = curtrans.split("[/GLat]")
                     curtrans = "</em>".join(transtextlist)
-                infoset.append(curtrans)
+                infolist[info_num + 1] = infoset[:-1] + [curtrans] + infoset[-1:]
                 del pagestrans[0]
             # deal with page 587 where glosses 27, 28, and 29 share the one translation, numbered '27 – 29.'.
             elif " – " in curtransid:
@@ -202,17 +330,20 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     curtransidlist.append(str(i))
                 if glossid in curtransidlist:
                     if "[GLat]" in curtrans:
+
                         transtextlist = curtrans.split("[GLat]")
                         curtrans = "<em>".join(transtextlist)
                     if "[/GLat]" in curtrans:
                         transtextlist = curtrans.split("[/GLat]")
                         curtrans = "</em>".join(transtextlist)
-                    infoset.append(curtrans)
+                    infolist[info_num + 1] = infoset[:-1] + [curtrans] + infoset[-1:]
                 if glossid == curtransidlist[-1]:
                     del pagestrans[0]
             # if no translation is given in TPH
             else:
-                infoset.append("No translation available in <em>Thesaurus Palaeohibernicus</em>.")
+                infolist[info_num + 1] = infoset[:-1] + [
+                    "No translation available in <em>Thesaurus Palaeohibernicus</em>."
+                ] + infoset[-1:]
     # Gets all page Footnotes for the second time (for the translation)
     curpage = None
     for infoset in infolist[1:]:  # exclude the first info-set containing the titles
@@ -225,7 +356,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
         elif not curpage:
             curpage = infoset[1]
             footnotelist = order_footlist(file, curpage)
-        trans = infoset[9]
+        trans = infoset[10]
         # finds which translations have footnotes, looks for the associated footnote i the list generated above
         if "<sup>" in trans:
             superscriptpat = re.compile(r'<sup>\w</sup>')
@@ -235,8 +366,8 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 for footnote in footnotelist:
                     if footnote[0] == fnid:
                         # if the footnote is found and not already in the footnote list for the gloss it is added
-                        if infoset[7]:
-                            if clear_tags(footnote[:1] + ":" + footnote[1:]) not in infoset[7]:
+                        if infoset[8]:
+                            if clear_tags(footnote[:1] + ":" + footnote[1:]) not in infoset[8]:
                                 thistransfns.append(clear_tags(footnote[:1] + ":" + footnote[1:]))
                         else:
                             thistransfns.append(clear_tags(footnote[:1] + ":" + footnote[1:]))
@@ -244,12 +375,12 @@ def get_glinfo(file, startpage=499, stoppage=712):
         # if there are translation footnotes
         if thistransfns:
             # if there are no gloss footnotes to add them to
-            if not infoset[7]:
-                infoset[7] = thistransfns
+            if not infoset[8]:
+                infoset[8] = thistransfns
             # if there are gloss footnotes to add them to
-            elif infoset[7]:
+            elif infoset[8]:
                 for i in thistransfns:
-                    infoset[7].append(i)
+                    infoset[8].append(i)
     return infolist
 
 
@@ -261,4 +392,8 @@ def get_glinfo(file, startpage=499, stoppage=712):
 #
 #     for i in get_glinfo("Wurzburg Glosses", 624, 625):
 #         print(i[:4] + i[8:])
+#
+#     get_glinfo("Wurzburg Glosses", 499, 712)
+#     for i in get_glinfo("Wurzburg Glosses", 499, 579):
+#         print(i)
 

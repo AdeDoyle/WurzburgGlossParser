@@ -13,8 +13,8 @@ def combine_infolists(file, startpage=499, stoppage=712):
     latinfo = get_allinfo(file, startpage, stoppage)
     del latinfo[0]
     combolist = [["Epistle", "Page", "Folio", "Verse", "Latin", "Lemma", "Lemma Position", "Gloss No.",
-                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "Relevant Footnotes", "Adrian's Notes",
-                  "Gloss Translation"]]
+                  "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "New Gloss", "Relevant Footnotes",
+                  "Adrian's Notes", "Gloss Translation", "New Translation"]]
     if len(glossinfo) == len(latinfo):
         for i, gloss in enumerate(glossinfo):
             lat = latinfo[i]
@@ -23,18 +23,20 @@ def combine_infolists(file, startpage=499, stoppage=712):
                 # Ensures the gloss from one list matches the same gloss in the other list before combining contents.
                 glist.extend(lat[6:8])  # ["Verse", "Latin"]
                 glist.extend(lat[4:6])  # ["Lemma", "Lemma Position"]
-                glist.extend(gloss[3:7])  # ["Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes"]
-                if gloss[7]:
-                    if lat[8]:
-                        fnlist = [lat[8] + gloss[7]]
+                glist.extend(gloss[3:8])  # [
+                #     "Gloss No.", "Gloss Full-Tags", "Gloss Text", "Gloss Footnotes", "New Gloss"
+                # ]
+                if gloss[8]:  # [Relevant Footnotes]
+                    if lat[8]:  # [Latin Footnotes]
+                        fnlist = [lat[8] + gloss[8]]
                     else:
-                        fnlist = [gloss[7]]
+                        fnlist = [gloss[8]]
                 elif lat[8]:
                     fnlist = [lat[8]]
                 else:
-                    fnlist = [gloss[7]]
+                    fnlist = [gloss[8]]
                 glist.extend(fnlist)  # ["Relevant Footnotes"]
-                glist.extend(gloss[8:])  # ["Adrian's Notes", "Gloss Translation"]
+                glist.extend(gloss[9:])  # ["Adrian's Notes", "Gloss Translation", "New Translation"]
                 combolist.append(glist)
             else:
                 print("Error 2.\n%s\n%s" % (clear_tags(gloss[4]), remove_glossnums(lat[0])))

@@ -1704,6 +1704,11 @@ def update_base_file(base_file, file_dir):
                             # Update the gloss text with all tags removed if changes have been made
                             if upd_glossText != glossText:
                                 glosses[k]['glossText'] = upd_glossText
+                            upd_newGloss = level_2.get('newGloss')
+                            newGloss = glosses[k].get('newGloss')
+                            # Update the new gloss readings if changes have been made
+                            if upd_newGloss != newGloss:
+                                glosses[k]['newGloss'] = upd_newGloss
                             upd_glossFNs = level_2.get('glossFNs')
                             glossFNs = glosses[k].get('glossFNs')
                             # Update the gloss text with superscript footnote tags if changes have been made
@@ -1724,6 +1729,11 @@ def update_base_file(base_file, file_dir):
                             # Update the site notes (new notes) if changes have been made
                             if upd_newnote != newnote:
                                 glosses[k]['newNotes'] = upd_newnote
+                            upd_newtrans = level_2.get('newTrans')
+                            newtrans = glosses[k].get('newTrans')
+                            # Update the new translations if changes have been made
+                            if upd_newtrans != newtrans:
+                                glosses[k]['newTrans'] = upd_newtrans
 
                             upd_toks = glosses[k].get('glossTokens')
                             upd_toks = [tagged_tok + [None] if len(tagged_tok) == 3

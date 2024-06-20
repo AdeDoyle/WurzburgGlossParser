@@ -34,8 +34,8 @@ def make_json(glosslist, headers=False):
             "glossHand": "[h]",
             "glossText": "[gt]",
             "glossTokens": "",
-            "newGloss": "[ng]",
             "glossFNs": "[gfn]",
+            "newGloss": "[ng]",
             "footnotes": "[fn]",
             "newNotes": "[nn]",
             "glossTrans": "[tr]",
@@ -59,9 +59,11 @@ def make_json(glosslist, headers=False):
         g = gloss[8]
         gt = gloss[9]
         gfn = gloss[10]
-        fn = gloss[11]
-        an = gloss[12]
-        gtr = gloss[13]
+        ng = gloss[11]
+        fn = gloss[12]
+        an = gloss[13]
+        gtr = gloss[14]
+        nt = gloss[15]
         if "[/" in gtr:
             gtr = clear_tags(gtr)
         h = "Hand Two"
@@ -73,7 +75,6 @@ def make_json(glosslist, headers=False):
             for i in fn:
                 if "prima" in i:
                     h = "Hand One (Prima Manus)"
-                    # print(i)
         mixed_hand_list = ["8d3", "8d13", "11b3", "17b4", "17d15", "21c21", "21d6", "24b8"]
         if an:
             if "a prima manu" in an or "prima manus" in an:
@@ -100,7 +101,10 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[g]")] + g + jsonblank[jsonblank.find("[g]") + 3:]
         jsonblank = jsonblank[:jsonblank.rfind("[h]")] + h + jsonblank[jsonblank.rfind("[h]") + 3:]
         jsonblank = jsonblank[:jsonblank.find("[gt]")] + gt + jsonblank[jsonblank.find("[gt]") + 4:]
-        jsonblank = jsonblank[:jsonblank.find("[ng]") - 1] + "null" + jsonblank[jsonblank.find("[ng]") + 5:]
+        if not ng:
+            jsonblank = jsonblank[:jsonblank.find("[ng]") - 1] + "null" + jsonblank[jsonblank.find("[ng]") + 5:]
+        elif ng:
+            jsonblank = jsonblank[:jsonblank.find("[ng]")] + ng + jsonblank[jsonblank.find("[ng]") + 4:]
         jsonblank = jsonblank[:jsonblank.find("[gfn]")] + gfn + jsonblank[jsonblank.find("[gfn]") + 5:]
         if not fn:
             jsonblank = jsonblank[:jsonblank.find("[fn]") - 1] + "null" + jsonblank[jsonblank.find("[fn]") + 5:]
@@ -120,7 +124,10 @@ def make_json(glosslist, headers=False):
         elif an:
             jsonblank = jsonblank[:jsonblank.find("[nn]")] + an + jsonblank[jsonblank.find("[nn]") + 4:]
         jsonblank = jsonblank[:jsonblank.find("[tr]")] + gtr + jsonblank[jsonblank.find("[tr]") + 4:]
-        jsonblank = jsonblank[:jsonblank.find("[nt]") - 1] + "null" + jsonblank[jsonblank.find("[nt]") + 5:]
+        if not nt:
+            jsonblank = jsonblank[:jsonblank.find("[nt]") - 1] + "null" + jsonblank[jsonblank.find("[nt]") + 5:]
+        elif nt:
+            jsonblank = jsonblank[:jsonblank.find("[nt]")] + nt + jsonblank[jsonblank.find("[nt]") + 4:]
         jsonblanklist = [e, f, jsonblank]
         jsonglosslist1.append(jsonblanklist)
     # Identify all low-mid level data for each new folio from the combined information list of glosses
