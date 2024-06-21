@@ -513,7 +513,8 @@ class UI:
                         raise RuntimeError(f"Could not find appropriate candidate in list:\n    {head_candidates}")
                     head = f"{head_candidate[1]} *"
             self.current_rendered_window[f"toks_tok_{i}"] = Label(self.current_rendered_window["toks_frame"],
-                                                                  text=token, font=("Helvetica", 12))
+                                                                  text=" ".join(token.split("_")),
+                                                                  font=("Helvetica", 12))
             self.current_rendered_window[f"toks_tok_{i}"].grid(row=i + 1, column=0, padx=5, pady=5, sticky='ne')
             self.current_rendered_window[f"toks_tok_{i}"].bind("<MouseWheel>", self.mouse_wheel)
 
@@ -805,6 +806,7 @@ class UI:
             self.cur_toks[tok_num][3] = fullfeat_str
 
     def update_tokens(self):
+        """Update tokens after applying tokenisation, POS-tagging, etc., by clicking the update button"""
         string = self.current_rendered_window["tokenise_text"].get(1.0, END)
         tokens = self.cur_toks
         updated_pos = [self.current_rendered_window[f"type_pos{i}"].get() for i in range(len(tokens))]
@@ -920,6 +922,7 @@ class UI:
         current_epistle = self.current_rendered_window["current_selected_epistle"].get()
         tokens = [[i, j, "", l] if k in ["Latin *", "Greek *"] else [i, j, k, l] for i, j, k, l in self.cur_toks]
         tokens = [[i, j, "".join(k.split(" *")), l] if " *" in k else [i, j, k, l] for i, j, k, l in tokens]
+        tokens = [t if "_" not in t[0] else [" ".join(t[0].split("_")), t[1], t[2], t[3]] for t in tokens]
 
         for epistle in main_file:
             ep_name = epistle['epistle']
@@ -1022,6 +1025,12 @@ class UI:
             selected_glossnum=self.current_rendered_window["current_selected_gloss"].get()
         )
 
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.selected_gloss_info["selected_toks"]
+        ]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
@@ -1034,10 +1043,11 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks=self.selected_gloss_info["selected_toks"]
+            cur_toks=spaceless_toks
         )
 
     def last_gloss(self):
+        """Displaying the previous gloss in the sequence of glosses"""
         self.remove_head_options()
 
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
@@ -1093,6 +1103,7 @@ class UI:
         )
 
     def next_gloss(self):
+        """Display next gloss in sequence"""
         self.remove_head_options()
 
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
@@ -1148,6 +1159,7 @@ class UI:
         )
 
     def emp_points(self, text):
+        """Identifies indices of tokens which should be italicised, removes emphasis tags"""
         suppat = re.compile(r'<sup>\w*</sup>')
         suppatiter = suppat.findall(text)
         if suppatiter:
@@ -1172,6 +1184,7 @@ class UI:
         return [text, finds]
 
     def italicise_text(self, text_box, finds):
+        """Italicises tokens at indices where emphasis tags occur in the annotated text"""
         italics_font = font.Font(text_box, text_box.cget("font"))
         italics_font.configure(weight="bold", slant="italic")
 
@@ -1220,6 +1233,7 @@ class UI:
             text_box.tag_add("italics", start_point, end_point)
 
     def set_spacing(self, text):
+        """Adds like breaks at the correct points so that line lengths do not exceed the maximum line-length allowed"""
         text = " ".join(text.split("\n")).strip()
         max_linelen = self.max_linelen
         text_cuts = list()
@@ -1242,7 +1256,7 @@ class UI:
         return text
 
     def check_lex_origin(self, check_list, orig_lex):
-        """Look for a token (and its POS data) in an original (Sg. only) lexicon and return true if found"""
+        """Look for a token (and its POS data) in the original (Sg. only) lexicon and return true if found"""
 
         # check if the check-list for a token has features or none
         if len(check_list) == 4:
@@ -1285,7 +1299,7 @@ class UI:
         return check_found
 
     def check_tokenised_file(self, checklist):
-        """Look for a token (and its POS data) the tokenised Wb. glosses file"""
+        """Look for a token (and its POS data) in the tokenised Wb. glosses file"""
         main_file = self.wb_data
         all_toks = list()
         for epistle in main_file:
