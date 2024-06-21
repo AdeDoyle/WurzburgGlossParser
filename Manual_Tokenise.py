@@ -72,6 +72,11 @@ class UI:
         self.open_gloss = self.open_glossdata[1]
         self.open_trans = self.open_glossdata[2]
         self.open_toks = self.open_glossdata[3]
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.open_toks
+        ]
 
         self.lex_toks = list()
 
@@ -92,7 +97,7 @@ class UI:
             cur_hand=self.open_hand,
             cur_gloss=self.open_gloss,
             cur_trans=self.open_trans,
-            cur_toks=self.open_toks
+            cur_toks=spaceless_toks
         )
 
     def start(self):
@@ -128,6 +133,12 @@ class UI:
             selected_glossnum=new_selected_glossnum
         )
 
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.selected_gloss_info["selected_toks"]
+        ]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
@@ -140,7 +151,7 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks=self.selected_gloss_info["selected_toks"]
+            cur_toks=spaceless_toks
         )
 
     def change_folio(self, event=None):
@@ -156,6 +167,12 @@ class UI:
             selected_glossnum=new_selected_glossnum
         )
 
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.selected_gloss_info["selected_toks"]
+        ]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
@@ -168,7 +185,7 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks=self.selected_gloss_info["selected_toks"]
+            cur_toks=spaceless_toks
         )
 
     def change_epistle(self, event=None):
@@ -185,6 +202,12 @@ class UI:
             selected_glossnum=new_selected_glossnum
         )
 
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.selected_gloss_info["selected_toks"]
+        ]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
@@ -197,7 +220,7 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks=self.selected_gloss_info["selected_toks"]
+            cur_toks=spaceless_toks
         )
 
     def mouse_wheel(self, event):
@@ -1087,6 +1110,12 @@ class UI:
             selected_glossnum=go_to_gloss
         )
 
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.selected_gloss_info["selected_toks"]
+        ]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
@@ -1099,7 +1128,7 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks=self.selected_gloss_info["selected_toks"]
+            cur_toks=spaceless_toks
         )
 
     def next_gloss(self):
@@ -1143,6 +1172,12 @@ class UI:
             selected_glossnum=go_to_gloss
         )
 
+        spaceless_toks = [
+            t if " " not in t[0] else [
+                "_".join(t[0].split(" ")), t[1], t[2], t[3]
+            ] for t in self.selected_gloss_info["selected_toks"]
+        ]
+
         self.render_gloss(
             self.root,
             epistles=self.epistles,
@@ -1155,7 +1190,7 @@ class UI:
             cur_hand=self.selected_gloss_info["selected_hand"],
             cur_gloss=self.selected_gloss_info["selected_gloss"],
             cur_trans=self.selected_gloss_info["selected_trans"],
-            cur_toks=self.selected_gloss_info["selected_toks"]
+            cur_toks=spaceless_toks
         )
 
     def emp_points(self, text):
