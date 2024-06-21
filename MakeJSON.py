@@ -36,6 +36,7 @@ def make_json(glosslist, headers=False):
             "glossTokens": "",
             "glossFNs": "[gfn]",
             "newGloss": "[ng]",
+            "taggedNewGloss": "[tng]",
             "footnotes": "[fn]",
             "newNotes": "[nn]",
             "glossTrans": "[tr]",
@@ -65,7 +66,7 @@ def make_json(glosslist, headers=False):
         gtr = gloss[14]
         nt = gloss[15]
         if "[/" in gtr:
-            gtr = clear_tags(gtr)
+            gtr = clear_tags(gtr, italicise="GLat")
         h = "Hand Two"
         if f == "f. 33a":
             foliohandswap = True
@@ -103,8 +104,11 @@ def make_json(glosslist, headers=False):
         jsonblank = jsonblank[:jsonblank.find("[gt]")] + gt + jsonblank[jsonblank.find("[gt]") + 4:]
         if not ng:
             jsonblank = jsonblank[:jsonblank.find("[ng]") - 1] + "null" + jsonblank[jsonblank.find("[ng]") + 5:]
+            jsonblank = jsonblank[:jsonblank.find("[tng]") - 1] + "null" + jsonblank[jsonblank.find("[tng]") + 6:]
         elif ng:
-            jsonblank = jsonblank[:jsonblank.find("[ng]")] + ng + jsonblank[jsonblank.find("[ng]") + 4:]
+            tagless = clear_tags(ng, italicise="GLat", keep_editorial=False)
+            jsonblank = jsonblank[:jsonblank.find("[ng]")] + tagless + jsonblank[jsonblank.find("[ng]") + 4:]
+            jsonblank = jsonblank[:jsonblank.find("[tng]")] + ng + jsonblank[jsonblank.find("[tng]") + 5:]
         jsonblank = jsonblank[:jsonblank.find("[gfn]")] + gfn + jsonblank[jsonblank.find("[gfn]") + 5:]
         if not fn:
             jsonblank = jsonblank[:jsonblank.find("[fn]") - 1] + "null" + jsonblank[jsonblank.find("[fn]") + 5:]
@@ -259,12 +263,13 @@ def make_lex_json(conllu_file):
     return json_file
 
 
-if __name__ == "__main__":
-
-    wbglosslist = combine_infolists("Wurzburg Glosses", 499, 509)
-    print(make_json(wbglosslist, True))
-    # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
-    # print(make_json(wbglosslist, True))
-
-    # make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu"))
-    print(make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")))
+# if __name__ == "__main__":
+#
+#     wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
+#     make_json(wbglosslist, True)
+#     # print(make_json(wbglosslist, True))
+#     # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
+#     # print(make_json(wbglosslist, True))
+#
+#     # make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu"))
+#     # print(make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")))

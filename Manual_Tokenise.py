@@ -1758,6 +1758,11 @@ def update_base_file(base_file, file_dir):
                             # Update the new gloss readings if changes have been made
                             if upd_newGloss != newGloss:
                                 glosses[k]['newGloss'] = upd_newGloss
+                            upd_newGlossTagged = level_2.get('taggedNewGloss')
+                            taggedNewGloss = glosses[k].get('taggedNewGloss')
+                            # Update the tagged new gloss readings if changes have been made
+                            if upd_newGlossTagged != taggedNewGloss:
+                                glosses[k]['taggedNewGloss'] = upd_newGlossTagged
                             upd_glossFNs = level_2.get('glossFNs')
                             glossFNs = glosses[k].get('glossFNs')
                             # Update the gloss text with superscript footnote tags if changes have been made

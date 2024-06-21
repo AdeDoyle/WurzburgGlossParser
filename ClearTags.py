@@ -4,7 +4,7 @@ from OpenPages import get_pages
 import re
 
 
-def clear_tags(file, exceptions=[], keep_editorial=True):
+def clear_tags(file, exceptions=[], italicise=None, keep_editorial=True):
     """Clears all tags out of the text except those listed as exceptions.
        Replace tags with original TPH markers default, however, if keep_editorial is set to False,
        remove any editorial commentary or markings identifying text inserted."""
@@ -13,6 +13,10 @@ def clear_tags(file, exceptions=[], keep_editorial=True):
                "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
                 "t", "u", "v", "w", "x", "y", "z"]
+    if italicise:
+        if italicise in taglist:
+            filetext = "<em>".join(filetext.split(f"[{italicise}]"))
+            filetext = "</em>".join(filetext.split(f"[/{italicise}]"))
     for tag in taglist:
         # Ensures tag to be removed isn't to be excepted
         if tag not in exceptions:

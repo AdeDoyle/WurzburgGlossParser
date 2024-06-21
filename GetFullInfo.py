@@ -81,15 +81,6 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 elif glossnumiter[0] == newgloss[:len(glossnumiter[0])]:
                     glossnum = glossnumiter[0][:-2]
                     newgloss = newgloss[len(glossnumiter[0]):].strip()
-                    # Remove or alter annotation tags that are likely to occur in the text of a new gloss reading
-                    newgloss = "".join(newgloss.split("[ie]"))
-                    newgloss = "".join(newgloss.split("[/ie]"))
-                    newgloss = "".join(newgloss.split("[Con]"))
-                    newgloss = "".join(newgloss.split("[/Con]"))
-                    newgloss = "".join(newgloss.split("[Sup]"))
-                    newgloss = "".join(newgloss.split("[/Sup]"))
-                    newgloss = "<em>".join(newgloss.split("[GLat]"))
-                    newgloss = "</em>".join(newgloss.split("[/GLat]"))
                 newglosslist.append([glossfol, glossnum, newgloss])
         # Gets all new translations supplied by me
         translist = order_newtranslist(file, page)
@@ -118,9 +109,6 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 elif transnumiter[0] == newtrans[:len(transnumiter[0])]:
                     glossnum = transnumiter[0][:-2]
                     newtrans = newtrans[len(transnumiter[0]):].strip()
-                    # Alter annotation tags that are likely to occur in the text of a new gloss translation
-                    newtrans = "<em>".join(newtrans.split("[GLat]"))
-                    newtrans = "</em>".join(newtrans.split("[/GLat]"))
                 newtranslist.append([transfol, glossnum, newtrans])
         # Checks for a new epistle on the current page.
         epfunc = get_tagtext(pagetext, "H2")
