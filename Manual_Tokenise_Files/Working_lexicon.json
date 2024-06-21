@@ -82782,6 +82782,20 @@
                 ]
             },
             {
+                "lemma": "–",
+                "tokens": [
+                    {
+                        "token": "–",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "…",
                 "tokens": [
                     {

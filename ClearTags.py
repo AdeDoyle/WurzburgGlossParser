@@ -4,9 +4,10 @@ from OpenPages import get_pages
 import re
 
 
-def clear_tags(file, exceptions=[]):
-    """Clears all tags out of the text except those listed as exceptions, replacing them with original TPH markers where
-       they were originally identified by use of various bracket types"""
+def clear_tags(file, exceptions=[], keep_editorial=True):
+    """Clears all tags out of the text except those listed as exceptions.
+       Replace tags with original TPH markers default, however, if keep_editorial is set to False,
+       remove any editorial commentary or markings identifying text inserted."""
     filetext = file
     taglist = ["H1", "H2", "Lat", "SG", "Eng", "FN", "GLat", "fol", "NV", "num", "let", "Rep", "ie", "vel", "etc",
                "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
@@ -57,34 +58,57 @@ def clear_tags(file, exceptions=[]):
             elif tag == "Com":
                 opentag = "[" + tag + "]"
                 closetag = "[/" + tag + "]"
-                if opentag in filetext:
-                    filetextlist = filetext.split(opentag)
-                    filetext = "[".join(filetextlist)
-                if closetag in filetext:
-                    filetextlist = filetext.split(closetag)
-                    filetext = "]".join(filetextlist)
+                if keep_editorial:
+                    if opentag in filetext:
+                        filetextlist = filetext.split(opentag)
+                        filetext = "[".join(filetextlist)
+                    if closetag in filetext:
+                        filetextlist = filetext.split(closetag)
+                        filetext = "]".join(filetextlist)
+                else:
+                    while opentag in filetext:
+                        startpos = filetext.find(opentag)
+                        endpos = filetext.find(closetag) + len(closetag)
+                        filetext = filetext[:startpos] + filetext[endpos:]
+                        filetext = " ".join(filetext.split("  "))
             # Deals with supplied text tags which identify text supplied by the editors
             # Replaces full tags with the original square brackets used in TPH
             elif tag == "Sup":
                 opentag = "[" + tag + "]"
                 closetag = "[/" + tag + "]"
-                if opentag in filetext:
-                    filetextlist = filetext.split(opentag)
-                    filetext = "[".join(filetextlist)
-                if closetag in filetext:
-                    filetextlist = filetext.split(closetag)
-                    filetext = "]".join(filetextlist)
+                if keep_editorial:
+                    if opentag in filetext:
+                        filetextlist = filetext.split(opentag)
+                        filetext = "[".join(filetextlist)
+                    if closetag in filetext:
+                        filetextlist = filetext.split(closetag)
+                        filetext = "]".join(filetextlist)
+                else:
+                    if opentag in filetext:
+                        filetextlist = filetext.split(opentag)
+                        filetext = "".join(filetextlist)
+                    if closetag in filetext:
+                        filetextlist = filetext.split(closetag)
+                        filetext = "".join(filetextlist)
             # Deals with restored text tags which identify text restored by the editors
             # Replaces full tags with the original round brackets used in TPH
             elif tag == "Res":
                 opentag = "[" + tag + "]"
                 closetag = "[/" + tag + "]"
-                if opentag in filetext:
-                    filetextlist = filetext.split(opentag)
-                    filetext = "(".join(filetextlist)
-                if closetag in filetext:
-                    filetextlist = filetext.split(closetag)
-                    filetext = ")".join(filetextlist)
+                if keep_editorial:
+                    if opentag in filetext:
+                        filetextlist = filetext.split(opentag)
+                        filetext = "(".join(filetextlist)
+                    if closetag in filetext:
+                        filetextlist = filetext.split(closetag)
+                        filetext = ")".join(filetextlist)
+                else:
+                    if opentag in filetext:
+                        filetextlist = filetext.split(opentag)
+                        filetext = "".join(filetextlist)
+                    if closetag in filetext:
+                        filetextlist = filetext.split(closetag)
+                        filetext = "".join(filetextlist)
             # Deals with all other tags
             # Removes them without replacement
             else:
@@ -96,6 +120,12 @@ def clear_tags(file, exceptions=[]):
                 if closetag in filetext:
                     filetextlist = filetext.split(closetag)
                     filetext = "".join(filetextlist)
+    if not keep_editorial:
+        while "[" in filetext:
+            startpos = filetext.find("[")
+            endpos = filetext.find("]") + 1
+            filetext = filetext[:startpos] + filetext[endpos:]
+            filetext = " ".join(filetext.split("  "))
     return filetext
 
 

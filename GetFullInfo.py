@@ -276,7 +276,7 @@ def get_glinfo(file, startpage=499, stoppage=712):
                             ntstring = ""
                             if len(thisglosslist) == 10:
                                 thisglosslist.extend([ntstring])
-                elif not newglosslist:
+                elif not newtranslist:
                     ntstring = ""
                     thisglosslist.extend([ntstring])
 
