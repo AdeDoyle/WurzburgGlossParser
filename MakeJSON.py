@@ -212,8 +212,9 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-def make_lex_json(conllu_file):
-    """Makes a lexicon in JSON file format from the contents of a CoNLL-U file"""
+def make_lex_json(conllu_file, eDIL_lexicon):
+    """Makes a lexicon in JSON file format from the contents of a CoNLL-U file
+       If numerical lexeme IDs have been supplied in a previously rendered JSON lexicon, add these"""
     with open(conllu_file, "r", encoding="utf-8") as conllu_file_import:
         text_file = conllu_file_import.read()
     sentences = parse(text_file)
@@ -235,6 +236,7 @@ def make_lex_json(conllu_file):
         relevant_lemmata = sorted(list(set([i[0] for i in relevant_lem_data])))
         pos_data["lemmata"] = [{
             "lemma": lemma,
+            "eDIL_id": None,
             "tokens": [j for j in relevant_lem_data if j[0] == lemma]
         } for lemma in relevant_lemmata]
         for lemmata_data in pos_data.get("lemmata"):
@@ -263,13 +265,13 @@ def make_lex_json(conllu_file):
     return json_file
 
 
-# if __name__ == "__main__":
-#
-#     wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
-#     make_json(wbglosslist, True)
-#     # print(make_json(wbglosslist, True))
-#     # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
-#     # print(make_json(wbglosslist, True))
-#
-#     # make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu"))
-#     # print(make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")))
+if __name__ == "__main__":
+
+    # wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
+    # make_json(wbglosslist, True)
+    # print(make_json(wbglosslist, True))
+    # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
+    # print(make_json(wbglosslist, True))
+
+    # make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu"))
+    print(make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")))

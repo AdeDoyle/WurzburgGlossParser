@@ -1855,15 +1855,12 @@ if __name__ == "__main__":
     if empty_tokfields:
         update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
 
-
     # Create a JSON document of the OI Lexicon in the Manual Tokenisation folder from the Sg. CoNNL_U file
     # if it doesn't exist already, otherwise, update it if necessary
     if "Lexicon.json" not in dir_contents:
         os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files")
-        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
-        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
         sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         save_json(sg_json, "Lexicon")
@@ -1871,15 +1868,13 @@ if __name__ == "__main__":
         with open("Lexicon.json", 'r', encoding="utf-8") as lex_json:
             original_lexicon = json.load(lex_json)
     else:
-        # Ensure that no changes have been made to the Sg. file that requrie the current lexicon to be amended
+        # Ensure that no changes have been made to the Sg. file that require the current lexicon to be amended
         # if any such changes have been made, replace the current lexicon
         with open("Lexicon.json", 'r', encoding="utf-8") as lex_json:
             original_lexicon = json.load(lex_json)
         os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files")
-        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
-        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
         sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         if original_lexicon != json.loads(sg_json):
@@ -1891,13 +1886,10 @@ if __name__ == "__main__":
 
     # Create a working copy of the OI Lexicon created above for use in the GUI if it doesn't already exist
     # This will be updated with new tokens and POS from Wb. which will not be saved to the original above
-
     if "Working_lexicon.json" not in dir_contents:
         os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files")
-        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
-        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
         sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         save_json(sg_json, "Working_lexicon")
@@ -1911,9 +1903,7 @@ if __name__ == "__main__":
             working_lexicon = json.load(lex_working_json)
         os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files")
-        sg_filepath = os.path.join(sg_filepath, "Sg_Treebanks")
-        sg_filepath = os.path.join(sg_filepath, sg_conllu_file)
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
         sg_json = make_lex_json(sg_filepath)
         os.chdir(tokenise_dir)
         sg_json = transfer_wb_toks(sg_json, wb_data)
