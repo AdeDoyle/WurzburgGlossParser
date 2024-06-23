@@ -212,12 +212,19 @@ def make_json(glosslist, headers=False):
     return jsonoutput
 
 
-def make_lex_json(conllu_file, eDIL_lexicon):
+def make_lex_json(conllu_file, eDIL_lexicon=None):
     """Makes a lexicon in JSON file format from the contents of a CoNLL-U file
        If numerical lexeme IDs have been supplied in a previously rendered JSON lexicon, add these"""
+    # Open CoNLL-U file
     with open(conllu_file, "r", encoding="utf-8") as conllu_file_import:
         text_file = conllu_file_import.read()
     sentences = parse(text_file)
+    # Open existing lexicon containing eDIL lexeme ID numbers if one is supplied
+    if eDIL_lexicon:
+        with open(eDIL_lexicon, "r", encoding="utf-8") as json_file_import:
+            eDIL_json_file = json.load(json_file_import)
+        eDIL_lexicon = eDIL_json_file
+    # Collect all words used in the CoNLL-U file, remove duplicates, and sort the remaining words.
     all_words = list()
     for sentence in sentences:
         words = [(i.get("lemma"), i.get("form").lower(), i.get("upos"), i.get("feats")) for i in sentence]
@@ -226,11 +233,14 @@ def make_lex_json(conllu_file, eDIL_lexicon):
                  else tuple([j for j in i[:3]] + ["|".join([f"{k}={i[3].get(k)}" for k in i[3]])]) for i in words]
         all_words = all_words + words
     all_words = sorted(list(set([i for i in all_words if i[0] not in ['_', 'False']])))
+    # Get a list of all unique POS-tags from the list of unique words
     all_POS = sorted(list(set([i[2] for i in all_words])))
+    # Create the JSON file with unique POS-tags as the first level, and lemmata for each POS-tag at the second level
     json_file = [{
         "part_of_speech": pos,
         "lemmata": [i for i in all_words if i[2] == pos]
     } for pos in all_POS]
+    # Sort lemma data on the second level of the JSON file
     for pos_data in json_file:
         relevant_lem_data = pos_data.get("lemmata")
         relevant_lemmata = sorted(list(set([i[0] for i in relevant_lem_data])))
@@ -239,6 +249,25 @@ def make_lex_json(conllu_file, eDIL_lexicon):
             "eDIL_id": None,
             "tokens": [j for j in relevant_lem_data if j[0] == lemma]
         } for lemma in relevant_lemmata]
+        # If a lexicon already exists with eDIL lexeme ID numbers, add theses to any lexemes in the new JSON file
+        if eDIL_lexicon:
+            cur_postag = pos_data.get("part_of_speech")
+            lemmata = pos_data.get("lemmata")
+            for cur_lemma_data in lemmata:
+                cur_lemma = cur_lemma_data.get("lemma")
+                for lex_pos_data in eDIL_lexicon:
+                    lex_postag = lex_pos_data.get("part_of_speech")
+                    if lex_postag == cur_postag:
+                        lex_lemmata = lex_pos_data.get("lemmata")
+                        for lex_lemma_data in lex_lemmata:
+                            lex_lemma = lex_lemma_data.get("lemma")
+                            if lex_lemma == cur_lemma:
+                                lex_dict_id = lex_lemma_data.get("eDIL_id")
+                                if lex_dict_id:
+                                    cur_lemma_data["eDIL_id"] = lex_dict_id
+                                break
+                        break
+        # Sort token data on the third level of the JSON file
         for lemmata_data in pos_data.get("lemmata"):
             relevant_tok_data = lemmata_data.get("tokens")
             relevant_tokens = sorted(list(set([k[1] for k in relevant_tok_data])))
@@ -265,13 +294,16 @@ def make_lex_json(conllu_file, eDIL_lexicon):
     return json_file
 
 
-if __name__ == "__main__":
-
-    # wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
-    # make_json(wbglosslist, True)
-    # print(make_json(wbglosslist, True))
-    # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
-    # print(make_json(wbglosslist, True))
-
-    # make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu"))
-    print(make_lex_json(os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")))
+# if __name__ == "__main__":
+#
+#     wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
+#     # make_json(wbglosslist, True)
+#     # print(make_json(wbglosslist, True))
+#     # wbglosslist = combine_infolists("Wurzburg Glosses", 704, 705)
+#     # print(make_json(wbglosslist, True))
+#
+#     sg_conllu = os.path.join(os.getcwd(), "conllu_files", "Sg_Treebanks", "combined_sg_files.conllu")
+#     edil_lex = os.path.join(os.getcwd(), "Manual_Tokenise_Files", "Working_lexicon.json")
+#     # make_lex_json(sg_conllu)
+#     # print(make_lex_json(sg_conllu))
+#     print(make_lex_json(sg_conllu, edil_lex))

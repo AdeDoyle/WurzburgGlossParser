@@ -167,7 +167,7 @@
             },
             {
                 "lemma": "adblam",
-                "eDIL_id": null,
+                "eDIL_id": 366,
                 "tokens": [
                     {
                         "token": "nadblamu",
@@ -84675,15 +84675,6 @@
                 "eDIL_id": null,
                 "tokens": [
                     {
-                        "token": "Ihũ",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
                         "token": "ísu",
                         "feature_sets": [
                             {
@@ -84975,15 +84966,6 @@
                 "lemma": "acht",
                 "eDIL_id": null,
                 "tokens": [
-                    {
-                        "token": "Acht",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
                     {
                         "token": "acht",
                         "feature_sets": [

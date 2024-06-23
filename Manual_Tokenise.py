@@ -1580,6 +1580,21 @@ def select_glossnum(glosses, glossnum):
 def transfer_wb_toks(add_to_file, add_from_file):
     """add tokens to a lexicon from a manually tokenised .json document if they are not already in it"""
 
+    # Check if a lexicon, potentially with eDIL lexeme IDs, already exists.
+    try:
+        if "Working_lexicon.json" in os.listdir(os.getcwd()):
+            with open("Working_lexicon.json", 'r', encoding="utf-8") as lex_file_json:
+                lex_file = json.load(lex_file_json)
+                lex_file = {
+                    pos.get("part_of_speech"): {
+                        lem.get("lemma"): lem.get("eDIL_id") for lem in pos.get("lemmata")
+                    } for pos in lex_file
+                }
+        else:
+            lex_file = None
+    except FileNotFoundError:
+        lex_file = None
+
     # Collect a list of token-data from a .json document from which tokens are to be added to lexica (Wb.)
     # If the token is Irish, add it to a list of Irish tokens
     # Remove duplicates from that list and sort its contents
@@ -1590,7 +1605,7 @@ def transfer_wb_toks(add_to_file, add_from_file):
             glosses = folio_data['glosses']
             for gloss_data in glosses:
                 tokens = gloss_data[f"glossTokens"]
-                tokens = [(i[1], i[2], i[0], i[3]) if [i[1], i[2]] not in [
+                tokens = [(i[1], i[2], i[0].lower(), i[3]) if [i[1], i[2]] not in [
                     ['<unknown>', '<unknown>'],
                     ['<Latin>', ''],
                     ['<Latin CCONJ>', 'et'],
@@ -1609,76 +1624,104 @@ def transfer_wb_toks(add_to_file, add_from_file):
     for tok in add_toks:
         tok_pos = tok[0]
         tok_head = tok[1]
+        found_lex_id = None
+        # Ensure POS-tag is not a non-standard tag-type used on the Wb. website.
         if tok_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok_head[-2:] != " *":
             tok_form = tok[2]
             tok_feats = tok[3]
             if tok_feats:
                 tok_feats = [{i[0]: i[1] for i in [j.split("=") for j in tok_feats.split("|")]}]
             all_filepos = [level_1.get("part_of_speech") for level_1 in json_file]
+            # If the POS-tag is a POS-tag that already occurs in the working lexicon
             if tok_pos in all_filepos:
                 file_pos_data = json_file[all_filepos.index(tok_pos)].get("lemmata")
                 all_filelemmata = [level_2.get("lemma") for level_2 in file_pos_data]
+                # If the lemma is a lemma that already occurs in the working lexicon
                 if tok_head in all_filelemmata:
                     file_tok_data = file_pos_data[all_filelemmata.index(tok_head)].get("tokens")
                     all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
+                    # If the token is a token that already occurs in the working lexicon
                     if tok_form in all_filetoks:
                         file_featsets_data = file_tok_data[all_filetoks.index(tok_form)].get("feature_sets")
                         all_feats = [level_4.get("features") for level_4 in file_featsets_data]
+                        # If the morphological features DO NOT already occur in the working lexicon for this token
                         if tok_feats not in all_feats:
+                            # Add the new morphological features if other features already exist for this token
                             if tok_feats:
                                 insert = {'feature_set': len(all_feats) + 1, 'features': tok_feats}
                                 file_featsets_data = file_featsets_data + [insert]
                             else:
+                                # Create a new set of morphological features if necessary
                                 insert = {'feature_set': 1, 'features': tok_feats}
                                 for i in file_featsets_data:
                                     i['feature_set'] = i.get('feature_set') + 1
                                 file_featsets_data = [insert] + file_featsets_data
+                            # Cascade the newly added feature set up through the token, lemma and POS levels
                             file_tok_data[all_filetoks.index(tok_form)] = {
                                 'token': tok_form, 'feature_sets': file_featsets_data
                             }
                             file_pos_data[all_filelemmata.index(tok_head)] = {
-                                'lemma': tok_head, 'tokens': file_tok_data
+                                'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': file_tok_data
                             }
                             json_file[all_filepos.index(tok_pos)] = {
                                 'part_of_speech': tok_pos, 'lemmata': file_pos_data
                             }
                     else:
+                        # If the token IS NOT a token that already occurs in the working lexicon
+                        # Find the correct position to insert it
                         filetoks_plus = sorted(list(set(
                             [level_3.get("token") for level_3 in file_tok_data] + [tok_form]
                         )))
                         correct_position = filetoks_plus.index(tok_form)
+                        # Insert it and any morphological feature sets in the correct position
                         insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
                         file_tok_data = file_tok_data[:correct_position] + [
                             insert
                         ] + file_tok_data[correct_position:]
+                        # Cascade the newly added token up through the lemma and POS levels
                         file_pos_data[all_filelemmata.index(tok_head)] = {
-                            'lemma': tok_head, 'tokens': file_tok_data
+                            'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': file_tok_data
                         }
                         json_file[all_filepos.index(tok_pos)] = {
                             'part_of_speech': tok_pos, 'lemmata': file_pos_data
                         }
                 else:
+                    # If the lemma IS NOT a lemma that already occurs in the working lexicon
+                    # Find the correct position to insert it
                     filelemmata_plus = sorted(list(set(
                         [level_2.get("lemma") for level_2 in file_pos_data] + [tok_head]
                     )))
                     correct_position = filelemmata_plus.index(tok_head)
+                    # Insert it, as well as any tokens and morphological feature sets in the correct position
                     insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
-                    insert = {'lemma': tok_head, 'tokens': [insert]}
+                    insert = {'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': [insert]}
                     file_pos_data = file_pos_data[:correct_position] + [
                         insert
                     ] + file_pos_data[correct_position:]
+                    # Cascade the newly added lemma up to the POS level
                     json_file[all_filepos.index(tok_pos)] = {
                         'part_of_speech': tok_pos, 'lemmata': file_pos_data
                     }
             else:
+                # If the POS-tag IS NOT a POS-tag that already occurs in the working lexicon
+                # Find the correct position to insert it at
                 filepos_plus = sorted(list(set(
                     [level_1.get("part_of_speech") for level_1 in json_file] + [tok_pos]
                 )))
                 correct_position = filepos_plus.index(tok_pos)
+                # Insert it, as well as any lemmata, tokens and morphological feature sets in the correct position
                 insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
-                insert = {'lemma': tok_head, 'tokens': [insert]}
+                insert = {'lemma': tok_head, 'eDIL_id': None, 'tokens': [insert]}
                 insert = {'part_of_speech': tok_pos, 'lemmata': [insert]}
                 json_file = json_file[:correct_position] + [insert] + json_file[correct_position:]
+
+    if lex_file:
+        for pos_data in json_file:
+            curpos = pos_data.get("part_of_speech")
+            lemmata = pos_data.get("lemmata")
+            annotated_lemmata = lex_file.get(curpos)
+            for lemma_data in lemmata:
+                lemma_data["eDIL_id"] = annotated_lemmata.get(lemma_data.get("lemma"))
 
     return json.dumps(json_file, indent=4, ensure_ascii=False)
 
