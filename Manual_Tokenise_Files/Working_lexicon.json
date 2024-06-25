@@ -84675,6 +84675,15 @@
                 "eDIL_id": null,
                 "tokens": [
                     {
+                        "token": "ihũ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "ísu",
                         "feature_sets": [
                             {
@@ -89506,23 +89515,6 @@
                 "eDIL_id": 4436,
                 "tokens": [
                     {
-                        "token": "asagnoither",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Pass"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "gninaim",
                         "feature_sets": [
                             {
@@ -89559,6 +89551,23 @@
                                 "features": [
                                     {
                                         "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Pass"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "gnoither",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
                                         "Number": "Sing",
                                         "Person": "3",
                                         "Tense": "Pres",
@@ -93867,6 +93876,15 @@
                         ]
                     },
                     {
+                        "token": "creites",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "creitfess",
                         "feature_sets": [
                             {
@@ -93880,21 +93898,6 @@
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "cretid",
-                "eDIL_id": 12189,
-                "tokens": [
-                    {
-                        "token": "creites",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             }
                         ]
                     },

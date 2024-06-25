@@ -5,23 +5,30 @@ from MakeJSON import make_json
 import os
 
 
-def save_json(content, docname="glosses"):
+def save_json(content, docname="glosses", file_path=None):
     """Saves content as text in a .json document file. If a file already exists in the directory with the selected
        filename, the name is edited by adding a number to the end of it before saving. This prevents files with the same
        name from being overwritten"""
     newdocname = docname
     docnamelen = len(docname)
-    curdir = os.getcwd()
-    exists = os.path.isfile(curdir + "/" + docname + ".json")
+    if file_path:
+        curdir = file_path
+    else:
+        curdir = os.getcwd()
+    exists = os.path.isfile(os.path.join(curdir, docname + ".json"))
     if exists:
         doccount = 0
         while exists:
             newdocname = docname[:docnamelen] + str(doccount)
-            exists = os.path.isfile(curdir + "/" + newdocname + ".json")
+            exists = os.path.isfile(os.path.join(curdir, docname + ".json"))
             doccount += 1
     docname = newdocname
-    with open(docname + '.json', 'w', encoding='utf-8') as doc:
-        doc.write(content)
+    if file_path:
+        with open(os.path.join(file_path, docname) + '.json', 'w', encoding='utf-8') as doc:
+            doc.write(content)
+    else:
+        with open(docname + '.json', 'w', encoding='utf-8') as doc:
+            doc.write(content)
 
 
 # testglosslist = [["Rom", "499", "f. 1a", "1", "foo", "foo", "foo"], ["Rom", "499", "f. 1a", "2", "fee", "fee", "fee"],

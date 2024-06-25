@@ -936,17 +936,43 @@ class UI:
         )
 
     def save_tokens(self):
+        """First, updates all tokens, so that no outstanding changes are remaining only on-screen.
+           Next, updates the entry for this gloss in the Manual Tokenisation JSON file.
+           Finally, updates working lexicon file with any new Irish lexical content"""
+
         self.update_tokens()
+
+        # Check if a lexicon, potentially with eDIL lexeme IDs, already exists.
+        # If so, create a simplified lexicon dictionary to use to find eDIL lexeme ID numbers
+        try:
+            try_path = os.path.join(os.getcwd(), "Manual_Tokenise_Files")
+            if "Working_lexicon.json" in os.listdir(try_path):
+                with open(os.path.join(try_path, "Working_lexicon.json"), 'r', encoding="utf-8") as lex_file_json:
+                    lex_dict = json.load(lex_file_json)
+                    lex_dict = {
+                        pos.get("part_of_speech"): {
+                            lem.get("lemma"): lem.get("eDIL_id") for lem in pos.get("lemmata")
+                        } for pos in lex_dict
+                    }
+            else:
+                lex_dict = None
+        except FileNotFoundError:
+            lex_dict = None
 
         file_name = self.file_name
         main_file = self.wb_data
         current_glossnum = self.current_rendered_window["current_selected_gloss"].get()
         current_folio = self.current_rendered_window["current_selected_folio"].get()
         current_epistle = self.current_rendered_window["current_selected_epistle"].get()
+
+        # Remove Latin and Greek headword placeholders
         tokens = [[i, j, "", l] if k in ["Latin *", "Greek *"] else [i, j, k, l] for i, j, k, l in self.cur_toks]
+        # Remove * from automatically supplied lemmata before saving them
         tokens = [[i, j, "".join(k.split(" *")), l] if " *" in k else [i, j, k, l] for i, j, k, l in tokens]
+        # Replace underscore characters with space for tokens with internal spacing
         tokens = [t if "_" not in t[0] else [" ".join(t[0].split("_")), t[1], t[2], t[3]] for t in tokens]
 
+        # Update Manual Tokenisation JSON file
         for epistle in main_file:
             ep_name = epistle['epistle']
             if ep_name == current_epistle:
@@ -962,84 +988,120 @@ class UI:
                                 break
         update_json(file_name, main_file)
 
+        # Update working lexicon file with any new Irish content
         working_file = self.lexicon
         for tok in tokens:
             tok_pos = tok[1]
             tok_head = tok[2]
+            found_lex_id = None
+            # Ensure the token is Irish
             if tok_pos not in ["<unknown>", "<Latin>", "<Latin CCONJ>", "<Greek>"] and tok_head[-2:] != " *":
                 tok_form = tok[0]
                 tok_feats = tok[3]
                 if tok_feats:
                     tok_feats = [{i[0]: i[1] for i in [j.split("=") for j in tok_feats.split("|")]}]
+                # Exclude common abbreviations
                 if tok_form not in [".i.", "ɫ.", "ɫ"]:
                     all_filepos = [level_1.get("part_of_speech") for level_1 in working_file]
+                    # If the POS-tag is a POS-tag that already occurs in the working lexicon
                     if tok_pos in all_filepos:
                         file_pos_data = working_file[all_filepos.index(tok_pos)].get("lemmata")
                         all_filelemmata = [level_2.get("lemma") for level_2 in file_pos_data]
+                        pos_id_dict = {level_2.get("lemma"): level_2.get("eDIL_id") for level_2 in file_pos_data}
+                        # If the lemma is a lemma that already occurs in the working lexicon
                         if tok_head in all_filelemmata:
+                            found_lex_id = pos_id_dict.get(tok_head)
                             file_tok_data = file_pos_data[all_filelemmata.index(tok_head)].get("tokens")
                             all_filetoks = [level_3.get("token") for level_3 in file_tok_data]
+                            # If the token is a token that already occurs in the working lexicon
                             if tok_form in all_filetoks:
                                 file_featsets_data = file_tok_data[all_filetoks.index(tok_form)].get("feature_sets")
                                 all_feats = [level_4.get("features") for level_4 in file_featsets_data]
+                                # If the morpho-features DO NOT already occur in the working lexicon for this token
                                 if tok_feats not in all_feats:
+                                    # Add the new morphological features if other features already exist for this token
                                     if tok_feats:
                                         insert = {'feature_set': len(all_feats) + 1, 'features': tok_feats}
                                         file_featsets_data = file_featsets_data + [insert]
                                     else:
+                                        # Create a new set of morphological features if necessary
                                         insert = {'feature_set': 1, 'features': tok_feats}
                                         for i in file_featsets_data:
                                             i['feature_set'] = i.get('feature_set') + 1
                                         file_featsets_data = [insert] + file_featsets_data
+                                    # Cascade the newly added feature set up through the token, lemma and POS levels
                                     file_tok_data[all_filetoks.index(tok_form)] = {
                                         'token': tok_form, 'feature_sets': file_featsets_data
                                     }
                                     file_pos_data[all_filelemmata.index(tok_head)] = {
-                                        'lemma': tok_head, 'tokens': file_tok_data
+                                        'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': file_tok_data
                                     }
                                     working_file[all_filepos.index(tok_pos)] = {
                                         'part_of_speech': tok_pos, 'lemmata': file_pos_data
                                     }
                             else:
+                                # If the token IS NOT a token that already occurs in the working lexicon
+                                # Find the correct position to insert it
                                 filetoks_plus = sorted(list(set(
                                     [level_3.get("token") for level_3 in file_tok_data] + [tok_form]
                                 )))
                                 correct_position = filetoks_plus.index(tok_form)
+                                # Insert it and any morphological feature sets in the correct position
                                 insert = {'token': tok_form, 'feature_sets': [
                                     {'feature_set': 1, 'features': tok_feats}
                                 ]}
                                 file_tok_data = file_tok_data[:correct_position] + [
                                     insert
                                 ] + file_tok_data[correct_position:]
+                                # Cascade the newly added token up through the lemma and POS levels
                                 file_pos_data[all_filelemmata.index(tok_head)] = {
-                                    'lemma': tok_head, 'tokens': file_tok_data
+                                    'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': file_tok_data
                                 }
                                 working_file[all_filepos.index(tok_pos)] = {
                                     'part_of_speech': tok_pos, 'lemmata': file_pos_data
                                 }
                         else:
+                            # If the lemma IS NOT a lemma that already occurs in the working lexicon
+                            # Find the correct position to insert it
                             filelemmata_plus = sorted(list(set(
                                 [level_2.get("lemma") for level_2 in file_pos_data] + [tok_head]
                             )))
                             correct_position = filelemmata_plus.index(tok_head)
+                            # Insert it, as well as any tokens and morphological feature sets in the correct position
                             insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
-                            insert = {'lemma': tok_head, 'tokens': [insert]}
+                            insert = {'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': [insert]}
                             file_pos_data = file_pos_data[:correct_position] + [
                                 insert
                             ] + file_pos_data[correct_position:]
+                            # Cascade the newly added lemma up to the POS level
                             working_file[all_filepos.index(tok_pos)] = {
                                 'part_of_speech': tok_pos, 'lemmata': file_pos_data
                             }
                     else:
+                        # If the POS-tag IS NOT a POS-tag that already occurs in the working lexicon
+                        # Find the correct position to insert it at
                         filepos_plus = sorted(list(set(
                             [level_1.get("part_of_speech") for level_1 in working_file] + [tok_pos]
                         )))
                         correct_position = filepos_plus.index(tok_pos)
+                        # Insert it, as well as any lemmata, tokens and morpho-feature sets in the correct position
                         insert = {'token': tok_form, 'feature_sets': [{'feature_set': 1, 'features': tok_feats}]}
-                        insert = {'lemma': tok_head, 'tokens': [insert]}
+                        insert = {'lemma': tok_head, 'eDIL_id': found_lex_id, 'tokens': [insert]}
                         insert = {'part_of_speech': tok_pos, 'lemmata': [insert]}
                         working_file = working_file[:correct_position] + [insert] + working_file[correct_position:]
-        with open("Working_lexicon.json", 'w', encoding="utf-8") as workfile:
+
+        if lex_dict:
+            for pos_data in working_file:
+                curpos = pos_data.get("part_of_speech")
+                lemmata = pos_data.get("lemmata")
+                annotated_lemmata = lex_dict.get(curpos)
+                for lemma_data in lemmata:
+                    if annotated_lemmata.get(lemma_data.get("lemma")) and not lemma_data.get("eDIL_id"):
+                        lemma_data["eDIL_id"] = annotated_lemmata.get(lemma_data.get("lemma"))
+
+        with open(
+                os.path.join(os.getcwd(), "Manual_tokenise_files", "Working_lexicon.json"
+                             ), 'w', encoding="utf-8") as workfile:
             json.dump(working_file, workfile, indent=4, ensure_ascii=False)
 
         self.selected_gloss_info = self.create_gloss_info(
@@ -1334,7 +1396,8 @@ class UI:
         return check_found
 
     def check_tokenised_file(self, checklist):
-        """Look for a token (and its POS data) in the tokenised Wb. glosses file"""
+        """Look for a token (and its POS data) in the tokenised Wb. glosses file
+           (Runs as the program is being closed)"""
         main_file = self.wb_data
         all_toks = list()
         for epistle in main_file:
@@ -1355,12 +1418,13 @@ class UI:
         all_toks = [i if i[3] else (i[0], i[1], i[2], '') for i in all_toks]
         all_toks = sorted(list(set(all_toks)))
         all_toks = [i if i[3] != '' else (i[0], i[1], i[2], None) for i in all_toks]
-        all_toks = [[i[0], i[1], i[2], i[3]] for i in all_toks]
+        all_toks = [[i[0], i[1], i[2].lower(), i[3]] for i in all_toks]
         results = [[i, True] if i in all_toks else [i, False] for i in checklist]
         return results
 
     def clear_lexica(self):
-        """Check each lexicon for entries which do not occur in either Wb. or Sg. and removes them from the lexicon"""
+        """Check each lexicon for entries which do not occur in either Wb. or Sg. and removes them from the lexicon
+           (Runs as the program is being closed)."""
 
         # create a list of tokens (and data) from a working lexicon which are not present in the original lexicon
         check_lex = list()
@@ -1440,7 +1504,9 @@ class UI:
                             feat_set_level["feature_set"] = set_count
                             set_count += 1
 
-            with open("Working_lexicon.json", 'w', encoding="utf-8") as workfile:
+            with open(
+                    os.path.join(os.getcwd(), "Manual_tokenise_files", "Working_lexicon.json"), 'w', encoding="utf-8"
+            ) as workfile:
                 json.dump(self.lexicon, workfile, indent=4, ensure_ascii=False)
 
 
@@ -1489,7 +1555,7 @@ def update_json(file_name, file_object):
         json.dump(file_object, json_file, indent=4, ensure_ascii=False)
 
 
-def update_empty_toks(file_name, json_doc):
+def update_empty_toks(file_path, json_doc):
     """Go through all glosses looking for tokenisation fields that are empty
        replace any empty fields with tokens from the gloss and their POS tags
        update the .json file containing the data"""
@@ -1512,7 +1578,7 @@ def update_empty_toks(file_name, json_doc):
                     token_list = [[i, "CCONJ", "nó", None] if i in ["ɫ", "ɫ."]
                                   else [i, j, k, l] for i, j, k, l in token_list]
                     gloss_data["glossTokens"] = token_list
-    update_json(file_name, json_doc)
+    update_json(file_path, json_doc)
     return f'{json_doc} updated: Tokenisation fields generated for empty strings.'
 
 
@@ -1581,19 +1647,21 @@ def transfer_wb_toks(add_to_file, add_from_file):
     """add tokens to a lexicon from a manually tokenised .json document if they are not already in it"""
 
     # Check if a lexicon, potentially with eDIL lexeme IDs, already exists.
+    # If so, create a simplified lexicon dictionary to use to find eDIL lexeme ID numbers
     try:
-        if "Working_lexicon.json" in os.listdir(os.getcwd()):
-            with open("Working_lexicon.json", 'r', encoding="utf-8") as lex_file_json:
-                lex_file = json.load(lex_file_json)
-                lex_file = {
+        try_path = os.path.join(os.getcwd(), "Manual_Tokenise_Files")
+        if "Working_lexicon.json" in os.listdir(try_path):
+            with open(os.path.join(try_path, "Working_lexicon.json"), 'r', encoding="utf-8") as lex_file_json:
+                lex_dict = json.load(lex_file_json)
+                lex_dict = {
                     pos.get("part_of_speech"): {
                         lem.get("lemma"): lem.get("eDIL_id") for lem in pos.get("lemmata")
-                    } for pos in lex_file
+                    } for pos in lex_dict
                 }
         else:
-            lex_file = None
+            lex_dict = None
     except FileNotFoundError:
-        lex_file = None
+        lex_dict = None
 
     # Collect a list of token-data from a .json document from which tokens are to be added to lexica (Wb.)
     # If the token is Irish, add it to a list of Irish tokens
@@ -1715,24 +1783,22 @@ def transfer_wb_toks(add_to_file, add_from_file):
                 insert = {'part_of_speech': tok_pos, 'lemmata': [insert]}
                 json_file = json_file[:correct_position] + [insert] + json_file[correct_position:]
 
-    if lex_file:
+    if lex_dict:
         for pos_data in json_file:
             curpos = pos_data.get("part_of_speech")
             lemmata = pos_data.get("lemmata")
-            annotated_lemmata = lex_file.get(curpos)
+            annotated_lemmata = lex_dict.get(curpos)
             for lemma_data in lemmata:
                 lemma_data["eDIL_id"] = annotated_lemmata.get(lemma_data.get("lemma"))
 
     return json.dumps(json_file, indent=4, ensure_ascii=False)
 
 
-def update_base_file(base_file, file_dir):
-    """update any data in the working manual tokenisation file that have been changed in the main text file
-       (currently newNotes and glossHand can be updated, and any newly included glosses can be added) """
-    cur_dir = os.getcwd()
-    os.chdir(file_dir)
+def update_base_file(base_file):
+    """update any data in the working manual tokenisation file if changes habe been made in the annotated text file
+       (currently newNotes and glossHand can be updated, and any newly included glosses can be added)
+       """
     updated_text_file = combine_infolists("Wurzburg Glosses", 499, 712)
-    os.chdir(cur_dir)
     updated_text_file = json.loads(make_json(updated_text_file, True))
     # Check if there is any difference at all between the newly generated file and the file currently in use
     # Note: the newly generated file will have no tokenisation, hence, glossTokens1 and glossTokens2 will be empty
@@ -1766,72 +1832,72 @@ def update_base_file(base_file, file_dir):
                                                 glosses = glosses[:k] + [upd_gloss_data] + glosses[k:]
                             folios[j]['glosses'] = glosses
                         for k, level_2 in enumerate(upd_glosses):
+                            # Update the glossed Latin text if changes have been made
                             upd_latin = level_2.get('latin')
                             latin = glosses[k].get('latin')
-                            # Update the glossed Latin text if changes have been made
                             if upd_latin != latin:
                                 glosses[k]['latin'] = upd_latin
+                            # Update the Latin lemma to which the gloss is attached if changes have been made
                             upd_lemma = level_2.get('lemma')
                             lemma = glosses[k].get('lemma')
-                            # Update the Latin lemma to which the gloss is attached if changes have been made
                             if upd_lemma != lemma:
                                 glosses[k]['lemma'] = upd_lemma
+                            # Update the position of the Latin lemma if changes have been made
                             upd_lemPos = level_2.get('lemPos')
                             lemPos = glosses[k].get('lemPos')
-                            # Update the position of the Latin lemma if changes have been made
                             if upd_lemPos != lemPos:
                                 glosses[k]['lemPos'] = upd_lemPos
+                            # Update the scribal hand if changes have been made
                             upd_glosshand = level_2.get('glossHand')
                             glosshand = glosses[k].get('glossHand')
-                            # Update the scribal hand if changes have been made
                             if upd_glosshand != glosshand:
                                 glosses[k]['glossHand'] = upd_glosshand
+                            # Update the fully tagged gloss text if changes have been made
                             upd_glossFullTags = level_2.get('glossFullTags')
                             glossFullTags = glosses[k].get('glossFullTags')
-                            # Update the fully tagged gloss text if changes have been made
                             if upd_glossFullTags != glossFullTags:
                                 glosses[k]['glossFullTags'] = upd_glossFullTags
+                            # Update the gloss text with all tags removed if changes have been made
                             upd_glossText = level_2.get('glossText')
                             glossText = glosses[k].get('glossText')
-                            # Update the gloss text with all tags removed if changes have been made
                             if upd_glossText != glossText:
                                 glosses[k]['glossText'] = upd_glossText
+                            # Update the new gloss readings if changes have been made
                             upd_newGloss = level_2.get('newGloss')
                             newGloss = glosses[k].get('newGloss')
-                            # Update the new gloss readings if changes have been made
                             if upd_newGloss != newGloss:
                                 glosses[k]['newGloss'] = upd_newGloss
+                            # Update the tagged new gloss readings if changes have been made
                             upd_newGlossTagged = level_2.get('taggedNewGloss')
                             taggedNewGloss = glosses[k].get('taggedNewGloss')
-                            # Update the tagged new gloss readings if changes have been made
                             if upd_newGlossTagged != taggedNewGloss:
                                 glosses[k]['taggedNewGloss'] = upd_newGlossTagged
+                            # Update the gloss text with superscript footnote tags if changes have been made
                             upd_glossFNs = level_2.get('glossFNs')
                             glossFNs = glosses[k].get('glossFNs')
-                            # Update the gloss text with superscript footnote tags if changes have been made
                             if upd_glossFNs != glossFNs:
                                 glosses[k]['glossFNs'] = upd_glossFNs
+                            # Update the English translation of the gloss if changes have been made
                             upd_glossTrans = level_2.get('glossTrans')
                             glossTrans = glosses[k].get('glossTrans')
-                            # Update the English translation of the gloss if changes have been made
                             if upd_glossTrans != glossTrans:
                                 glosses[k]['glossTrans'] = upd_glossTrans
+                            # Update the footnotes if changes have been made
                             upd_footnotes = level_2.get('footnotes')
                             footnotes = glosses[k].get('footnotes')
-                            # Update the footnotes if changes have been made
                             if upd_footnotes != footnotes:
                                 glosses[k]['footnotes'] = upd_footnotes
+                            # Update the site notes (new notes) if changes have been made
                             upd_newnote = level_2.get('newNotes')
                             newnote = glosses[k].get('newNotes')
-                            # Update the site notes (new notes) if changes have been made
                             if upd_newnote != newnote:
                                 glosses[k]['newNotes'] = upd_newnote
+                            # Update the new translations if changes have been made
                             upd_newtrans = level_2.get('newTrans')
                             newtrans = glosses[k].get('newTrans')
-                            # Update the new translations if changes have been made
                             if upd_newtrans != newtrans:
                                 glosses[k]['newTrans'] = upd_newtrans
-
+                            # Update the new tokens if changes have been made
                             upd_toks = glosses[k].get('glossTokens')
                             upd_toks = [tagged_tok + [None] if len(tagged_tok) == 3
                                           else tagged_tok for tagged_tok in upd_toks]
@@ -1846,7 +1912,7 @@ def update_base_file(base_file, file_dir):
                                           else [i, j, k, l] for i, j, k, l in upd_toks]
                             glosses[k]['glossTokens'] = upd_toks
 
-    update_json("Wb. Manual Tokenisation.json", base_file)
+    update_json(os.path.join(os.getcwd(), "Manual_Tokenise_Files", "Wb. Manual Tokenisation.json"), base_file)
     return base_file
 
 
@@ -1860,23 +1926,21 @@ if __name__ == "__main__":
 
     # Open the Manual Tokenisation folder
     try:
-        os.chdir(tokenise_dir)
+        os.listdir(tokenise_dir)
     except FileNotFoundError:
         os.mkdir("Manual_Tokenise_Files")
-        os.chdir(tokenise_dir)
 
     # Create a JSON document of the Wb. Glosses in the Manual Tokenisation folder if it doesn't exist already
-    dir_contents = os.listdir()
+    dir_contents = os.listdir(tokenise_dir)
     if "Wb. Manual Tokenisation.json" not in dir_contents:
-        os.chdir(maindir)
         wbglosslist = combine_infolists("Wurzburg Glosses", 499, 712)
-        os.chdir(tokenise_dir)
-        save_json(make_json(wbglosslist, True), "Wb. Manual Tokenisation")
+        save_json(make_json(wbglosslist, True), "Wb. Manual Tokenisation", tokenise_dir)
 
     # Open the Wb. JSON file for use in the GUI
-    with open("Wb. Manual Tokenisation.json", 'r', encoding="utf-8") as wb_json:
+    man_tok_filepath = os.path.join(tokenise_dir, "Wb. Manual Tokenisation.json")
+    with open(man_tok_filepath, 'r', encoding="utf-8") as wb_json:
         wb_data = json.load(wb_json)
-        wb_data = update_base_file(wb_data, maindir)
+        wb_data = update_base_file(wb_data)
 
     # Check if any of the tokenisation fields are empty
     empty_tokfields = False
@@ -1896,65 +1960,57 @@ if __name__ == "__main__":
     # If any of the tokenisation fields, for any gloss, are empty (eg. if the JSON file has just been generated)
     # add lists of tokens and their POS tags, for each gloss, to the gloss's tokenisation fields
     if empty_tokfields:
-        update_empty_toks("Wb. Manual Tokenisation.json", wb_data)
+        update_empty_toks(man_tok_filepath, wb_data)
 
     # Create a JSON document of the OI Lexicon in the Manual Tokenisation folder from the Sg. CoNNL_U file
     # if it doesn't exist already, otherwise, update it if necessary
     if "Lexicon.json" not in dir_contents:
-        os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
-        sg_json = make_lex_json(sg_filepath)
-        os.chdir(tokenise_dir)
-        save_json(sg_json, "Lexicon")
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks")
+        sg_json = make_lex_json(os.path.join(sg_filepath, sg_conllu_file))
+        save_json(sg_json, "Lexicon", tokenise_dir)
         # Open the first Lexicon JSON file for use in the GUI
-        with open("Lexicon.json", 'r', encoding="utf-8") as lex_json:
+        with open(os.path.join(tokenise_dir, "Lexicon.json"), 'r', encoding="utf-8") as lex_json:
             original_lexicon = json.load(lex_json)
     else:
         # Ensure that no changes have been made to the Sg. file that require the current lexicon to be amended
         # if any such changes have been made, replace the current lexicon
-        with open("Lexicon.json", 'r', encoding="utf-8") as lex_json:
+        with open(os.path.join(tokenise_dir, "Lexicon.json"), 'r', encoding="utf-8") as lex_json:
             original_lexicon = json.load(lex_json)
-        os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
-        sg_json = make_lex_json(sg_filepath)
-        os.chdir(tokenise_dir)
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks")
+        sg_json = make_lex_json(os.path.join(sg_filepath, sg_conllu_file))
         if original_lexicon != json.loads(sg_json):
-            os.remove("Lexicon.json")
-            save_json(sg_json, "Lexicon")
+            os.remove(os.path.join(tokenise_dir, "Lexicon.json"))
+            save_json(sg_json, "Lexicon", tokenise_dir)
         # Open the first Lexicon JSON file for use in the GUI
-        with open("Lexicon.json", 'r', encoding="utf-8") as lex_json:
+        with open(os.path.join(tokenise_dir, "Lexicon.json"), 'r', encoding="utf-8") as lex_json:
             original_lexicon = json.load(lex_json)
 
     # Create a working copy of the OI Lexicon created above for use in the GUI if it doesn't already exist
     # This will be updated with new tokens and POS from Wb. which will not be saved to the original above
     if "Working_lexicon.json" not in dir_contents:
-        os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
-        sg_json = make_lex_json(sg_filepath)
-        os.chdir(tokenise_dir)
-        save_json(sg_json, "Working_lexicon")
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks")
+        sg_json = make_lex_json(os.path.join(sg_filepath, sg_conllu_file))
+        save_json(sg_json, "Working_lexicon", tokenise_dir)
         # Open the second Lexicon JSON file for use in the GUI
-        with open("Working_lexicon.json", 'r', encoding="utf-8") as lex_working_json:
+        with open(os.path.join(tokenise_dir, "Working_lexicon.json"), 'r', encoding="utf-8") as lex_working_json:
             working_lexicon = json.load(lex_working_json)
     # Check for any tokens, lemmata or parts-of-speech which don't occur in either the Sg. file of the Wb. file
     # if any exist, delete them.
     else:
-        with open("Working_lexicon.json", 'r', encoding="utf-8") as lex_working_json:
+        with open(os.path.join(tokenise_dir, "Working_lexicon.json"), 'r', encoding="utf-8") as lex_working_json:
             working_lexicon = json.load(lex_working_json)
-        os.chdir(maindir)
         sg_conllu_file = "combined_sg_files.conllu"
-        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks", sg_conllu_file)
-        sg_json = make_lex_json(sg_filepath)
-        os.chdir(tokenise_dir)
+        sg_filepath = os.path.join(maindir, "conllu_files", "Sg_Treebanks")
+        sg_json = make_lex_json(os.path.join(sg_filepath, sg_conllu_file))
         sg_json = transfer_wb_toks(sg_json, wb_data)
         if working_lexicon != json.loads(sg_json):
-            os.remove("Working_lexicon.json")
-            save_json(sg_json, "Working_lexicon")
+            os.remove(os.path.join(tokenise_dir, "Working_lexicon.json"))
+            save_json(sg_json, "Working_lexicon", tokenise_dir)
         # Open the second Lexicon JSON file for use in the GUI
-        with open("Working_lexicon.json", 'r', encoding="utf-8") as lex_working_json:
+        with open(os.path.join(tokenise_dir, "Working_lexicon.json"), 'r', encoding="utf-8") as lex_working_json:
             working_lexicon = json.load(lex_working_json)
 
 
