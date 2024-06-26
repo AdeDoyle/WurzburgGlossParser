@@ -1,7 +1,6 @@
 
 import os
 import json
-from SaveJSON import save_json
 
 
 def check_lex_dups():
