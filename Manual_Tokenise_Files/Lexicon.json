@@ -21423,21 +21423,6 @@
                 ]
             },
             {
-                "lemma": "namma",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "namma",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "nammá",
                 "eDIL_id": null,
                 "tokens": [

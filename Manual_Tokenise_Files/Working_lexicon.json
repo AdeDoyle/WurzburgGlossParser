@@ -13529,7 +13529,7 @@
             },
             {
                 "lemma": "ocus",
-                "eDIL_id": null,
+                "eDIL_id": 33483,
                 "tokens": [
                     {
                         "token": "nesa",
@@ -23187,7 +23187,7 @@
         "lemmata": [
             {
                 "lemma": ".i.",
-                "eDIL_id": null,
+                "eDIL_id": 26892,
                 "tokens": [
                     {
                         "token": ".i.",
@@ -23527,7 +23527,7 @@
             },
             {
                 "lemma": "dano",
-                "eDIL_id": null,
+                "eDIL_id": 14616,
                 "tokens": [
                     {
                         "token": "dano",
@@ -23575,7 +23575,7 @@
             },
             {
                 "lemma": "didiu",
-                "eDIL_id": null,
+                "eDIL_id": 16223,
                 "tokens": [
                     {
                         "token": "didiu",
@@ -23822,23 +23822,8 @@
                 ]
             },
             {
-                "lemma": "namma",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "namma",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "nammá",
-                "eDIL_id": null,
+                "eDIL_id": 32963,
                 "tokens": [
                     {
                         "token": "namma",
@@ -23949,7 +23934,7 @@
             },
             {
                 "lemma": "sund",
-                "eDIL_id": null,
+                "eDIL_id": 39303,
                 "tokens": [
                     {
                         "token": "sund",
@@ -24036,7 +24021,7 @@
             },
             {
                 "lemma": "trá",
-                "eDIL_id": null,
+                "eDIL_id": 41529,
                 "tokens": [
                     {
                         "token": "tra",
@@ -24156,7 +24141,7 @@
             },
             {
                 "lemma": "ém",
-                "eDIL_id": null,
+                "eDIL_id": 19799,
                 "tokens": [
                     {
                         "token": "em",
@@ -24198,7 +24183,7 @@
             },
             {
                 "lemma": "íarum",
-                "eDIL_id": null,
+                "eDIL_id": 27092,
                 "tokens": [
                     {
                         "token": "iarum",
@@ -24213,7 +24198,7 @@
             },
             {
                 "lemma": "⁊rl.",
-                "eDIL_id": null,
+                "eDIL_id": 978,
                 "tokens": [
                     {
                         "token": "rl.",
@@ -26776,7 +26761,7 @@
         "lemmata": [
             {
                 "lemma": "afameinn",
-                "eDIL_id": null,
+                "eDIL_id": 660,
                 "tokens": [
                     {
                         "token": "abamin",
@@ -26818,7 +26803,7 @@
             },
             {
                 "lemma": "ná",
-                "eDIL_id": null,
+                "eDIL_id": 32902,
                 "tokens": [
                     {
                         "token": "na",
@@ -26837,7 +26822,7 @@
             },
             {
                 "lemma": "nó",
-                "eDIL_id": null,
+                "eDIL_id": 33204,
                 "tokens": [
                     {
                         "token": "na",
@@ -26897,7 +26882,7 @@
             },
             {
                 "lemma": "ocus",
-                "eDIL_id": null,
+                "eDIL_id": 33484,
                 "tokens": [
                     {
                         "token": "⁊",
@@ -26917,7 +26902,7 @@
         "lemmata": [
             {
                 "lemma": "a",
-                "eDIL_id": null,
+                "eDIL_id": 9,
                 "tokens": [
                     {
                         "token": "a",
@@ -27386,7 +27371,7 @@
             },
             {
                 "lemma": "cach",
-                "eDIL_id": null,
+                "eDIL_id": 7528,
                 "tokens": [
                     {
                         "token": "cach",
@@ -27549,7 +27534,7 @@
             },
             {
                 "lemma": "in",
-                "eDIL_id": null,
+                "eDIL_id": 28194,
                 "tokens": [
                     {
                         "token": "a",
@@ -28493,7 +28478,7 @@
             },
             {
                 "lemma": "nach",
-                "eDIL_id": null,
+                "eDIL_id": 32906,
                 "tokens": [
                     {
                         "token": "na",
@@ -79096,7 +79081,7 @@
             },
             {
                 "lemma": "ná",
-                "eDIL_id": null,
+                "eDIL_id": 32900,
                 "tokens": [
                     {
                         "token": "na",
@@ -85492,7 +85477,7 @@
             },
             {
                 "lemma": "ná",
-                "eDIL_id": null,
+                "eDIL_id": 32901,
                 "tokens": [
                     {
                         "token": "na",
