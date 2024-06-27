@@ -986,7 +986,7 @@ class UI:
                             if gloss_no == current_glossnum:
                                 gloss_data["glossTokens"] = tokens
                                 break
-        update_json(file_name, main_file)
+        overwrite_json(os.path.join(os.getcwd(), "Manual_Tokenise_Files", file_name), main_file)
 
         # Update working lexicon file with any new Irish content
         working_file = self.lexicon
@@ -1549,9 +1549,9 @@ def refresh_tokens(string, tokens):
         return return_tokens
 
 
-def update_json(file_name, file_object):
+def overwrite_json(file_path, file_object):
     """Save JSON file, overwrite old file by the same name if necessary"""
-    with open(file_name, 'w', encoding="utf-8") as json_file:
+    with open(file_path, 'w', newline='', encoding="utf-8") as json_file:
         json.dump(file_object, json_file, indent=4, ensure_ascii=False)
 
 
@@ -1578,7 +1578,7 @@ def update_empty_toks(file_path, json_doc):
                     token_list = [[i, "CCONJ", "nó", None] if i in ["ɫ", "ɫ."]
                                   else [i, j, k, l] for i, j, k, l in token_list]
                     gloss_data["glossTokens"] = token_list
-    update_json(file_path, json_doc)
+    overwrite_json(file_path, json_doc)
     return f'{json_doc} updated: Tokenisation fields generated for empty strings.'
 
 
@@ -1912,7 +1912,7 @@ def update_base_file(base_file):
                                           else [i, j, k, l] for i, j, k, l in upd_toks]
                             glosses[k]['glossTokens'] = upd_toks
 
-    update_json(os.path.join(os.getcwd(), "Manual_Tokenise_Files", "Wb. Manual Tokenisation.json"), base_file)
+    overwrite_json(os.path.join(os.getcwd(), "Manual_Tokenise_Files", "Wb. Manual Tokenisation.json"), base_file)
     return base_file
 
 
