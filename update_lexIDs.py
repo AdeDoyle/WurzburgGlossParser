@@ -61,7 +61,7 @@ def update_gloss_ids():
                                 user_tok_id = input("        Input lemma ID: ")
                                 if user_tok_id in ["none", "None", "null", "Null", "false", "False",
                                                    "no", "No", "NO", "no!", "No!", "NO!"]:
-                                    user_tok_id = None
+                                    user_tok_id = "None"
                                 elif user_tok_id in ["exit", "exit!", "Exit", "Exit!"]:
                                     return
                                 else:

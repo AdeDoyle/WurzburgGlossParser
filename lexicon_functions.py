@@ -50,7 +50,8 @@ def create_site_lex():
                     lex_dict = json.load(lex_file_json)
                     lex_dict = {
                         pos.get("part_of_speech"): {
-                            lem.get("lemma"): lem.get("eDIL_id") for lem in pos.get("lemmata")
+                            lem.get("lemma"): lem.get("eDIL_id") if lem.get("eDIL_id") != "None" else None
+                            for lem in pos.get("lemmata")
                         } for pos in lex_dict
                     }
             else:
