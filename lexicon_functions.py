@@ -36,7 +36,7 @@ def check_lex_dups():
     return dup_list
 
 
-def create_site_lex():
+def create_site_lex(replace_none_string=True):
     """Returns a JSON lookup dictionary for all headwords.
        It assumes that no duplicate headwords occur within any given POS group."""
 
@@ -48,12 +48,22 @@ def create_site_lex():
             if "Working_lexicon.json" in os.listdir(try_path):
                 with open(os.path.join(try_path, "Working_lexicon.json"), 'r', encoding="utf-8") as lex_file_json:
                     lex_dict = json.load(lex_file_json)
-                    lex_dict = {
-                        pos.get("part_of_speech"): {
-                            lem.get("lemma"): lem.get("eDIL_id") if lem.get("eDIL_id") != "None" else None
-                            for lem in pos.get("lemmata")
-                        } for pos in lex_dict
-                    }
+                    # Where tokens have no headword in eDIL they are tagged with the string "None"
+                    # By default this is replaced with a null value for use on the Wb. website
+                    if replace_none_string:
+                        lex_dict = {
+                            pos.get("part_of_speech"): {
+                                lem.get("lemma"): lem.get("eDIL_id") if lem.get("eDIL_id") != "None" else None
+                                for lem in pos.get("lemmata")
+                            } for pos in lex_dict
+                        }
+                    # If specified, the "None" string can be kept (as is necessary for functions in update_lexIDs.py)
+                    else:
+                        lex_dict = {
+                            pos.get("part_of_speech"): {
+                                lem.get("lemma"): lem.get("eDIL_id") for lem in pos.get("lemmata")
+                            } for pos in lex_dict
+                        }
             else:
                 raise RuntimeError("Could not find lexicon in directory")
         except FileNotFoundError:
