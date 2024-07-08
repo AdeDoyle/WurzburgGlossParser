@@ -82390,7 +82390,10 @@
             },
             {
                 "lemma": "side",
-                "eDIL_id": 37463,
+                "eDIL_id": [
+                    37463,
+                    38459
+                ],
                 "tokens": [
                     {
                         "token": "ade",
@@ -82991,38 +82994,6 @@
                                         "Number": "Sing",
                                         "Person": "3",
                                         "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "són",
-                "eDIL_id": 38459,
-                "tokens": [
-                    {
-                        "token": "son",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "són",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ana"
                                     }
                                 ]
                             }
