@@ -19443,7 +19443,10 @@
             },
             {
                 "lemma": "co",
-                "eDIL_id": 9786,
+                "eDIL_id": [
+                    9786,
+                    9787
+                ],
                 "tokens": [
                     {
                         "token": "chucae",
