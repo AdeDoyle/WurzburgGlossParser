@@ -79890,43 +79890,9 @@
                                 "feature_set": 3,
                                 "features": [
                                     {
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 4,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 5,
-                                "features": [
-                                    {
                                         "Number": "Plur",
                                         "Person": "3",
                                         "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 6,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronClass": "A",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -80071,8 +80037,60 @@
                 ]
             },
             {
+                "lemma": "a_1",
+                "eDIL_id": [
+                    19325,
+                    11
+                ],
+                "tokens": [
+                    {
+                        "token": "a",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "A",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "a_2",
+                "eDIL_id": [
+                    19657,
+                    11
+                ],
+                "tokens": [
+                    {
+                        "token": "a",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "A",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "ar",
-                "eDIL_id": null,
+                "eDIL_id": 3906,
                 "tokens": [
                     {
                         "token": "ar",
@@ -80298,7 +80316,10 @@
             },
             {
                 "lemma": "b",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    37502,
+                    5053
+                ],
                 "tokens": [
                     {
                         "token": "b",
@@ -80310,16 +80331,6 @@
                                         "Number": "Plur",
                                         "Person": "2",
                                         "PronClass": "A",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "2",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -80711,7 +80722,7 @@
             },
             {
                 "lemma": "d",
-                "eDIL_id": "None",
+                "eDIL_id": 50165,
                 "tokens": [
                     {
                         "token": "d",
@@ -80720,61 +80731,7 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
                                         "PronType": "Void"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "da",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "did",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
                                     }
                                 ]
                             }
@@ -80787,104 +80744,7 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
                                         "PronType": "Void"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "n",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "nd",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ndid",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ṅd",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
                                     }
                                 ]
                             }
@@ -80893,8 +80753,11 @@
                 ]
             },
             {
-                "lemma": "da",
-                "eDIL_id": null,
+                "lemma": "da_1",
+                "eDIL_id": [
+                    37356,
+                    14070
+                ],
                 "tokens": [
                     {
                         "token": "da",
@@ -80906,16 +80769,7 @@
                                         "Gender": "Fem",
                                         "Number": "Sing",
                                         "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -80932,6 +80786,7 @@
                                         "Gender": "Fem",
                                         "Number": "Sing",
                                         "Person": "3",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -80948,16 +80803,7 @@
                                         "Gender": "Fem",
                                         "Number": "Sing",
                                         "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -80974,6 +80820,48 @@
                                         "Gender": "Fem",
                                         "Number": "Sing",
                                         "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "da_2",
+                "eDIL_id": [
+                    19326,
+                    14070
+                ],
+                "tokens": [
+                    {
+                        "token": "da",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ta",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -80984,7 +80872,10 @@
             },
             {
                 "lemma": "dat",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    42137,
+                    14724
+                ],
                 "tokens": [
                     {
                         "token": "dat",
@@ -80995,6 +80886,7 @@
                                     {
                                         "Number": "Sing",
                                         "Person": "2",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81010,6 +80902,7 @@
                                     {
                                         "Number": "Sing",
                                         "Person": "2",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81020,7 +80913,10 @@
             },
             {
                 "lemma": "do",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    17097,
+                    39354
+                ],
                 "tokens": [
                     {
                         "token": "do",
@@ -81074,7 +80970,10 @@
             },
             {
                 "lemma": "dob",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    37502,
+                    17196
+                ],
                 "tokens": [
                     {
                         "token": "ndob",
@@ -81091,28 +80990,15 @@
                                 ]
                             }
                         ]
-                    },
-                    {
-                        "token": "tob",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "2",
-                                        "PronClass": "B",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             },
             {
                 "lemma": "dom",
-                "eDIL_id": 18053,
+                "eDIL_id": [
+                    31705,
+                    18053
+                ],
                 "tokens": [
                     {
                         "token": "dom",
@@ -81123,6 +81009,7 @@
                                     {
                                         "Number": "Sing",
                                         "Person": "1",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81133,7 +81020,7 @@
             },
             {
                 "lemma": "don",
-                "eDIL_id": null,
+                "eDIL_id": 14557,
                 "tokens": [
                     {
                         "token": "ndon",
@@ -81144,6 +81031,7 @@
                                     {
                                         "Number": "Plur",
                                         "Person": "1",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81159,6 +81047,7 @@
                                     {
                                         "Number": "Plur",
                                         "Person": "1",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81169,7 +81058,7 @@
             },
             {
                 "lemma": "ed",
-                "eDIL_id": null,
+                "eDIL_id": 19657,
                 "tokens": [
                     {
                         "token": "ed",
@@ -81529,44 +81418,6 @@
             },
             {
                 "lemma": "far",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "far",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "2",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "for",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "2",
-                                        "Poss": "Yes",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "for",
                 "eDIL_id": 23273,
                 "tokens": [
                     {
@@ -81659,11 +81510,31 @@
                 ]
             },
             {
-                "lemma": "id",
-                "eDIL_id": null,
+                "lemma": "id_1",
+                "eDIL_id": [
+                    19325,
+                    27169
+                ],
                 "tokens": [
                     {
                         "token": "d",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "da",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -81686,9 +81557,155 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "n",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "id_2",
+                "eDIL_id": [
+                    19657,
+                    27168
+                ],
+                "tokens": [
+                    {
+                        "token": "d",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
                                         "Gender": "Neut",
                                         "Number": "Sing",
                                         "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "did",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "id",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "n",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nd",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ndid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ṅd",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "C",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81699,7 +81716,10 @@
             },
             {
                 "lemma": "m",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    31705,
+                    31160
+                ],
                 "tokens": [
                     {
                         "token": "m",
@@ -81711,16 +81731,6 @@
                                         "Number": "Sing",
                                         "Person": "1",
                                         "PronClass": "A",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "1",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -81740,16 +81750,6 @@
                                         "PronType": "Prs"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "1",
-                                        "PronType": "Prs"
-                                    }
-                                ]
                             }
                         ]
                     }
@@ -81757,7 +81757,10 @@
             },
             {
                 "lemma": "mo",
-                "eDIL_id": 32400,
+                "eDIL_id": [
+                    32400,
+                    31159
+                ],
                 "tokens": [
                     {
                         "token": "m",
@@ -81926,23 +81929,13 @@
             },
             {
                 "lemma": "n",
-                "eDIL_id": null,
+                "eDIL_id": 32895,
                 "tokens": [
                     {
                         "token": "n",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "1",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -82203,8 +82196,11 @@
                 ]
             },
             {
-                "lemma": "s",
-                "eDIL_id": null,
+                "lemma": "s_1",
+                "eDIL_id": [
+                    37356,
+                    35819
+                ],
                 "tokens": [
                     {
                         "token": "s",
@@ -82216,22 +82212,27 @@
                                         "Gender": "Fem",
                                         "Number": "Sing",
                                         "Person": "3",
+                                        "PronClass": "A",
                                         "PronType": "Prs"
                                     }
                                 ]
-                            },
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "s_2",
+                "eDIL_id": [
+                    19326,
+                    35819
+                ],
+                "tokens": [
+                    {
+                        "token": "s",
+                        "feature_sets": [
                             {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
+                                "feature_set": 1,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -82525,7 +82526,7 @@
             },
             {
                 "lemma": "sní",
-                "eDIL_id": null,
+                "eDIL_id": 38158,
                 "tokens": [
                     {
                         "token": "sni",
@@ -82952,7 +82953,7 @@
             },
             {
                 "lemma": "sí",
-                "eDIL_id": null,
+                "eDIL_id": 37356,
                 "tokens": [
                     {
                         "token": "si",
@@ -83005,171 +83006,11 @@
                 ]
             },
             {
-                "lemma": "t",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "t",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "2",
-                                        "PronClass": "A",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "2",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tt",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "ta",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "ta",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Fem",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "tob",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "dob",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "2",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "tom",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "dom",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "1",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tom",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "1",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "tum",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Number": "Sing",
-                                        "Person": "1",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "tú",
-                "eDIL_id": 42137,
+                "lemma": "síi",
+                "eDIL_id": [
+                    37502,
+                    37334
+                ],
                 "tokens": [
                     {
                         "token": "sethar",
@@ -83186,7 +83027,205 @@
                                 ]
                             }
                         ]
+                    }
+                ]
+            },
+            {
+                "lemma": "t_1",
+                "eDIL_id": [
+                    42137,
+                    39355,
+                    14066
+                ],
+                "tokens": [
+                    {
+                        "token": "t",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "2",
+                                        "PronClass": "A",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "t_3",
+                "eDIL_id": [
+                    19657,
+                    14069
+                ],
+                "tokens": [
+                    {
+                        "token": "t",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
                     },
+                    {
+                        "token": "tt",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "ta_1",
+                "eDIL_id": [
+                    37356,
+                    14070
+                ],
+                "tokens": [
+                    {
+                        "token": "ta",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Fem",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tob",
+                "eDIL_id": [
+                    37502,
+                    17196
+                ],
+                "tokens": [
+                    {
+                        "token": "dob",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tob",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tom",
+                "eDIL_id": [
+                    31705,
+                    18053
+                ],
+                "tokens": [
+                    {
+                        "token": "dom",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tom",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "tum",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronClass": "B",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tú",
+                "eDIL_id": 42137,
+                "tokens": [
                     {
                         "token": "thv",
                         "feature_sets": [
@@ -83220,8 +83259,8 @@
                 ]
             },
             {
-                "lemma": "é",
-                "eDIL_id": null,
+                "lemma": "é_1",
+                "eDIL_id": 19325,
                 "tokens": [
                     {
                         "token": "aí",
@@ -83268,16 +83307,6 @@
                                         "PronType": "Prs"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -83290,16 +83319,6 @@
                                     {
                                         "Gender": "Masc",
                                         "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Number": "Plur",
                                         "Person": "3",
                                         "PronType": "Prs"
                                     }
@@ -83336,9 +83355,50 @@
                                         "PronType": "Prs"
                                     }
                                 ]
-                            },
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "é_2",
+                "eDIL_id": 19326,
+                "tokens": [
+                    {
+                        "token": "he",
+                        "feature_sets": [
                             {
-                                "feature_set": 2,
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "hé",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "é",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
                                 "features": [
                                     {
                                         "Number": "Plur",
