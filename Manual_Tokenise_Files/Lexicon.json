@@ -21419,6 +21419,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "nai",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -21690,9 +21699,18 @@
                 ]
             },
             {
-                "lemma": "ém",
+                "lemma": "ám",
                 "eDIL_id": null,
                 "tokens": [
+                    {
+                        "token": "am",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "em",
                         "feature_sets": [
@@ -21704,6 +21722,15 @@
                     },
                     {
                         "token": "áem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ám",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -25517,41 +25544,11 @@
         "part_of_speech": "INTJ",
         "lemmata": [
             {
-                "lemma": "am",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "ám",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "debrath",
                 "eDIL_id": null,
                 "tokens": [
                     {
                         "token": "debrath",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "nai",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "nai",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -25597,30 +25594,6 @@
                 "tokens": [
                     {
                         "token": "upp",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "ám",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "am",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ám",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
