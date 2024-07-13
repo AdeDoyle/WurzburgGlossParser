@@ -10,7 +10,9 @@ def c_to_j(conllu_file, json_file, output_filename=None, save_folder=None):
 
     if not output_filename:
         output_filename = "Wb. Manual Tokenisation - update.json"
-    if not save_folder:
+    if save_folder:
+        output_filename = os.path.join(save_folder, output_filename)
+    else:
         save_folder = os.path.join(os.getcwd(), "Manual_Tokenise_Files")
         output_filename = os.path.join(save_folder, output_filename)
 
@@ -36,7 +38,7 @@ def c_to_j(conllu_file, json_file, output_filename=None, save_folder=None):
         tok_data = [[i[0], i[1], i[2], i[3]] for i in tok_data]
         tok_data = [t if t != ['et', 'CCONJ', '_', 'Foreign=Yes']
                     else ['et', '<Latin CCONJ>', 'et', 'Foreign=Yes'] for t in tok_data]
-        tok_data = [t if t[1:] != ['X', '_', 'Foreign=Yes']
+        tok_data = [t if t[2:] != ['_', 'Foreign=Yes']
                     else [t[0], '<Latin>', '', None] for t in tok_data]
 
         gloss_list = [folcol, gl_id, tok_data]
@@ -57,7 +59,7 @@ def c_to_j(conllu_file, json_file, output_filename=None, save_folder=None):
                         if gloss_num == tagged_glno:
                             gloss_data["glossTokens"] = tagged_toks
 
-    with open(output_filename, 'w', encoding="utf-8") as new_json_file:
+    with open(output_filename, 'w', newline='', encoding="utf-8") as new_json_file:
         json.dump(json_file, new_json_file, indent=4, ensure_ascii=False)
 
     return "\nDone"

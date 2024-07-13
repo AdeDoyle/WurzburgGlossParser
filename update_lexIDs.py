@@ -1,10 +1,10 @@
 
 import os
 import json
-from lexicon_functions import create_site_lex
+from lexicon_functions import create_site_lex, create_lex_lookup
 
 
-def update_gloss_ids():
+def update_gloss_ids(update_site_lex=True):
     """Opens tagged glosses and requests, presents users with headwords with missing lemma IDs
        Users can then input the required ID for each headword as necessary, and these are saved to the lexicon"""
 
@@ -132,6 +132,13 @@ def update_gloss_ids():
                                     json.dump(lex_data, json_update, indent=4, ensure_ascii=False)
                                 # Recreate the simplified lexicon so changes in the working lexicon are reflected here
                                 simp_lex = create_site_lex(False)
+
+    # Update the website lexicon files
+    with open(os.path.join(os.getcwd(), "Manual_tokenise_files", "OI_lexicon.json"), 'w', encoding="utf-8") as lex_file:
+        json.dump(create_site_lex(), lex_file, indent=4, ensure_ascii=False)
+
+    with open(os.path.join(os.getcwd(), "Manual_tokenise_files", "lex_lookup.json"), 'w', encoding="utf-8") as lex_file:
+        json.dump(create_lex_lookup(), lex_file, indent=4, ensure_ascii=False)
 
 
 if __name__ == "__main__":

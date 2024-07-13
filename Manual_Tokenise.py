@@ -2,6 +2,8 @@
 from CombineInfoLists import combine_infolists
 from MakeJSON import make_json, make_lex_json
 from SaveJSON import save_json
+from CoNLLU_to_JSON import c_to_j
+from conllu import parse
 import os
 import json
 import re
@@ -101,8 +103,30 @@ class UI:
         )
 
     def start(self):
+        """Starts the program running, and runs functions when the program is ended"""
+        # Runs the main loop of the program
         self.root.mainloop()
+        # Runs functions when the program is closed
         self.clear_lexica()
+
+        # Set arguments for CoNLL-U to JSON function
+        conllu_dir = os.path.join(os.getcwd(), "conllu_files")
+        wb_dir = os.path.join(conllu_dir, "Wb_Treebanks")
+        wb_conllu = os.path.join(wb_dir, "combined_wb_files.conllu")
+        with open(wb_conllu, "r", encoding="utf-8") as conllu_file_import:
+            conllu_content = parse(conllu_file_import.read())
+
+        json_dir = os.path.join(os.getcwd(), "Manual_Tokenise_Files")
+        wb_json = os.path.join(json_dir, "Wb. Manual Tokenisation.json")
+        with open(wb_json, "r", encoding="utf-8") as json_file_import:
+            json_content = json.load(json_file_import)
+
+        close_save_folder = os.path.join(os.getcwd(), "Manual_Tokenise_Files")
+
+        # Combine any updates from manually annotated Wb. glosses CoNLL-U files before closing program
+        c_to_j(
+            conllu_content, json_content, output_filename="Wb. Manual Tokenisation.json", save_folder=close_save_folder
+        )
 
     def create_gloss_info(self, selected_epistle, selected_folio, selected_glossnum):
         selected_glossdata = select_glossnum(
