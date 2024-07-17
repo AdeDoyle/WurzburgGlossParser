@@ -509,7 +509,10 @@
             },
             {
                 "lemma": "aile",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    978,
+                    2880
+                ],
                 "tokens": [
                     {
                         "token": "ail",
@@ -4170,7 +4173,7 @@
             },
             {
                 "lemma": "cointfe",
-                "eDIL_id": null,
+                "eDIL_id": 10327,
                 "tokens": [
                     {
                         "token": "cointfi",
@@ -9082,7 +9085,7 @@
             },
             {
                 "lemma": "fodordach",
-                "eDIL_id": null,
+                "eDIL_id": 22634,
                 "tokens": [
                     {
                         "token": "fodordchu",
@@ -17668,7 +17671,7 @@
             },
             {
                 "lemma": "uisse",
-                "eDIL_id": null,
+                "eDIL_id": 43080,
                 "tokens": [
                     {
                         "token": "huise",
@@ -21015,7 +21018,7 @@
             },
             {
                 "lemma": "fri",
-                "eDIL_id": null,
+                "eDIL_id": 24329,
                 "tokens": [
                     {
                         "token": "fri",
@@ -39423,7 +39426,11 @@
             },
             {
                 "lemma": "comnessam",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    11559,
+                    10554,
+                    33131
+                ],
                 "tokens": [
                     {
                         "token": "comnissim",
@@ -46097,7 +46104,7 @@
             },
             {
                 "lemma": "duine",
-                "eDIL_id": null,
+                "eDIL_id": 19139,
                 "tokens": [
                     {
                         "token": "doini",
@@ -48414,7 +48421,7 @@
             },
             {
                 "lemma": "dúlem",
-                "eDIL_id": null,
+                "eDIL_id": 19096,
                 "tokens": [
                     {
                         "token": "dúlem",
@@ -57969,7 +57976,7 @@
             },
             {
                 "lemma": "indírge",
-                "eDIL_id": null,
+                "eDIL_id": 28436,
                 "tokens": [
                     {
                         "token": "indírgi",
@@ -61245,7 +61252,7 @@
             },
             {
                 "lemma": "lóg",
-                "eDIL_id": null,
+                "eDIL_id": 30495,
                 "tokens": [
                     {
                         "token": "luach",
@@ -64704,7 +64711,7 @@
             },
             {
                 "lemma": "peccad",
-                "eDIL_id": null,
+                "eDIL_id": 34237,
                 "tokens": [
                     {
                         "token": "peccad",
@@ -75024,7 +75031,7 @@
             },
             {
                 "lemma": "écndach",
-                "eDIL_id": null,
+                "eDIL_id": 19622,
                 "tokens": [
                     {
                         "token": "eícndag",
@@ -78223,7 +78230,7 @@
             },
             {
                 "lemma": "con",
-                "eDIL_id": null,
+                "eDIL_id": 10554,
                 "tokens": [
                     {
                         "token": "chon",
@@ -80501,28 +80508,6 @@
                                 "features": [
                                     {
                                         "PronType": "Ind"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "ch",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "ch",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
                                     }
                                 ]
                             }
@@ -85460,7 +85445,11 @@
             },
             {
                 "lemma": "lase",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    29610,
+                    29233,
+                    36707
+                ],
                 "tokens": [
                     {
                         "token": "lase",
@@ -85611,13 +85600,20 @@
             },
             {
                 "lemma": "nách_3",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    32909,
+                    32901
+                ],
                 "tokens": [
                     {
                         "token": "nach",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Neut",
@@ -92730,7 +92726,7 @@
             },
             {
                 "lemma": "concétban",
-                "eDIL_id": null,
+                "eDIL_id": 12017,
                 "tokens": [
                     {
                         "token": "cocéitbani",
