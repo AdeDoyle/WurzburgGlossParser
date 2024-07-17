@@ -68918,14 +68918,6 @@
                                         "Polarity": "Neg"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Polarity": "Neg"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -68980,6 +68972,30 @@
                                     {
                                         "PartType": "Rel",
                                         "Polarity": "Neg"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "nách_2",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "naich",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Neg",
+                                        "PronType": "Prs,Rel",
+                                        "VerbType": "Cop"
                                     }
                                 ]
                             }
@@ -70101,28 +70117,6 @@
                 ]
             },
             {
-                "lemma": "ch",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "ch",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "cách",
                 "eDIL_id": null,
                 "tokens": [
@@ -70788,39 +70782,6 @@
                                 "features": [
                                     {
                                         "Gender": "Masc,Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "ich",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "ich",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
                                         "Number": "Sing",
                                         "Person": "3",
                                         "PronType": "Prs"
@@ -73761,36 +73722,6 @@
                         ]
                     },
                     {
-                        "token": "nach",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Polarity": "Neg",
-                                        "PronClass": "Neg",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Polarity": "Neg",
-                                        "PronGend": "Neut",
-                                        "PronNum": "Sing",
-                                        "PronPers": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "nna",
                         "feature_sets": [
                             {
@@ -73837,6 +73768,78 @@
                                 "features": [
                                     {
                                         "Polarity": "Neg"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "nách_3",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "nach",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Neg",
+                                        "PronType": "Prs",
+                                        "VerbType": "Cop"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "naich",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Neg",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Neg",
+                                        "PronType": "Prs",
+                                        "VerbType": "Cop"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nách",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Gender": "Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Polarity": "Neg",
+                                        "PronType": "Prs",
+                                        "VerbType": "Cop"
                                     }
                                 ]
                             }
