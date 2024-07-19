@@ -5041,7 +5041,7 @@
             },
             {
                 "lemma": "cosmail",
-                "eDIL_id": null,
+                "eDIL_id": 12604,
                 "tokens": [
                     {
                         "token": "chossmaili",
@@ -10091,7 +10091,7 @@
             },
             {
                 "lemma": "fírían",
-                "eDIL_id": null,
+                "eDIL_id": 22184,
                 "tokens": [
                     {
                         "token": "firianu",
@@ -19319,7 +19319,7 @@
             },
             {
                 "lemma": "cen",
-                "eDIL_id": null,
+                "eDIL_id": 8581,
                 "tokens": [
                     {
                         "token": "cen",
@@ -21233,7 +21233,7 @@
             },
             {
                 "lemma": "fíad",
-                "eDIL_id": null,
+                "eDIL_id": 21885,
                 "tokens": [
                     {
                         "token": "fiad",
@@ -22322,7 +22322,7 @@
             },
             {
                 "lemma": "tar",
-                "eDIL_id": null,
+                "eDIL_id": 40049,
                 "tokens": [
                     {
                         "token": "dar",
@@ -23266,7 +23266,7 @@
             },
             {
                 "lemma": "amal",
-                "eDIL_id": null,
+                "eDIL_id": 3057,
                 "tokens": [
                     {
                         "token": "samlaid",
@@ -30205,7 +30205,11 @@
             },
             {
                 "lemma": "ainfírinne",
-                "eDIL_id": null,
+                "eDIL_id": [
+                    1352,
+                    1158,
+                    22203
+                ],
                 "tokens": [
                     {
                         "token": "ainfírinni",
@@ -35719,7 +35723,7 @@
             },
             {
                 "lemma": "buith",
-                "eDIL_id": null,
+                "eDIL_id": 7435,
                 "tokens": [
                     {
                         "token": "buid",
@@ -36867,7 +36871,7 @@
             },
             {
                 "lemma": "cenn",
-                "eDIL_id": null,
+                "eDIL_id": 8622,
                 "tokens": [
                     {
                         "token": "ceinn",
@@ -43353,7 +43357,7 @@
             },
             {
                 "lemma": "cóis",
-                "eDIL_id": null,
+                "eDIL_id": 13695,
                 "tokens": [
                     {
                         "token": "chois",
@@ -45684,7 +45688,7 @@
             },
             {
                 "lemma": "domun",
-                "eDIL_id": null,
+                "eDIL_id": 18161,
                 "tokens": [
                     {
                         "token": "domun",
@@ -48536,7 +48540,7 @@
             },
             {
                 "lemma": "ecne",
-                "eDIL_id": null,
+                "eDIL_id": 19605,
                 "tokens": [
                     {
                         "token": "ecni",
@@ -48745,7 +48749,7 @@
             },
             {
                 "lemma": "engnae",
-                "eDIL_id": null,
+                "eDIL_id": 20097,
                 "tokens": [
                     {
                         "token": "engne",
@@ -48917,7 +48921,7 @@
             },
             {
                 "lemma": "epert",
-                "eDIL_id": null,
+                "eDIL_id": 20181,
                 "tokens": [
                     {
                         "token": "eipirt",
@@ -49721,7 +49725,7 @@
             },
             {
                 "lemma": "exceptaid",
-                "eDIL_id": null,
+                "eDIL_id": 20446,
                 "tokens": [
                     {
                         "token": "exceptaid",
@@ -53132,7 +53136,7 @@
             },
             {
                 "lemma": "frecrae",
-                "eDIL_id": null,
+                "eDIL_id": 24273,
                 "tokens": [
                     {
                         "token": "frecra",
@@ -53948,7 +53952,7 @@
             },
             {
                 "lemma": "fírinne",
-                "eDIL_id": null,
+                "eDIL_id": 22203,
                 "tokens": [
                     {
                         "token": "firinne",
@@ -54570,7 +54574,7 @@
             },
             {
                 "lemma": "gentlide",
-                "eDIL_id": null,
+                "eDIL_id": 25694,
                 "tokens": [
                     {
                         "token": "geintlidiu",
@@ -56761,7 +56765,7 @@
             },
             {
                 "lemma": "il",
-                "eDIL_id": null,
+                "eDIL_id": 27239,
                 "tokens": [
                     {
                         "token": "il",
@@ -61690,7 +61694,7 @@
             },
             {
                 "lemma": "maldact",
-                "eDIL_id": null,
+                "eDIL_id": 31485,
                 "tokens": [
                     {
                         "token": "maldactin",
@@ -62535,7 +62539,7 @@
             },
             {
                 "lemma": "molad",
-                "eDIL_id": null,
+                "eDIL_id": 32490,
                 "tokens": [
                     {
                         "token": "molad",
@@ -64747,7 +64751,7 @@
             },
             {
                 "lemma": "pecthach",
-                "eDIL_id": null,
+                "eDIL_id": 34240,
                 "tokens": [
                     {
                         "token": "pecthach",
@@ -68138,7 +68142,7 @@
             },
             {
                 "lemma": "serbe",
-                "eDIL_id": null,
+                "eDIL_id": 37217,
                 "tokens": [
                     {
                         "token": "serbe",
@@ -77318,6 +77322,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "NumType": "Card"
@@ -77626,21 +77634,6 @@
                                         "NumType": "Ord"
                                     }
                                 ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "óin",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "óin",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             }
                         ]
                     }
@@ -79339,7 +79332,7 @@
             },
             {
                 "lemma": "ro",
-                "eDIL_id": null,
+                "eDIL_id": 35364,
                 "tokens": [
                     {
                         "token": "r",
@@ -82169,6 +82162,44 @@
                 ]
             },
             {
+                "lemma": "oín",
+                "eDIL_id": 33512,
+                "tokens": [
+                    {
+                        "token": "nóin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "óen",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "s_1",
                 "eDIL_id": [
                     37356,
@@ -83383,28 +83414,6 @@
                         ]
                     }
                 ]
-            },
-            {
-                "lemma": "óin",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "nóin",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
             }
         ]
     },
@@ -83773,7 +83782,7 @@
             },
             {
                 "lemma": "críst",
-                "eDIL_id": null,
+                "eDIL_id": 12985,
                 "tokens": [
                     {
                         "token": "christ",
@@ -85458,7 +85467,7 @@
             },
             {
                 "lemma": "má",
-                "eDIL_id": null,
+                "eDIL_id": 31164,
                 "tokens": [
                     {
                         "token": "ma",
@@ -94562,7 +94571,7 @@
             },
             {
                 "lemma": "doaccair",
-                "eDIL_id": null,
+                "eDIL_id": 17104,
                 "tokens": [
                     {
                         "token": "racartmar",
@@ -100406,7 +100415,7 @@
             },
             {
                 "lemma": "fofera",
-                "eDIL_id": null,
+                "eDIL_id": 22675,
                 "tokens": [
                     {
                         "token": "dera",
@@ -105130,7 +105139,7 @@
             },
             {
                 "lemma": "roicc",
-                "eDIL_id": null,
+                "eDIL_id": 35459,
                 "tokens": [
                     {
                         "token": "ecar",
@@ -107386,7 +107395,7 @@
             },
             {
                 "lemma": "écndaigidir",
-                "eDIL_id": null,
+                "eDIL_id": 19623,
                 "tokens": [
                     {
                         "token": "ǽicndichther",
@@ -107416,7 +107425,7 @@
             },
             {
                 "lemma": "íarmifoich",
-                "eDIL_id": null,
+                "eDIL_id": 27020,
                 "tokens": [
                     {
                         "token": "foich",

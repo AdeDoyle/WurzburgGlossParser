@@ -71240,6 +71240,28 @@
                 ]
             },
             {
+                "lemma": "oín",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "óen",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Gender": "Masc",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "s_1",
                 "eDIL_id": null,
                 "tokens": [
