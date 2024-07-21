@@ -23821,6 +23821,21 @@
                 ]
             },
             {
+                "lemma": "noch",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "noch",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "ná",
                 "eDIL_id": null,
                 "tokens": [
@@ -48238,40 +48253,6 @@
                                 "features": [
                                     {
                                         "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "gnim",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "gnim",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "gním",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -73702,21 +73683,6 @@
                     },
                     {
                         "token": "má",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "noch",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "noch",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
