@@ -24370,6 +24370,14 @@
                                         "VerbType": "Cop"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 4,
+                                "features": [
+                                    {
+                                        "Typo": "Yes"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -35071,7 +35079,7 @@
                 "eDIL_id": 6704,
                 "tokens": [
                     {
-                        "token": "ṁbrithemnacte",
+                        "token": "ṁ brithemnacte",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
