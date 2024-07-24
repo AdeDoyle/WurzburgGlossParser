@@ -8043,7 +8043,7 @@
             },
             {
                 "lemma": "dílmain",
-                "eDIL_id": null,
+                "eDIL_id": 16440,
                 "tokens": [
                     {
                         "token": "dilmain",
@@ -10613,7 +10613,7 @@
             },
             {
                 "lemma": "il",
-                "eDIL_id": null,
+                "eDIL_id": 27239,
                 "tokens": [
                     {
                         "token": "hile",
@@ -23293,7 +23293,7 @@
             },
             {
                 "lemma": "amein",
-                "eDIL_id": null,
+                "eDIL_id": 3125,
                 "tokens": [
                     {
                         "token": "amein",
@@ -29227,7 +29227,7 @@
             },
             {
                 "lemma": "adall",
-                "eDIL_id": null,
+                "eDIL_id": 275,
                 "tokens": [
                     {
                         "token": "adíll",
@@ -32687,7 +32687,7 @@
             },
             {
                 "lemma": "amairsech",
-                "eDIL_id": null,
+                "eDIL_id": 3069,
                 "tokens": [
                     {
                         "token": "amhirissig",
@@ -33057,7 +33057,7 @@
             },
             {
                 "lemma": "apstalacht",
-                "eDIL_id": null,
+                "eDIL_id": 3889,
                 "tokens": [
                     {
                         "token": "apstalachte",
@@ -33982,7 +33982,7 @@
             },
             {
                 "lemma": "augtortás",
-                "eDIL_id": null,
+                "eDIL_id": 4993,
                 "tokens": [
                     {
                         "token": "augtortas",
@@ -35889,7 +35889,7 @@
             },
             {
                 "lemma": "báeth",
-                "eDIL_id": null,
+                "eDIL_id": 5139,
                 "tokens": [
                     {
                         "token": "baid",
@@ -41614,7 +41614,7 @@
             },
             {
                 "lemma": "cuit",
-                "eDIL_id": null,
+                "eDIL_id": 13717,
                 "tokens": [
                     {
                         "token": "chuit",
@@ -49072,7 +49072,7 @@
             },
             {
                 "lemma": "epistil",
-                "eDIL_id": null,
+                "eDIL_id": 20187,
                 "tokens": [
                     {
                         "token": "epistle",
@@ -52672,7 +52672,7 @@
             },
             {
                 "lemma": "format",
-                "eDIL_id": null,
+                "eDIL_id": 23768,
                 "tokens": [
                     {
                         "token": "formut",
@@ -59116,7 +59116,7 @@
             },
             {
                 "lemma": "labrad",
-                "eDIL_id": null,
+                "eDIL_id": 29249,
                 "tokens": [
                     {
                         "token": "labrad",
@@ -69841,7 +69841,7 @@
             },
             {
                 "lemma": "suidiugud",
-                "eDIL_id": null,
+                "eDIL_id": 39209,
                 "tokens": [
                     {
                         "token": "suidigthe",
@@ -72269,7 +72269,7 @@
             },
             {
                 "lemma": "tol",
-                "eDIL_id": null,
+                "eDIL_id": 41316,
                 "tokens": [
                     {
                         "token": "thol",
@@ -72397,7 +72397,7 @@
             },
             {
                 "lemma": "tooit",
-                "eDIL_id": null,
+                "eDIL_id": 41404,
                 "tokens": [
                     {
                         "token": "thooit",
@@ -78580,7 +78580,7 @@
             },
             {
                 "lemma": "eter",
-                "eDIL_id": null,
+                "eDIL_id": 20789,
                 "tokens": [
                     {
                         "token": "etar",
@@ -78691,7 +78691,7 @@
             },
             {
                 "lemma": "for",
-                "eDIL_id": null,
+                "eDIL_id": 23272,
                 "tokens": [
                     {
                         "token": "far",
@@ -80498,7 +80498,7 @@
             },
             {
                 "lemma": "cote",
-                "eDIL_id": null,
+                "eDIL_id": 12664,
                 "tokens": [
                     {
                         "token": "cote",
@@ -87454,7 +87454,7 @@
             },
             {
                 "lemma": "anaid",
-                "eDIL_id": null,
+                "eDIL_id": 3302,
                 "tokens": [
                     {
                         "token": "ainfa",
@@ -99722,7 +99722,7 @@
             },
             {
                 "lemma": "etarcerta",
-                "eDIL_id": null,
+                "eDIL_id": 20793,
                 "tokens": [
                     {
                         "token": "certa",
@@ -100035,15 +100035,6 @@
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "canit",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             }
                         ]
                     }
@@ -101069,6 +101060,21 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "forcain",
+                "eDIL_id": 23414,
+                "tokens": [
+                    {
+                        "token": "canit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -105970,7 +105976,7 @@
             },
             {
                 "lemma": "slucid",
-                "eDIL_id": null,
+                "eDIL_id": 38006,
                 "tokens": [
                     {
                         "token": "roslogeth",
