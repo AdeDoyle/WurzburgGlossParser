@@ -87,6 +87,8 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None):
                         if "".join(["".join(t[0].split(" ")) for t in tokens]) == "".join(new_gloss.split(" ")):
                             gloss = new_gloss
                         else:
+                            print(f"Tokens: {tokens}")
+                            print(f"New Gloss: {new_gloss}")
                             raise RuntimeError("Unresolvable differences between tokens and new-gloss.")
                     else:
                         raise RuntimeError("Unresolvable differences between tokens and gloss.")
