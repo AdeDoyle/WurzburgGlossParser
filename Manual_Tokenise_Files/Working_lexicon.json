@@ -5892,6 +5892,15 @@
                         ]
                     },
                     {
+                        "token": "chétni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "cétna",
                         "feature_sets": [
                             {
@@ -12314,6 +12323,15 @@
                 "eDIL_id": 31438,
                 "tokens": [
                     {
+                        "token": "deg",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "ferr",
                         "feature_sets": [
                             {
@@ -12911,6 +12929,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "mithig",
+                "eDIL_id": 32384,
+                "tokens": [
+                    {
+                        "token": "mithig",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -20119,24 +20152,6 @@
                         ]
                     },
                     {
-                        "token": "don",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Case": "Dat",
-                                        "Definite": "Def",
-                                        "Gender": "Masc",
-                                        "Number": "Sing",
-                                        "PronType": "Art"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "du",
                         "feature_sets": [
                             {
@@ -20621,6 +20636,23 @@
                                         "Gender": "Masc,Neut",
                                         "Number": "Sing",
                                         "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "etrunn",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "1",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -21947,6 +21979,24 @@
                         ]
                     },
                     {
+                        "token": "less",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "leu",
                         "feature_sets": [
                             {
@@ -23049,6 +23099,23 @@
                                     {
                                         "AdpType": "Prep",
                                         "Definite": "Def"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "uáim",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Sing",
+                                        "Person": "1",
+                                        "PronType": "Prs"
                                     }
                                 ]
                             }
@@ -34480,6 +34547,15 @@
                 "eDIL_id": 5779,
                 "tokens": [
                     {
+                        "token": "bethu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "mbethu",
                         "feature_sets": [
                             {
@@ -35528,6 +35604,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Acc",
@@ -35536,7 +35616,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Gen",
@@ -35545,7 +35625,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 3,
+                                "feature_set": 4,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -50852,6 +50932,15 @@
                 "eDIL_id": 22281,
                 "tokens": [
                     {
+                        "token": "laith",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "lathi",
                         "feature_sets": [
                             {
@@ -52462,6 +52551,15 @@
                                         "Number": "Plur"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "forcital",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -56649,6 +56747,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "góo",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -57010,6 +57117,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nimchomarc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -65999,6 +66115,26 @@
                 ]
             },
             {
+                "lemma": "remfius",
+                "eDIL_id": [
+                    35032,
+                    50457,
+                    34869,
+                    22221
+                ],
+                "tokens": [
+                    {
+                        "token": "rremfius",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "remthechtas",
                 "eDIL_id": null,
                 "tokens": [
@@ -66904,6 +67040,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "ríar",
+                "eDIL_id": 35223,
+                "tokens": [
+                    {
+                        "token": "réir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -69265,6 +69416,15 @@
                     36385
                 ],
                 "tokens": [
+                    {
+                        "token": "soscele",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "sosceli",
                         "feature_sets": [
@@ -77822,10 +77982,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Prefix": "Yes"
@@ -77885,6 +78041,15 @@
                     },
                     {
                         "token": "ari",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "aro",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -78417,6 +78582,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "PartType": "Vb"
@@ -80463,6 +80632,19 @@
                 "lemma": "cote",
                 "eDIL_id": 12664,
                 "tokens": [
+                    {
+                        "token": "cateat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PronType": "Int"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         "token": "cote",
                         "feature_sets": [
@@ -88011,6 +88193,15 @@
                         ]
                     },
                     {
+                        "token": "foimfea",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "fóim",
                         "feature_sets": [
                             {
@@ -88639,6 +88830,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -93995,6 +94190,15 @@
                         ]
                     },
                     {
+                        "token": "rochreitset",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "rocreitset",
                         "feature_sets": [
                             {
@@ -96022,6 +96226,21 @@
                 "tokens": [
                     {
                         "token": "ercomlassat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "doeim",
+                "eDIL_id": 17531,
+                "tokens": [
+                    {
+                        "token": "rret",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -98422,6 +98641,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "rolgea",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -99657,6 +99885,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "roerpad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -100631,6 +100868,15 @@
                 "lemma": "foilsigidir",
                 "eDIL_id": 22888,
                 "tokens": [
+                    {
+                        "token": "failsigestar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "failsigetar",
                         "feature_sets": [
@@ -102216,6 +102462,21 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "fristaít",
+                "eDIL_id": 24394,
+                "tokens": [
+                    {
+                        "token": "frittáit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
