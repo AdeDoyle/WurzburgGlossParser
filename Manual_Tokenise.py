@@ -39,15 +39,10 @@ class UI:
 
         # Define possible morphological features
         self.adp_feats = {"AdpType": ["N/A", "Prep"],
-                          "Case": ["N/A", "Acc", "Dat"],
                           "Definite": ["N/A", "Def", "Ind"],
                           "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
                           "Number": ["N/A", "Dual", "Sing", "Plur"],
                           "Person": ["N/A", "1",  "2", "3"],
-                          "PronClass": ["N/A", "A", "B", "C"],
-                          "PronGend": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
-                          "PronNum": ["N/A", "Sing", "Plur"],
-                          "PronPers": ["N/A", "1",  "2", "3"],
                           "PronType": ["N/A", "Art", "Prs", "Prs,Rel", "Rel"]}
         self.pron_feats = {"Case": ["N/A", "Nom", "Acc", "Gen", "Dat"],
                            "Gender": ["N/A", "Masc", "Masc,Neut", "Neut", "Fem"],
@@ -56,10 +51,9 @@ class UI:
                            "Person": ["N/A", "1",  "2", "3"],
                            "Polarity": ["N/A", "Neg", "Pos"],
                            "Poss": ["N/A", "Yes"],
+                           "PronClass": ["N/A", "A", "B", "C"],
                            "PronType": ["N/A", "Ana", "Emp", "Ind", "Int", "Prs"],
-                           "Reflex": ["N/A", "Yes"],
-                           "Tense": ["N/A", "Past", "Pres"],
-                           "VerbType": ["N/A", "Cop"]}
+                           "Reflex": ["N/A", "Yes"]}
         self.max_linelen = 110
 
         self.open_ep = self.epistles[0]

@@ -69073,25 +69073,6 @@
                 ]
             },
             {
-                "lemma": "on",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "ón",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Dem"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "remi",
                 "eDIL_id": null,
                 "tokens": [
