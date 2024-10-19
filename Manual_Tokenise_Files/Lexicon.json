@@ -14154,16 +14154,6 @@
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Case": "Nom",
-                                        "Degree": "Pos",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 3,
-                                "features": [
-                                    {
                                         "Degree": "Pos",
                                         "Prefix": "Yes"
                                     }
@@ -59269,6 +59259,26 @@
                 "tokens": [
                     {
                         "token": "seib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "sen",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "sen",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
