@@ -57650,54 +57650,6 @@
                 ]
             },
             {
-                "lemma": "ret",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "reto",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rét",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "réta",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Nom",
-                                        "Number": "Plur"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "reód",
                 "eDIL_id": null,
                 "tokens": [
@@ -58078,10 +58030,33 @@
                 "eDIL_id": null,
                 "tokens": [
                     {
+                        "token": "reto",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "rét",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -58100,6 +58075,15 @@
                                     {
                                         "Case": "Gen",
                                         "Number": "Sing"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Plur"
                                     }
                                 ]
                             }
@@ -70403,7 +70387,7 @@
                 ]
             },
             {
-                "lemma": "don",
+                "lemma": "don_2",
                 "eDIL_id": null,
                 "tokens": [
                     {
