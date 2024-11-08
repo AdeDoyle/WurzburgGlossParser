@@ -30263,6 +30263,26 @@
                 ]
             },
             {
+                "lemma": "aís",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "áis",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "bacc",
                 "eDIL_id": null,
                 "tokens": [
@@ -64868,15 +64888,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Gen",
