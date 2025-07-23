@@ -4,7 +4,7 @@ import json
 from ClearTags import clear_tags
 
 
-def j_to_c(json_file_path, output_filename=None, save_folder=None):
+def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untokenised=False):
     """Takes the JSON file format specific to the Wb. website and converts its contents to CoNLL-U format"""
 
     with open(json_file_path, "r", encoding="utf-8") as json_file_import:
@@ -62,11 +62,24 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None):
 
                 # Identify glosses which have not been annotated, and recreate tokens from text
                 unannotated = False
+                tokenised = False
                 for t in tokens:
-                    if t[1] == "<unknown>" or t[2] == "<unknown>":
+                    if not tokenised and t[1] in [
+                        "ADJ", "ADP", "AUX", "DET", "INTJ", "NOUN", "NUM", "PART", "PRON", "PROPN", "VERB", "SCONJ"
+                    ]:
+                        tokenised = True
+                        unannotated = False
+                    if not tokenised and (t[1] == "<unknown>" or t[2] == "<unknown>"):
                         unannotated = True
+
                 if unannotated:
-                    tokens = [[tok, "_", "_", None] for tok in gloss.split(" ")]
+                    if exclude_untokenised:
+                        continue
+                    else:
+                        tokens = [[tok, "_", "_", None] for tok in gloss.split(" ")]
+                elif tokenised:
+                    tokens = [tok if tok[1] != "<unknown>" else [tok[0], "X", tok[2], tok[3]] for tok in tokens]
+                    tokens = [tok if tok[2] != "<unknown>" else [tok[0], tok[1], "_", tok[3]] for tok in tokens]
 
                 # Replace null morphological features in tokens with _ character
                 tokens = [t if t[3] else [t[0], t[1], t[2], "_"] for t in tokens]
@@ -118,4 +131,4 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None):
 if __name__ == "__main__":
 
     json_dir = os.path.join(os.getcwd(), "Manual_Tokenise_Files", "Wb. Manual Tokenisation.json")
-    print(j_to_c(json_dir))
+    print(j_to_c(json_dir, "All_Tokenised_Wb.conllu", exclude_untokenised=True))
