@@ -6258,8 +6258,17 @@
             },
             {
                 "lemma": "cían",
-                "eDIL_id": null,
+                "eDIL_id": 9003,
                 "tokens": [
+                    {
+                        "token": "cheín",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "chían",
                         "feature_sets": [
@@ -33723,6 +33732,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "nabstalacte",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -41319,6 +41337,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "cosc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -44379,6 +44406,15 @@
                         ]
                     },
                     {
+                        "token": "coræ",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "córe",
                         "feature_sets": [
                             {
@@ -47099,6 +47135,15 @@
                                         "Number": "Plur"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "doíni",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -63708,6 +63753,21 @@
                 ]
             },
             {
+                "lemma": "mind",
+                "eDIL_id": 32297,
+                "tokens": [
+                    {
+                        "token": "mind",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "miscais",
                 "eDIL_id": 32351,
                 "tokens": [
@@ -73779,6 +73839,21 @@
                 ]
             },
             {
+                "lemma": "togu",
+                "eDIL_id": 41142,
+                "tokens": [
+                    {
+                        "token": "togu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "toimsidetu",
                 "eDIL_id": null,
                 "tokens": [
@@ -73848,6 +73923,15 @@
                     },
                     {
                         "token": "thol",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "toil",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -80502,6 +80586,15 @@
                                         "PartType": "Vb"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "immu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -94658,6 +94751,15 @@
                         ]
                     },
                     {
+                        "token": "comalnatar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "comalnid",
                         "feature_sets": [
                             {
@@ -95102,6 +95204,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "icimm",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -99434,6 +99545,21 @@
                 ]
             },
             {
+                "lemma": "dogair",
+                "eDIL_id": 17726,
+                "tokens": [
+                    {
+                        "token": "nrograd",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dogaítha",
                 "eDIL_id": null,
                 "tokens": [
@@ -100060,6 +100186,15 @@
                     },
                     {
                         "token": "rigénsat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rigénsid",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -100738,6 +100873,21 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "domolta",
+                "eDIL_id": 18149,
+                "tokens": [
+                    {
+                        "token": "thomoldid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -105661,6 +105811,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rordad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
