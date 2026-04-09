@@ -1633,6 +1633,15 @@
                         ]
                     },
                     {
+                        "token": "irdircc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "irdurcu",
                         "feature_sets": [
                             {
@@ -13627,7 +13636,7 @@
             },
             {
                 "lemma": "neimnech",
-                "eDIL_id": null,
+                "eDIL_id": 33041,
                 "tokens": [
                     {
                         "token": "neimnich",
@@ -13642,6 +13651,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nemnech",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -19749,7 +19767,7 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": ""
+                                "features": null
                             },
                             {
                                 "feature_set": 2,
@@ -22556,6 +22574,24 @@
                 "lemma": "oc",
                 "eDIL_id": 33397,
                 "tokens": [
+                    {
+                        "token": "nocco",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         "token": "oc",
                         "feature_sets": [
@@ -34766,6 +34802,24 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "irlatu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nirlatu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -38989,7 +39043,7 @@
             },
             {
                 "lemma": "clú",
-                "eDIL_id": null,
+                "eDIL_id": 9616,
                 "tokens": [
                     {
                         "token": "clú",
@@ -39002,6 +39056,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "clúu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -39082,6 +39145,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "cobuir",
+                "eDIL_id": 9802,
+                "tokens": [
+                    {
+                        "token": "cobrith",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -58674,6 +58752,21 @@
                 ]
             },
             {
+                "lemma": "immairecc",
+                "eDIL_id": 27679,
+                "tokens": [
+                    {
+                        "token": "immairecc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "immargal",
                 "eDIL_id": null,
                 "tokens": [
@@ -59658,13 +59751,17 @@
             },
             {
                 "lemma": "inne",
-                "eDIL_id": null,
+                "eDIL_id": 28806,
                 "tokens": [
                     {
                         "token": "inne",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Gen",
@@ -59673,7 +59770,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -64370,6 +64467,15 @@
                         ]
                     },
                     {
+                        "token": "montar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "muinter",
                         "feature_sets": [
                             {
@@ -65944,6 +66050,15 @@
                     },
                     {
                         "token": "nolcc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ulcc",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -78015,6 +78130,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "óiph",
+                "eDIL_id": 33585,
+                "tokens": [
+                    {
+                        "token": "óiph",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -94534,6 +94664,21 @@
                 ]
             },
             {
+                "lemma": "brisid",
+                "eDIL_id": 6848,
+                "tokens": [
+                    {
+                        "token": "brister",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "bruthnaigidir",
                 "eDIL_id": null,
                 "tokens": [
@@ -97670,6 +97815,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -107021,6 +107170,21 @@
                 "tokens": [
                     {
                         "token": "lín",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "maidid",
+                "eDIL_id": 31300,
+                "tokens": [
+                    {
+                        "token": "maided",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
