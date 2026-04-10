@@ -11880,7 +11880,7 @@
             },
             {
                 "lemma": "irlithe",
-                "eDIL_id": null,
+                "eDIL_id": 2220,
                 "tokens": [
                     {
                         "token": "irlithi",
@@ -13757,7 +13757,7 @@
             },
             {
                 "lemma": "nuae",
-                "eDIL_id": null,
+                "eDIL_id": 33322,
                 "tokens": [
                     {
                         "token": "naue",
@@ -30706,7 +30706,7 @@
             },
             {
                 "lemma": "ailithir",
-                "eDIL_id": null,
+                "eDIL_id": 1031,
                 "tokens": [
                     {
                         "token": "ailithir",
@@ -37796,7 +37796,7 @@
             },
             {
                 "lemma": "catlach",
-                "eDIL_id": null,
+                "eDIL_id": 8387,
                 "tokens": [
                     {
                         "token": "chatlach",
@@ -38456,7 +38456,7 @@
             },
             {
                 "lemma": "cenélae",
-                "eDIL_id": null,
+                "eDIL_id": 8605,
                 "tokens": [
                     {
                         "token": "cenelae",
@@ -40784,7 +40784,7 @@
             },
             {
                 "lemma": "comtherchomrac",
-                "eDIL_id": null,
+                "eDIL_id": 11844,
                 "tokens": [
                     {
                         "token": "comtherchomrac",
@@ -49900,7 +49900,7 @@
             },
             {
                 "lemma": "eclais",
-                "eDIL_id": null,
+                "eDIL_id": 19585,
                 "tokens": [
                     {
                         "token": "ǽccalsa",
@@ -59610,7 +59610,7 @@
             },
             {
                 "lemma": "inducbál",
-                "eDIL_id": null,
+                "eDIL_id": 28501,
                 "tokens": [
                     {
                         "token": "indocbáal",
@@ -69859,7 +69859,7 @@
             },
             {
                 "lemma": "scrínire",
-                "eDIL_id": null,
+                "eDIL_id": 36648,
                 "tokens": [
                     {
                         "token": "scrinire",
@@ -79683,7 +79683,7 @@
             },
             {
                 "lemma": "tress",
-                "eDIL_id": null,
+                "eDIL_id": 41835,
                 "tokens": [
                     {
                         "token": "tres",
@@ -90003,7 +90003,7 @@
             },
             {
                 "lemma": "airladigidir",
-                "eDIL_id": null,
+                "eDIL_id": "None",
                 "tokens": [
                     {
                         "token": "irladigsetar",
