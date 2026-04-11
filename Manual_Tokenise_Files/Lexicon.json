@@ -69156,6 +69156,19 @@
                         ]
                     },
                     {
+                        "token": "ru",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "PartType": "Aug"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "ró",
                         "feature_sets": [
                             {
@@ -77588,6 +77601,42 @@
                 "eDIL_id": null,
                 "tokens": [
                     {
+                        "token": "batar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bbe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "bbiad",
                         "feature_sets": [
                             {
@@ -77605,6 +77654,24 @@
                         ]
                     },
                     {
+                        "token": "bbátar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "bbé",
                         "feature_sets": [
                             {
@@ -77613,6 +77680,25 @@
                                     {
                                         "Mood": "Sub",
                                         "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bbí",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Aspect": "Hab",
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
                                         "Person": "3",
                                         "Tense": "Pres",
                                         "Voice": "Act"
@@ -77873,6 +77959,7 @@
                                         "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Plur",
+                                        "PartType": "Aug",
                                         "Person": "3",
                                         "Tense": "Pres",
                                         "Voice": "Act"
@@ -77881,6 +77968,19 @@
                             },
                             {
                                 "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Aspect": "Hab",
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Aspect": "Hab",
@@ -77996,10 +78096,41 @@
                         ]
                     },
                     {
+                        "token": "bá",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "1",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "bé",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Sub",
@@ -78176,6 +78307,19 @@
                                     {
                                         "Mood": "Ind",
                                         "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
                                         "Person": "3",
                                         "Tense": "Past",
                                         "Voice": "Act"
@@ -78328,6 +78472,24 @@
                         ]
                     },
                     {
+                        "token": "mbatar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "mbe",
                         "feature_sets": [
                             {
@@ -78441,6 +78603,20 @@
                                         "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Aspect": "Hab",
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
                                         "Person": "3",
                                         "Tense": "Pres",
                                         "Voice": "Act"
@@ -78512,27 +78688,21 @@
                                     {
                                         "Mood": "Ind",
                                         "Number": "Sing",
+                                        "PartType": "Aug",
                                         "Person": "3",
                                         "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "nroib",
-                        "feature_sets": [
+                            },
                             {
-                                "feature_set": 1,
+                                "feature_set": 2,
                                 "features": [
                                     {
-                                        "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Sing",
-                                        "PartType": "Aug",
                                         "Person": "3",
-                                        "Tense": "Pres",
+                                        "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -78594,117 +78764,7 @@
                         ]
                     },
                     {
-                        "token": "robbe",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robbátar",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robbí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Aspect": "Hab",
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "robe",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robiat",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Aspect": "Hab",
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robá",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "1",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robói",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -78728,42 +78788,6 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rombatar",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rombí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
                                         "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Sing",
@@ -78773,21 +78797,16 @@
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rombói",
-                        "feature_sets": [
+                            },
                             {
-                                "feature_set": 1,
+                                "feature_set": 2,
                                 "features": [
                                     {
-                                        "Mood": "Ind",
+                                        "Mood": "Sub",
                                         "Number": "Sing",
                                         "PartType": "Aug",
                                         "Person": "3",
-                                        "Tense": "Past",
+                                        "Tense": "Pres",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -78822,24 +78841,6 @@
                                     {
                                         "Aspect": "Hab",
                                         "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rubé",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
                                         "Number": "Sing",
                                         "PartType": "Aug",
                                         "Person": "3",

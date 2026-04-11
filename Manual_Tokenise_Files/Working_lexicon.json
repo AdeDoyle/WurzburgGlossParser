@@ -44,6 +44,15 @@
                         ]
                     },
                     {
+                        "token": "accomalti",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "accomolta",
                         "feature_sets": [
                             {
@@ -3690,6 +3699,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -6355,6 +6368,15 @@
                         ]
                     },
                     {
+                        "token": "coir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "coír",
                         "feature_sets": [
                             {
@@ -6988,6 +7010,30 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "dil",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "dilem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "diliu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -9029,6 +9075,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "etrantach",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "etrantach",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -11869,6 +11930,15 @@
                 "tokens": [
                     {
                         "token": "hiressach",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "niressach",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -20212,6 +20282,18 @@
                                         "PronType": "Prs"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -26080,6 +26162,15 @@
                         ]
                     },
                     {
+                        "token": "nan",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "nand",
                         "feature_sets": [
                             {
@@ -31099,15 +31190,6 @@
                         ]
                     },
                     {
-                        "token": "animm",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
                         "token": "anma",
                         "feature_sets": [
                             {
@@ -33739,6 +33821,15 @@
                         ]
                     },
                     {
+                        "token": "animm",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "anmain",
                         "feature_sets": [
                             {
@@ -33749,6 +33840,15 @@
                     },
                     {
                         "token": "anmana",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "anme",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -33888,6 +33988,15 @@
                     },
                     {
                         "token": "apstil",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nabstil",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -37503,6 +37612,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "cairigud",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "cairigud",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -44980,6 +45104,21 @@
                 ]
             },
             {
+                "lemma": "dalte",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "dalte",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dam",
                 "eDIL_id": 14462,
                 "tokens": [
@@ -45524,6 +45663,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "deimnigud",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "deimnigud",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -49835,6 +49989,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "dúthracht",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -50058,6 +50221,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nellug",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -50983,6 +51155,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "etarscartha",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -60643,6 +60824,21 @@
                 ]
             },
             {
+                "lemma": "irnigde",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "irnigde",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "irtach",
                 "eDIL_id": 2415,
                 "tokens": [
@@ -70194,6 +70390,15 @@
                         ]
                     },
                     {
+                        "token": "serc",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "sercc",
                         "feature_sets": [
                             {
@@ -74432,6 +74637,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "toimtiu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -74756,6 +74970,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "torisse",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "tarisse",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -77322,6 +77551,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -81720,6 +81953,14 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "PartType": "Aug"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -92744,6 +92985,46 @@
                         ]
                     },
                     {
+                        "token": "batar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bbe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "bbiad",
                         "feature_sets": [
                             {
@@ -92754,6 +93035,24 @@
                                         "Number": "Sing",
                                         "Person": "3",
                                         "Tense": "Fut",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bbátar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -92774,6 +93073,34 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bbí",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Aspect": "Hab",
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "be",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -93084,6 +93411,7 @@
                                         "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Plur",
+                                        "PartType": "Aug",
                                         "Person": "3",
                                         "Tense": "Pres",
                                         "Voice": "Act"
@@ -93092,6 +93420,19 @@
                             },
                             {
                                 "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Aspect": "Hab",
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Aspect": "Hab",
@@ -93260,6 +93601,33 @@
                         ]
                     },
                     {
+                        "token": "boi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bá",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "1",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "bámmar",
                         "feature_sets": [
                             {
@@ -93273,6 +93641,19 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Sub",
@@ -93453,6 +93834,19 @@
                             },
                             {
                                 "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -93657,11 +94051,29 @@
                         ]
                     },
                     {
-                        "token": "líit",
+                        "token": "m both",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "mbatar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -93762,6 +94174,15 @@
                         ]
                     },
                     {
+                        "token": "mboi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "mbái",
                         "feature_sets": [
                             {
@@ -93796,6 +94217,20 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Aspect": "Hab",
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "PartType": "Aug",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Aspect": "Hab",
@@ -93876,27 +94311,21 @@
                                     {
                                         "Mood": "Ind",
                                         "Number": "Sing",
+                                        "PartType": "Aug",
                                         "Person": "3",
                                         "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "nroib",
-                        "feature_sets": [
+                            },
                             {
-                                "feature_set": 1,
+                                "feature_set": 3,
                                 "features": [
                                     {
-                                        "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Sing",
-                                        "PartType": "Aug",
                                         "Person": "3",
-                                        "Tense": "Pres",
+                                        "Tense": "Past",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -93971,10 +94400,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -93982,61 +94407,6 @@
                                         "PartType": "Aug",
                                         "Person": "3",
                                         "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robbe",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robbátar",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robbí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Aspect": "Hab",
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -94066,70 +94436,11 @@
                         ]
                     },
                     {
-                        "token": "robiat",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Aspect": "Hab",
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robá",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "1",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "robæ",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
                                 "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "robói",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
                             }
                         ]
                     },
@@ -94140,54 +94451,6 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rombatar",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rombí",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
                                         "Aspect": "Hab",
                                         "Mood": "Ind",
                                         "Number": "Sing",
@@ -94197,25 +94460,28 @@
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rombói",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             },
                             {
                                 "feature_set": 2,
                                 "features": [
                                     {
-                                        "Mood": "Ind",
+                                        "Mood": "Sub",
                                         "Number": "Sing",
                                         "PartType": "Aug",
                                         "Person": "3",
-                                        "Tense": "Past",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "Mood": "Sub",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Pres",
                                         "Voice": "Act"
                                     }
                                 ]
@@ -94257,51 +94523,6 @@
                                         "Voice": "Act"
                                     }
                                 ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ruboi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rubé",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Sub",
-                                        "Number": "Sing",
-                                        "PartType": "Aug",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rumboi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "rumbói",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             }
                         ]
                     },
@@ -94763,6 +94984,15 @@
                     },
                     {
                         "token": "berit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "berth",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -98385,6 +98615,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -107407,6 +107641,21 @@
                 ]
             },
             {
+                "lemma": "líit",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "líit",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "línaid",
                 "eDIL_id": 30237,
                 "tokens": [
@@ -108093,6 +108342,15 @@
                     },
                     {
                         "token": "pridched",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "pridchid",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -109000,6 +109258,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
