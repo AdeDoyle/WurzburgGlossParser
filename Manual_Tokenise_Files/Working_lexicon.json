@@ -3763,6 +3763,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "chensi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -82910,25 +82919,6 @@
                 ]
             },
             {
-                "lemma": "cach",
-                "eDIL_id": 7528,
-                "tokens": [
-                    {
-                        "token": "cech",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PronType": "Ind"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "cacha",
                 "eDIL_id": null,
                 "tokens": [
@@ -84689,17 +84679,6 @@
                                         "PronType": "Ind"
                                     }
                                 ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Gender": "Neut",
-                                        "Number": "Sing",
-                                        "PronType": "Ind"
-                                    }
-                                ]
                             }
                         ]
                     }
@@ -84803,6 +84782,36 @@
                 "eDIL_id": 33145,
                 "tokens": [
                     {
+                        "token": "neich",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "neuch",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "ni",
                         "feature_sets": [
                             {
@@ -84822,6 +84831,26 @@
                                 "feature_set": 1,
                                 "features": [
                                     {
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Nom",
+                                        "Number": "Sing",
+                                        "PronType": "Ind"
+                                    }
+                                ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Number": "Sing",
                                         "PronType": "Ind"
                                     }
                                 ]
@@ -108803,6 +108832,15 @@
                     },
                     {
                         "token": "ricub",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "risid",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
