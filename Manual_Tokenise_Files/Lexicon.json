@@ -10515,19 +10515,6 @@
                 "eDIL_id": null,
                 "tokens": [
                     {
-                        "token": "hinnun",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Degree": "Pos"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "hinon",
                         "feature_sets": [
                             {
@@ -10609,19 +10596,6 @@
                         ]
                     },
                     {
-                        "token": "hínnunn",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Degree": "Pos"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "innon",
                         "feature_sets": [
                             {
@@ -10646,14 +10620,6 @@
                                         "Case": "Acc",
                                         "Degree": "Pos",
                                         "Number": "Sing"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Degree": "Pos"
                                     }
                                 ]
                             }
@@ -21384,6 +21350,39 @@
                 "tokens": [
                     {
                         "token": "indhé",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "innonn",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "hinnun",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "hínnunn",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "innunn",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -42770,40 +42769,6 @@
                 ]
             },
             {
-                "lemma": "edpart",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "edpairt",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "edpartaib",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Dat",
-                                        "Number": "Plur"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "eirp",
                 "eDIL_id": null,
                 "tokens": [
@@ -49728,6 +49693,40 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
+                                        "Number": "Plur"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "idbart",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "edpairt",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "edpartaib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
                                         "Number": "Plur"
                                     }
                                 ]
@@ -68138,19 +68137,6 @@
                         ]
                     },
                     {
-                        "token": "chon",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PartType": "Vb"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
                         "token": "co",
                         "feature_sets": [
                             {
@@ -68171,19 +68157,6 @@
                                 "features": [
                                     {
                                         "Prefix": "Yes"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "con",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "PartType": "Vb"
                                     }
                                 ]
                             }
