@@ -2133,7 +2133,7 @@
             },
             {
                 "lemma": "amall",
-                "eDIL_id": null,
+                "eDIL_id": 3075,
                 "tokens": [
                     {
                         "token": "amall",
@@ -10131,7 +10131,7 @@
             },
             {
                 "lemma": "fáilid",
-                "eDIL_id": null,
+                "eDIL_id": 21104,
                 "tokens": [
                     {
                         "token": "fáilti",
@@ -20209,6 +20209,24 @@
                         ]
                     },
                     {
+                        "token": "cucci",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Gender": "Masc,Neut",
+                                        "Number": "Sing",
+                                        "Person": "2",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "cuccum",
                         "feature_sets": [
                             {
@@ -21310,6 +21328,23 @@
                                         "Gender": "Masc,Neut",
                                         "Number": "Sing",
                                         "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "etruib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "2",
                                         "PronType": "Prs"
                                     }
                                 ]
@@ -24830,7 +24865,7 @@
             },
             {
                 "lemma": "ro",
-                "eDIL_id": null,
+                "eDIL_id": 35365,
                 "tokens": [
                     {
                         "token": "ro",
@@ -26768,6 +26803,15 @@
                         ]
                     },
                     {
+                        "token": "nibo",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "nibu",
                         "feature_sets": [
                             {
@@ -27339,6 +27383,15 @@
                     },
                     {
                         "token": "rbu",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ro bo",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -33611,6 +33664,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "aithiss",
+                "eDIL_id": 2716,
+                "tokens": [
+                    {
+                        "token": "aithissi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -42806,6 +42874,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Dat",
@@ -42814,7 +42886,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -53086,6 +53158,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Acc",
@@ -54215,7 +54291,7 @@
             },
             {
                 "lemma": "foraithmet",
-                "eDIL_id": null,
+                "eDIL_id": 23306,
                 "tokens": [
                     {
                         "token": "foraidmet",
@@ -60818,7 +60894,7 @@
             },
             {
                 "lemma": "intamail",
-                "eDIL_id": null,
+                "eDIL_id": 28925,
                 "tokens": [
                     {
                         "token": "intamail",
@@ -63200,7 +63276,7 @@
             },
             {
                 "lemma": "láine",
-                "eDIL_id": null,
+                "eDIL_id": 29420,
                 "tokens": [
                     {
                         "token": "lláni",
@@ -63481,6 +63557,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "léire",
+                "eDIL_id": 29812,
+                "tokens": [
+                    {
+                        "token": "lére",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -74524,7 +74615,7 @@
             },
             {
                 "lemma": "testas",
-                "eDIL_id": null,
+                "eDIL_id": 40619,
                 "tokens": [
                     {
                         "token": "testassa",
@@ -75909,6 +76000,21 @@
                 ]
             },
             {
+                "lemma": "tossogod",
+                "eDIL_id": 41499,
+                "tokens": [
+                    {
+                        "token": "tossogod",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "tosṅgachtigtheid",
                 "eDIL_id": null,
                 "tokens": [
@@ -76438,7 +76544,7 @@
             },
             {
                 "lemma": "tuirem",
-                "eDIL_id": null,
+                "eDIL_id": 42381,
                 "tokens": [
                     {
                         "token": "tuirem",
@@ -77672,7 +77778,7 @@
             },
             {
                 "lemma": "áil",
-                "eDIL_id": null,
+                "eDIL_id": 959,
                 "tokens": [
                     {
                         "token": "ail",
@@ -86035,6 +86141,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Gender": "Masc,Neut",
@@ -86045,7 +86155,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Number": "Plur",
@@ -87799,6 +87909,21 @@
                 "tokens": [
                     {
                         "token": "philomóin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "pilipianstae",
+                "eDIL_id": 50599,
+                "tokens": [
+                    {
+                        "token": "pilipianstib",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -93680,6 +93805,15 @@
                 "tokens": [
                     {
                         "token": "attó",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "bammar",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -103118,6 +103252,15 @@
                         ]
                     },
                     {
+                        "token": "ndechommar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "reg",
                         "feature_sets": [
                             {
@@ -107987,6 +108130,21 @@
                 ]
             },
             {
+                "lemma": "infét",
+                "eDIL_id": 28584,
+                "tokens": [
+                    {
+                        "token": "neícdid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "ingnaidi",
                 "eDIL_id": null,
                 "tokens": [
@@ -109291,6 +109449,24 @@
                         ]
                     },
                     {
+                        "token": "pridchissem",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "pridchissid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "pridchither",
                         "feature_sets": [
                             {
@@ -109964,6 +110140,24 @@
                 "lemma": "saeraid",
                 "eDIL_id": 35902,
                 "tokens": [
+                    {
+                        "token": "soír",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "soírfea",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
                     {
                         "token": "sóir",
                         "feature_sets": [
