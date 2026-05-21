@@ -1909,6 +1909,21 @@
                 ]
             },
             {
+                "lemma": "aithrech",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "aidrech",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "aittrebthach",
                 "eDIL_id": null,
                 "tokens": [
@@ -5329,6 +5344,15 @@
                     },
                     {
                         "token": "cosmili",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "cosmuil",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -17405,6 +17429,15 @@
                         ]
                     },
                     {
+                        "token": "tóisig",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "tóisigem",
                         "feature_sets": [
                             {
@@ -17738,6 +17771,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -24820,6 +24857,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Polarity": "Neg"
@@ -26937,6 +26978,15 @@
                                         "VerbType": "Cop"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "nipa",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -32949,6 +32999,15 @@
                 "eDIL_id": null,
                 "tokens": [
                     {
+                        "token": "airet",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "nheret",
                         "feature_sets": [
                             {
@@ -34356,6 +34415,15 @@
                         ]
                     },
                     {
+                        "token": "apstalaib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "apstil",
                         "feature_sets": [
                             {
@@ -34390,6 +34458,15 @@
                     },
                     {
                         "token": "nabstalacte",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "napstalacte",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -36430,6 +36507,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "brithe",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -44400,6 +44486,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "célib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -48633,6 +48728,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Case": "Acc",
@@ -48641,7 +48740,7 @@
                                 ]
                             },
                             {
-                                "feature_set": 2,
+                                "feature_set": 3,
                                 "features": [
                                     {
                                         "Case": "Nom",
@@ -53117,7 +53216,7 @@
                 ]
             },
             {
-                "lemma": "fochaid",
+                "lemma": "fochith",
                 "eDIL_id": 22412,
                 "tokens": [
                     {
@@ -53126,6 +53225,24 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "fochidi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Number": "Plur"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -53144,30 +53261,6 @@
                             {
                                 "feature_set": 1,
                                 "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "fochith",
-                "eDIL_id": 22412,
-                "tokens": [
-                    {
-                        "token": "fochidi",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            },
-                            {
-                                "feature_set": 2,
-                                "features": [
-                                    {
-                                        "Case": "Acc",
-                                        "Number": "Plur"
-                                    }
-                                ]
                             }
                         ]
                     }
@@ -53275,6 +53368,15 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "fochricci",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -56264,6 +56366,15 @@
                 "tokens": [
                     {
                         "token": "firiónaib",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "fírianu",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -60605,6 +60716,21 @@
                 ]
             },
             {
+                "lemma": "ingreimm",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "ingremmen",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "inidleán",
                 "eDIL_id": null,
                 "tokens": [
@@ -63568,6 +63694,21 @@
                 "tokens": [
                     {
                         "token": "lére",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "lésboire",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "lésboiri",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -67449,6 +67590,15 @@
                                 "features": null
                             }
                         ]
+                    },
+                    {
+                        "token": "pectho",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -68029,6 +68179,15 @@
                 "tokens": [
                     {
                         "token": "pæna",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "pían",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -74977,6 +75136,21 @@
                 ]
             },
             {
+                "lemma": "titacht",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "titacht",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "titul",
                 "eDIL_id": null,
                 "tokens": [
@@ -76950,6 +77124,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tíchtu",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "tíchtin",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -81054,6 +81243,15 @@
                         ]
                     },
                     {
+                        "token": "si",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "á",
                         "feature_sets": [
                             {
@@ -82920,6 +83118,21 @@
                 ]
             },
             {
+                "lemma": "tremi",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "tremi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "tris",
                 "eDIL_id": null,
                 "tokens": [
@@ -83552,6 +83765,22 @@
                         ]
                     },
                     {
+                        "token": "náii",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "Poss": "Yes",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "ái",
                         "feature_sets": [
                             {
@@ -84125,6 +84354,22 @@
                         ]
                     },
                     {
+                        "token": "nda",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "ta",
                         "feature_sets": [
                             {
@@ -84247,6 +84492,22 @@
                     17196
                 ],
                 "tokens": [
+                    {
+                        "token": "ndi",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Number": "Plur",
+                                        "Person": "2",
+                                        "PronClass": "C",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
                     {
                         "token": "ndib",
                         "feature_sets": [
@@ -86993,6 +87254,21 @@
                                         "Number": "Sing"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "anchrist",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "nancrist",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
@@ -90947,6 +91223,15 @@
                 "eDIL_id": 1370,
                 "tokens": [
                     {
+                        "token": "ain",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "aingid",
                         "feature_sets": [
                             {
@@ -92756,6 +93041,15 @@
                         ]
                     },
                     {
+                        "token": "epir",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "epret",
                         "feature_sets": [
                             {
@@ -94234,6 +94528,10 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
+                                "features": null
+                            },
+                            {
+                                "feature_set": 2,
                                 "features": [
                                     {
                                         "Mood": "Ind",
@@ -95187,6 +95485,15 @@
                         ]
                     },
                     {
+                        "token": "ppiat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "rabad",
                         "feature_sets": [
                             {
@@ -96121,6 +96428,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "carid",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -98711,6 +99027,21 @@
                 ]
             },
             {
+                "lemma": "doaidlea",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "naidlibea",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "doairbir",
                 "eDIL_id": null,
                 "tokens": [
@@ -99193,6 +99524,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "mbérthar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -105155,6 +105495,15 @@
                         ]
                     },
                     {
+                        "token": "lilsat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "llongam",
                         "feature_sets": [
                             {
@@ -109614,6 +109963,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "chualatar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -110429,6 +110787,15 @@
                                         "Voice": "Pass"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "rroscribad",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },
@@ -111808,6 +112175,21 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "tremitéit",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "tíagat",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     }
