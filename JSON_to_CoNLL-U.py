@@ -4,7 +4,7 @@ import json
 from ClearTags import clear_tags
 
 
-def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untokenised=False):
+def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untokenised=False, count_annotated=False):
     """Takes the JSON file format specific to the Wb. website and converts its contents to CoNLL-U format"""
 
     with open(json_file_path, "r", encoding="utf-8") as json_file_import:
@@ -13,6 +13,8 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untok
     conllu_text = ""
 
     gloss_counter = 0
+    annotated_count = 0
+    unannotated_count = 0
 
     for _, ep in enumerate(json_file):
         folios = ep.get("folios")
@@ -73,11 +75,13 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untok
                         unannotated = True
 
                 if unannotated:
+                    unannotated_count += 1
                     if exclude_untokenised:
                         continue
                     else:
                         tokens = [[tok, "_", "_", None] for tok in gloss.split(" ")]
                 elif tokenised:
+                    annotated_count += 1
                     tokens = [tok if tok[1] != "<unknown>" else [tok[0], "X", tok[2], tok[3]] for tok in tokens]
                     tokens = [tok if tok[2] != "<unknown>" else [tok[0], tok[1], "_", tok[3]] for tok in tokens]
 
@@ -125,10 +129,20 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untok
     with open(save_dir, "w", encoding="utf-8") as conllu_file_export:
         conllu_file_export.write(conllu_text)
 
+    if count_annotated:
+        annotated_percent = round(((100/gloss_counter)*annotated_count), 2)
+        unannotated_percent = round(((100/gloss_counter)*unannotated_count), 2)
+        print(
+            f"{annotated_count}/{gloss_counter} ({annotated_percent}%) glosses tokenised"
+        )
+        print(
+            f"{unannotated_count}/{gloss_counter} ({unannotated_percent}%) glosses still untokenised"
+        )
+
     return "\nDone"
 
 
 if __name__ == "__main__":
 
     json_dir = os.path.join(os.getcwd(), "Manual_Tokenise_Files", "Wb. Manual Tokenisation.json")
-    print(j_to_c(json_dir, "All_Tokenised_Wb.conllu", exclude_untokenised=True))
+    print(j_to_c(json_dir, "All_Tokenised_Wb.conllu", exclude_untokenised=True, count_annotated=True))
