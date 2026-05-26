@@ -18413,7 +18413,7 @@
                         ]
                     },
                     {
-                        "token": "dunni",
+                        "token": "dun",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -19419,19 +19419,6 @@
                         "feature_sets": [
                             {
                                 "feature_set": 1,
-                                "features": [
-                                    {
-                                        "AdpType": "Prep",
-                                        "Definite": "Ind",
-                                        "Gender": "Masc,Neut",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "PronType": "Prs"
-                                    }
-                                ]
-                            },
-                            {
-                                "feature_set": 2,
                                 "features": [
                                     {
                                         "AdpType": "Prep",
@@ -54416,7 +54403,7 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
-                                        "Number": "Sing"
+                                        "Number": "Dual"
                                     }
                                 ]
                             }
@@ -54456,7 +54443,7 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
-                                        "Number": "Dual"
+                                        "Number": "Sing"
                                     }
                                 ]
                             }
