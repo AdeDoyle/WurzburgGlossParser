@@ -23895,6 +23895,30 @@
                         ]
                     }
                 ]
+            },
+            {
+                "lemma": "os",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "os",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ot",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -73800,30 +73824,6 @@
                 "tokens": [
                     {
                         "token": "ol",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "os",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "os",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "ot",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
