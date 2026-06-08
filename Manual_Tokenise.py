@@ -52,7 +52,7 @@ class UI:
                            "Polarity": ["N/A", "Neg", "Pos"],
                            "Poss": ["N/A", "Yes"],
                            "PronClass": ["N/A", "A", "B", "C"],
-                           "PronType": ["N/A", "Ana", "Emp", "Ind", "Int", "Prs"],
+                           "PronType": ["N/A", "Ana", "Emp", "Ind", "Int", "Prs", "Void"],
                            "Reflex": ["N/A", "Yes"]}
         self.max_linelen = 110
 
