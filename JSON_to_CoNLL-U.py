@@ -108,6 +108,7 @@ def j_to_c(json_file_path, output_filename=None, save_folder=None, exclude_untok
                             print(f"New Gloss: {new_gloss}")
                             raise RuntimeError("Unresolvable differences between tokens and new-gloss.")
                     else:
+                        print(f"Tokens: {tokens}")
                         raise RuntimeError("Unresolvable differences between tokens and gloss.")
 
                 # Create CoNLL-U text for gloss
