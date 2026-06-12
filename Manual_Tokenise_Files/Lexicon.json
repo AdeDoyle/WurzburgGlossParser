@@ -41619,20 +41619,6 @@
                                 ]
                             }
                         ]
-                    },
-                    {
-                        "token": "ṅdé",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Gen",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             },
@@ -53852,6 +53838,26 @@
                                 "features": [
                                     {
                                         "Case": "Nom",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "lemma": "mael",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "mail",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Voc",
                                         "Number": "Sing"
                                     }
                                 ]
@@ -72520,6 +72526,40 @@
                 ]
             },
             {
+                "lemma": "día",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "dia",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Dat",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "ṅdé",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Case": "Gen",
+                                        "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "fergus",
                 "eDIL_id": null,
                 "tokens": [
@@ -72691,26 +72731,6 @@
                                 "features": [
                                     {
                                         "Case": "Dat",
-                                        "Number": "Sing"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "mael",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "mail",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Case": "Voc",
                                         "Number": "Sing"
                                     }
                                 ]

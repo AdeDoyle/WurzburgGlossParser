@@ -101,7 +101,7 @@
 9	co	co	SCONJ	_	_	10	mark	_	SpaceAfter=No
 10	nducaid	dobeir	VERB	_	Mood=Sub|Number=Plur|Person=2|Tense=Pres|Voice=Act	7	dislocated	_	_
 11	etargne	etargne	NOUN	_	Case=Acc|Number=Sing	10	obj	_	_
-12	ṅ dǽ	día	NOUN	_	Case=Gen|Number=Sing	11	nmod	_	_
+12	ṅ dǽ	día	PROPN	_	Case=Gen|Number=Sing	11	nmod	_	_
 13	et	_	CCONJ	_	Foreign=Yes	16	cc	_	Lang=la
 14	co	co	SCONJ	_	_	16	mark	_	SpaceAfter=No
 15	na	ná	SCONJ	_	Polarity=Neg	16	mark	_	SpaceAfter=No
@@ -633,7 +633,7 @@
 1	.i.	.i.	ADV	_	Abbr=Yes	2	advmod	_	_
 2	gigeste	guidid	VERB	_	Mood=Ind|Number=Plur|Person=2|Tense=Fut|Voice=Act	0	root	_	SpaceAfter=No
 3	si	si	PRON	_	Number=Plur|Person=2|PronType=Emp	2	amod	_	_
-4	dia	día	NOUN	_	Case=Acc|Number=Sing	2	obj	_	_
+4	dia	día	PROPN	_	Case=Acc|Number=Sing	2	obj	_	_
 5	linn	la	ADP	_	AdpType=Prep|Definite=Ind|Number=Plur|Person=1|PronType=Prs	4	obl:prep	_	_
 6	ara	ara	SCONJ	_	_	7	mark	_	SpaceAfter=No
 7	fulsam	foloing	VERB	_	Mood=Sub|Number=Plur|Person=1|Tense=Pres|Voice=Act	2	advcl	_	_
