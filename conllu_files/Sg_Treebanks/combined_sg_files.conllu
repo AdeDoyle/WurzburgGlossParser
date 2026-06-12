@@ -1154,14 +1154,13 @@
 # sent_id = 88
 # reference = 4b12
 # scribe = Main Glossator
-# text = .i. it hé se inna briathra
-# translation = i.e. these are the words (of Servius)
-1	.i.	.i.	ADV	_	Abbr=Yes	_	_	_	_
-2	it	is	AUX	_	Mood=Ind|Number=Plur|Person=3|Polarity=Pos|Tense=Pres|VerbType=Cop	_	_	_	_
-3	hé	é_2	PRON	_	Number=Plur|Person=3|PronType=Prs	_	_	_	_
-4	se	so	PART	_	PronType=Dem	_	_	_	_
-5	inna	in	DET	_	Case=Nom|Gender=Fem|Number=Plur|PronType=Art	_	_	_	_
-6	briathra	bríathar	NOUN	_	Case=Nom|Number=Plur	_	_	_	_
+# text = ithé se innabriathra
+# translation = these are the words
+1	it	is	AUX	_	Mood=Ind|Number=Plur|Person=3|Polarity=Pos|Tense=Pres|VerbType=Cop	_	_	_	_
+2	hé	é_2	PRON	_	Number=Plur|Person=3|PronType=Prs	_	_	_	_
+3	se	so	PART	_	PronType=Dem	_	_	_	_
+4	inna	in	DET	_	Case=Nom|Gender=Fem|Number=Plur|PronType=Art	_	_	_	_
+5	briathra	bríathar	NOUN	_	Case=Nom|Number=Plur	_	_	_	_
 
 # sent_id = 89
 # reference = 4b13
@@ -42498,7 +42497,7 @@
 # reference = f.229 top marg. (TPH p.290)
 # scribe = Main Glossator
 # text = Gaib do chuil isin charcair niróis chluim nacolcaid · truag insin amail bachal rot giuil indṡrathar dodcaid
-# translation = Take your corner in the cell; you shall acquire neither feather-quilt nor mattress, that is pitiable, o follower of the staffs; the bedding of misfortune has stuck to you
+# translation = Take your place in the cell; you shall acquire neither duvet nor mattress; that is pitiable, devotee of croziers; the horse-blanket of misfortune has stuck to you
 1	Gaib	gaibid	VERB	_	Mood=Imp|Number=Sing|Person=2|Tense=Pres|Voice=Act	0	root	_	_
 2	do	do	PRON	_	Number=Sing|Person=2|Poss=Yes|PronType=Prs	3	nmod:poss	_	_
 3	chuil	cúil	NOUN	_	Case=Acc|Number=Sing	1	obj	_	_
@@ -42515,7 +42514,7 @@
 14	in	in	DET	_	Case=Nom|Gender=Masc|Number=Sing|PronType=Art	15	det	_	SpaceAfter=No
 15	sin	sin	PART	_	PronType=Dem	13	amod	_	_
 16	a	a	PART	_	PartType=Voc	17	case:voc	_	SpaceAfter=No
-17	mail	mael	PROPN	_	Case=Voc|Number=Sing	13	vocative	_	_
+17	mail	mael	NOUN	_	Case=Voc|Number=Sing	13	vocative	_	_
 18	bachal	bachall	NOUN	_	Case=Gen|Number=Plur	17	nmod	_	_
 19	ro	ro	PART	_	PartType=Aug	21	compound:prt	_	SpaceAfter=No
 20	t	t_1	PRON	_	Number=Sing|Person=2|PronClass=A|PronType=Prs	19	obj:infx	_	_
