@@ -81425,6 +81425,29 @@
                 ]
             },
             {
+                "lemma": "doalla",
+                "eDIL_id": null,
+                "tokens": [
+                    {
+                        "token": "talla",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Mood": "Ind",
+                                        "Number": "Sing",
+                                        "Person": "3",
+                                        "Tense": "Pres",
+                                        "Voice": "Act"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "lemma": "dobeir",
                 "eDIL_id": null,
                 "tokens": [
@@ -82437,23 +82460,6 @@
                                         "Person": "3",
                                         "Tense": "Pres",
                                         "Voice": "Pass"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "talla",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Mood": "Ind",
-                                        "Number": "Sing",
-                                        "Person": "3",
-                                        "Tense": "Pres",
-                                        "Voice": "Act"
                                     }
                                 ]
                             }
