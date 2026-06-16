@@ -489,12 +489,14 @@
 # reference = 26b6
 # text = .i. rocomalnisidsi anropridchissemni dúib
 1	.i.	.i.	ADV	_	Abbr=Yes	2	advmod	_	_
-2	rocomalnisid	comalnaithir	VERB	_	Aspect=Perf|Mood=Ind|Number=Plur|Person=2|Tense=Past|Voice=Act	0	root	_	SpaceAfter=No
-3	si	si	PRON	_	Number=Plur|Person=2|PronType=Emp	2	amod	_	_
-4	a	a	PART	_	PartType=Rel|PronType=Dem	2	obj	_	SpaceAfter=No
-5	nropridchissem	pridchaid	VERB	_	Aspect=Perf|Mood=Ind|Number=Plur|Person=1|Tense=Past|Voice=Act	4	acl:relcl	_	SpaceAfter=No
-6	ni	ni	PRON	_	Number=Plur|Person=1|PronType=Emp	5	amod	_	_
-7	dúib	do	ADP	_	AdpType=Prep|Definite=Ind|Number=Plur|Person=2|PronType=Prs	5	obl:prep	_	_
+2	ro	ro	PART	_	PartType=Aug	_	_	_	_
+3	comalnisid	comalnaithir	VERB	_	Aspect=Perf|Mood=Ind|Number=Plur|Person=2|Tense=Past|Voice=Act	0	root	_	SpaceAfter=No
+4	si	si	PRON	_	Number=Plur|Person=2|PronType=Emp	2	amod	_	_
+5	a	a	PART	_	PartType=Rel|PronType=Dem	2	obj	_	SpaceAfter=No
+6	nro	ro	PART	_	PartType=Aug	_	_	_	_
+7	pridchissem	pridchaid	VERB	_	Aspect=Perf|Mood=Ind|Number=Plur|Person=1|Tense=Past|Voice=Act	4	acl:relcl	_	SpaceAfter=No
+8	ni	ni	PRON	_	Number=Plur|Person=1|PronType=Emp	5	amod	_	_
+9	dúib	do	ADP	_	AdpType=Prep|Definite=Ind|Number=Plur|Person=2|PronType=Prs	5	obl:prep	_	_
 
 # sent_id = 38
 # reference = 31c7
@@ -517,16 +519,17 @@
 # text = .i. cain ronóibad abracham trihiris intree ǽm didiu fanacc
 1	.i.	.i.	ADV	_	Abbr=Yes	3	advmod	_	_
 2	cain	cani	PRON	_	Polarity=Neg|PronType=Int	3	xcomp	_	_
-3	ronóibad	noíbaid	VERB	_	Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Tense=Past|Voice=Pass	0	root	_	_
-4	abracham	abracham	PROPN	_	Case=Nom|Number=Sing	3	obj	_	_
-5	tri	tre	ADP	_	AdpType=Prep|Definite=Ind	6	case	_	SpaceAfter=No
-6	hiris	iress	NOUN	_	Case=Acc|Number=Sing	3	obl	_	_
-7	in	in	PART	_	PronType=Int	8	mark:int	_	SpaceAfter=No
-8	tree	tre	ADP	_	AdpType=Prep|Definite=Ind|Gender=Fem|Number=Sing|Person=3|PronType=Prs	3	parataxis	_	_
-9	ǽm	ám	ADV	_	_	8	advmod	_	_
-10	didiu	didiu	ADV	_	_	8	advmod	_	_
-11	fa	fa	SCONJ	_	_	12	mark	_	SpaceAfter=No
-12	nacc	nacc	ADV	_	Polarity=Neg	8	advcl	_	_
+3	ro	ro	PART	_	PartType=Aug	_	_	_	_
+4	nóibad	noíbaid	VERB	_	Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Tense=Past|Voice=Pass	0	root	_	_
+5	abracham	abracham	PROPN	_	Case=Nom|Number=Sing	3	obj	_	_
+6	tri	tre	ADP	_	AdpType=Prep|Definite=Ind	6	case	_	SpaceAfter=No
+7	hiris	iress	NOUN	_	Case=Acc|Number=Sing	3	obl	_	_
+8	in	in	PART	_	PronType=Int	8	mark:int	_	SpaceAfter=No
+9	tree	tre	ADP	_	AdpType=Prep|Definite=Ind|Gender=Fem|Number=Sing|Person=3|PronType=Prs	3	parataxis	_	_
+10	ǽm	ám	ADV	_	_	8	advmod	_	_
+11	didiu	didiu	ADV	_	_	8	advmod	_	_
+12	fa	fa	SCONJ	_	_	12	mark	_	SpaceAfter=No
+13	nacc	nacc	ADV	_	Polarity=Neg	8	advcl	_	_
 
 # sent_id = 40
 # reference = 18c6

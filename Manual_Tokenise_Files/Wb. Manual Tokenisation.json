@@ -355,7 +355,13 @@
                                 null
                             ],
                             [
-                                "rocretsi",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "cretsi",
                                 "VERB",
                                 "creitid",
                                 null
@@ -439,7 +445,13 @@
                                 null
                             ],
                             [
-                                "rocreitset",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "creitset",
                                 "VERB",
                                 "creitid",
                                 null
@@ -975,7 +987,13 @@
                                 null
                             ],
                             [
-                                "rotectsat",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "tectsat",
                                 "VERB",
                                 "techtaid",
                                 null
@@ -7459,7 +7477,7 @@
                             ],
                             [
                                 "huili",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ]
@@ -10106,7 +10124,13 @@
                                 null
                             ],
                             [
-                                "rofírianiged",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "fírianiged",
                                 "VERB",
                                 "fírianigidir",
                                 null
@@ -10280,7 +10304,13 @@
                                 null
                             ],
                             [
-                                "ronóibad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "nóibad",
                                 "VERB",
                                 "noíbaid",
                                 null
@@ -10625,7 +10655,13 @@
                                 "Polarity=Neg|PronType=Int"
                             ],
                             [
-                                "ronóibad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                "PartType=Aug"
+                            ],
+                            [
+                                "nóibad",
                                 "VERB",
                                 "noíbaid",
                                 "Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Tense=Past|Voice=Pass"
@@ -11067,7 +11103,13 @@
                                 null
                             ],
                             [
-                                "rofirianiged",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "firianiged",
                                 "VERB",
                                 "fírianigidir",
                                 null
@@ -11642,7 +11684,13 @@
                                 null
                             ],
                             [
-                                "rochomalnisset",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "chomalnisset",
                                 "VERB",
                                 "comalnaithir",
                                 null
@@ -12309,7 +12357,13 @@
                                 null
                             ],
                             [
-                                "rogab",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "gab",
                                 "VERB",
                                 "gaibid",
                                 null
@@ -12387,7 +12441,13 @@
                                 "Gender=Neut|Number=Sing|Person=3|PronType=Prs"
                             ],
                             [
-                                "rogab",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "gab",
                                 "VERB",
                                 "gaibid",
                                 null
@@ -13295,7 +13355,13 @@
                                 "Number=Plur|Person=1|PronType=Emp"
                             ],
                             [
-                                "roscríbad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "scríbad",
                                 "VERB",
                                 "scríbaid",
                                 null
@@ -49398,7 +49464,13 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "rogabad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "gabad",
                                 "VERB",
                                 "gaibid",
                                 null
@@ -53730,7 +53802,19 @@
                                 null
                             ],
                             [
-                                "rodfóidi",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "d",
+                                "PRON",
+                                "id_2",
+                                "Gender=Neut|Number=Sing|Person=3|PronClass=C|PronType=Prs"
+                            ],
+                            [
+                                "fóidi",
                                 "VERB",
                                 "foídid",
                                 null
@@ -53875,9 +53959,15 @@
                                 null
                             ],
                             [
-                                "ropridchad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "pridchad",
                                 "VERB",
-                                "pridchid",
+                                "pridchaid",
                                 null
                             ],
                             [
@@ -53956,7 +54046,7 @@
                             ],
                             [
                                 "uile",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ]
@@ -54509,7 +54599,13 @@
                                 null
                             ],
                             [
-                                "rurádi",
+                                "ru",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "rádi",
                                 "VERB",
                                 "rádid",
                                 null
@@ -54796,7 +54892,7 @@
                             ],
                             [
                                 "uili",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ],
@@ -80503,7 +80599,7 @@
                             ],
                             [
                                 "huili",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ],
@@ -107706,7 +107802,13 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "roslogeth",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "slogeth",
                                 "VERB",
                                 "slucid",
                                 null
@@ -137499,7 +137601,13 @@
                         "glossText": "rulaimur",
                         "glossTokens": [
                             [
-                                "rulaimur",
+                                "ru",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "laimur",
                                 "VERB",
                                 "rolaimethar",
                                 null
@@ -146413,7 +146521,13 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "ropridchad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                "PartType=Aug"
+                            ],
+                            [
+                                "pridchad",
                                 "VERB",
                                 "pridchaid",
                                 "Aspect=Perf|Mood=Ind|Number=Sing|Person=3|Tense=Past|Voice=Pass"
@@ -178375,7 +178489,13 @@
                                 null
                             ],
                             [
-                                "rombá",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "mbá",
                                 "VERB",
                                 "attá",
                                 null
@@ -189232,7 +189352,7 @@
                             ],
                             [
                                 "uili",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ],
@@ -189633,7 +189753,13 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "rocreitsid",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "creitsid",
                                 "VERB",
                                 "creitid",
                                 null
@@ -189705,7 +189831,13 @@
                                 null
                             ],
                             [
-                                "roerbad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "erbad",
                                 "VERB",
                                 "erbaid",
                                 null
@@ -190168,7 +190300,7 @@
                             ],
                             [
                                 "uili",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ],
@@ -192037,7 +192169,7 @@
                             ],
                             [
                                 "uili",
-                                "ADJ",
+                                "NOUN",
                                 "uile",
                                 null
                             ]
@@ -193343,22 +193475,28 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "doduthractar",
-                                "<unknown>",
-                                "<unknown>",
+                                "do",
+                                "PART",
+                                "do",
+                                null
+                            ],
+                            [
+                                "duthractar",
+                                "VERB",
+                                "dofuthraccair",
                                 null
                             ],
                             [
                                 "olcc",
-                                "<unknown>",
-                                "<unknown>",
+                                "NOUN",
+                                "olc",
                                 null
                             ],
                             [
                                 "dunn",
-                                "<unknown>",
-                                "<unknown>",
-                                null
+                                "ADP",
+                                "do",
+                                "AdpType=Prep|Definite=Ind|Number=Plur|Person=1|PronType=Prs"
                             ]
                         ],
                         "newGloss": null,
@@ -193383,39 +193521,27 @@
                         "glossText": "[in marg. sup.] (níd)at huili itfoirbthi",
                         "glossTokens": [
                             [
-                                "[in",
-                                "<unknown>",
-                                "<unknown>",
-                                null
-                            ],
-                            [
-                                "marg.",
-                                "<unknown>",
-                                "<unknown>",
-                                null
-                            ],
-                            [
-                                "sup.]",
-                                "<unknown>",
-                                "<unknown>",
-                                null
-                            ],
-                            [
-                                "(níd)at",
-                                "<unknown>",
-                                "<unknown>",
+                                "nídat",
+                                "AUX",
+                                "is",
                                 null
                             ],
                             [
                                 "huili",
-                                "<unknown>",
-                                "<unknown>",
+                                "NOUN",
+                                "uile",
                                 null
                             ],
                             [
-                                "itfoirbthi",
-                                "<unknown>",
-                                "<unknown>",
+                                "it",
+                                "AUX",
+                                "is",
+                                null
+                            ],
+                            [
+                                "foirbthi",
+                                "ADJ",
+                                "foirbthe",
                                 null
                             ]
                         ],
@@ -193445,27 +193571,33 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "isfollus",
-                                "<unknown>",
-                                "<unknown>",
+                                "is",
+                                "AUX",
+                                "is",
+                                null
+                            ],
+                            [
+                                "follus",
+                                "ADJ",
+                                "follus",
                                 null
                             ],
                             [
                                 "nandat",
-                                "<unknown>",
-                                "<unknown>",
+                                "AUX",
+                                "is",
                                 null
                             ],
                             [
                                 "foirbthi",
-                                "<unknown>",
-                                "<unknown>",
+                                "ADJ",
+                                "foirbthe",
                                 null
                             ],
                             [
                                 "uili",
-                                "<unknown>",
-                                "<unknown>",
+                                "NOUN",
+                                "uile",
                                 null
                             ]
                         ],
@@ -193495,15 +193627,27 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "istualang",
-                                "<unknown>",
-                                "<unknown>",
+                                "is",
+                                "AUX",
+                                "is",
                                 null
                             ],
                             [
-                                "forṅd(íten)",
-                                "<unknown>",
-                                "<unknown>",
+                                "tualang",
+                                "ADJ",
+                                "tualang",
+                                null
+                            ],
+                            [
+                                "for",
+                                "PRON",
+                                "far",
+                                "Number=Plur|Person=2|Poss=Yes|PronType=Prs"
+                            ],
+                            [
+                                "ṅdíten",
+                                "NOUN",
+                                "dítiu",
                                 null
                             ]
                         ],
@@ -193533,15 +193677,27 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "is(ni)ni",
-                                "<unknown>",
-                                "<unknown>",
+                                "i",
+                                "AUX",
+                                "is",
                                 null
                             ],
                             [
+                                "sni",
+                                "PRON",
+                                "sní",
+                                "Number=Plur|Person=1|PronType=Prs"
+                            ],
+                            [
+                                "ni",
+                                "PRON",
+                                "ni",
+                                "Number=Plur|Person=1|PronType=Emp"
+                            ],
+                            [
                                 "torisnig",
-                                "<unknown>",
-                                "<unknown>",
+                                "ADJ",
+                                "tairisnech",
                                 null
                             ]
                         ],
@@ -193552,7 +193708,7 @@
                             "c: according to Chroust, cf. taraisnech Ml. 58c 18, taraisnigte Ml. 39b 9, nantarasnigthi ‘nec confidendum,’ Ml. 144a 3",
                             "d: cf. Ml. 77c 1, 133d 7, 137a 3"
                         ],
-                        "newNotes": null,
+                        "newNotes": "According to Kavanagh (p. 735), though he quotes this example under the entry for the copula, which agrees with the translation provided in <em>Thesaurus Palaeohibernicus</em>, this interpretation “seems doubtful”. Instead, Kavanagh seems to prefer the interpretation that <em>is</em> represents the conjunction <em>os</em> “and”, and he translates “i.e. and we (being) trustful” (p. 736). Nevertheless, it is annotated as the copula here.",
                         "glossTrans": "i.e. it is we trustful<sup>d</sup>.",
                         "newTrans": null
                     },
@@ -193574,7 +193730,13 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "rocomalnisid",
+                                "ro",
+                                "PART",
+                                "ro",
+                                "PartType=Aug"
+                            ],
+                            [
+                                "comalnisid",
                                 "VERB",
                                 "comalnaithir",
                                 "Aspect=Perf|Mood=Ind|Number=Plur|Person=2|Tense=Past|Voice=Act"
@@ -193592,7 +193754,13 @@
                                 "PartType=Rel|PronType=Dem"
                             ],
                             [
-                                "nropridchissem",
+                                "nro",
+                                "PART",
+                                "ro",
+                                "PartType=Aug"
+                            ],
+                            [
+                                "pridchissem",
                                 "VERB",
                                 "pridchaid",
                                 "Aspect=Perf|Mood=Ind|Number=Plur|Person=1|Tense=Past|Voice=Act"
@@ -217319,7 +217487,13 @@
                                 null
                             ],
                             [
-                                "robǽ",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "bǽ",
                                 "VERB",
                                 "attá",
                                 null
@@ -224218,7 +224392,13 @@
                                 null
                             ],
                             [
-                                "rochreitset",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "chreitset",
                                 "VERB",
                                 "creitid",
                                 null
@@ -224654,7 +224834,13 @@
                                 null
                             ],
                             [
-                                "roerpad",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "erpad",
                                 "VERB",
                                 "erbaid",
                                 null
@@ -229855,7 +230041,13 @@
                                 null
                             ],
                             [
-                                "roscrib",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "scrib",
                                 "VERB",
                                 "scríbaid",
                                 null
@@ -231802,7 +231994,13 @@
                                 null
                             ],
                             [
-                                "rofoided",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "foided",
                                 "VERB",
                                 "foídid",
                                 null
@@ -231878,7 +232076,13 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "rofetar",
+                                "ro",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "fetar",
                                 "VERB",
                                 "rofinnadar",
                                 null
@@ -235709,7 +235913,7 @@
                         "taggedNewGloss": null,
                         "glossFNs": "isnini firiónaib",
                         "footnotes": null,
-                        "newNotes": null,
+                        "newNotes": "According to Kavanagh (p. 735), though he quotes this example under the entry for the copula, which agrees with the translation provided in <em>Thesaurus Palaeohibernicus</em>, this interpretation “seems doubtful”. Instead, Kavanagh seems to prefer the interpretation that <em>is</em> represents the conjunction <em>os</em> “and”, and he translates “and we (being) righteous” (p. 736). Nevertheless, it is annotated as the copula here.",
                         "glossTrans": "it is we righteous.",
                         "newTrans": null
                     },
@@ -241356,7 +241560,13 @@
                                 null
                             ],
                             [
-                                "rusamaltar",
+                                "ru",
+                                "PART",
+                                "ro",
+                                null
+                            ],
+                            [
+                                "samaltar",
                                 "VERB",
                                 "samlaither",
                                 null
