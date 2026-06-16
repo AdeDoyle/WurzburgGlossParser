@@ -111949,6 +111949,33 @@
                 "eDIL_id": 34558,
                 "tokens": [
                     {
+                        "token": "praidchas",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "predchim",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "priched",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
                         "token": "pridach",
                         "feature_sets": [
                             {
@@ -111998,57 +112025,6 @@
                     },
                     {
                         "token": "pridchas",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "pridchissem",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Aspect": "Perf",
-                                        "Mood": "Ind",
-                                        "Number": "Plur",
-                                        "Person": "1",
-                                        "Tense": "Past",
-                                        "Voice": "Act"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "pridchid",
-                "eDIL_id": 34558,
-                "tokens": [
-                    {
-                        "token": "praidchas",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "predchim",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
-                            }
-                        ]
-                    },
-                    {
-                        "token": "priched",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -112107,6 +112083,19 @@
                             {
                                 "feature_set": 1,
                                 "features": null
+                            },
+                            {
+                                "feature_set": 2,
+                                "features": [
+                                    {
+                                        "Aspect": "Perf",
+                                        "Mood": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "1",
+                                        "Tense": "Past",
+                                        "Voice": "Act"
+                                    }
+                                ]
                             }
                         ]
                     },
