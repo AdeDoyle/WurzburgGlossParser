@@ -51866,38 +51866,6 @@
                 ]
             },
             {
-                "lemma": "lam",
-                "eDIL_id": null,
-                "tokens": [
-                    {
-                        "token": "lam",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Prefix": "Yes"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "token": "lám",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": [
-                                    {
-                                        "Prefix": "Yes"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "lemma": "laurentide",
                 "eDIL_id": null,
                 "tokens": [
@@ -53147,6 +53115,32 @@
                                     {
                                         "Case": "Dat",
                                         "Number": "Sing"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "lam",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Prefix": "Yes"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "lám",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "Prefix": "Yes"
                                     }
                                 ]
                             }
