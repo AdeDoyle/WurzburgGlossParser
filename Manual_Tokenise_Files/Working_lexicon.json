@@ -77927,7 +77927,10 @@
             },
             {
                 "lemma": "toschid",
-                "eDIL_id": 41298,
+                "eDIL_id": [
+                    41298,
+                    17683
+                ],
                 "tokens": [
                     {
                         "token": "thoschith",
