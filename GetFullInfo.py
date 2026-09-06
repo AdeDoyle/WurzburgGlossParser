@@ -152,14 +152,17 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 # Identifies foundational gloss including all markup tags.
                 glossfulltags = gloss[gloss.find(i.group()) + len(i.group()):]
 
-                # Creates a display copy of the gloss text, replacing Latin tags with html emphasis tags.
+                # Creates a display copy of the gloss text, replacing Latin and Greek tags with html emphasis tags.
                 glosstext = glossfulltags
-                if "[GLat]" in glosstext:
-                    glosstextlist = glosstext.split("[GLat]")
-                    glosstext = "<em>".join(glosstextlist)
-                if "[/GLat]" in glosstext:
-                    glosstextlist = glosstext.split("[/GLat]")
-                    glosstext = "</em>".join(glosstextlist)
+
+                for open_tag in ["[GLat]", "[GGr]", "[Gr]"]:
+                    if open_tag in glosstext:
+                        glosstextlist = glosstext.split(open_tag)
+                        glosstext = "<em>".join(glosstextlist)
+                for close_tag in ["[/GLat]", "[/GGr]", "[/Gr]"]:
+                    if close_tag in glosstext:
+                        glosstextlist = glosstext.split(close_tag)
+                        glosstext = "</em>".join(glosstextlist)
 
                 # Creates 2 copies of display gloss text, one primary, one retaining footnotes in superscript tags.
                 basegloss = clear_tags(glosstext)
@@ -290,21 +293,25 @@ def get_glinfo(file, startpage=499, stoppage=712):
                     curtransid = curpagetrans[0]
                     curtrans = curpagetrans[1]
             joinedtrans = " i.e. ".join(splittranslations)
-            if "[GLat]" in joinedtrans:
-                transtextlist = joinedtrans.split("[GLat]")
-                joinedtrans = "<em>".join(transtextlist)
-            if "[/GLat]" in joinedtrans:
-                transtextlist = joinedtrans.split("[/GLat]")
-                joinedtrans = "</em>".join(transtextlist)
+            for open_tag in ["[GLat]", "[GGr]", "[Gr]"]:
+                if open_tag in joinedtrans:
+                    transtextlist = joinedtrans.split(open_tag)
+                    joinedtrans = "<em>".join(transtextlist)
+            for close_tag in ["[/GLat]", "[/GGr]", "[/Gr]"]:
+                if close_tag in joinedtrans:
+                    transtextlist = joinedtrans.split(close_tag)
+                    joinedtrans = "</em>".join(transtextlist)
             infolist[info_num + 1] = infoset[:-1] + [joinedtrans] + infoset[-1:]
         else:
             if glossid == curtransid:
-                if "[GLat]" in curtrans:
-                    transtextlist = curtrans.split("[GLat]")
-                    curtrans = "<em>".join(transtextlist)
-                if "[/GLat]" in curtrans:
-                    transtextlist = curtrans.split("[/GLat]")
-                    curtrans = "</em>".join(transtextlist)
+                for open_tag in ["[GLat]", "[GGr]", "[Gr]"]:
+                    if open_tag in curtrans:
+                        transtextlist = curtrans.split(open_tag)
+                        curtrans = "<em>".join(transtextlist)
+                for close_tag in ["[/GLat]", "[/GGr]", "[/Gr]"]:
+                    if close_tag in curtrans:
+                        transtextlist = curtrans.split(close_tag)
+                        curtrans = "</em>".join(transtextlist)
                 infolist[info_num + 1] = infoset[:-1] + [curtrans] + infoset[-1:]
                 del pagestrans[0]
             # deal with page 587 where glosses 27, 28, and 29 share the one translation, numbered '27 – 29.'.
@@ -317,13 +324,14 @@ def get_glinfo(file, startpage=499, stoppage=712):
                 for i in range(idstart, idstop + 1):
                     curtransidlist.append(str(i))
                 if glossid in curtransidlist:
-                    if "[GLat]" in curtrans:
-
-                        transtextlist = curtrans.split("[GLat]")
-                        curtrans = "<em>".join(transtextlist)
-                    if "[/GLat]" in curtrans:
-                        transtextlist = curtrans.split("[/GLat]")
-                        curtrans = "</em>".join(transtextlist)
+                    for open_tag in ["[GLat]", "[GGr]", "[Gr]"]:
+                        if open_tag in curtrans:
+                            transtextlist = curtrans.split(open_tag)
+                            curtrans = "<em>".join(transtextlist)
+                    for close_tag in ["[/GLat]", "[/GGr]", "[/Gr]"]:
+                        if close_tag in curtrans:
+                            transtextlist = curtrans.split(close_tag)
+                            curtrans = "</em>".join(transtextlist)
                     infolist[info_num + 1] = infoset[:-1] + [curtrans] + infoset[-1:]
                 if glossid == curtransidlist[-1]:
                     del pagestrans[0]

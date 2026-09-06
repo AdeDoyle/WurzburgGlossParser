@@ -4,29 +4,30 @@ from OpenPages import get_pages
 import re
 
 
-def clear_tags(file, exceptions=[], italicise=None, keep_editorial=True):
+def clear_tags(file, exceptions=None, italicise=None, keep_editorial=True):
     """Clears all tags out of the text except those listed as exceptions.
        Replace tags with original TPH markers default, however, if keep_editorial is set to False,
        remove any editorial commentary or markings identifying text inserted."""
     filetext = file
-    taglist = ["H1", "H2", "Lat", "SG", "Eng", "FN", "GLat", "fol", "NV", "num", "let", "Rep", "ie", "vel", "etc",
-               "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
+    taglist = ["H1", "H2", "Lat", "SG", "Eng", "Gr", "FN", "GLat", "GGr", "TGr", "fol", "NV", "num", "let", "Rep", "ie",
+               "vel", "etc", "info", "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
                 "t", "u", "v", "w", "x", "y", "z"]
     if italicise:
-        if italicise in taglist:
-            filetext = "<em>".join(filetext.split(f"[{italicise}]"))
-            filetext = "</em>".join(filetext.split(f"[/{italicise}]"))
+        for italic_tag in italicise:
+            if italic_tag in taglist:
+                filetext = "<em>".join(filetext.split(f"[{italic_tag}]"))
+                filetext = "</em>".join(filetext.split(f"[/{italic_tag}]"))
     for tag in taglist:
         # Ensures tag to be removed isn't to be excepted
-        if tag not in exceptions:
+        if not exceptions or tag not in exceptions:
             # Deals with folio tags which identify folios as numbered in TPH
             # Removes them without replacement
             if tag == "fol":
-                for i in range(1, 34 + 1):
-                    for l in ["a", "b", "c", "d"]:
-                        opentag = "[f. " + str(i) + l + "]"
-                        closetag = "[/f. " + str(i) + l + "]"
+                for fol in range(1, 34 + 1):
+                    for col in ["a", "b", "c", "d"]:
+                        opentag = "[f. " + str(fol) + col + "]"
+                        closetag = "[/f. " + str(fol) + col + "]"
                         if opentag in filetext:
                             filetextlist = filetext.split(opentag)
                             filetext = "".join(filetextlist)
@@ -57,6 +58,24 @@ def clear_tags(file, exceptions=[], italicise=None, keep_editorial=True):
                     if closetag in filetext:
                         filetextlist = filetext.split(closetag)
                         filetext = "".join(filetextlist)
+            # Deals with information tags which identify information supplied by the editors
+            # Replaces full tags with the original round brackets used in TPH
+            elif tag == "info":
+                opentag = "[" + tag + "]"
+                closetag = "[/" + tag + "]"
+                if keep_editorial:
+                    if opentag in filetext:
+                        filetextlist = filetext.split(opentag)
+                        filetext = "(".join(filetextlist)
+                    if closetag in filetext:
+                        filetextlist = filetext.split(closetag)
+                        filetext = ")".join(filetextlist)
+                else:
+                    while opentag in filetext:
+                        startpos = filetext.find(opentag)
+                        endpos = filetext.find(closetag) + len(closetag)
+                        filetext = filetext[:startpos] + filetext[endpos:]
+                        filetext = " ".join(filetext.split("  "))
             # Deals with comment tags which identify commentary by the editors
             # Replaces full tags with the original square brackets used in TPH
             elif tag == "Com":
@@ -135,8 +154,8 @@ def clear_tags(file, exceptions=[], italicise=None, keep_editorial=True):
 
 def clear_spectags(file, taglist=[]):
     """Clears only the specified tag or tags from the text using the clear_tags function"""
-    alltags = ["H1", "H2", "Lat", "SG", "Eng", "FN", "GLat", "fol", "NV", "num", "let", "Rep", "ie", "vel", "etc",
-               "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
+    alltags = ["H1", "H2", "Lat", "SG", "Eng", "Gr", "FN", "GLat", "GGr", "TGr", "fol", "NV", "num", "let", "Rep", "ie",
+               "vel", "etc", "info", "Com", "Con", "Sup", "Res", "STOP", "Nam", "MRep", "LRep", "...", "&"]
     excepted = []
     for exception in alltags:
         if exception not in taglist:

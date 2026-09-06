@@ -66,7 +66,7 @@ def make_json(glosslist, headers=False):
         gtr = gloss[14]
         nt = gloss[15]
         if "[/" in gtr:
-            gtr = clear_tags(gtr, italicise="GLat")
+            gtr = clear_tags(gtr, italicise=["GLat", "GGr", "TGr"])
         h = "Hand Two"
         if f == "f. 33a":
             foliohandswap = True
@@ -106,7 +106,7 @@ def make_json(glosslist, headers=False):
             jsonblank = jsonblank[:jsonblank.find("[ng]") - 1] + "null" + jsonblank[jsonblank.find("[ng]") + 5:]
             jsonblank = jsonblank[:jsonblank.find("[tng]") - 1] + "null" + jsonblank[jsonblank.find("[tng]") + 6:]
         elif ng:
-            tagless = clear_tags(ng, italicise="GLat", keep_editorial=False)
+            tagless = clear_tags(ng, italicise=["GLat", "GGr", "TGr"], keep_editorial=False)
             jsonblank = jsonblank[:jsonblank.find("[ng]")] + tagless + jsonblank[jsonblank.find("[ng]") + 4:]
             jsonblank = jsonblank[:jsonblank.find("[tng]")] + ng + jsonblank[jsonblank.find("[tng]") + 5:]
         jsonblank = jsonblank[:jsonblank.find("[gfn]")] + gfn + jsonblank[jsonblank.find("[gfn]") + 5:]
