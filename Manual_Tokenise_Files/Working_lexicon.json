@@ -21299,6 +21299,23 @@
                         ]
                     },
                     {
+                        "token": "doíb",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": [
+                                    {
+                                        "AdpType": "Prep",
+                                        "Definite": "Ind",
+                                        "Number": "Plur",
+                                        "Person": "3",
+                                        "PronType": "Prs"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "token": "du",
                         "feature_sets": [
                             {
@@ -42464,6 +42481,15 @@
                                 ]
                             }
                         ]
+                    },
+                    {
+                        "token": "com tinol",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
                     }
                 ]
             },
@@ -57747,6 +57773,15 @@
                 "tokens": [
                     {
                         "token": "gabaal",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
+                            }
+                        ]
+                    },
+                    {
+                        "token": "gabaál",
                         "feature_sets": [
                             {
                                 "feature_set": 1,
@@ -76851,21 +76886,6 @@
                                         "Number": "Sing"
                                     }
                                 ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "lemma": "tinól",
-                "eDIL_id": 40918,
-                "tokens": [
-                    {
-                        "token": "tinol",
-                        "feature_sets": [
-                            {
-                                "feature_set": 1,
-                                "features": null
                             }
                         ]
                     }
