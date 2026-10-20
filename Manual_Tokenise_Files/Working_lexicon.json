@@ -88938,6 +88938,16 @@
                                         "PronType": "Ana"
                                     }
                                 ]
+                            },
+                            {
+                                "feature_set": 3,
+                                "features": [
+                                    {
+                                        "Case": "Acc",
+                                        "Number": "Plur",
+                                        "PronType": "Ana"
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -104843,6 +104853,15 @@
                                         "Voice": "Act"
                                     }
                                 ]
+                            }
+                        ]
+                    },
+                    {
+                        "token": "dénatar",
+                        "feature_sets": [
+                            {
+                                "feature_set": 1,
+                                "features": null
                             }
                         ]
                     },

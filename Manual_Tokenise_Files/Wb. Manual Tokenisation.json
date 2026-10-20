@@ -56798,46 +56798,70 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "nítorbe",
-                                "<unknown>",
-                                "<unknown>",
+                                "ní",
+                                "AUX",
+                                "is",
                                 null
                             ],
                             [
-                                "lasuidiu",
-                                "<unknown>",
-                                "<unknown>",
+                                "torbe",
+                                "NOUN",
+                                "torbae",
                                 null
+                            ],
+                            [
+                                "la",
+                                "ADP",
+                                "la",
+                                "AdpType=Prep|Definite=Ind"
+                            ],
+                            [
+                                "suidiu",
+                                "PRON",
+                                "suide",
+                                "Case=Acc|Number=Plur|PronType=Ana"
                             ],
                             [
                                 "precept",
-                                "<unknown>",
-                                "<unknown>",
+                                "NOUN",
+                                "precept",
                                 null
                             ],
                             [
                                 "doib",
-                                "<unknown>",
-                                "<unknown>",
+                                "ADP",
+                                "do",
+                                "AdpType=Prep|Definite=Ind|Number=Plur|Person=3|PronType=Prs"
+                            ],
+                            [
+                                "ma",
+                                "SCONJ",
+                                "má",
                                 null
                             ],
                             [
-                                "manidénatar",
-                                "<unknown>",
-                                "<unknown>",
+                                "ni",
+                                "PART",
+                                "ní",
+                                null
+                            ],
+                            [
+                                "dénatar",
+                                "VERB",
+                                "dogní",
                                 null
                             ],
                             [
                                 "ferte",
-                                "<unknown>",
-                                "<unknown>",
+                                "NOUN",
+                                "fiurt",
                                 null
                             ],
                             [
                                 "occa",
-                                "<unknown>",
-                                "<unknown>",
-                                null
+                                "ADP",
+                                "oc",
+                                "AdpType=Prep|Definite=Ind|Gender=Masc,Neut|Number=Sing|Person=3|PronType=Prs"
                             ]
                         ],
                         "newGloss": null,
@@ -56866,21 +56890,45 @@
                                 "Abbr=Yes"
                             ],
                             [
-                                "nitorbe",
-                                "<unknown>",
-                                "<unknown>",
+                                "ni",
+                                "AUX",
+                                "is",
                                 null
                             ],
                             [
-                                "lasuidib",
-                                "<unknown>",
-                                "<unknown>",
+                                "torbe",
+                                "NOUN",
+                                "torbae",
                                 null
                             ],
                             [
-                                "manipsulbair",
-                                "<unknown>",
-                                "<unknown>",
+                                "la",
+                                "ADP",
+                                "la",
+                                "AdpType=Prep|Definite=Ind"
+                            ],
+                            [
+                                "suidib",
+                                "PRON",
+                                "suide",
+                                "Case=Dat|Number=Plur|PronType=Ana"
+                            ],
+                            [
+                                "ma",
+                                "SCONJ",
+                                "má",
+                                null
+                            ],
+                            [
+                                "nip",
+                                "AUX",
+                                "is",
+                                null
+                            ],
+                            [
+                                "sulbair",
+                                "ADJ",
+                                "sulbair",
                                 null
                             ]
                         ],
